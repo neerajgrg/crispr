@@ -1,2 +1,9443 @@
-function e(){e=function(){return t};var t={},n=Object.prototype,r=n.hasOwnProperty,i=Object.defineProperty||function(e,t,n){e[t]=n.value},o="function"==typeof Symbol?Symbol:{},a=o.iterator||"@@iterator",s=o.asyncIterator||"@@asyncIterator",u=o.toStringTag||"@@toStringTag";function l(e,t,n){return Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}),e[t]}try{l({},"")}catch(e){l=function(e,t,n){return e[t]=n}}function c(e,t,n,r){var o=Object.create((t&&t.prototype instanceof f?t:f).prototype),a=new E(r||[]);return i(o,"_invoke",{value:k(e,n,a)}),o}function h(e,t,n){try{return{type:"normal",arg:e.call(t,n)}}catch(e){return{type:"throw",arg:e}}}t.wrap=c;var d={};function f(){}function p(){}function v(){}var g={};l(g,a,function(){return this});var m=Object.getPrototypeOf,y=m&&m(m(D([])));y&&y!==n&&r.call(y,a)&&(g=y);var _=v.prototype=f.prototype=Object.create(g);function b(e){["next","throw","return"].forEach(function(t){l(e,t,function(e){return this._invoke(t,e)})})}function w(e,t){function n(i,o,a,s){var u=h(e[i],e,o);if("throw"!==u.type){var l=u.arg,c=l.value;return c&&"object"==typeof c&&r.call(c,"__await")?t.resolve(c.__await).then(function(e){n("next",e,a,s)},function(e){n("throw",e,a,s)}):t.resolve(c).then(function(e){l.value=e,a(l)},function(e){return n("throw",e,a,s)})}s(u.arg)}var o;i(this,"_invoke",{value:function(e,r){function i(){return new t(function(t,i){n(e,r,t,i)})}return o=o?o.then(i,i):i()}})}function k(e,t,n){var r="suspendedStart";return function(i,o){if("executing"===r)throw new Error("Generator is already running");if("completed"===r){if("throw"===i)throw o;return{value:void 0,done:!0}}for(n.method=i,n.arg=o;;){var a=n.delegate;if(a){var s=j(a,n);if(s){if(s===d)continue;return s}}if("next"===n.method)n.sent=n._sent=n.arg;else if("throw"===n.method){if("suspendedStart"===r)throw r="completed",n.arg;n.dispatchException(n.arg)}else"return"===n.method&&n.abrupt("return",n.arg);r="executing";var u=h(e,t,n);if("normal"===u.type){if(r=n.done?"completed":"suspendedYield",u.arg===d)continue;return{value:u.arg,done:n.done}}"throw"===u.type&&(r="completed",n.method="throw",n.arg=u.arg)}}}function j(e,t){var n=e.iterator[t.method];if(void 0===n){if(t.delegate=null,"throw"===t.method){if(e.iterator.return&&(t.method="return",t.arg=void 0,j(e,t),"throw"===t.method))return d;t.method="throw",t.arg=new TypeError("The iterator does not provide a 'throw' method")}return d}var r=h(n,e.iterator,t.arg);if("throw"===r.type)return t.method="throw",t.arg=r.arg,t.delegate=null,d;var i=r.arg;return i?i.done?(t[e.resultName]=i.value,t.next=e.nextLoc,"return"!==t.method&&(t.method="next",t.arg=void 0),t.delegate=null,d):i:(t.method="throw",t.arg=new TypeError("iterator result is not an object"),t.delegate=null,d)}function M(e){var t={tryLoc:e[0]};1 in e&&(t.catchLoc=e[1]),2 in e&&(t.finallyLoc=e[2],t.afterLoc=e[3]),this.tryEntries.push(t)}function x(e){var t=e.completion||{};t.type="normal",delete t.arg,e.completion=t}function E(e){this.tryEntries=[{tryLoc:"root"}],e.forEach(M,this),this.reset(!0)}function D(e){if(e){var t=e[a];if(t)return t.call(e);if("function"==typeof e.next)return e;if(!isNaN(e.length)){var n=-1,i=function t(){for(;++n<e.length;)if(r.call(e,n))return t.value=e[n],t.done=!1,t;return t.value=void 0,t.done=!0,t};return i.next=i}}return{next:S}}function S(){return{value:void 0,done:!0}}return p.prototype=v,i(_,"constructor",{value:v,configurable:!0}),i(v,"constructor",{value:p,configurable:!0}),p.displayName=l(v,u,"GeneratorFunction"),t.isGeneratorFunction=function(e){var t="function"==typeof e&&e.constructor;return!!t&&(t===p||"GeneratorFunction"===(t.displayName||t.name))},t.mark=function(e){return Object.setPrototypeOf?Object.setPrototypeOf(e,v):(e.__proto__=v,l(e,u,"GeneratorFunction")),e.prototype=Object.create(_),e},t.awrap=function(e){return{__await:e}},b(w.prototype),l(w.prototype,s,function(){return this}),t.AsyncIterator=w,t.async=function(e,n,r,i,o){void 0===o&&(o=Promise);var a=new w(c(e,n,r,i),o);return t.isGeneratorFunction(n)?a:a.next().then(function(e){return e.done?e.value:a.next()})},b(_),l(_,u,"Generator"),l(_,a,function(){return this}),l(_,"toString",function(){return"[object Generator]"}),t.keys=function(e){var t=Object(e),n=[];for(var r in t)n.push(r);return n.reverse(),function e(){for(;n.length;){var r=n.pop();if(r in t)return e.value=r,e.done=!1,e}return e.done=!0,e}},t.values=D,E.prototype={constructor:E,reset:function(e){if(this.prev=0,this.next=0,this.sent=this._sent=void 0,this.done=!1,this.delegate=null,this.method="next",this.arg=void 0,this.tryEntries.forEach(x),!e)for(var t in this)"t"===t.charAt(0)&&r.call(this,t)&&!isNaN(+t.slice(1))&&(this[t]=void 0)},stop:function(){this.done=!0;var e=this.tryEntries[0].completion;if("throw"===e.type)throw e.arg;return this.rval},dispatchException:function(e){if(this.done)throw e;var t=this;function n(n,r){return a.type="throw",a.arg=e,t.next=n,r&&(t.method="next",t.arg=void 0),!!r}for(var i=this.tryEntries.length-1;i>=0;--i){var o=this.tryEntries[i],a=o.completion;if("root"===o.tryLoc)return n("end");if(o.tryLoc<=this.prev){var s=r.call(o,"catchLoc"),u=r.call(o,"finallyLoc");if(s&&u){if(this.prev<o.catchLoc)return n(o.catchLoc,!0);if(this.prev<o.finallyLoc)return n(o.finallyLoc)}else if(s){if(this.prev<o.catchLoc)return n(o.catchLoc,!0)}else{if(!u)throw new Error("try statement without catch or finally");if(this.prev<o.finallyLoc)return n(o.finallyLoc)}}}},abrupt:function(e,t){for(var n=this.tryEntries.length-1;n>=0;--n){var i=this.tryEntries[n];if(i.tryLoc<=this.prev&&r.call(i,"finallyLoc")&&this.prev<i.finallyLoc){var o=i;break}}o&&("break"===e||"continue"===e)&&o.tryLoc<=t&&t<=o.finallyLoc&&(o=null);var a=o?o.completion:{};return a.type=e,a.arg=t,o?(this.method="next",this.next=o.finallyLoc,d):this.complete(a)},complete:function(e,t){if("throw"===e.type)throw e.arg;return"break"===e.type||"continue"===e.type?this.next=e.arg:"return"===e.type?(this.rval=this.arg=e.arg,this.method="return",this.next="end"):"normal"===e.type&&t&&(this.next=t),d},finish:function(e){for(var t=this.tryEntries.length-1;t>=0;--t){var n=this.tryEntries[t];if(n.finallyLoc===e)return this.complete(n.completion,n.afterLoc),x(n),d}},catch:function(e){for(var t=this.tryEntries.length-1;t>=0;--t){var n=this.tryEntries[t];if(n.tryLoc===e){var r=n.completion;if("throw"===r.type){var i=r.arg;x(n)}return i}}throw new Error("illegal catch attempt")},delegateYield:function(e,t,n){return this.delegate={iterator:D(e),resultName:t,nextLoc:n},"next"===this.method&&(this.arg=void 0),d}},t}function t(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}function n(e,n,r){return n&&t(e.prototype,n),r&&t(e,r),Object.defineProperty(e,"prototype",{writable:!1}),e}function r(){return r=Object.assign?Object.assign.bind():function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},r.apply(this,arguments)}function i(e,t){e.prototype=Object.create(t.prototype),e.prototype.constructor=e,o(e,t)}function o(e,t){return o=Object.setPrototypeOf?Object.setPrototypeOf.bind():function(e,t){return e.__proto__=t,e},o(e,t)}function a(e,t){(null==t||t>e.length)&&(t=e.length);for(var n=0,r=new Array(t);n<t;n++)r[n]=e[n];return r}var s=0;function u(e){return"__private_"+s+++"_"+e}function l(e,t){if(!Object.prototype.hasOwnProperty.call(e,t))throw new TypeError("attempted to use private field on non-instance");return e}var c=/*#__PURE__*/function(){function e(e,t){this.formContainer=void 0,this.element=void 0,this.active=void 0,this.id=void 0,this.parentView=void 0,this._model=void 0,this.options=void 0,this.formContainer=e.formContainer,this.id=e.id,this.element=e.element,this.element.id=e.id,this.active=!1,this.setModel(t)}var t=e.prototype;return t.setId=function(e){this.id=e},t.setParent=function(e){this.parentView=e,this.parentView.addChild&&this.parentView.addChild(this)},t.setActive=function(){this.isActive()||this.element.setAttribute("data-cmp-active","true"),this.parentView&&this.parentView.setActive&&this.parentView.setActive()},t.setInactive=function(){this.isActive()&&this.element.setAttribute("data-cmp-active","false"),this.parentView&&this.parentView.setInactive&&this.parentView.setInactive()},t.isActive=function(){return this.active},t.getFormContainerPath=function(){var e;return null==(e=this.options)?void 0:e.adaptiveformcontainerPath},t.getId=function(){return this.id},t.setModel=function(e){if(null!=this._model)throw"Re-initializing model is not permitted";this._model=e},t.toggle=function(e,t,n){this.toggleAttribute(this.element,e,t,n)},t.toggleAttribute=function(e,t,n,r){e&&(!1===t?e.setAttribute(n,r):e.removeAttribute(n))},t.getLayoutProperties=function(){var e={},t=this.getModel().getState();return t&&t.properties&&t.properties["afs:layout"]&&(e=t.properties["afs:layout"]),e},t.getModel=function(){return this._model},t.subscribe=function(){throw"the field does not subscribe to the model"},t.getState=function(){var e;return null==(e=this._model)?void 0:e.getState()},t.isVisible=function(){return(null==this?void 0:this.getState().visible)||!0},t.isEnabled=function(){return(null==this?void 0:this.getState().enabled)||!0},t.isLabelVisible=function(){var e,t;return(null==this||null==(e=this.getState())||null==(t=e.label)?void 0:t.visible)||!0},t.getLabelValue=function(){var e,t;return(null==this||null==(e=this.getState())||null==(t=e.label)?void 0:t.value)||""},t.getName=function(){var e;return(null==this||null==(e=this.getState())?void 0:e.name)||""},t.isTooltipVisible=function(){return!1},t.getTooltipValue=function(){return""},t.isShortDescVisible=function(){return!1},t.getShortDescValue=function(){return""},t.getDescriptionValue=function(){var e;return(null==this||null==(e=this.getState())?void 0:e.description)||""},t.getDefault=function(){var e;return(null==this||null==(e=this.getState())?void 0:e.default)||""},t.isReadOnly=function(){var e;return(null==this||null==(e=this.getState())?void 0:e.readOnly)||!1},t.isRequired=function(){var e;return(null==this||null==(e=this.getState())?void 0:e.required)||!1},t.getPlaceHolder=function(){var e;return(null==this||null==(e=this.getState())?void 0:e.placeholder)||""},t.getMinLength=function(){var e;return null==this||null==(e=this.getState())?void 0:e.minLength},t.getMaxLength=function(){var e;return null==this||null==(e=this.getState())?void 0:e.maxLength},t.getMinimum=function(){var e;return null==this||null==(e=this.getState())?void 0:e.minimum},t.getMaximum=function(){var e;return null==this||null==(e=this.getState())?void 0:e.maximum},e}();c.IS="FormField";var h=/*#__PURE__*/function(e){function t(t,n){var r;return(r=e.call(this,t,n)||this).qm=void 0,r.widget=void 0,r.label=void 0,r.errorDiv=void 0,r.tooltip=void 0,r.description=void 0,r.element.className=r.getbemBlock(),r.widget=r.getWidget(),r.description=r.getDescription(),r.label=r.getLabel(),r.errorDiv=r.getErrorDiv(),r.qm=r.getQuestionMarkDiv(),r.tooltip=r.getTooltipDiv(),r}i(t,e);var n=t.prototype;return n.getWidget=function(){throw"method not implemented"},n.getDescription=function(){throw"method not implemented"},n.getLabel=function(){throw"method not implemented"},n.getErrorDiv=function(){throw"method not implemented"},n.getTooltipDiv=function(){throw"method not implemented"},n.getQuestionMarkDiv=function(){throw"method not implemented"},n.setModel=function(t){e.prototype.setModel.call(this,t);var n=this._model.getState();this._applyState(n)},n.setFocus=function(){var e;null==(e=this.getWidget())||e.focus()},n._applyState=function(e){e.value&&this._updateValue(e.value),this._updateVisible(e.visible),this._updateEnabled(e.enabled),this._initializeHelpContent(e)},n._initializeHelpContent=function(e){this._showHideLongDescriptionDiv(!1),this.getDescription()&&this._addHelpIconHandler(e)},n._showHideTooltipDiv=function(e){this.tooltip&&this.toggleAttribute(this.getTooltipDiv(),e,"data-cmp-visible",!1)},n._showHideLongDescriptionDiv=function(e){this.description&&this.toggleAttribute(this.description,e,"data-cmp-visible",!1)},n._isTooltipAlwaysVisible=function(){return!!this.getLayoutProperties().tooltipVisible},n._updateVisible=function(e){this.toggle(e,"aria-hidden",!0),this.element.setAttribute("data-cmp-visible",e+"")},n._updateEnabled=function(e){var t,n,r,i;this.getWidget()&&(this.toggle(e,"aria-disabled",!0),this.element.setAttribute("data-cmp-enabled",e+""),!1===e?(null==(t=this.getWidget())||t.setAttribute("disabled","true"),null==(n=this.getWidget())||n.setAttribute("aria-disabled","true")):(null==(r=this.getWidget())||r.removeAttribute("disabled"),null==(i=this.getWidget())||i.removeAttribute("aria-disabled")))},n._updateValid=function(e,t){this.errorDiv&&(this.toggle(e,"aria-invalid",!0),this.element.setAttribute("data-cmp-valid",e+""),("string"!=typeof t.errorMessage||""===t.errorMessage)&&(this.errorDiv.innerHTML=!0===e?"":"There is an error in the field"))},n._updateErrorMessage=function(e,t){this.errorDiv&&(this.errorDiv.innerHTML=t.errorMessage)},n._updateValue=function(e){var t=this.getWidget();t&&(t.value=e)},n._addHelpIconHandler=function(e){var t=this.qm,n=this.description,r=this._isTooltipAlwaysVisible(),i=this;t&&n&&t.addEventListener("click",function(e){e.preventDefault(),"false"===n.getAttribute("data-cmp-visible")?(i._showHideLongDescriptionDiv(!0),r&&i._showHideTooltipDiv(!1)):(i._showHideLongDescriptionDiv(!1),r&&i._showHideTooltipDiv(!0))})},n.getClass=function(){return this.constructor.IS},n.subscribe=function(){var e=this;this._model.subscribe(function(t){var n=t.target.getState();t.payload.changes.forEach(function(t){var r,i="_update"+((r=t.propertyName)[0].toUpperCase()+r.slice(1));"function"==typeof e[i]?"items"===t.propertyName?e[i](t.prevValue,t.currentValue,n):e[i](t.currentValue,n):console.error("changes to "+t.propertyName+" are not supported. Please raise an issue")})})},n.getbemBlock=function(){throw"bemBlock not implemented"},n.getIS=function(){throw"IS is not implemented"},n.addListener=function(){},n.render=function(){this.element.innerHTML=this.getHTML(),this.addListener(),this.subscribe()},n.getHTML=function(){return'\n            <div class="'+this.getbemBlock()+'"\n                data-cmp-is="'+this.getIS()+'"\n                id="'+this.id+'"\n                data-cmp-visible="'+this.isVisible()+'"\n                data-cmp-enabled="'+this.isEnabled()+'"\n                data-cmp-adaptiveformcontainer-path="'+this.getFormContainerPath()+'">\n\n                '+this.renderLabel()+"\n                "+this.getInputHTML()+"\n                "+this.getQuestionMarkHTML()+"\n                "+this.getShortDescHTML()+"\n                "+this.getLongDescHTML()+"\n                "+this.getErrorHTML()+"\n            </div>"},n.getInputHTML=function(){throw"getInputHTML is not implemented"},n.renderLabel=function(){return this.isLabelVisible()?'<label id="'+this.id+'-label" for="'+this.id+'" class="'+this.getbemBlock()+'__label" >'+this.getLabelValue()+"</label>":""},n.getQuestionMarkHTML=function(){return this.getDescriptionValue()?'<button class="'+this.getbemBlock()+'__questionmark" data-sly-test="'+this.getDescriptionValue()+'">\n        </button>':""},n.getShortDescHTML=function(){return this.isShortDescVisible()?'<div id="'+this.id+'-shortDescription" class="'+this.getbemBlock()+'__shortdescription">\n                {this.getShortDescValue()}\n            </div>':""},n.getLongDescHTML=function(){return'<div aria-live="polite">\n                '+(this.getDescriptionValue()?'<div id="'+this.id+'-longDescription" class="'+this.getbemBlock()+'__longdescription"></div>':"")+"\n            </div>"},n.getErrorHTML=function(){return'<div id="'+this.id+'-errorMessage" class="'+this.getbemBlock()+'__errormessage"></div>'},n.getDisabledHTML=function(){return this.isEnabled()?"":' disabled="true" '},n.getReadonlyHTML=function(){return this.isReadOnly()?' readonly="true" ':""},t}(c),d=/*#__PURE__*/function(e){function t(){return e.apply(this,arguments)||this}i(t,e);var n=t.prototype;return n.getWidget=function(){return this.element.querySelector(t.selectors.widget)},n.getDescription=function(){return this.element.querySelector(t.selectors.description)},n.getLabel=function(){return this.element.querySelector(t.selectors.label)},n.getErrorDiv=function(){return this.element.querySelector(t.selectors.errorDiv)},n.getTooltipDiv=function(){return this.element.querySelector(t.selectors.tooltipDiv)},n.getQuestionMarkDiv=function(){return this.element.querySelector(t.selectors.qm)},n.addListener=function(){var e,t,n=this;null==(e=this.getWidget())||e.addEventListener("blur",function(e){n._model.value=e.target.value,n.setInactive()}),null==(t=this.getWidget())||t.addEventListener("focus",function(e){n.setActive()})},n.getbemBlock=function(){return t.bemBlock},n.getIS=function(){return t.IS},n.getInputHTML=function(){return'<input\n            class="cmp-adaptiveform-textinput__widget"\n            title="'+(this.isTooltipVisible()?this.getTooltipValue():"")+'"\n            aria-label="'+(this.isLabelVisible()?this.getLabelValue():"")+'"\n            type="text"\n            name="'+this.getName()+'"\n            value="'+this.getDefault()+'"\n            '+this.getDisabledHTML()+"\n            "+this.getReadonlyHTML()+'\n            required="'+this.isRequired()+'"\n            placeholder="'+this.getPlaceHolder()+'"\n            minlength="'+this.getMinLength()+'"\n            maxlength="'+this.getMaxLength()+'"/>'},t}(h);function f(e){var t={exports:{}};return e(t,t.exports),t.exports}d.NS="cmp",d.IS="adaptiveFormTextInput",d.bemBlock="cmp-adaptiveform-textinput",d.selectors={self:"[data-"+d.NS+'-is="'+d.IS+'"]',widget:"."+d.bemBlock+"__widget",label:"."+d.bemBlock+"__label",description:"."+d.bemBlock+"__longdescription",qm:"."+d.bemBlock+"__questionmark",errorDiv:"."+d.bemBlock+"__errormessage",tooltipDiv:"."+d.bemBlock+"__shortdescription"};var p=b;const v=/(?:[Eec]{1,6}|G{1,5}|[Qq]{1,5}|(?:[yYur]+|U{1,5})|[ML]{1,5}|d{1,2}|D{1,3}|F{1}|[abB]{1,5}|[hkHK]{1,2}|w{1,2}|W{1}|m{1,2}|s{1,2}|[zZOvV]{1,5}|[zZOvVxX]{1,3}|S{1,3}|'(?:[^']|'')*')|[^a-zA-Z']+/g;function g(e,t){const n={},r=e.split(/\s/).filter(e=>e.length);n.dateStyle=r[0],r.length>1&&(n.timeStyle=r[1]);const i=new Date(2e3,2,1,2,3,4),o=new Intl.DateTimeFormat(t,n).formatToParts(i),a=o.find(e=>"month"===e.type).value,s=new Intl.DateTimeFormat(t,{month:"long"}).formatToParts(i)[0].value,u=new Intl.DateTimeFormat(t,{month:"short"}).formatToParts(i)[0].value,l=[];return o.forEach(t=>{let n,{type:r,value:i}=t;"month"===r&&(n={[a]:"medium"===e?"short":"long",[s]:"long",[u]:"short","03":"2-digit",3:"numeric"}[i]),"year"===r&&(n={2e3:"numeric","00":"2-digit"}[i]),["day","hour","minute","second"].includes(r)&&(n=2===i.length?"2-digit":"numeric"),"literal"===r&&(n=i),"dayPeriod"===r&&(n="short"),l.push([r,n,i.length])}),l}var m,y,_=/*#__PURE__*/Object.defineProperty({getSkeleton:function(e,t){if(p.ShorthandStyles.find(t=>e.includes(t))){const n=g(e,t),r=[],i={month:"M",year:"Y",day:"d"};return n.forEach(e=>{let[t,n,o]=e;t in i?r.push(Array(o).fill(i[t]).join("")):"literal"===t&&r.push(n)}),r.join("")}return e},parseDateTimeSkeleton:function(e,t){if(p.ShorthandStyles.find(t=>e.includes(t)))return g(e,t);const n=[];return e.replace(v,e=>{const t=e.length;switch(e[0]){case"G":n.push(["era",4===t?"long":5===t?"narrow":"short",t]);break;case"y":n.push(["year",2===t?"2-digit":"numeric",t]);break;case"Y":case"u":case"U":case"r":throw new RangeError("`Y/u/U/r` (year) patterns are not supported, use `y` instead");case"q":case"Q":throw new RangeError("`q/Q` (quarter) patterns are not supported");case"M":case"L":n.push(["month",["numeric","2-digit","short","long","narrow"][t-1],t]);break;case"w":case"W":throw new RangeError("`w/W` (week) patterns are not supported");case"d":n.push(["day",["numeric","2-digit"][t-1],t]);break;case"D":case"F":case"g":throw new RangeError("`D/F/g` (day) patterns are not supported, use `d` instead");case"E":n.push(["weekday",["short","short","short","long","narrow","narrow"][t-1],t]);break;case"e":if(t<4)throw new RangeError("`e..eee` (weekday) patterns are not supported");n.push(["weekday",["short","long","narrow","short"][t-4],t]);break;case"c":if(t<3||t>5)throw new RangeError("`c, cc, cccccc` (weekday) patterns are not supported");n.push(["weekday",["short","long","narrow","short"][t-3],t]);break;case"a":n.push(["hour12",!0,1]);break;case"b":case"B":throw new RangeError("`b/B` (period) patterns are not supported, use `a` instead");case"h":n.push(["hourCycle","h12"]),n.push(["hour",["numeric","2-digit"][t-1],t]);break;case"H":n.push(["hourCycle","h23",1]),n.push(["hour",["numeric","2-digit"][t-1],t]);break;case"K":n.push(["hourCycle","h11",1]),n.push(["hour",["numeric","2-digit"][t-1],t]);break;case"k":n.push(["hourCycle","h24",1]),n.push(["hour",["numeric","2-digit"][t-1],t]);break;case"j":case"J":case"C":throw new RangeError("`j/J/C` (hour) patterns are not supported, use `h/H/K/k` instead");case"m":n.push(["minute",["numeric","2-digit"][t-1],t]);break;case"s":n.push(["second",["numeric","2-digit"][t-1],t]);break;case"S":n.push(["fractionalSecondDigits",t,t]);break;case"A":throw new RangeError("`S/A` (millisecond) patterns are not supported, use `s` instead");case"O":n.push(["timeZoneName",t<4?"shortOffset":"longOffset",t]),n.push(["x-timeZoneName",t<4?"O":"OOOO",t]);break;case"X":case"x":case"Z":n.push(["timeZoneName","longOffset",1]),n.push(["x-timeZoneName",e,1]);break;case"z":case"v":case"V":throw new RangeError("z/v/V` (timeZone) patterns are not supported, use `X/x/Z/O` instead");case"'":n.push(["literal",e.slice(1,-1).replace(/''/g,"'"),-1]);break;default:n.push(["literal",e,-1])}return""}),n}},"__esModule",{value:!0}),b=f(function(e,t){Object.defineProperty(t,"__esModule",{value:!0}),t.ShorthandStyles=void 0,t.adjustTimeZone=l,t.datetimeToNumber=function(e){return null===e?0:e.getTime()/864e5},t.formatDate=function(e,t,n,r){if(c.find(e=>n.includes(e))){const i={timeZone:r},o=n.split(/\s/).filter(e=>e.length);return c.indexOf(o[0])>-1&&(i.dateStyle=o[0]),o.length>1&&c.indexOf(o[1])>-1&&(i.timeStyle=o[1]),new Intl.DateTimeFormat(t,i).format(e)}return function(e,t,n,r){const i=(0,_.parseDateTimeSkeleton)(n,t);i.push(["timeZone",r]);const o=i.filter(e=>!e[0].startsWith("x-")),a=i.filter(e=>e[0].startsWith("x-")),s=Object.fromEntries(o);delete s.literal;const u=new Intl.DateTimeFormat(t,s).formatToParts(e);return function(e,t){["hour","minute","second"].forEach(n=>{const r=e.find(e=>e.type===n);if(!r)return;const i=t.find(e=>e[0]===n)[1];"2-digit"===i&&1===r.value.length&&(r.value=`0${r.value}`),"numeric"===i&&2===r.value.length&&"0"===r.value.charAt(0)&&(r.value=r.value.slice(1))})}(u,i),function(e,t){const n=e.find(e=>"year"===e.type);if(!n)return;const r=t.find(e=>"year"===e[0])[2];for(;n.value.length<r;)n.value=`0${n.value}`}(u,o),o.reduce((e,t)=>{if("literal"===t[0])e.push(t);else{const n=u.find(e=>{return e.type===({hour12:"dayPeriod",fractionalSecondDigits:"fractionalSecond"}[n=t[0]]||n);var n});if(n&&"timeZoneName"===n.type){const e=a.find(e=>"x-timeZoneName"===e[0])[1],t=e[0];"Z"===t&&(e.length<4?(n.value=n.value.replace(/(GMT|:)/g,""),""===n.value&&(n.value="+0000")):5===e.length&&(n.value="GMT"===n.value?"Z":n.value.replace(/GMT/,""))),"X"===t||"x"===t?(1===e.length&&(n.value=n.value.replace(/(GMT|:(00)?)/g,"")),2===e.length&&(n.value=n.value.replace(/(GMT|:)/g,"")),3===e.length&&(n.value=n.value.replace(/GMT/g,"")),"X"===t&&""===n.value&&(n.value="Z")):"O"===e&&(n.value=n.value.replace(/GMT/g,"").replace(/0(\d+):/,"$1:").replace(/:00/,""),""===n.value&&(n.value="+0"))}n&&e.push([n.type,n.value])}return e},[])}(e,t,n,r).map(e=>e[1]).join("")},t.numberToDatetime=function(e){return new Date(Math.round(1e3*e*60*60*24))},t.offsetMS=s,t.offsetMSFallback=u,t.parseDate=h,t.parseDefaultDate=function(e,t,n){return h(e,t,"short",null,!1)};const n=[0,1,2,3,4,5,6,7,8,9,10,11].map(e=>new Date(2e3,e,1));function r(e,t){return n.map(n=>{const r=new Intl.DateTimeFormat(e,t).formatToParts(n).find(e=>"month"===e.type);return r&&r.value})}function i(e){return new Intl.NumberFormat(e,{style:"decimal",useGrouping:!1}).format(9876543210).split("").reverse()}function o(e){var t;return"هـ"===(null===(t=new Intl.DateTimeFormat(e,{era:"short"}).formatToParts(new Date).find(e=>"era"===e.type))||void 0===t?void 0:t.value)?"islamic":"gregory"}function a(e){const t=new Date(2e3,1,1,1,1,1),n=new Date(2e3,1,1,16,1,1),r=new Intl.DateTimeFormat(e,{dateStyle:"full",timeStyle:"full"}),i=r.formatToParts(t).find(e=>"dayPeriod"===e.type),o=r.formatToParts(n).find(e=>"dayPeriod"===e.type);return i&&o?{regex:`(${i.value}|${o.value})`,fn:(e,t)=>t.hour+=e===o.value?12:0}:null}function s(e,t){let n;try{n=new Intl.DateTimeFormat("en-US",{timeZone:t,timeZoneName:"longOffset"}).format(e)}catch(e){return u(0,t)}const r=/GMT([+\-−])?(\d{1,2}):?(\d{0,2})?/.exec(n);if(!r)return 0;const[i,o,a]=r.slice(1),s=60*(60*(isNaN(parseInt(o))?0:parseInt(o))+(isNaN(parseInt(a))?0:parseInt(a)))*1e3;return"-"===i?-s:s}function u(e,t){const n=function(e){var t=new Date;function n(e){var t=e.replace(":"," ").split(" ");return{day:parseInt(t[0]),hour:parseInt(t[1]),minute:parseInt(t[2])}}var r=t.toLocaleString("en-US",{timeZone:e,day:"numeric",hour:"numeric",minute:"numeric",hour12:!1}),i=n(r),o=n(r=t.toLocaleString("en-US",{day:"numeric",hour:"numeric",minute:"numeric",hour12:!1}));return 24*i.day*60+60*i.hour+i.minute-(24*o.day*60+60*o.hour+o.minute)-t.getTimezoneOffset()}(t);return 60*n*1e3}function l(e,t){if(null===e)return null;let n=e.getTime()-60*e.getTimezoneOffset()*1e3;const r=s(e,t);return u(0,t),n+=-r,new Date(n)}const c=["full","long","medium","short"];function h(e,t,n,s){let u=arguments.length>4&&void 0!==arguments[4]&&arguments[4];const c=[],h=[],d=o(t),f=i(t),p=`([${f[0]}-${f[9]}]{1,2})`,v=`([${f[0]}-${f[9]}]{1,3})`,g=`([${f[0]}-${f[9]}]{1,4})`;let m="h12",y=u,b=!1;const w=e=>1===e.length&&":-/.".includes(e),k=e=>j(e)-1,j=e=>e.split("").reduce((e,t)=>10*e+f.indexOf(t),0),M=e=>t=>{let n=j(t);return n=n<100&&2===e?n+2e3:n,"islamic"===d&&(n=Math.ceil(.97*n+622)),e>2&&n<100&&(b=!0),n},x=e=>t=>e.indexOf(t),E=(0,_.parseDateTimeSkeleton)(n,t),D=r(t,Object.fromEntries(E));E.forEach(e=>{let[n,r,i]=e;if("literal"===n)w(r)?h.push(`[^${f[0]}-${f[9]}]`):h.push(r);else if("month"===n&&["numeric","2-digit"].includes(r))h.push(p),c.push(["month",k]);else if("month"===n&&["formatted","long","short","narrow"].includes(r))h.push(`(${D.join("|")})`),c.push(["month",x(D)]);else if(["day","minute","second"].includes(n))"minute"!==n&&"second"!==n||(y=!1),h.push(p),c.push([n,j]);else if("fractionalSecondDigits"===n)y=!1,h.push(v),c.push([n,(e,t)=>t.fractionalSecondDigits+j(e)]);else if("hour"===n)y=!1,h.push(p),c.push([n,(e,t)=>t.hour+j(e)]);else if("year"===n)h.push("numeric"===r?g:p),c.push(["year",M(i)]);else if("dayPeriod"===n){y=!1;const e=a(t);e&&(h.push(e.regex),c.push(["hour",e.fn]))}else"hourCycle"===n?(y=!1,m=r):"x-timeZoneName"===n?(y=!1,h.push("(?:GMT|UTC|Z)?([+\\-−0-9]{0,3}:?[0-9]{0,2})"),c.push([n,(e,t)=>{if(y=!0,!e)return;const n=e.replace(/−/,"-").match(/([+\-\d]{2,3}):?(\d{0,2})/),r=1*n[1];t.hour-=r;const i=n.length>2?1*n[2]:0;t.minute-=r<0?-i:i}])):"timeZoneName"!==n&&(y=!1,h.push(".+?"));return h},[]);const S=new RegExp(h.join("")),O=e.match(S);if(null===O)return e;const T={year:1972,month:0,day:1,hour:0,minute:0,second:0,fractionalSecondDigits:0};if(O.slice(1).forEach((e,t)=>{const[n,r]=c[t];T[n]=r(e,T)}),"h24"===m&&24===T.hour&&(T.hour=0),"h12"===m&&12===T.hour&&(T.hour=0),y){const e=new Date(Date.UTC(T.year,T.month,T.day,T.hour,T.minute,T.second,T.fractionalSecondDigits));return b&&e.setUTCFullYear(T.year),e}const N=new Date(T.year,T.month,T.day,T.hour,T.minute,T.second,T.fractionalSecondDigits);return b&&N.setFullYear(T.year),null==s?N:l(N,s)}t.ShorthandStyles=c}),w=f(function(e,t){Object.defineProperty(t,"__esModule",{value:!0}),Object.defineProperty(t,"formatDate",{enumerable:!0,get:function(){return p.formatDate}}),Object.defineProperty(t,"getSkeleton",{enumerable:!0,get:function(){return _.getSkeleton}}),Object.defineProperty(t,"parseDate",{enumerable:!0,get:function(){return p.parseDate}})}),k=f(function(e,t){Object.defineProperty(t,"__esModule",{value:!0}),Object.defineProperty(t,"formatDate",{enumerable:!0,get:function(){return w.formatDate}}),Object.defineProperty(t,"getSkeleton",{enumerable:!0,get:function(){return w.getSkeleton}}),Object.defineProperty(t,"parseDate",{enumerable:!0,get:function(){return w.parseDate}})}),j=0,M=2,x=3,E=5,D=7,S=8,O=9,T=((m={})[j]="number",m[1]="any",m[M]="string",m[x]="array",m[4]="object",m[E]="boolean",m[6]="expression",m[D]="null",m[S]="Array<number>",m[O]="Array<string>",m[10]="class",m[11]="Array<array>",m);function N(e,t){if(void 0===t&&(t=!0),null===e)return D;var n=e;if(t){if("function"!=typeof e.valueOf)return 4;n=e.valueOf.call(e)}switch(Object.prototype.toString.call(n)){case"[object String]":return M;case"[object Number]":return j;case"[object Array]":return x;case"[object Boolean]":return E;case"[object Null]":return D;case"[object Object]":return"Expref"===n.jmespathType?6:4;default:return 4}}function P(e){return[N(e),N(e,!1)]}function L(e,t,n,r,i,o){var a=e[0];if(-1!==t.findIndex(function(e){return 1===e||a===e}))return n;var s=!1;if((4===a||1===t.length&&10===t[0])&&(s=!0),a===x&&1===t.length&&4===t[0]&&(s=!0),t.includes(11)){if(a===x&&(n.forEach(function(e){e instanceof Array||(s=!0)}),!s))return n;s=!0}if(s)throw new Error("TypeError: "+r+" expected argument to be type "+T[t[0]]+" but received type "+T[a]+" instead.");var u=-1;if(a===x&&t.includes(O)&&t.includes(S)&&(u=n.length>0&&"string"==typeof n[0]?O:S),-1===u&&[O,S,x].includes(a)&&(u=t.find(function(e){return[O,S,x].includes(e)})),-1===u&&(u=t[0]),1===u)return n;if(u===O||u===S||u===x){if(u===x)return a===S||a===O?n:null===n?[]:[n];var l=u===S?j:M;if(a===x){for(var c=n.slice(),h=0;h<c.length;h+=1){var d=P(c[h]);c[h]=L(d,[l],c[h],r,i,o)}return c}if([j,M,D,E].includes(l))return[L(e,[l],n,r,i,o)]}else{if(u===j)return[M,E,D].includes(a)?i(n):0;if(u===M)return a===D||4===a?"":o(n);if(u===E)return!!n;if(4===u&&4===e[1])return n}throw new Error("unhandled argument")}function I(e){return null!==e&&"[object Array]"===Object.prototype.toString.call(e)}function C(e){return null!==e&&"[object Object]"===Object.prototype.toString.call(e)}function A(e){return null==e?e:I(e)?e.map(function(e){return A(e)}):"function"!=typeof e.valueOf?e:e.valueOf()}function F(e,t){var n=A(e),r=A(t);if(n===r)return!0;if(Object.prototype.toString.call(n)!==Object.prototype.toString.call(r))return!1;if(!0===I(n)){if(n.length!==r.length)return!1;for(var i=0;i<n.length;i+=1)if(!1===F(n[i],r[i]))return!1;return!0}if(!0===C(n)){var o={};for(var a in n)if(hasOwnProperty.call(n,a)){if(!1===F(n[a],r[a]))return!1;o[a]=!0}for(var s in r)if(hasOwnProperty.call(r,s)&&!0!==o[s])return!1;return!0}return!1}function q(e){if(null===e)return!0;var t=A(e);if(""===t||!1===t||null===t)return!0;if(I(t)&&0===t.length)return!0;if(C(t)){for(var n in t)if(Object.prototype.hasOwnProperty.call(t,n))return!1;return!0}return!t}var R=/*#__PURE__*/function(){function e(e,t,n,r,i,o){this.runtime=e,this.globals=t,this.toNumber=n,this.toString=r,this.debug=i,this.language=o}var t=e.prototype;return t.search=function(e,t){return this.visit(e,t)},t.visit=function(e,t){var n,r=this,i=e&&(n={Field:function(e,t){if(null!==t&&(C(t)||I(t))){var n=t[e.name];if("function"==typeof n&&(n=void 0),void 0===n){try{r.debug.push("Failed to find: '"+e.name+"'");var i=Object.keys(t).map(function(e){return"'"+e+"'"}).toString();i.length&&r.debug.push("Available fields: "+i)}catch(e){}return null}return n}return null},Subexpression:function(e,t){for(var n=r.visit(e.children[0],t),i=1;i<e.children.length;i+=1)if(null===(n=r.visit(e.children[1],n)))return null;return n},IndexExpression:function(e,t){var n=r.visit(e.children[0],t);return r.visit(e.children[1],n)},Index:function(e,t){if(I(t)){var n=r.toNumber(r.visit(e.value,t));n<0&&(n=t.length+n);var i=t[n];return void 0===i?(r.debug.push("Index "+n+" out of range"),null):i}if(C(t)){var o=r.toString(r.visit(e.value,t)),a=t[o];return void 0===a?(r.debug.push("Key "+o+" does not exist"),null):a}return r.debug.push("left side of index expression "+t+" is not an array or object."),null},Slice:function(e,t){if(!I(t))return null;var n=e.children.slice(0).map(function(e){return null!=e?r.toNumber(r.visit(e,t)):null}),i=r.computeSliceParams(t.length,n),o=i[0],a=i[1],s=i[2],u=[];if(s>0)for(var l=o;l<a;l+=s)u.push(t[l]);else for(var c=o;c>a;c+=s)u.push(t[c]);return u},Projection:function(e,t){var n=r.visit(e.children[0],t);if(!I(n))return null;var i=[];return n.forEach(function(t){var n=r.visit(e.children[1],t);null!==n&&i.push(n)}),i},ValueProjection:function(e,t){var n=r.visit(e.children[0],t);if(!C(A(n)))return null;var i=[];return Object.values(n).forEach(function(t){var n=r.visit(e.children[1],t);null!==n&&i.push(n)}),i},FilterProjection:function(e,t){var n=r.visit(e.children[0],t);if(!I(n))return null;var i=n.filter(function(t){return!q(r.visit(e.children[2],t))}),o=[];return i.forEach(function(t){var n=r.visit(e.children[1],t);null!==n&&o.push(n)}),o},Comparator:function(e,t){var n=r.visit(e.children[0],t),i=r.visit(e.children[1],t);if("EQ"===e.name)return F(n,i);if("NE"===e.name)return!F(n,i);if("GT"===e.name)return n>i;if("GTE"===e.name)return n>=i;if("LT"===e.name)return n<i;if("LTE"===e.name)return n<=i;throw new Error("Unknown comparator: "+e.name)}},n.Flatten=function(e,t){var n=r.visit(e.children[0],t);if(!I(n))return null;var i=[];return n.forEach(function(e){I(e)?i.push.apply(i,e):i.push(e)}),i},n.Identity=function(e,t){return t},n.MultiSelectList=function(e,t){return null===t?null:e.children.map(function(e){return r.visit(e,t)})},n.MultiSelectHash=function(e,t){if(null===t)return null;var n={};return e.children.forEach(function(e){n[e.name]=r.visit(e.value,t)}),n},n.OrExpression=function(e,t){var n=r.visit(e.children[0],t);return q(n)&&(n=r.visit(e.children[1],t)),n},n.AndExpression=function(e,t){var n=r.visit(e.children[0],t);return!0===q(n)?n:r.visit(e.children[1],t)},n.AddExpression=function(e,t){var n=r.visit(e.children[0],t),i=r.visit(e.children[1],t);return r.applyOperator(n,i,"+")},n.ConcatenateExpression=function(e,t){var n=r.visit(e.children[0],t),i=r.visit(e.children[1],t);return n=L(P(n),[2,9],n,"concatenate",r.toNumber,r.toString),i=L(P(i),[2,9],i,"concatenate",r.toNumber,r.toString),r.applyOperator(n,i,"&")},n.UnionExpression=function(e,t){var n=r.visit(e.children[0],t),i=r.visit(e.children[1],t);return n=L(P(n),[3],n,"union",r.toNumber,r.toString),i=L(P(i),[3],i,"union",r.toNumber,r.toString),n.concat(i)},n.SubtractExpression=function(e,t){var n=r.visit(e.children[0],t),i=r.visit(e.children[1],t);return r.applyOperator(n,i,"-")},n.MultiplyExpression=function(e,t){var n=r.visit(e.children[0],t),i=r.visit(e.children[1],t);return r.applyOperator(n,i,"*")},n.DivideExpression=function(e,t){var n=r.visit(e.children[0],t),i=r.visit(e.children[1],t);return r.applyOperator(n,i,"/")},n.PowerExpression=function(e,t){var n=r.visit(e.children[0],t),i=r.visit(e.children[1],t);return r.applyOperator(n,i,"^")},n.NotExpression=function(e,t){return q(r.visit(e.children[0],t))},n.Literal=function(e){return e.value},n.Number=function(e){return e.value},n.Pipe=function(e,t){var n=r.visit(e.children[0],t);return r.visit(e.children[1],n)},n.Current=function(e,t){return t},n.Global=function(e){var t=r.globals[e.name];return void 0===t?null:t},n.Function=function(e,t){if("if"===e.name)return r.runtime.callFunction(e.name,e.children,t,r,!1);var n=e.children.map(function(e){return r.visit(e,t)});return r.runtime.callFunction(e.name,n,t,r)},n.ExpressionReference=function(e){var t=e.children[0];return t.jmespathType="Expref",t},n)[e.type];if(!i)throw new Error("Unknown/missing node type "+(e&&e.type||""));return i(e,t)},t.computeSliceParams=function(e,t){function n(e,t,n){var r=t;return r<0?(r+=e)<0&&(r=n<0?-1:0):r>=e&&(r=n<0?e-1:e),r}var r=t[0],i=t[1],o=t[2];if(null===o)o=1;else if(0===o){var a=new Error("Invalid slice, step cannot be 0");throw a.name="RuntimeError",a}var s=o<0;return[r=null===r?s?e-1:0:n(e,r,o),i=null===i?s?-1:e:n(e,i,o),o]},t.applyOperator=function(e,t,n){var r=this;if(I(e)&&I(t)){var i=e.length<t.length?e:t,o=Math.abs(e.length-t.length);i.length+=o,i.fill(null,i.length-o);for(var a=[],s=0;s<e.length;s+=1)a.push(this.applyOperator(e[s],t[s],n));return a}if(I(e))return e.map(function(e){return r.applyOperator(e,t,n)});if(I(t))return t.map(function(t){return r.applyOperator(e,t,n)});if("*"===n)return this.toNumber(e)*this.toNumber(t);if("&"===n)return e+t;if("+"===n)return this.toNumber(e)+this.toNumber(t);if("-"===n)return this.toNumber(e)-this.toNumber(t);if("/"===n){var u=e/t;return Number.isFinite(u)?u:null}if("^"===n)return Math.pow(e,t);throw new Error("Unknown operator: "+n)},e}(),V="UnquotedIdentifier",$="QuotedIdentifier",B="Rbracket",H="Rparen",U="Comma",z="Colon",W="Number",G="Current",Q="Pipe",Z="Or",J="And",Y="Dot",K="Lbracket",X="Literal",ee={".":Y,",":U,":":z,"{":"Lbrace","}":"Rbrace","]":B,"(":"Lparen",")":H,"@":G},te={"<":!0,">":!0,"=":!0,"!":!0},ne={" ":!0,"\t":!0,"\n":!0};function re(e,t){return e>="0"&&e<="9"||t&&"-"===e||"."===e}function ie(e){return e>="a"&&e<="z"||e>="A"&&e<="Z"||e>="0"&&e<="9"||"_"===e}function oe(e,t){var n=e[t];return"$"===n?e.length>t&&ie(e[t+1]):n>="a"&&n<="z"||n>="A"&&n<="Z"||"_"===n}var ae=/*#__PURE__*/function(){function e(e,t){void 0===e&&(e=[]),void 0===t&&(t=[]),this._allowedGlobalNames=e,this.debug=t}var t=e.prototype;return t.tokenize=function(e){var t,n,r,i=[];for(this._current=0;this._current<e.length;){var o=i.length?i.slice(-1)[0].type:null;if(this._isGlobal(o,e,this._current))i.push(this._consumeGlobal(e));else if(oe(e,this._current))t=this._current,n=this._consumeUnquotedIdentifier(e),i.push({type:V,value:n,start:t});else if(void 0!==ee[e[this._current]])i.push({type:ee[e[this._current]],value:e[this._current],start:this._current}),this._current+=1;else if("-"===e[this._current]&&![G,W,H,V,$,B].includes(o)||re(e[this._current],!1))r=this._consumeNumber(e),i.push(r);else if("["===e[this._current])r=this._consumeLBracket(e),i.push(r);else if('"'===e[this._current])t=this._current,n=this._consumeQuotedIdentifier(e),i.push({type:$,value:n,start:t});else if("'"===e[this._current])t=this._current,n=this._consumeRawStringLiteral(e),i.push({type:X,value:n,start:t});else if("`"===e[this._current]){t=this._current;var a=this._consumeLiteral(e);i.push({type:X,value:a,start:t})}else if(void 0!==te[e[this._current]])i.push(this._consumeOperator(e));else if(void 0!==ne[e[this._current]])this._current+=1;else if("&"===e[this._current])t=this._current,this._current+=1,"&"===e[this._current]?(this._current+=1,i.push({type:J,value:"&&",start:t})):i.push(o===U||"Lparen"===o?{type:"Expref",value:"&",start:t}:{type:"Concatenate",value:"&",start:t});else if("~"===e[this._current])t=this._current,this._current+=1,i.push({type:"Union",value:"~",start:t});else if("+"===e[this._current])t=this._current,this._current+=1,i.push({type:"Add",value:"+",start:t});else if("-"===e[this._current])t=this._current,this._current+=1,i.push({type:"Subtract",value:"-",start:t});else if("*"===e[this._current]){t=this._current,this._current+=1;var s=i.length&&i.slice(-1)[0].type;0===i.length||[K,Y,Q,J,Z,U,z].includes(s)?i.push({type:"Star",value:"*",start:t}):i.push({type:"Multiply",value:"*",start:t})}else if("/"===e[this._current])t=this._current,this._current+=1,i.push({type:"Divide",value:"/",start:t});else if("^"===e[this._current])t=this._current,this._current+=1,i.push({type:"Power",value:"^",start:t});else{if("|"!==e[this._current]){var u=new Error("Unknown character:"+e[this._current]);throw u.name="LexerError",u}t=this._current,this._current+=1,"|"===e[this._current]?(this._current+=1,i.push({type:Z,value:"||",start:t})):i.push({type:Q,value:"|",start:t})}}return i},t._consumeUnquotedIdentifier=function(e){var t=this._current;for(this._current+=1;this._current<e.length&&ie(e[this._current]);)this._current+=1;return e.slice(t,this._current)},t._consumeQuotedIdentifier=function(e){var t=this._current;this._current+=1;for(var n=e.length,r=!oe(e,t+1);'"'!==e[this._current]&&this._current<n;){var i=this._current;ie(e[i])||(r=!0),this._current=i+="\\"!==e[i]||"\\"!==e[i+1]&&'"'!==e[i+1]?1:2}this._current+=1;var o=e.slice(t,this._current);try{r&&!o.includes(" ")||(this.debug.push("Suspicious quotes: "+o),this.debug.push("Did you intend a literal? '"+o.replace(/"/g,"")+"'?"))}catch(e){}return JSON.parse(o)},t._consumeRawStringLiteral=function(e){var t=this._current;this._current+=1;for(var n=e.length;"'"!==e[this._current]&&this._current<n;){var r=this._current;this._current=r+="\\"!==e[r]||"\\"!==e[r+1]&&"'"!==e[r+1]?1:2}return this._current+=1,e.slice(t+1,this._current-1).replaceAll("\\'","'")},t._consumeNumber=function(e){var t=this._current;this._current+=1;for(var n=e.length;re(e[this._current],!1)&&this._current<n;)this._current+=1;var r,i=e.slice(t,this._current);return r=i.includes(".")?parseFloat(i):parseInt(i,10),{type:W,value:r,start:t}},t._consumeLBracket=function(e){var t=this._current;return this._current+=1,"?"===e[this._current]?(this._current+=1,{type:"Filter",value:"[?",start:t}):"]"===e[this._current]?(this._current+=1,{type:"Flatten",value:"[]",start:t}):{type:K,value:"[",start:t}},t._isGlobal=function(e,t,n){if(null!==e&&e===Y)return!1;if("$"!==t[n])return!1;for(var r=n+1;r<t.length&&ie(t[r]);)r+=1;var i=t.slice(n,r);return this._allowedGlobalNames.includes(i)},t._consumeGlobal=function(e){var t=this._current;for(this._current+=1;this._current<e.length&&ie(e[this._current]);)this._current+=1;return{type:"Global",name:e.slice(t,this._current),start:t}},t._consumeOperator=function(e){var t=this._current,n=e[t];return this._current+=1,"!"===n?"="===e[this._current]?(this._current+=1,{type:"NE",value:"!=",start:t}):{type:"Not",value:"!",start:t}:"<"===n?"="===e[this._current]?(this._current+=1,{type:"LTE",value:"<=",start:t}):{type:"LT",value:"<",start:t}:">"===n?"="===e[this._current]?(this._current+=1,{type:"GTE",value:">=",start:t}):{type:"GT",value:">",start:t}:"="===e[this._current]?(this._current+=1,{type:"EQ",value:"==",start:t}):{type:"EQ",value:"=",start:t}},t._consumeLiteral=function(e){this._current+=1;for(var t,n=this._current,r=e.length,i=!1;(i||"`"!==e[this._current])&&this._current<r;){var o=this._current;i&&"\\"===e[o]&&'"'===e[o+1]?o+=2:('"'===e[o]&&(i=!i),o+=i&&"`"===e[o+1]?2:"\\"!==e[o]||"\\"!==e[o+1]&&"`"!==e[o+1]?1:2),this._current=o}var a=e.slice(n,this._current).trimStart();return t=function(e){if(""===e)return!1;if('[{"'.includes(e[0]))return!0;if(["true","false","null"].includes(e))return!0;if(!"-0123456789".includes(e[0]))return!1;try{return JSON.parse(e),!0}catch(e){return!1}}(a=a.replaceAll("\\`","`"))?JSON.parse(a):JSON.parse('"'+a+'"'),this._current+=1,t},e}(),se="Colon",ue="UnquotedIdentifier",le="QuotedIdentifier",ce="Rbracket",he="Rparen",de="Comma",fe="Concatenate",pe="Rbrace",ve="Number",ge="Current",me="Global",ye="Field",_e="Pipe",be="Subtract",we="Multiply",ke="Flatten",je="Star",Me="Filter",xe="Lbrace",Ee="Lbracket",De="Lparen",Se=((y={}).EOF=0,y[ue]=0,y[le]=0,y[ce]=0,y[he]=0,y[de]=0,y[pe]=0,y[ve]=0,y[ge]=0,y[me]=0,y[ye]=0,y.Expref=0,y[_e]=1,y.Or=2,y.And=3,y.Add=6,y[be]=6,y[fe]=7,y[we]=7,y.Divide=7,y.Power=7,y.Union=7,y.EQ=5,y.GT=5,y.LT=5,y.GTE=5,y.LTE=5,y.NE=5,y[ke]=9,y[je]=20,y[Me]=21,y.Dot=40,y.Not=45,y[xe]=50,y[Ee]=55,y[De]=60,y),Oe=/*#__PURE__*/function(){function e(e){void 0===e&&(e=[]),this._allowedGlobalNames=e}var t=e.prototype;return t.parse=function(e,t){this._loadTokens(e,t),this.index=0;var n=this.expression(0);if("EOF"!==this._lookahead(0)){var r=this._lookaheadToken(0),i=new Error("Unexpected token type: "+r.type+", value: "+r.value);throw i.name="ParserError",i}return n},t._loadTokens=function(e,t){var n=new ae(this._allowedGlobalNames,t).tokenize(e);n.push({type:"EOF",value:"",start:e.length}),this.tokens=n},t.expression=function(e){var t=this._lookaheadToken(0);this._advance();for(var n=this.nud(t),r=this._lookahead(0);e<Se[r];)this._advance(),n=this.led(r,n),r=this._lookahead(0);return n},t._lookahead=function(e){return this.tokens[this.index+e].type},t._lookaheadToken=function(e){return this.tokens[this.index+e]},t._advance=function(){this.index+=1},t._getIndex=function(){return this.index},t._setIndex=function(e){this.index=e},t.nud=function(e){var t,n,r;switch(e.type){case"Literal":return{type:"Literal",value:e.value};case ve:return{type:"Number",value:e.value};case ue:return{type:"Field",name:e.value};case le:if(n={type:"Field",name:e.value},this._lookahead(0)===De)throw new Error("Quoted identifier not allowed for function names.");return n;case"Not":return{type:"NotExpression",children:[this.expression(Se.Not)]};case je:return{type:"ValueProjection",children:[{type:"Identity"},this._lookahead(0)===ce?{type:"Identity"}:this._parseProjectionRHS(Se.Star)]};case Me:return this.led(e.type,{type:"Identity"});case xe:return this._parseMultiselectHash();case ke:return{type:"Projection",children:[{type:ke,children:[{type:"Identity"}]},this._parseProjectionRHS(Se.Flatten)]};case Ee:return this._lookahead(0)===je&&this._lookahead(1)===ce?(this._advance(),this._advance(),{type:"Projection",children:[{type:"Identity"},this._parseProjectionRHS(Se.Star)]}):this._parseUnchainedIndexExpression();case ge:return{type:ge};case me:return{type:me,name:e.name};case ye:return{type:ye};case"Expref":return{type:"ExpressionReference",children:[t=this.expression(Se.Expref)]};case De:for(r=[];this._lookahead(0)!==he;)t=this.expression(0),r.push(t);return this._match(he),r[0];default:this._errorToken(e)}},t.led=function(e,t){var n,r,i,o,a,s;switch(e){case fe:return{type:"ConcatenateExpression",children:[t,r=this.expression(Se.Concatenate)]};case"Dot":return s=Se.Dot,this._lookahead(0)!==je?{type:"Subexpression",children:[t,r=this._parseDotRHS(s)]}:(this._advance(),{type:"ValueProjection",children:[t,r=this._parseProjectionRHS(s)]});case _e:return r=this.expression(Se.Pipe),{type:_e,children:[t,r]};case"Or":return{type:"OrExpression",children:[t,r=this.expression(Se.Or)]};case"And":return{type:"AndExpression",children:[t,r=this.expression(Se.And)]};case"Add":return{type:"AddExpression",children:[t,r=this.expression(Se.Add)]};case be:return{type:"SubtractExpression",children:[t,r=this.expression(Se.Subtract)]};case we:return{type:"MultiplyExpression",children:[t,r=this.expression(Se.Multiply)]};case"Divide":return{type:"DivideExpression",children:[t,r=this.expression(Se.Divide)]};case"Power":return{type:"PowerExpression",children:[t,r=this.expression(Se.Power)]};case"Union":return{type:"UnionExpression",children:[t,r=this.expression(Se.Power)]};case De:for(i=t.name,o=[];this._lookahead(0)!==he;)a=this.expression(0),this._lookahead(0)===de&&this._match(de),o.push(a);return this._match(he),{type:"Function",name:i,children:o};case Me:return n=this.expression(0),this._match(ce),{type:"FilterProjection",children:[t,r=this._lookahead(0)===ke?{type:"Identity"}:this._parseProjectionRHS(Se.Filter),n]};case ke:return{type:"Projection",children:[{type:ke,children:[t]},this._parseProjectionRHS(Se.Flatten)]};case"EQ":case"NE":case"GT":case"GTE":case"LT":case"LTE":return this._parseComparator(t,e);case Ee:return this._lookahead(0)===je&&this._lookahead(1)===ce?(this._advance(),this._advance(),{type:"Projection",children:[t,r=this._parseProjectionRHS(Se.Star)]}):(r=this._parseChainedIndexExpression(),this._projectIfSlice(t,r));default:this._errorToken(this._lookaheadToken(0))}},t._match=function(e){if(this._lookahead(0)!==e){var t=this._lookaheadToken(0),n=new Error("Expected "+e+", got: "+t.type);throw n.name="ParserError",n}this._advance()},t._errorToken=function(e){var t=new Error("Invalid token ("+e.type+'): "'+e.value+'"');throw t.name="ParserError",t},t._parseChainedIndexExpression=function(){var e=this._getIndex();if(this._lookahead(0)===se)return this._parseSliceExpression();var t=this.expression(0);return this._lookahead(0)===se?(this._setIndex(e),this._parseSliceExpression()):(this._match(ce),{type:"Index",value:t})},t._parseUnchainedIndexExpression=function(){var e=this._getIndex(),t=this._lookahead(0);if(t===se){var n=this._parseSliceExpression();return this._projectIfSlice({type:"Identity"},n)}var r=this.expression(0),i=this._lookahead(0);if(i===de)return this._setIndex(e),this._parseMultiselectList();if(i===se){this._setIndex(e);var o=this._parseSliceExpression();return this._projectIfSlice({type:"Identity"},o)}return t===ve?(this._match(ce),{type:"Index",value:r}):(this._setIndex(e),this._parseMultiselectList())},t._projectIfSlice=function(e,t){var n={type:"IndexExpression",children:[e,t]};return"Slice"===t.type?{type:"Projection",children:[n,this._parseProjectionRHS(Se.Star)]}:n},t._parseSliceExpression=function(){for(var e=[null,null,null],t=0,n=this._lookahead(0);n!==ce&&t<3;){if(n===se&&t<2)t+=1,this._advance();else{e[t]=this.expression(0);var r=this._lookahead(0);if(r!==se&&r!==ce){var i=new Error("Syntax error, unexpected token: "+r.value+"("+r.type+")");throw i.name="Parsererror",i}}n=this._lookahead(0)}return this._match(ce),{type:"Slice",children:e}},t._parseComparator=function(e,t){return{type:"Comparator",name:t,children:[e,this.expression(Se[t])]}},t._parseDotRHS=function(e){var t=this._lookahead(0);return[ue,le,je].indexOf(t)>=0?this.expression(e):t===Ee?(this._match(Ee),this._parseMultiselectList()):t===xe?(this._match(xe),this._parseMultiselectHash()):void 0},t._parseProjectionRHS=function(e){var t;if(Se[this._lookahead(0)]<10)t={type:"Identity"};else if(this._lookahead(0)===Ee)t=this.expression(e);else if(this._lookahead(0)===Me)t=this.expression(e);else{if("Dot"!==this._lookahead(0)){var n=this._lookaheadToken(0),r=new Error("Sytanx error, unexpected token: "+n.value+"("+n.type+")");throw r.name="ParserError",r}this._match("Dot"),t=this._parseDotRHS(e)}return t},t._parseMultiselectList=function(){for(var e=[];this._lookahead(0)!==ce;){var t=this.expression(0);if(e.push(t),this._lookahead(0)===de&&(this._match(de),this._lookahead(0)===ce))throw new Error("Unexpected token Rbracket")}return this._match(ce),{type:"MultiSelectList",children:e}},t._parseMultiselectHash=function(){var e,t,n,r=[],i=[ue,le];if(this._lookahead(0)===pe)return this._advance(),{type:"MultiSelectHash",children:[]};for(;;){if(e=this._lookaheadToken(0),i.indexOf(e.type)<0)throw new Error("Expecting an identifier token, got: "+e.type);if(t=e.value,this._advance(),this._match(se),n=this.expression(0),r.push({type:"KeyValuePair",name:t,value:n}),this._lookahead(0)===de)this._match(de);else if(this._lookahead(0)===pe){this._match(pe);break}}return{type:"MultiSelectHash",children:r}},e}();function Te(e,t){var n=Math.pow(10,t);return Math.round(e*n)/n}var Ne=new function(){var e;function t(e){return null==e?"":e.toString()}var n=/*#__PURE__*/function(){function n(){}var i=n.prototype;return i.addFunctions=function(n,i){void 0===i&&(i={}),this.functionTable=r({},function(e,t,n,r,i,o,a){var s=0,u=2;function l(t,n){return function(r){var o=e.visit(t,r);if(n.indexOf(i(o))<0){var a="TypeError: expected one of "+n+", received "+i(o);throw new Error(a)}return o}}return{abs:{_func:function(e){return Math.abs(e[0])},_signature:[{types:[s]}]},avg:{_func:function(e){var t=0,n=e[0];return n.forEach(function(e){t+=e}),t/n.length},_signature:[{types:[8]}]},ceil:{_func:function(e){return Math.ceil(e[0])},_signature:[{types:[s]}]},contains:{_func:function(e){return o(e[0]).indexOf(o(e[1]))>=0},_signature:[{types:[u,3]},{types:[1]}]},endsWith:{_func:function(e){var t=o(e[0]),n=o(e[1]);return-1!==t.indexOf(n,t.length-n.length)},_signature:[{types:[u]},{types:[u]}]},floor:{_func:function(e){return Math.floor(e[0])},_signature:[{types:[s]}]},length:{_func:function(e){var r=o(e[0]);return t(r)?Object.keys(r).length:n(r)?r.length:a(r).length},_signature:[{types:[u,3,4]}]},map:{_func:function(t){var n=t[0];return t[1].map(function(t){return e.visit(n,t)})},_signature:[{types:[6]},{types:[3]}]},reduce:{_func:function(t){var n=t[0];return t[1].reduce(function(t,r,i,o){return e.visit(n,{accumulated:t,current:r,index:i,array:o})},3===t.length?t[2]:null)},_signature:[{types:[6]},{types:[3]},{types:[1],optional:!0}]},max:{_func:function(e){if(e[0].length>0){var t=i(e[0][0]);return e[0].reduce(t===s?function(e,t){return r(e)>=r(t)?e:t}:function(e,t){return a(t).localeCompare(a(e))<0?e:t},e[0][0])}return null},_signature:[{types:[3,8,9]}]},merge:{_func:function(e){var t={};return e.forEach(function(e){Object.entries(e).forEach(function(e){t[e[0]]=e[1]})}),t},_signature:[{types:[4],variadic:!0}]},maxBy:{_func:function(e){var t,n,r=e[0],i=l(e[1],[s,u]),o=-Infinity;return r.forEach(function(e){(n=i(e))>o&&(o=n,t=e)}),t},_signature:[{types:[3]},{types:[6]}]},sum:{_func:function(e){var t=0;return e[0].forEach(function(e){t+=1*e}),t},_signature:[{types:[8]}]},startsWith:{_func:function(e){return o(e[0]).startsWith(o(e[1]))},_signature:[{types:[u]},{types:[u]}]},min:{_func:function(e){if(e[0].length>0){if(i(e[0][0])===s)return e[0].reduce(function(e,t){return r(e)<=r(t)?e:t},e[0][0]);for(var t=e[0],n=t[0],o=1;o<t.length;o+=1)a(t[o]).localeCompare(a(n))<0&&(n=t[o]);return n}return null},_signature:[{types:[3,8,9]}]},minBy:{_func:function(e){var t,n,r=e[0],i=l(e[1],[s,u]),o=Infinity;return r.forEach(function(e){(n=i(e))<o&&(o=n,t=e)}),t},_signature:[{types:[3]},{types:[6]}]},type:{_func:function(e){var t;return(t={},t[s]="number",t[u]="string",t[3]="array",t[4]="object",t[5]="boolean",t[6]="expref",t[7]="null",t)[i(e[0])]},_signature:[{types:[1]}]},keys:{_func:function(e){return null===e[0]?[]:Object.keys(e[0])},_signature:[{types:[1]}]},values:{_func:function(e){var t=o(e[0]);return null===t?[]:Object.values(t)},_signature:[{types:[1]}]},sort:{_func:function(e){var t=e[0].slice(0);if(t.length>0){var n=i(e[0][0])===s?r:a;t.sort(function(e,t){var r=n(e),i=n(t);return r<i?-1:r>i?1:0})}return t},_signature:[{types:[3,9,8]}]},sortBy:{_func:function(t){var n=t[0].slice(0);if(0===n.length)return n;var r=t[1],o=i(e.visit(r,n[0]));if([s,u].indexOf(o)<0)throw new Error("TypeError");for(var a=[],l=0;l<n.length;l+=1)a.push([l,n[l]]);a.sort(function(t,n){var a=e.visit(r,t[1]),s=e.visit(r,n[1]);if(i(a)!==o)throw new Error("TypeError: expected "+o+", received "+i(a));if(i(s)!==o)throw new Error("TypeError: expected "+o+", received "+i(s));return a>s?1:a<s?-1:t[0]-n[0]});for(var c=0;c<a.length;c+=1)n[c]=a[c][1];return n},_signature:[{types:[3]},{types:[6]}]},join:{_func:function(e){return e[1].join(e[0])},_signature:[{types:[u]},{types:[9]}]},reverse:{_func:function(e){var t=o(e[0]);if(i(t)===u){for(var n="",r=t.length-1;r>=0;r-=1)n+=t[r];return n}var a=e[0].slice(0);return a.reverse(),a},_signature:[{types:[u,3]}]},toArray:{_func:function(e){return 3===i(e[0])?e[0]:[e[0]]},_signature:[{types:[1]}]},toString:{_func:function(e){return i(e[0])===u?e[0]:JSON.stringify(e[0])},_signature:[{types:[1]}]},toNumber:{_func:function(e){var t=i(e[0]);return t===s?e[0]:t===u?r(e[0]):null},_signature:[{types:[1]}]},notNull:{_func:function(e){return e.find(function(e){return 7!==i(e)})||null},_signature:[{types:[1],variadic:!0}]},zip:{_func:function(e){for(var t=e.reduce(function(e,t){return Math.min(e,t.length)},e[0].length),n=new Array(t),r=function(t){n[t]=[],e.forEach(function(e){n[t].push(e[t])})},i=0;i<t;i+=1)r(i);return n},_signature:[{types:[3],variadic:!0}]}}}(this._interpreter,C,I,e,N,A,t),function(e,t,n,r){return void 0===r&&(r=[]),{casefold:{_func:function(e,n,r){return t(e[0]).toLocaleUpperCase(r.language).toLocaleLowerCase(r.language)},_signature:[{types:[2]}]},and:{_func:function(t){var n=!!e(t[0]);return t.slice(1).forEach(function(t){n=n&&!!e(t)}),n},_signature:[{types:[1],variadic:!0}]},deepScan:{_func:function(e){var t=e[0],n=e[1].toString(),r=[];return null===t||function e(t){Object.entries(t).forEach(function(t){var i=t[1];t[0]===n&&r.push(i),"object"==typeof i&&e(i)})}(t),r},_signature:[{types:[4,3,7]},{types:[2,0]}]},or:{_func:function(t){var n=!!e(t[0]);return t.slice(1).forEach(function(t){n=n||!!e(t)}),n},_signature:[{types:[1],variadic:!0}]},not:{_func:function(t){return!e(t[0])},_signature:[{types:[1]}]},null:{_func:function(){return null},_signature:[]},true:{_func:function(){return!0},_signature:[]},false:{_func:function(){return!1},_signature:[]},if:{_func:function(t,n,r){var i=t[1],o=t[2],a=r.visit(t[0],n);return e(a)?r.visit(i,n):r.visit(o,n)},_signature:[{types:[1]},{types:[1]},{types:[1]}]},substitute:{_func:function(e){var r=t(e[0]),i=t(e[1]),o=t(e[2]);if(e.length<=3)return r.replaceAll(i,o);var a=n(e[3]);if(a<1)return r;for(var s=-1,u=0;u<a;u+=1){var l=r.slice(s+=1).indexOf(i);if(-1===l)return r;s+=l}return r.slice(0,s)+r.slice(s).replace(i,o)},_signature:[{types:[2]},{types:[2]},{types:[2]},{types:[0],optional:!0}]},value:{_func:function(e){var t=e[0]||{},n=e[1],i=t[n];if(void 0===i){r.push("Failed to find: '"+n+"'");var o=Object.keys(t).map(function(e){return"'"+e+"'"}).toString();return o.length&&r.push("Available fields: "+o),null}return i},_signature:[{types:[4,3,7]},{types:[2,0]}]},lower:{_func:function(e){return t(e[0]).toLowerCase()},_signature:[{types:[2]}]},upper:{_func:function(e){return t(e[0]).toUpperCase()},_signature:[{types:[2]}]},exp:{_func:function(e){var t=n(e[0]);return Math.exp(t)},_signature:[{types:[0]}]},power:{_func:function(e){return Math.pow(n(e[0]),n(e[1]))},_signature:[{types:[0]},{types:[0]}]},find:{_func:function(e){var r=t(e[0]),i=t(e[1]),o=e.length>2?n(e[2]):0,a=i.indexOf(r,o);return-1===a?null:a},_signature:[{types:[2]},{types:[2]},{types:[0],optional:!0}]},left:{_func:function(e){var r=e.length>1?n(e[1]):1;return r<0?null:e[0]instanceof Array?e[0].slice(0,r):t(e[0]).substr(0,r)},_signature:[{types:[2,3]},{types:[0],optional:!0}]},right:{_func:function(e){var r=e.length>1?n(e[1]):1;if(r<0)return null;if(e[0]instanceof Array)return 0===r?[]:e[0].slice(-1*r);var i=t(e[0]);return i.substr(i.length-r,r)},_signature:[{types:[2,3]},{types:[0],optional:!0}]},mid:{_func:function(e){var r=n(e[1]),i=n(e[2]);return r<0?null:e[0]instanceof Array?e[0].slice(r,r+i):t(e[0]).substr(r,i)},_signature:[{types:[2,3]},{types:[0]},{types:[0]}]},mod:{_func:function(e){return n(e[0])%n(e[1])},_signature:[{types:[0]},{types:[0]}]},proper:{_func:function(e){return t(e[0]).split(" ").map(function(e){return e.charAt(0).toUpperCase()+e.slice(1).toLowerCase()}).join(" ")},_signature:[{types:[2]}]},rept:{_func:function(e){var r=t(e[0]),i=n(e[1]);return i<0?null:r.repeat(i)},_signature:[{types:[2]},{types:[0]}]},replace:{_func:function(e){var r=t(e[0]),i=n(e[1]),o=n(e[2]),a=t(e[3]);return i<0?null:r.substr(0,i)+a+r.substr(i+o)},_signature:[{types:[2]},{types:[0]},{types:[0]},{types:[2]}]},round:{_func:function(e){return Te(n(e[0]),n(e[1]))},_signature:[{types:[0]},{types:[0]}]},sqrt:{_func:function(e){var t=Math.sqrt(n(e[0]));return Number.isNaN(t)?null:t},_signature:[{types:[0]}]},stdevp:{_func:function(e){var t=e[0]||[];if(0===t.length)return null;var r=t.map(function(e){return n(e)}),i=r.reduce(function(e,t){return e+t},0)/t.length,o=r.reduce(function(e,t){return e+t*t},0)/t.length,a=Math.sqrt(o-i*i);return Number.isNaN(a)?null:a},_signature:[{types:[8]}]},stdev:{_func:function(e){var t=e[0]||[];if(t.length<=1)return null;var r=t.map(function(e){return n(e)}),i=r.reduce(function(e,t){return e+t},0)/t.length,o=r.reduce(function(e,t){return e+t*t},0),a=Math.sqrt((o-t.length*i*i)/(t.length-1));return Number.isNaN(a)?null:a},_signature:[{types:[8]}]},trim:{_func:function(e){return t(e[0]).split(" ").filter(function(e){return e}).join(" ")},_signature:[{types:[2]}]},trunc:{_func:function(e){var t=n(e[0]),r=e.length>1?n(e[1]):0;return(t>=0?Math.floor:Math.ceil)(t*Math.pow(10,r))/Math.pow(10,r)},_signature:[{types:[0]},{types:[0],optional:!0}]},charCode:{_func:function(e){var t=n(e[0]);return Number.isInteger(t)?String.fromCharCode(t):null},_signature:[{types:[0]}]},codePoint:{_func:function(e){var n=t(e[0]);return 0===n.length?null:n.codePointAt(0)},_signature:[{types:[2]}]},datetime:{_func:function(e){var r=n(e[0]),i=n(e[1]),o=n(e[2]),a=e.length>3?n(e[3]):0,s=e.length>4?n(e[4]):0,u=e.length>5?n(e[5]):0,l=e.length>6?n(e[6]):0,c=e.length>7?t(e[7]):null,h=new Date(r,i-1,o,a,s,u,l);return c&&(h=function(e,t){if(null===e)return null;var n=Date.UTC(e.getFullYear(),e.getMonth(),e.getDate(),e.getHours(),e.getMinutes(),e.getSeconds(),e.getMilliseconds());return n+=function(e,t){var n=new Intl.DateTimeFormat("en-US",{timeZone:t,timeZoneName:"longOffset"}).format(e),r=/GMT([+\-−])?(\d{1,2}):?(\d{0,2})?/.exec(n);if(!r)return 0;var i=r.slice(1),o=60*(60*(i[1]||0)+1*(i[2]||0))*1e3;return"-"===i[0]?-1*o:o}(e,t),new Date(n)}(h,c)),h.getTime()/864e5},_signature:[{types:[0]},{types:[0]},{types:[0]},{types:[0],optional:!0},{types:[0],optional:!0},{types:[0],optional:!0},{types:[0],optional:!0},{types:[2],optional:!0}]},datedif:{_func:function(e){var r=n(e[0]),i=n(e[1]),o=t(e[2]).toLowerCase();if(i===r)return 0;if(i<r)return null;if("d"===o)return Math.floor(i-r);var a=new Date(864e5*r),s=new Date(864e5*i),u=s.getFullYear()-a.getFullYear(),l=s.getMonth()-a.getMonth(),c=s.getDate()-a.getDate();if("y"===o){var h=u;return l<0&&(h-=1),0===l&&c<0&&(h-=1),h}if("m"===o)return 12*u+l+(c<0?-1:0);if("ym"===o)return c<0&&(l-=1),l<=0&&u>0?12+l:l;if("yd"===o)return c<0&&(l-=1),s.setFullYear(l<0?a.getFullYear()+1:a.getFullYear()),Math.floor((s.getTime()-a.getTime())/864e5);throw new TypeError('Unrecognized unit parameter "'+o+'" for datedif()')},_signature:[{types:[0]},{types:[0]},{types:[2]}]},eomonth:{_func:function(e){var t=n(e[0]),r=n(e[1]),i=new Date(864e5*t);return new Date(i.getFullYear(),i.getMonth()+r+1,0).getTime()/864e5},_signature:[{types:[0]},{types:[0]}]},day:{_func:function(e){var t=n(e[0]);return new Date(864e5*t).getDate()},_signature:[{types:[0]}]},month:{_func:function(e){var t=n(e[0]);return new Date(864e5*t).getMonth()+1},_signature:[{types:[0]}]},year:{_func:function(e){var t=n(e[0]);return new Date(864e5*t).getFullYear()},_signature:[{types:[0]}]},time:{_func:function(e){var t=(3600*n(e[0])+60*n(e[1])+n(e[2]))/86400;return t<0?null:t-Math.floor(t)},_signature:[{types:[0]},{types:[0]},{types:[0]}]},hour:{_func:function(e){var t=n(e[0])%1;if(t<0)return null;var r=Te(24*t,14);return Math.floor(r%24)},_signature:[{types:[0]}]},minute:{_func:function(e){var t=n(e[0])%1;if(t<0)return null;var r=Math.round(1440*t,10);return Math.floor(r%60)},_signature:[{types:[0]}]},second:{_func:function(e){var t=n(e[0])%1;if(t<0)return null;var r=Te(86400*t,10);return Math.floor(r%60)},_signature:[{types:[0]}]},now:{_func:function(){return Date.now()/864e5},_signature:[]},today:{_func:function(){return Math.floor(Date.now()/864e5)},_signature:[]},weekday:{_func:function(e){var t=n(e[0]),r=e.length>1?n(e[1]):1,i=new Date(864e5*t).getDay();switch(r){case 1:return i+1;case 2:return(i+6)%7+1;case 3:return(i+6)%7;default:return null}},_signature:[{types:[0]},{types:[0],optional:!0}]},entries:{_func:function(t){var n=e(t[0]);return Object.entries(n)},_signature:[{types:[0,2,3,4,5]}]},fromEntries:{_func:function(e){return Object.fromEntries(e[0])},_signature:[{types:[11]}]},split:{_func:function(e){var n=t(e[0]),r=t(e[1]);return n.split(r)},_signature:[{types:[2]},{types:[2]}]},unique:{_func:function(t){var n=t[0].map(function(t){return e(t)});return t[0].filter(function(t,r){return n.indexOf(e(t))===r})},_signature:[{types:[3]}]},encodeUrlComponent:{_func:function(e){return encodeURIComponent(e[0])},_signature:[{types:[2]}]},encodeUrl:{_func:function(e){return encodeURI(e[0])},_signature:[{types:[2]}]},decodeUrlComponent:{_func:function(e){return decodeURIComponent(e[0])},_signature:[{types:[2]}]},decodeUrl:{_func:function(e){return decodeURI(e[0])},_signature:[{types:[2]}]}}}(A,t,e,n),i)},i._validateArgs=function(n,r,i,o){if(0!==i.length){var a,s=i.filter(function(e){return!e.optional}).length;if(i[i.length-1].variadic){if(r.length<i.length)throw a=1===i.length?" argument":" arguments",new Error("ArgumentError: "+n+"() takes at least"+i.length+a+" but received "+r.length)}else if(r.length<s||r.length>i.length)throw a=1===i.length?" argument":" arguments",new Error("ArgumentError: "+n+"() takes "+i.length+a+" but received "+r.length);if(o)for(var u,l,c,h,d=Math.min(i.length,r.length),f=0;f<d;f+=1)c=r[f],h=void 0,(u=i[f].types).includes(10)&&null!==(h=c)&&!Array.isArray(h)&&"Object"!==h.constructor.name||u.includes(1)||(l=P(r[f]),r[f]=L(l,u,r[f],n,e,t))}},i.callFunction=function(e,t,n,r,i){if(void 0===i&&(i=!0),!Object.prototype.hasOwnProperty.call(this.functionTable,e))throw new Error("Unknown function: "+e+"()");var o=this.functionTable[e];return this._validateArgs(e,t,o._signature,i),o._func.call(this,t,n,r)},n}();this.compile=function(e,t,n){var r;void 0===t&&(t=[]),void 0===n&&(n=[]);try{r=new Oe(t).parse(e,n)}catch(e){throw n.push(e.toString()),e}return r},this.search=function(r,i,o,a,s,u,l){void 0===u&&(u=[]),void 0===l&&(l="en-US");var c=new n(a);c.debug=u,e=function(e,t){return void 0===t&&(t=[]),function(n){var r=A(n);if(null===r)return null;if(r instanceof Array)return t.push("Converted array to zero"),0;var i=typeof r;return"number"===i?r:"string"===i?e(r,t):"boolean"===i?r?1:0:(t.push("Converted object to zero"),0)}}(s||function(e){var t=+e;return Number.isNaN(t)?0:t},u);var h=new R(c,o,e,t,u,l);c._interpreter=h,c.addFunctions(u,a);try{return h.search(r,i)}catch(e){throw u.push(e.message||e.toString()),e}},this.strictDeepEqual=F},Pe=/*#__PURE__*/function(){function e(e,t,n,r,i,o){void 0===t&&(t={}),void 0===n&&(n=null),void 0===r&&(r=[]),void 0===i&&(i=[]),void 0===o&&(o="en-US"),this.expression=e,this.customFunctions=t,this.stringToNumber=n,this.node=Ne.compile(e,r,i),this.debug=i,this.language=o}return e.prototype.search=function(e,t){return Ne.search(this.node,e,t,r({},this.customFunctions),this.stringToNumber,this.debug,this.language)},e}();function Le(){return Le=Object.assign?Object.assign.bind():function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},Le.apply(this,arguments)}var Ie=function(e){try{var t=e.name,n=e.size,r=e.type;return Promise.resolve(new Promise(function(i,o){var a=new FileReader;a.onload=function(e){i(new Ot({data:Yt(e.target.result,t),type:r,name:t,size:n}))},a.readAsDataURL(e.data)}))}catch(e){return Promise.reject(e)}},Ce=function(e,t){void 0===e&&(e=""),void 0===t&&(t=[]),this.errorMessages=t,this.fieldName=e},Ae=function(e){return new Map(Object.entries(e))},Fe=Ae({date:"date-input","data-url":"file-input",binary:"file-input"}),qe=Ae({number:"number-input",boolean:"checkbox",object:"panel",array:"panel",file:"file-input","file[]":"file-input"}),Re=["string[]","boolean[]","number[]","array"],Ve=function(e){var t=e.type||"string";return"enum"in e?e.enum.length>2||Re.indexOf(t)>-1?"drop-down":"checkbox":"string"===t||"string[]"===t?Fe.get(e.format)||"text-input":qe.get(t)||"text-input"},$e=function(e){return"file"===(null==e?void 0:e.type)||"file[]"===(null==e?void 0:e.type)||("string"===(null==e?void 0:e.type)||"string[]"===(null==e?void 0:e.type))&&("binary"===(null==e?void 0:e.format)||"data-url"===(null==e?void 0:e.format))};function Be(e,t){var n;return e instanceof Array?(n=[],n=e.map(function(e){return Be(e,t)})):"object"==typeof e&&null!==e?(n={},Object.entries(e).forEach(function(e){n[e[0]]=Be(e[1],t)})):n=e,t&&n&&n.id&&(n.id=t()),n}var He=function(e){return JSON.stringify(e,null,2)},Ue=/*#__PURE__*/function(){function e(e,t,n){this._metadata=n,this._payload=e,this._type=t}var t=e.prototype;return t.payloadToJson=function(){return this.payload},t.toJson=function(){return{payload:this.payloadToJson(),type:this.type,isCustomEvent:this.isCustomEvent}},t.toString=function(){return JSON.stringify(this.toJson())},n(e,[{key:"type",get:function(){return this._type}},{key:"payload",get:function(){return this._payload}},{key:"metadata",get:function(){return this._metadata}},{key:"target",get:function(){return this._target}},{key:"isCustomEvent",get:function(){return!1}}]),e}(),ze=/*#__PURE__*/function(e){function t(t,n){return void 0===n&&(n=!1),e.call(this,t,"change",{dispatch:n})||this}return i(t,e),t.prototype.withAdditionalChange=function(e){return new t(this.payload.changes.concat(e.payload.changes),this.metadata)},t}(Ue),We=/*#__PURE__*/function(e){function t(t){return void 0===t&&(t={}),e.call(this,t,"invalid",{})||this}return i(t,e),t}(Ue),Ge=/*#__PURE__*/function(e){function t(t){return void 0===t&&(t={}),e.call(this,t,"valid",{})||this}return i(t,e),t}(Ue),Qe=/*#__PURE__*/function(e){function t(t,n){return void 0===t&&(t={}),void 0===n&&(n=!1),e.call(this,t,"executeRule",{dispatch:n})||this}return i(t,e),t}(Ue),Ze=function(e,t,n){return new ze({changes:[{propertyName:e,currentValue:t,prevValue:n}]})},Je=/*#__PURE__*/function(e){function t(t,n){return void 0===n&&(n=!1),e.call(this,t,"initialize",{dispatch:n})||this}return i(t,e),t}(Ue),Ye=/*#__PURE__*/function(e){function t(){return e.call(this,{},"load",{dispatch:!1})||this}return i(t,e),t}(Ue),Ke=/*#__PURE__*/function(e){function t(t,n){return void 0===n&&(n=!1),e.call(this,t,"click",{dispatch:n})||this}return i(t,e),t}(Ue),Xe=/*#__PURE__*/function(e){function t(t,n){return void 0===n&&(n=!1),e.call(this,t,"blur",{dispatch:n})||this}return i(t,e),t}(Ue),et=/*#__PURE__*/function(e){function t(t,n){return void 0===n&&(n=!1),e.call(this,t,"validationComplete",{dispatch:n})||this}return i(t,e),t}(Ue),tt=/*#__PURE__*/function(e){function t(t,n){return void 0===n&&(n=!1),e.call(this,t,"submit",{dispatch:n})||this}return i(t,e),t}(Ue),nt=/*#__PURE__*/function(e){function t(t,n){return e.call(this,{field:n,changes:t},"fieldChanged")||this}return i(t,e),t}(Ue),rt=/*#__PURE__*/function(e){function t(t,n,r){return void 0===n&&(n={}),void 0===r&&(r=!1),e.call(this,n,t,{dispatch:r})||this}return i(t,e),n(t,[{key:"isCustomEvent",get:function(){return!0}}]),t}(Ue),it=/*#__PURE__*/function(e){function t(t){return e.call(this,t,"addItem")||this}return i(t,e),t}(Ue),ot=/*#__PURE__*/function(e){function t(t){return e.call(this,t,"removeItem")||this}return i(t,e),t}(Ue),at=/*#__PURE__*/function(){function e(e,t,n){void 0===n&&(n=typeof t),this.$_fields=[],this.$_name=e,this.$_value=t,this.$_type=n}var t=e.prototype;return t.valueOf=function(){return this.$_value},t.setValue=function(e,t,n){this.$_value=e,this.$_fields.forEach(function(e){n!==e&&(e.value=t)})},t.$bindToField=function(e){-1===this.$_fields.indexOf(e)&&this.$_fields.push(e)},t.$convertToDataValue=function(){return this},n(e,[{key:"$name",get:function(){return this.$_name}},{key:"$value",get:function(){return this.$_value}},{key:"$type",get:function(){return this.$_type}},{key:"$isDataGroup",get:function(){return!1}}]),e}(),st=Symbol("NullValue"),ut=new(/*#__PURE__*/function(e){function t(){return e.call(this,"",st,"null")||this}i(t,e);var n=t.prototype;return n.setValue=function(){},n.$bindToField=function(){},n.$length=function(){return 0},n.$convertToDataValue=function(){return this},n.$addDataNode=function(){},n.$removeDataNode=function(){},n.$getDataNode=function(){return this},n.$containsDataNode=function(){return!1},t}(at)),lt=/*#__PURE__*/function(e){i(r,e);var t=r.prototype;function r(t,n,r){var i;return void 0===r&&(r=typeof n),(i=e.call(this,t,n,r)||this).$_items=n instanceof Array?n.map(function(e,t){return i.createEntry(t,e)}):Object.fromEntries(Object.entries(n).map(function(e){var t=e[0];return[t,i.createEntry(t,e[1])]})),i}return t.createEntry=function(e,t){var n=t instanceof Array?"array":typeof t;return"object"==typeof t&&null!=t?new r(e,t,n):new at(e,t,n)},t.$convertToDataValue=function(){return new at(this.$name,this.$value,this.$type)},t.$addDataNode=function(e,t,n){if(void 0===n&&(n=!1),t!==ut)if("array"===this.$type){var r=e;n?this.$_items[e]=t:this.$_items.splice(r,0,t)}else this.$_items[e]=t},t.$removeDataNode=function(e){this.$_items[e]=void 0},t.$getDataNode=function(e){if(this.$_items.hasOwnProperty(e))return this.$_items[e]},t.$containsDataNode=function(e){return this.$_items.hasOwnProperty(e)&&void 0!==this.$_items[e]},n(r,[{key:"$value",get:function(){return"array"===this.$type?Object.values(this.$_items).filter(function(e){return void 0!==e}).map(function(e){return e.$value}):Object.fromEntries(Object.values(this.$_items).filter(function(e){return void 0!==e}).map(function(e){return[e.$name,e.$value]}))}},{key:"$length",get:function(){return Object.entries(this.$_items).length}},{key:"$isDataGroup",get:function(){return!0}}]),r}(at),ct=function(e,t){return{type:"Identifier",value:e,start:t}},ht=function(e){return e>="a"&&e<="z"||e>="A"&&e<="Z"||e>="0"&&e<="9"||"_"===e},dt=function(e,t,n){return null===e&&"$"===t[n]},ft=function(e,t){var n=e[t];return"$"===n?e.length>t&&ht(e[t+1]):n>="a"&&n<="z"||n>="A"&&n<="Z"||"_"===n},pt=function(e){return e>="0"&&e<="9"},vt=/*#__PURE__*/function(){function e(e){this._tokens=[],this._result_tokens=[],this.stream=e,this._current=0}var t=e.prototype;return t._consumeGlobal=function(){return this._current+=1,{type:"Global",start:0,value:"$"}},t._consumeUnquotedIdentifier=function(e){var t=this._current;for(this._current+=1;this._current<e.length&&ht(e[this._current]);)this._current+=1;return ct(e.slice(t,this._current),t)},t._consumeQuotedIdentifier=function(e){var t=this._current;this._current+=1;for(var n=e.length;'"'!==e[this._current]&&this._current<n;){var r=this._current;this._current=r+="\\"!==e[r]||"\\"!==e[r+1]&&'"'!==e[r+1]?1:2}return this._current+=1,ct(JSON.parse(e.slice(t,this._current)),t)},t._consumeNumber=function(e){var t=this._current;this._current+=1;for(var n=e.length;pt(e[this._current])&&this._current<n;)this._current+=1;var r=e.slice(t,this._current);return{type:"Number",value:parseInt(r,10),start:t}},t._consumeBracket=function(e){var t,n=this._current;if(this._current+=1,!pt(e[this._current]))throw new Error("unexpected exception at position "+this._current+". Must be a character");if(t=this._consumeNumber(e).value,this._current<this.stream.length&&"]"!==e[this._current])throw new Error("unexpected exception at position "+this._current+". Must be a character");return this._current++,function(e,t){return{type:"bracket",value:e,start:t}}(t,n)},t.tokenize=function(){for(var e=this.stream;this._current<e.length;){var t=this._tokens.length?this._tokens.slice(-1)[0]:null;if(dt(t,e,this._current)){var n=this._consumeGlobal();this._tokens.push(n),this._result_tokens.push(n)}else if(ft(e,this._current)){var r=this._consumeUnquotedIdentifier(e);this._tokens.push(r),this._result_tokens.push(r)}else if("."===e[this._current]&&null!=t&&"DOT"!==t.type)this._tokens.push({type:"DOT",value:".",start:this._current}),this._current+=1;else if("["===e[this._current]){var i=this._consumeBracket(e);this._tokens.push(i),this._result_tokens.push(i)}else{if('"'!==e[this._current]){var o=Math.max(0,this._current-2),a=Math.min(this.stream.length,this._current+2);throw new Error("Exception at parsing stream "+this.stream.slice(o,a))}var s=this._consumeQuotedIdentifier(e);this._tokens.push(s),this._result_tokens.push(s)}}return this._result_tokens},e}(),gt=function(e){return new vt(e).tokenize()},mt=function(e,t,n){var r;r="string"==typeof t?gt(t):t;for(var i=e,o=0,a=function(e,t,n){return null===t?n:"bracket"===t.type?new lt(e.value,[],"array"):new lt(e.value,{})};o<r.length&&null!=i;){var s=r[o];if("Global"===s.type)i=e;else if("Identifier"===s.type){if(!(i instanceof lt&&"object"===i.$type))throw new Error("Looking for "+s.value+" in "+i.$value);if(i.$containsDataNode(s.value)&&null!==i.$getDataNode(s.value).$value)i=i.$getDataNode(s.value);else if(n){var u=a(s,o<r.length-1?r[o+1]:null,n);i.$addDataNode(s.value,u),i=u}else i=void 0}else if("bracket"===s.type){if(!(i instanceof lt&&"array"===i.$type))throw new Error("Looking for index "+s.value+" in non array"+i.$value);var l=s.value;if(l<i.$length)i=i.$getDataNode(l);else if(n){var c=a(s,o<r.length-1?r[o+1]:null,n);i.$addDataNode(l,c),i=c}else i=void 0}o+=1}return i},yt=function(e,t,n,r){var i,o=arguments.length,a=o<3?t:null===r?r=Object.getOwnPropertyDescriptor(t,n):r;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)a=Reflect.decorate(e,t,n,r);else for(var s=e.length-1;s>=0;s--)(i=e[s])&&(a=(o<3?i(a):o>3?i(t,n,a):i(t,n))||a);return o>3&&a&&Object.defineProperty(t,n,a),a},_t=["value","label","description","visible","enabled","readOnly","enum","enumNames","required","properties","exclusiveMinimum","exclusiveMaximum","maxLength","maximum","maxItems","minLength","minimum","minItems","step"],bt=[].concat(_t,["valid","index","activeChild"]),wt=/*#__PURE__*/function(){function e(e,t){this._action=e,this._target=t}return e.prototype.toString=function(){return this._action.toString()},n(e,[{key:"type",get:function(){return this._action.type}},{key:"payload",get:function(){return this._action.payload}},{key:"metadata",get:function(){return this._action.metadata}},{key:"target",get:function(){return this._target}},{key:"isCustomEvent",get:function(){return this._action.isCustomEvent}},{key:"originalAction",get:function(){return this._action.originalAction}}]),e}(),kt=Symbol("target"),jt=Symbol("qualifiedName"),Mt=/*#__PURE__*/function(){function e(e,t){this._callbacks={},this._dependents=[],this._tokens=[],this._options=t,this[jt]=null,this._jsonModel=Le({},e,{id:"id"in e?e.id:this.form.getUniqueId()})}var t=e.prototype;return t.setupRuleNode=function(){var e=this;this._ruleNode=new Proxy(this.ruleNodeReference(),{get:function(t,n){return e.getFromRule(t,n)}})},t.ruleNodeReference=function(){return this},t.getRuleNode=function(){return this._ruleNode},t.getFromRule=function(t,n){if(n===Symbol.toPrimitive||"valueOf"===n&&!t.hasOwnProperty("valueOf"))return this.valueOf;if(n===kt)return this;if("string"==typeof n)if(n.startsWith("$")){if("function"!=typeof this[n=n.substr(1)]){var r=this[n];return r instanceof e?r.getRuleNode():r instanceof Array?r.map(function(t){return t instanceof e?t.getRuleNode():t}):r}}else{if(t.hasOwnProperty(n))return t[n];if("function"==typeof t[n])return t[n]}},t.isTransparent=function(){var e,t="array"===(null==(e=this.parent)?void 0:e._jsonModel.type);return!this._jsonModel.name&&!t},t.getState=function(){return Le({},this._jsonModel,{":type":this[":type"]})},t.subscribe=function(e,t){var n=this;return void 0===t&&(t="change"),this._callbacks[t]=this._callbacks[t]||[],this._callbacks[t].push(e),{unsubscribe:function(){n._callbacks[t]=n._callbacks[t].filter(function(t){return t!==e})}}},t._addDependent=function(e){if(void 0===this._dependents.find(function(t){return t.node===e})){var t=this.subscribe(function(t){var n=t.payload.changes,r=[].concat(bt,["items"]);n.findIndex(function(e){return r.indexOf(e.propertyName)>-1})>-1&&e.dispatch(new Qe)});this._dependents.push({node:e,subscription:t})}},t.removeDependent=function(e){var t=this._dependents.findIndex(function(t){return t.node===e});t>-1&&(this._dependents[t].subscription.unsubscribe(),this._dependents.splice(t,1))},t.queueEvent=function(e){var t=new wt(e,this);this.form.getEventQueue().queue(this,t,["valid","invalid"].indexOf(t.type)>-1)},t.dispatch=function(e){this.queueEvent(e),this.form.getEventQueue().runPendingQueue()},t.notifyDependents=function(e){var t=this;(this._callbacks[e.type]||[]).forEach(function(n){n(new wt(e,t))})},t._setProperty=function(e,t,n){void 0===n&&(n=!0);var r=this._jsonModel[e];if(!(null!==t&&null!==r&&"object"==typeof t&&"object"==typeof r?JSON.stringify(t)===JSON.stringify(r):r===t)){this._jsonModel[e]=t;var i=Ze(e,t,r);return n&&this.notifyDependents(i),i.payload.changes}return[]},t._bindToDataModel=function(e){if("$form"!==this.id){var t,n,r,i=this._jsonModel.dataRef,o=e,a="";if(null===i)t=ut;else if(void 0!==i){0===this._tokens.length&&(this._tokens=gt(i));var s=e;if("Global"===this._tokens[0].type&&(s=this.form.getDataNode()),void 0!==s){var u=this._tokens[this._tokens.length-1].value,l=this.defaultDataModel(u);t=mt(s,this._tokens,l),o=mt(s,this._tokens.slice(0,-1)),a=u}}else if(e!==ut){o=e;var c="array"===e.$type?this.index:this._jsonModel.name||"";if(a=c,""!==c){var h=this.defaultDataModel(c);void 0!==h&&void 0===(t=e.$getDataNode(c))&&e.$addDataNode(c,t=h)}else t=void 0}t&&(this.isContainer||o===ut||t===ut||(t=null==(r=t)?void 0:r.$convertToDataValue(),o.$addDataNode(a,t,!0)),null==(n=t)||n.$bindToField(this),this._data=t)}else this._data=e},t.getDataNode=function(){return this._data},t.getNonTransparentParent=function(){for(var e=this.parent;null!=e&&e.isTransparent();)e=e.parent;return e},t._initialize=function(){if(void 0===this._data){var e,t=this.parent;do{e=t.getDataNode(),t=t.parent}while(void 0===e);this._bindToDataModel(e)}},t._applyUpdates=function(e,t){var n=this;return e.reduce(function(e,r){var i=n._setProperty(r,t[r],!1);return i.length>0&&(e[r]=i[0]),e},{})},t.focus=function(){this.parent&&(this.parent.activeChild=this)},n(e,[{key:"isContainer",get:function(){return!1}},{key:"id",get:function(){return this._jsonModel.id}},{key:"index",get:function(){return this.parent.indexOf(this)}},{key:"parent",get:function(){return this._options.parent}},{key:"type",get:function(){return this._jsonModel.type}},{key:"fieldType",get:function(){return this._jsonModel.fieldType||"text-input"}},{key:":type",get:function(){return this._jsonModel[":type"]||this.fieldType}},{key:"name",get:function(){return this._jsonModel.name}},{key:"description",get:function(){return this._jsonModel.description},set:function(e){this._setProperty("description",e)}},{key:"dataRef",get:function(){return this._jsonModel.dataRef}},{key:"visible",get:function(){return this._jsonModel.visible},set:function(e){if(e!==this._jsonModel.visible){var t=Ze("visible",e,this._jsonModel.visible);this._jsonModel.visible=e,this.notifyDependents(t)}}},{key:"form",get:function(){return this._options.form}},{key:"ruleEngine",get:function(){return this.form.ruleEngine}},{key:"label",get:function(){return this._jsonModel.label},set:function(e){if(e!==this._jsonModel.label){var t=Ze("label",e,this._jsonModel.label);this._jsonModel=Le({},this._jsonModel,{label:e}),this.notifyDependents(t)}}},{key:"uniqueItems",get:function(){return this._jsonModel.uniqueItems}},{key:"properties",get:function(){return this._jsonModel.properties||{}},set:function(e){this._setProperty("properties",Le({},e))}},{key:"qualifiedName",get:function(){if(this.isTransparent())return null;if(null!==this[jt])return this[jt];var e=this.getNonTransparentParent();return this[jt]=e&&"array"===e.type?e.qualifiedName+"["+this.index+"]":e.qualifiedName+"."+this.name,this[jt]}}]),e}();yt([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Mt.prototype,"index",null),yt([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Mt.prototype,"description",null),yt([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Mt.prototype,"visible",null),yt([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Mt.prototype,"label",null),yt([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Mt.prototype,"properties",null);var xt=/*#__PURE__*/function(e){function t(){var t;return(t=e.call.apply(e,[this].concat([].slice.call(arguments)))||this)._events={},t._rules={},t}i(t,e);var r=t.prototype;return r.getCompiledRule=function(e,t){if(!(e in this._rules)){var n=t||this.rules[e];if(!("string"==typeof n&&n.length>0))throw new Error("only expression strings are supported. "+typeof n+" types are not supported");try{this._rules[e]=this.ruleEngine.compileRule(n)}catch(t){this.form.logger.error('Unable to compile rule `"'+e+'" : "'+n+'"` Exception : '+t)}}return this._rules[e]},r.getCompiledEvent=function(e){var t=this;if(!(e in this._events)){var n,r=null==(n=this._jsonModel.events)?void 0:n[e];"string"==typeof r&&r.length>0&&(r=[r]),void 0!==r&&r.length>0&&(this._events[e]=r.map(function(n){try{return t.ruleEngine.compileRule(n)}catch(n){t.form.logger.error('Unable to compile expression `"'+e+'" : "'+r+'"` Exception : '+n)}return null}).filter(function(e){return null!==e}))}return this._events[e]||[]},r.applyUpdates=function(e){var t=this;Object.entries(e).forEach(function(e){var n=e[0],r=e[1];if(n in _t||n in t&&"function"!=typeof t[n])try{t[n]=r}catch(e){console.error(e)}})},r.executeAllRules=function(e){var t=this,n=Object.entries(this.rules);if(n.length>0){var r=this.getExpressionScope();n.forEach(function(n){var i=n[0],o=t.getCompiledRule(i,n[1]);if(o){var a=t.ruleEngine.execute(o,r,e,!0);_t.indexOf(i)>-1?t[i]=a:t.form.logger.warn(i+" is not a valid editable property.")}})}},r.getExpressionScope=function(){var e=this.getNonTransparentParent(),t={self:this.getRuleNode(),siblings:(null==e?void 0:e.ruleNodeReference())||{}},n=new Proxy(t,{get:function(e,t){if(t===Symbol.toStringTag)return"Object";if(t.startsWith("$")){var n=e.self[t];return n instanceof Mt?n.getRuleNode():n instanceof Array?n.map(function(e){return e instanceof Mt?e.getRuleNode():e}):n}return t in e.siblings?e.siblings[t]:e.self[t]},has:function(e,t){return void 0!==e.self[t]||void 0!==e.siblings[t]}});return n},r.executeEvent=function(e,t){var n;t&&(n=this.ruleEngine.execute(t,this.getExpressionScope(),e)),void 0!==n&&null!=n&&this.applyUpdates(n)},r.executeRule=function(e,t){void 0===e.payload.ruleName&&this.executeAllRules(t)},r.executeExpression=function(e){var t={form:this.form,$form:this.form.getRuleNode(),$field:this.getRuleNode(),field:this},n=this.ruleEngine.compileRule(e);return this.ruleEngine.execute(n,this.getExpressionScope(),t)},r.executeAction=function(e){var t=this,n={form:this.form,$form:this.form.getRuleNode(),$field:this.getRuleNode(),field:this,$event:{type:e.type,payload:e.payload,target:this.getRuleNode()}},r=e.isCustomEvent?"custom_"+e.type:e.type;this.getCompiledEvent(e.isCustomEvent?"custom:"+e.type:e.type).forEach(function(e){return t.executeEvent(n,e)}),r in this&&"function"==typeof this[r]&&this[r](e,n),this.notifyDependents(e)},n(t,[{key:"rules",get:function(){return this._jsonModel.rules||{}}}]),t}(Mt),Et=function(e,t,n,r){var i,o=arguments.length,a=o<3?t:null===r?r=Object.getOwnPropertyDescriptor(t,n):r;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)a=Reflect.decorate(e,t,n,r);else for(var s=e.length-1;s>=0;s--)(i=e[s])&&(a=(o<3?i(a):o>3?i(t,n,a):i(t,n))||a);return o>3&&a&&Object.defineProperty(t,n,a),a},Dt=/*#__PURE__*/function(e){function t(){var t;return(t=e.call.apply(e,[this].concat([].slice.call(arguments)))||this)._children=[],t._itemTemplate=null,t._activeChild=null,t}i(t,e);var r=t.prototype;return r.ruleNodeReference=function(){return this._childrenReference},r.hasDynamicItems=function(){return null!=this._itemTemplate},r.getState=function(){return Le({},this._jsonModel,{":type":this[":type"],items:this._children.map(function(e){return Le({},e.getState())})})},r._addChildToRuleNode=function(e,t){var n=this,r=this,i=t.parent,o=void 0===i?this:i,a="array"==o.type?o._children.length+"":e.name||"";a.length>0&&Object.defineProperty(o._childrenReference,a,{get:function(){return e.isContainer&&e.hasDynamicItems()&&r.ruleEngine.trackDependency(e),r.hasDynamicItems()?(r.ruleEngine.trackDependency(r),void 0!==n._children[a]?n._children[a].getRuleNode():void 0):e.getRuleNode()},configurable:!0,enumerable:!0})},r._addChild=function(e,t,n){void 0===n&&(n=!1);for(var r=this;null!=r&&r.isTransparent();)r=r.parent;("number"!=typeof t||t>r._children.length)&&(t=this._children.length);var i=this.form,o=Le({index:t},Be(e,n?function(){return i.getUniqueId()}:void 0)),a=this._createChild(o,{parent:this,index:t});return this._addChildToRuleNode(a,{parent:r}),t===this._children.length?this._children.push(a):this._children.splice(t,0,a),a},r.indexOf=function(e){return this._children.indexOf(e)},r.defaultDataModel=function(e){var t=this._jsonModel.type||void 0;if(void 0!==t)return new lt(e,"array"===t?[]:{},t)},r._initialize=function(){var t=this;e.prototype._initialize.call(this);var n=this._jsonModel.items;if(this._jsonModel.items=[],this._childrenReference="array"==this._jsonModel.type?[]:{},"array"==this._jsonModel.type&&1===n.length&&null!=this.getDataNode()){this._itemTemplate=Be(n[0]),"number"!=typeof this._jsonModel.minItems&&(this._jsonModel.minItems=0),"number"!=typeof this._jsonModel.maxItems&&(this._jsonModel.maxItems=-1),"number"!=typeof this._jsonModel.initialItems&&(this._jsonModel.initialItems=Math.max(1,this._jsonModel.minItems));for(var r=0;r<this._jsonModel.initialItems;r++)this._addChild(this._itemTemplate)._initialize()}else n.length>0&&(n.forEach(function(e){t._addChild(e)._initialize()}),this._jsonModel.minItems=this._children.length,this._jsonModel.maxItems=this._children.length,this._jsonModel.initialItems=this._children.length);this.setupRuleNode()},r.addItem=function(e){if("addItem"===e.type&&null!=this._itemTemplate&&(-1===this._jsonModel.maxItems||this._children.length<this._jsonModel.maxItems)){var t=this.getDataNode(),n=e.payload;("number"!=typeof n||n>this._children.length)&&(n=this._children.length);var r=this._addChild(this._itemTemplate,e.payload,!0),i=r.defaultDataModel(n);i&&t.$addDataNode(n,i),r._initialize(),this.notifyDependents(Ze("items",r.getState,null)),r.dispatch(new Je),r.dispatch(new Qe);for(var o=n+1;o<this._children.length;o++)this._children[o].dispatch(new Qe)}},r.removeItem=function(e){if("removeItem"===e.type&&null!=this._itemTemplate){if(0==this._children.length)return;var t="number"==typeof e.payload?e.payload:this._children.length-1,n=this._children[t].getState();if(this._children.length>this._jsonModel.minItems){this._childrenReference.pop(),this._children.splice(t,1),this.getDataNode().$removeDataNode(t);for(var r=t;r<this._children.length;r++)this._children[r].dispatch(new Qe);this.notifyDependents(Ze("items",null,n))}}},r.queueEvent=function(t){var n;e.prototype.queueEvent.call(this,t),null!=(n=t.metadata)&&n.dispatch&&this.items.forEach(function(e){e.queueEvent(t)})},r.validate=function(){return this.items.flatMap(function(e){return e.validate()}).filter(function(e){return""!==e.fieldName})},r.dispatch=function(t){e.prototype.dispatch.call(this,t)},r.importData=function(e){this._bindToDataModel(e);var t=this.getDataNode()||e;this.syncDataAndFormModel(t)},r.syncDataAndFormModel=function(e){if("array"===(null==e?void 0:e.$type)&&null!=this._itemTemplate){for(var t=null==e?void 0:e.$value.length,n=this._children.length,r=this._jsonModel.minItems,i=Math.min(t-n,(-1===this._jsonModel.maxItems?t:this._jsonModel.maxItems)-n),o=Math.min(n-t,n-r);i>0;)i--,this._addChild(this._itemTemplate)._initialize();if(o>0){this._children.splice(t,o);for(var a=0;a<o;a++)this._childrenReference.pop()}}this._children.forEach(function(t){t.importData(e)})},n(t,[{key:"items",get:function(){return this._children}},{key:"maxItems",get:function(){return this._jsonModel.maxItems},set:function(e){this._jsonModel.maxItems=e;var t=this._children.length,n=Math.min(t-e,t-(this._jsonModel.minItems||1));if(n>0){for(var r=0;r<n;r++)this.getDataNode().$removeDataNode(e+r),this._childrenReference.pop();var i=this._children.splice(e,n);this.notifyDependents(Ze("items",i,null))}}},{key:"minItems",get:function(){return this._jsonModel.minItems}},{key:"isContainer",get:function(){return!0}},{key:"activeChild",get:function(){return this._activeChild},set:function(e){if(e!==this._activeChild){for(var n=this._activeChild;n instanceof t;){var r=n.activeChild;n.activeChild=null,n=r}var i=Ze("activeChild",e,this._activeChild);this._activeChild=e,this.parent&&null!==e&&(this.parent.activeChild=this),this._jsonModel.activeChild=null==e?void 0:e.id,this.notifyDependents(i)}}}]),t}(xt);Et([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Dt.prototype,"maxItems",null),Et([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Dt.prototype,"minItems",null),Et([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Dt.prototype,"activeChild",null);var St=/*#__PURE__*/function(e){function t(){return e.apply(this,arguments)||this}return i(t,e),n(t,[{key:"version",get:function(){return this.getP("version","")}},{key:"locale",get:function(){return this.getP("locale","")}},{key:"grammar",get:function(){return this.getP("grammar","")}}]),t}(/*#__PURE__*/function(){function e(e){this._jsonModel=Le({},e)}return e.prototype.getP=function(e,t){return function(e,t,n){if(t in e)return e[t];if(!t.startsWith(":")){var r=":"+t;if(r in e)return e[r]}return n}(this._jsonModel,e,t)},n(e,[{key:"isContainer",get:function(){return!1}}]),e}()),Ot=/*#__PURE__*/function(){function e(e){this.type="application/octet-stream",this.name="unknown",this.size=0,Object.assign(this,e)}var t=e.prototype;return t.toJSON=function(){return{name:this.name,size:this.size,type:this.type,data:this.data.toString()}},t.equals=function(e){return this.data===e.data&&this.type===e.type&&this.name===e.name&&this.size===e.size},e}(),Tt="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_".split(""),Nt=/^(\d*\.?\d+)(\\?(?=[KMGT])([KMGT])(?:i?B)?|B?)$/i,Pt=function(e){for(var t=[],n=0;n<=e;n++){var r=Math.floor(Math.random()*Tt.length);t.push(Tt[r])}return t.join("")},Lt=function e(t){var n=t.items||[];return null==n?void 0:n.reduce(function(t,n){var r=null;if(n.isContainer)r=e(n);else if($e(n.getState())){r={};var i=null!=n.dataRef?n.dataRef:(n.name||"").length>0?n.name:void 0;n.value instanceof Array?r[n.id]=n.value.map(function(e){return Le({},e,{dataRef:i})}):null!=n.value&&(r[n.id]=Le({},n.value,{dataRef:i}))}return Object.assign(t,r)},{})},It=function(e){var t=0;if("string"==typeof e){var n=Nt.exec(e.trim());null!=n&&(t=Ct(parseFloat(n[1]),(n[2]||"kb").toUpperCase()))}return t},Ct=function(e,t){var n=Math.pow(1024,{KB:1,MB:2,GB:3,TB:4}[t]);return Math.round(e*n)},At=function(e){var t=/^data:([a-z]+\/[a-z0-9-+.]+)?(?:;name=([^;]+))?(;base64)?,(.+)$/.exec(e);if(null!==t){var n=t[1]||"",r=t[2]||"unknown";if("string"==typeof t[3]){for(var i=atob(t[4]),o=[],a=0;a<i.length;a++)o.push(i.charCodeAt(a));return{name:r,blob:new window.Blob([new Uint8Array(o)],{type:n})}}return{name:r,blob:new window.Blob([t[4]],{type:n})}}return null},Ft=/^(\d{4})-(\d{1,2})-(\d{1,2})$/,qt=/^data:([a-z]+\/[a-z0-9-+.]+)?;(?:name=(.*);)?base64,(.*)$/,Rt=[31,28,31,30,31,30,31,31,30,31,30,31],Vt=function(e){return null!=qt.exec(e.trim())},$t=function(e){var t=parseFloat(e),n=!isNaN(t);return n||(t=e),{value:t,valid:n}},Bt=function(e){var t=parseFloat(e),n=!isNaN(t)&&Math.round(t)===t;return n||(t=e),{value:t,valid:n}},Ht=function(e){return null==e||e instanceof Array?e:[e]},Ut=function(e){var t="boolean"==typeof e||"true"===e||"false"===e;return{valid:t,value:"boolean"==typeof e?e:t?"true"===e:e}},zt=function(e){var t=function(e){if(null!==e){var t=null;if(e instanceof Ot)t=e;else if("undefined"!=typeof File&&e instanceof File)t={name:e.name,type:e.type,size:e.size,data:e};else if("string"==typeof e&&Vt(e)){var n=At(e);if(null!==n){var r=n.blob;t={name:n.name,type:r.type,size:r.size,data:r}}}else{var i,o,a=e;try{t=a=JSON.parse(e)}catch(e){}if("string"==typeof(null==(i=a)?void 0:i.data)&&Vt(null==(o=a)?void 0:o.data)){var s,u=At(null==(s=a)?void 0:s.data);if(null!==u){var l,c,h=u.blob;t={name:null==(l=a)?void 0:l.name,type:null==(c=a)?void 0:c.type,size:h.size,data:h}}}else if("string"==typeof a)t={name:a.split("/").pop(),type:"application/octet-stream",size:0,data:a};else if("object"==typeof a){var d,f,p,v;t={name:null==(d=a)?void 0:d.name,type:null==(f=a)?void 0:f.type,size:null==(p=a)?void 0:p.size,data:null==(v=a)?void 0:v.data}}}return null!==t&&null!=t.data?new Ot(t):null}return null}(e),n=null!==t;return{value:n?t:e,valid:n}},Wt=function(e,t){var n=Ht(e);return null==n?[[],[n]]:n.reduce(function(e,n){if(0==e[1].length){var r=t(n);e[r.valid?0:1].push(r.value)}return e},[[],[]])},Gt={date:["minimum","maximum","exclusiveMinimum","exclusiveMaximum","format"],string:["minLength","maxLength","pattern"],number:["minimum","maximum","exclusiveMinimum","exclusiveMaximum"],array:["minItems","maxItems","uniqueItems"],file:["accept","maxFileSize"]},Qt={type:function(e,t){var n=t;if(null==t)return{valid:!0,value:t};var r,i=!0;switch(e){case"string":i=!0,n=t.toString();break;case"string[]":n=Ht(t);break;case"number":n=(r=$t(t)).value,i=r.valid;break;case"boolean":i=(r=Ut(t)).valid,n=r.value;break;case"integer":i=(r=Bt(t)).valid,n=r.value;break;case"integer[]":n=(i=0===(r=Wt(t,Bt))[1].length)?r[0]:t;break;case"file":i=(r=zt(t instanceof Array?t[0]:t)).valid,n=r.value;break;case"file[]":n=(i=0===(r=Wt(t,zt))[1].length)?r[0]:t;break;case"number[]":n=(i=0===(r=Wt(t,$t))[1].length)?r[0]:t;break;case"boolean[]":n=(i=0===(r=Wt(t,Ut))[1].length)?r[0]:t}return{valid:i,value:n}},format:function(e,t){var n,r,i=!0,o=t;if(null===t)return{value:o,valid:i};switch(e){case"date":if(null!=(n=Ft.exec((t||"").trim()))){var a=+n[2],s=+n[3],u=(r=+n[1])%400==0||r%4==0&&r%100!=0;i=a>=1&&a<=12&&s>=1&&s<=function(e,t){return e&&2==t?29:Rt[t-1]}(u,a)}else i=!1;break;case"data-url":i=!0}return{valid:i,value:o}},minimum:function(e,t){return{valid:t>=e,value:t}},maximum:function(e,t){return{valid:t<=e,value:t}},exclusiveMinimum:function(e,t){return{valid:t>e,value:t}},exclusiveMaximum:function(e,t){return{valid:t<e,value:t}},minItems:function(e,t){return{valid:t instanceof Array&&t.length>=e,value:t}},maxItems:function(e,t){return{valid:t instanceof Array&&t.length<=e,value:t}},uniqueItems:function(e,t){return{valid:!e||t instanceof Array&&t.length===new Set(t).size,value:t}},minLength:function(e,t){return Le({},Qt.minimum(e,"string"==typeof t?t.length:0),{value:t})},maxLength:function(e,t){return Le({},Qt.maximum(e,"string"==typeof t?t.length:0),{value:t})},pattern:function(e,t){return{valid:("string"==typeof e?new RegExp(e):e).test(t),value:t}},required:function(e,t){return{valid:!e||null!=t&&""!==t,value:t}},enum:function(e,t){return{valid:e.indexOf(t)>-1,value:t}},accept:function(e,t){return e&&0!==e.length&&null!=t?{valid:!(t instanceof Array?t:[t]).some(function(t){return!(!(n=t.type)||e.some(function(e){var t=e.trim(),r=t.split("/")[0],i=t.split(".")[1];return t.includes("*")&&n.startsWith(r)||t.includes(".")&&n.endsWith(i)||t===n}));var n}),value:t}:{valid:!0,value:t}},maxFileSize:function(e,t){var n="string"==typeof e?It(e):e;return{valid:!(t instanceof Ot)||t.size<=n,value:t}}},Zt=function(e,t,n,r){var i,o=arguments.length,a=o<3?t:null===r?r=Object.getOwnPropertyDescriptor(t,n):r;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)a=Reflect.decorate(e,t,n,r);else for(var s=e.length-1;s>=0;s--)(i=e[s])&&(a=(o<3?i(a):o>3?i(t,n,a):i(t,n))||a);return o>3&&a&&Object.defineProperty(t,n,a),a},Jt=/*#__PURE__*/function(e){function t(t,n){var r;return(r=e.call(this,t,n)||this)._ruleNodeReference=[],r._applyDefaults(),r.queueEvent(new Je),r.queueEvent(new Qe),r}i(t,e);var r=t.prototype;return r._initialize=function(){e.prototype._initialize.call(this),this.setupRuleNode()},r.ruleNodeReference=function(){var e;return this._ruleNodeReference=null!=(e=this.type)&&e.endsWith("[]")?[]:this,this._ruleNodeReference},r._getDefaults=function(){return{readOnly:!1,enabled:!0,visible:!0,type:this._getFallbackType()}},r._getFallbackType=function(){if("string"!=typeof this._jsonModel.type){var e=this.enum;return e&&e.length>0?typeof e[0]:"string"}},r._applyDefaults=function(){var e=this;if(Object.entries(this._getDefaults()).map(function(t){var n=t[0],r=t[1];void 0===e._jsonModel[n]&&void 0!==r&&(e._jsonModel[n]=r)}),void 0===this._jsonModel.value){var t=Qt.type(this.getInternalType()||"string",this._jsonModel.default);this._jsonModel.value=t.value}void 0===this._jsonModel.fieldType&&(this._jsonModel.viewType?(this._jsonModel.viewType.startsWith("custom:")?this.form.logger.error("viewType property has been removed. For custom types, use :type property"):this.form.logger.error("viewType property has been removed. Use fieldType property"),this._jsonModel.fieldType=this._jsonModel.viewType):this._jsonModel.fieldType=Ve(this._jsonModel)),void 0===this._jsonModel.enum&&"boolean"===this._jsonModel.type&&(this._jsonModel.enum=[!0,!1]),"number"==typeof this._jsonModel.step&&"number"===this._jsonModel.type||(this._jsonModel.step=void 0)},r.isEmpty=function(){return null==this._jsonModel.value||""===this._jsonModel.value},r.getDataNodeValue=function(e){return this.isEmpty()?this.emptyValue:e},r._updateRuleNodeReference=function(e){var t,n=this;if(null!=(t=this.type)&&t.endsWith("[]"))if(null!=e)for(e.forEach(function(e,t){n._ruleNodeReference[t]=e});e.length!==this._ruleNodeReference.length;)this._ruleNodeReference.pop();else for(;0!==this._ruleNodeReference.length;)this._ruleNodeReference.pop()},r.getInternalType=function(){return this.type},r.valueOf=function(){var e=this[kt],t=void 0===e?this:e;return t.ruleEngine.trackDependency(t),t._jsonModel.value||null},r.toString=function(){var e,t=this[kt];return(null==(e=(void 0===t?this:t)._jsonModel.value)?void 0:e.toString())||""},r.getErrorMessage=function(e){var t;return(null==(t=this._jsonModel.constraintMessages)?void 0:t[e])||""},r._getConstraintObject=function(){return Qt},r.isArrayType=function(){return!!this.type&&this.type.indexOf("[]")>-1},r.checkEnum=function(e,t){var n=this;if(!0===this._jsonModel.enforceEnum&&null!=e){var r=t.enum;return e instanceof Array&&this.isArrayType()?e.every(function(e){return r(n.enum||[],e).valid}):r(this.enum||[],e).valid}return!0},r.checkStep=function(){return"number"!=typeof this._jsonModel.step||(this._jsonModel.value-(this._jsonModel.minimum||this._jsonModel.default||0))%this._jsonModel.step==0},r.checkValidationExpression=function(){return"string"!=typeof this._jsonModel.validationExpression||this.executeExpression(this._jsonModel.validationExpression)},r.getConstraints=function(){switch(this.type){case"string":switch(this.format){case"date":return Gt.date;case"binary":case"data-url":return Gt.file;default:return Gt.string}case"file":return Gt.file;case"number":case"integer":return Gt.number}return this.isArrayType()?Gt.array:[]},r.evaluateConstraints=function(){var e=this,t="type",n=this._jsonModel,r=this._jsonModel.value,i=this._getConstraintObject(),o=this.getConstraints(),a=!0;if(a&&(a=i.required(this.required,r).valid&&(!this.isArrayType()||!this.required||r.length>0),t="required"),a&&r!=this.emptyValue){var s=o.find(function(t){if(t in n){var o=n[t],a=i[t];return r instanceof Array&&e.isArrayType()?-1!==Gt.array.indexOf(t)?!a(o,r).valid:r.some(function(e){return!a(o,e).valid}):"function"==typeof a&&!a(o,r).valid}return!1});null!=s?(a=!1,t=s):(t="enum",(a=this.checkEnum(r,i))&&"number"===this.type&&(a=this.checkStep(),t="step"),a&&(a=this.checkValidationExpression(),t="validationExpression"))}a||this.form.logger.log(t+" constraint evaluation failed "+this[t]+". Received "+this._jsonModel.value);var u={valid:a,errorMessage:a?"":this.getErrorMessage(t)};return this._applyUpdates(["valid","errorMessage"],u)},r.triggerValidationEvent=function(e){e.valid&&this.dispatch(this.valid?new Ge:new We)},r.validate=function(){var e=this.evaluateConstraints();return e.valid&&(this.triggerValidationEvent(e),this.notifyDependents(new ze({changes:Object.values(e)}))),this.valid?[]:[new Ce(this.id,[this._jsonModel.errorMessage])]},r.importData=function(e){this._bindToDataModel(e);var t=this.getDataNode();if(void 0!==t&&t!==ut&&t.$value!==this._jsonModel.value){var n=Ze("value",t.$value,this._jsonModel.value);this._jsonModel.value=t.$value,this.queueEvent(n)}},r.defaultDataModel=function(e){return new at(e,this.getDataNodeValue(this._jsonModel.value),this.type||"string")},r.getState=function(){return Le({},e.prototype.getState.call(this),{editValue:this.editValue,displayValue:this.displayValue})},n(t,[{key:"editFormat",get:function(){return this._jsonModel.editFormat}},{key:"displayFormat",get:function(){return this._jsonModel.displayFormat}},{key:"placeholder",get:function(){return this._jsonModel.placeholder}},{key:"readOnly",get:function(){return this._jsonModel.readOnly},set:function(e){this._setProperty("readOnly",e)}},{key:"language",get:function(){return Intl.DateTimeFormat().resolvedOptions().locale}},{key:"enabled",get:function(){return this._jsonModel.enabled},set:function(e){this._setProperty("enabled",e)}},{key:"valid",get:function(){return this._jsonModel.valid}},{key:"emptyValue",get:function(){return"null"===this._jsonModel.emptyValue?null:""===this._jsonModel.emptyValue&&"string"===this.type?"":void 0}},{key:"enum",get:function(){return this._jsonModel.enum},set:function(e){this._setProperty("enum",e)}},{key:"enumNames",get:function(){return this._jsonModel.enumNames},set:function(e){this._setProperty("enumNames",e)}},{key:"required",get:function(){return this._jsonModel.required||!1},set:function(e){this._setProperty("required",e)}},{key:"maximum",get:function(){return this._jsonModel.maximum},set:function(e){this._setProperty("maximum",e)}},{key:"minimum",get:function(){return this._jsonModel.minimum},set:function(e){this._setProperty("minimum",e)}},{key:"editValue",get:function(){var e=this.editFormat;return"date"==this.format&&null!=this.value&&!1!==this.valid?k.formatDate(new Date(this.value),this.language,e):this.value}},{key:"displayValue",get:function(){var e=this.displayFormat;return"date"==this.format&&null!=this.value&&!1!==this.valid?k.formatDate(new Date(this.value),this.language,e):this.value}},{key:"value",get:function(){return void 0===this._jsonModel.value?null:this._jsonModel.value},set:function(e){var t=this._getConstraintObject(),n=t.type(this.getInternalType()||"string",e),r=this._setProperty("value",n.value,!1),i={valid:!0};if(r.length>0){this._updateRuleNodeReference(n.value);var o,a=this.getDataNode();if(void 0!==a&&a.setValue(this.getDataNodeValue(this._jsonModel.value),this._jsonModel.value,this),this.parent.uniqueItems&&"array"===this.parent.type&&(i=t.uniqueItems(this.parent.uniqueItems,this.parent.getDataNode().$value)),n.valid&&i.valid)o=this.evaluateConstraints();else{var s={valid:n.valid&&i.valid,errorMessage:n.valid&&i.valid?"":this.getErrorMessage("type")};o=this._applyUpdates(["valid","errorMessage"],s)}o.valid&&this.triggerValidationEvent(o);var u=new ze({changes:r.concat(Object.values(o))});this.dispatch(u)}}},{key:"format",get:function(){return this._jsonModel.format||""}}]),t}(xt);function Yt(e,t){return e.replace(";base64",";name="+encodeURIComponent(t)+";base64")}Zt([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Jt.prototype,"readOnly",null),Zt([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Jt.prototype,"enabled",null),Zt([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Jt.prototype,"valid",null),Zt([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Jt.prototype,"enum",null),Zt([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Jt.prototype,"enumNames",null),Zt([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Jt.prototype,"required",null),Zt([function(e,t,n){var r=n.get;null!=r&&(n.get=function(){return this.ruleEngine.trackDependency(this),r.call(this)})}],Jt.prototype,"value",null);var Kt=/*#__PURE__*/function(e){function t(){return e.apply(this,arguments)||this}i(t,e);var r=t.prototype;return r._getDefaults=function(){return Le({},e.prototype._getDefaults.call(this),{accept:["audio/*","video/*","image/*","text/*","application/pdf"],maxFileSize:"2MB",type:"file"})},r._applyUpdates=function(e,t){var n=this;return e.reduce(function(e,r){var i=n._jsonModel[r],o=t[r];return o!==i&&(e[r]={propertyName:r,currentValue:o,prevValue:i},n._jsonModel[r]=i instanceof Ot&&"object"==typeof o&&"value"===r?new Ot(Le({},i,{data:o.data})):o),e},{})},r.getInternalType=function(){var e;return null!=(e=this.type)&&e.endsWith("[]")?"file[]":"file"},r.getDataNodeValue=function(e){var t,n=e;return null!=n&&("string"===this.type?n=null==(t=n.data)?void 0:t.toString():"string[]"===this.type&&(n=(n=n instanceof Array?n:[n]).map(function(e){var t;return null==e||null==(t=e.data)?void 0:t.toString()}))),n},r._serialize=function(){try{var e=this._jsonModel.value;return Promise.resolve(void 0===e?null:Promise.all([].map.call(e instanceof Array?e:[e],Ie)))}catch(e){return Promise.reject(e)}},r.importData=function(e){this._bindToDataModel(e);var t=this.getDataNode();if(void 0!==t){var n=null==t?void 0:t.$value;if(null!=n){var r=Qt.type(this.getInternalType(),n);r.valid||this.form.logger.error("unable to bind "+this.name+" to data"),this.form.getEventQueue().queue(this,Ze("value",r.value,this._jsonModel.value)),this._jsonModel.value=r.value}else this._jsonModel.value=null}},n(t,[{key:"maxFileSize",get:function(){return It(this._jsonModel.maxFileSize)}},{key:"accept",get:function(){return this._jsonModel.accept}}]),t}(Jt),Xt=/*#__PURE__*/function(e){function t(){return e.apply(this,arguments)||this}i(t,e);var r=t.prototype;return r.offValue=function(){var e=this.enum;return e.length>1?e[1]:null},r._getConstraintObject=function(){var t,n=Le({},e.prototype._getConstraintObject.call(this));return n.required=(t=this.offValue(),function(e,n){return{valid:Qt.required(e,n).valid&&(!e||n!=t),value:n}}),n},r._getDefaults=function(){return Le({},e.prototype._getDefaults.call(this),{enforceEnum:!0})},n(t,[{key:"enum",get:function(){return this._jsonModel.enum||[]}}]),t}(Jt),en=/*#__PURE__*/function(e){function t(t,n){return e.call(this,t,n)||this}i(t,e);var n=t.prototype;return n._getFallbackType=function(){var t=e.prototype._getFallbackType.call(this);if("string"==typeof t)return t+"[]"},n._getDefaults=function(){return Le({},e.prototype._getDefaults.call(this),{enforceEnum:!0,enum:[]})},t}(Jt),tn=/*#__PURE__*/function(e){function t(){return e.apply(this,arguments)||this}return i(t,e),t.prototype._applyDefaults=function(){e.prototype._applyDefaults.call(this);var t=(new Intl.DateTimeFormat).resolvedOptions().locale;this._jsonModel.editFormat||(this._jsonModel.editFormat="short"),this._jsonModel.displayFormat||(this._jsonModel.displayFormat=this._jsonModel.editFormat),this._jsonModel.placeholder||(this._jsonModel.placeholder=k.getSkeleton(this._jsonModel.editFormat,t)),this._jsonModel.description||(this._jsonModel.description="To enter today's date use "+k.formatDate(new Date,t,this._jsonModel.editFormat))},t}(Jt),nn=function(e,t){var n,r;return n="items"in e?new on(e,t):$e(e)||"file-input"===e.fieldType?new Kt(e,t):"checkbox"===((null==(r=e)?void 0:r.fieldType)||Ve(r))?new Xt(e,t):function(e){return"checkbox-group"===((null==e?void 0:e.fieldType)||Ve(e))}(e)?new en(e,t):function(e){var t=(null==e?void 0:e.fieldType)||Ve(e);return"text-input"===t&&"date"===(null==e?void 0:e.format)||"date-input"===t}(e)?new tn(e,t):new Jt(e,t),t.form.fieldAdded(n),n},rn={visible:!0},on=/*#__PURE__*/function(e){function t(t,n){var r;return(r=e.call(this,t,n)||this)._applyDefaults(),r.queueEvent(new Je),r.queueEvent(new Qe),r}i(t,e);var r=t.prototype;return r._applyDefaults=function(){var e=this;Object.entries(rn).map(function(t){var n=t[0];void 0===e._jsonModel[n]&&(e._jsonModel[n]=t[1])}),this._jsonModel.dataRef&&void 0===this._jsonModel.type&&(this._jsonModel.type="object")},r._createChild=function(e,t){var n=t.parent;return nn(e,{form:this.form,parent:void 0===n?this:n})},n(t,[{key:"type",get:function(){var t=e.prototype.type;if("array"===t||"object"===t)return t}},{key:"items",get:function(){return e.prototype.items}},{key:"value",get:function(){return null}},{key:"fieldType",get:function(){return"panel"}},{key:"enabled",get:function(){return this._jsonModel.enabled},set:function(e){this._setProperty("enabled",e)}}]),t}(Dt),an={off:0,debug:1,info:2,warn:3,error:4},sn=/*#__PURE__*/function(){var e=t.prototype;function t(e){void 0===e&&(e="off"),this.logLevel=an[e]}return e.debug=function(e){this.log(e,"debug")},e.info=function(e){this.log(e,"info")},e.warn=function(e){this.log(e,"warn")},e.error=function(e){this.log(e,"error")},e.log=function(e,t){0!==this.logLevel&&this.logLevel<=an[t]&&console[t](e)},t}(),un=/*#__PURE__*/function(){function e(e,t){this._node=e,this._event=t}var t=e.prototype;return t.isEqual=function(e){return null!=e&&this._node==e._node&&this._event.type==e._event.type},t.toString=function(){return this._node.id+"__"+this.event.type},t.valueOf=function(){return this.toString()},n(e,[{key:"node",get:function(){return this._node}},{key:"event",get:function(){return this._event}}]),e}(),ln=/*#__PURE__*/function(){function e(e){void 0===e&&(e=new sn("off")),this._isProcessing=!1,this._pendingEvents=[],this.logger=e,this._runningEventCount={}}var t=e.prototype;return t.isQueued=function(e,t){var n=new un(e,t);return void 0!==this._pendingEvents.find(function(e){return n.isEqual(e)})},t.queue=function(t,n,r){var i=this;void 0===r&&(r=!1),t&&n&&(n instanceof Array||(n=[n]),n.forEach(function(n){var o=new un(t,n),a=i._runningEventCount[o.valueOf()]||0;a<e.MAX_EVENT_CYCLE_COUNT?(i.logger.info("Queued event : "+n.type+" node: "+t.id+" - "+t.name),r?i._pendingEvents.splice(i._isProcessing?1:0,0,o):i._pendingEvents.push(o),i._runningEventCount[o.valueOf()]=a+1):i.logger.info("Skipped queueing event : "+n.type+" node: "+t.id+" - "+t.name+" with count="+a)}))},t.runPendingQueue=function(){if(!this._isProcessing){for(this._isProcessing=!0;this._pendingEvents.length>0;){var e=this._pendingEvents[0];this.logger.info("Dequeued event : "+e.event.type+" node: "+e.node.id+" - "+e.node.name),e.node.executeAction(e.event),this._pendingEvents.shift()}this._runningEventCount={},this._isProcessing=!1}},n(e,[{key:"length",get:function(){return this._pendingEvents.length}},{key:"isProcessing",get:function(){return this._isProcessing}}]),e}();ln.MAX_EVENT_CYCLE_COUNT=10;var cn={method:"GET"},hn=function(e){var t=e;return t.length>0&&t.startsWith("custom:")?t.substring("custom:".length):t},dn=function(e,t,n,r,i,o,a){try{var s,u,l,c=function(t){if(s)return t;var n=hn(i);e.form.dispatch(new rt(n,u,!0))},h=t,d={method:n},f=function(e,t){try{var n=e()}catch(e){return t()}return n&&n.then?n.then(void 0,t):n}(function(){if(r&&r instanceof Ot&&r.data instanceof File){var e=new FormData;e.append(r.name,r.data),l=e}else if(r instanceof FormData)l=r;else if(r&&"object"==typeof r&&Object.keys(r).length>0){var t,n=Object.keys(a);d.headers=n.length>0?Le({},a,-1===n.indexOf("Content-Type")?{"Content-Type":"application/json"}:{}):{"Content-Type":"application/json"};var i=(null==d||null==(t=d.headers)?void 0:t["Content-Type"])||"application/json";"application/json"===i?l=JSON.stringify(r):i.indexOf("multipart/form-data")>-1?l=pn(r):i.indexOf("application/x-www-form-urlencoded")>-1&&(l=fn(r))}return Promise.resolve(function(e,t,n){void 0===t&&(t=null),void 0===n&&(n={});var r=Le({},cn,n);return fetch(e,Le({},r,{body:t})).then(function(e){var t;if(!e.ok)throw new Error(e.statusText);return null!=e&&null!=(t=e.headers.get("Content-Type"))&&t.includes("application/json")?e.json():e.text()})}(h,l,d)).then(function(e){u=e})},function(){e.form.logger.error("Error invoking a rest API");var t=hn(o);e.form.dispatch(new rt(t,{},!0)),s=1});return Promise.resolve(f&&f.then?f.then(c):c(f))}catch(e){return Promise.reject(e)}},fn=function(e){var t=new URLSearchParams;return Object.entries(e).forEach(function(e){var n=e[1];t.append(e[0],null!=n&&"object"==typeof n?He(n):n)}),t},pn=function(e,t){var n=new FormData;Object.entries(e).forEach(function(e){var t=e[1];n.append(e[0],null!=t&&"object"==typeof t?He(t):t)});var r=function(e,t){if((null==e?void 0:e.data)instanceof File){var n=(null==e?void 0:e.dataRef)+"/"+(null==e?void 0:e.name);n.startsWith("/")||(n="/"+n),t.append(n,e.data)}};return t&&Object.keys(t).reduce(function(e,i){var o=t[i];return[].concat(e,o&&o instanceof Array?o.map(function(e){return r(e,n)}):[r(o,n)])},[]),n},vn=/*#__PURE__*/function(){function e(){this.customFunctions={}}var t=e.prototype;return t.registerFunctions=function(e){var t=this;Object.entries(e).forEach(function(e){var n=e[0],r=e[1],i=r;"function"==typeof r&&(i={_func:function(e){return r.apply(void 0,e)},_signature:[]}),i.hasOwnProperty("_func")?t.customFunctions[n]=i:console.warn("Unable to register function with name "+n+".")})},t.unregisterFunctions=function(){var e=this;[].slice.call(arguments).forEach(function(t){t in e.customFunctions&&delete e.customFunctions[t]})},t.getFunctions=function(){function e(t){return null==t?t:null!==(n=t)&&"[object Array]"===Object.prototype.toString.call(n)?t.map(function(t){return e(t)}):t.valueOf();var n}function t(e){return null==e?"":e.toString()}return Le({},{validate:{_func:function(e,t,n){var r,i=e[0];return r="string"==typeof i||void 0===i?n.globals.form.validate():n.globals.form.getElement(i.$id).validate(),Array.isArray(r)&&r.length&&n.globals.form.logger.error("Form Validation Error"),r},_signature:[]},setFocus:{_func:function(e,t,n){var r=e[0];try{var i=n.globals.form.getElement(r.$id);n.globals.form.setFocus(i)}catch(e){n.globals.form.logger.error("Invalid argument passed in setFocus. An element is expected")}},_signature:[]},getData:{_func:function(e,t,n){return n.globals.form.logger.warn("The `getData` function is depricated. Use `exportData` instead."),n.globals.form.exportData()},_signature:[]},exportData:{_func:function(e,t,n){return n.globals.form.exportData()},_signature:[]},importData:{_func:function(e,t,n){var r=e[0];return"object"==typeof r&&null!==r&&n.globals.form.importData(r),{}},_signature:[]},submitForm:{_func:function(n,r,i){var o=t(n[0]),a=t(n[1]),s=n.length>2?t(n[2]):"multipart/form-data",u=n.length>3?e(n[3]):null;return i.globals.form.dispatch(new tt({success:o,error:a,submit_as:s,data:u})),{}},_signature:[]},request:{_func:function(n,r,i){var o,a,s=t(n[0]),u=t(n[1]),l=e(n[2]),c={};return"string"==typeof n[3]?(i.globals.form.logger.warn("This usage of request is deprecated. Please see the documentation and update"),o=e(n[3]),a=e(n[4])):(c=e(n[3]),o=e(n[4]),a=e(n[5])),dn(i.globals,s,u,l,o,a,c),{}},_signature:[]},dispatchEvent:{_func:function(t,n,r){var i,o=t[0],a=e(t[1]),s=t.length>2?e(t[2]):void 0,u=!1;return"string"==typeof o&&(s=a,a=o,u=!0),i=a.startsWith("custom:")?new rt(a.substring("custom:".length),s,u):function(e,t){switch(void 0===t&&(t={}),e){case"change":return new ze(t);case"submit":return new tt(t);case"click":return new Ke(t);case"addItem":return new it(t);case"removeItem":return new ot(t);default:console.error("invalid action")}}(a,s),null!=i&&("string"==typeof o?r.globals.form.dispatch(i):r.globals.form.getElement(o.$id).dispatch(i)),{}},_signature:[]}},this.customFunctions)},e}(),gn=new vn,mn=/*#__PURE__*/function(t){function r(n,r,i,o){var a,s;return void 0===i&&(i=new ln),void 0===o&&(o="off"),(a=t.call(this,n,{})||this)._fields={},a._invalidFields=[],a.dataRefRegex=/("[^"]+?"|[^.]+?)(?:\.|$)/g,a._ruleEngine=r,a._eventQueue=i,a._logger=new sn(o),a.queueEvent(new Je),a.queueEvent(new Qe),a._ids=(void 0===s&&(s=50),/*#__PURE__*/e().mark(function t(){var n,r,i,o;return e().wrap(function(e){for(;;)switch(e.prev=e.next){case 0:n=function(){for(var e=[],t=0;t<s;t++)e.push(Pt(10));return e},r={},i=n();case 3:for(o=i.pop();o in r;)0===i.length&&(i=n()),o=i.pop();return r[o]=!0,e.next=8,i.pop();case 8:0===i.length&&(i=n());case 9:if(i.length>0){e.next=3;break}case 10:case"end":return e.stop()}},t)})()),a._bindToDataModel(new lt("$form",{})),a._initialize(),a.queueEvent(new Ye),a}i(r,t);var o=r.prototype;return o._createChild=function(e){return nn(e,{form:this,parent:this})},o.importData=function(e){this._bindToDataModel(new lt("$form",e)),this.syncDataAndFormModel(this.getDataNode()),this._eventQueue.runPendingQueue()},o.exportData=function(){var e;return null==(e=this.getDataNode())?void 0:e.$value},o.setFocus=function(e){for(var t=e.parent,n=e;null!=t&&t.activeChild!=n;)t.activeChild=n},o.getState=function(){var e=this,n=t.prototype.getState.call(this);return n.id="$form",Object.defineProperty(n,"data",{get:function(){return e.exportData()}}),Object.defineProperty(n,"attachments",{get:function(){return Lt(e)}}),n},o.isTransparent=function(){return!1},o.getUniqueId=function(){return null==this._ids?"":this._ids.next().value},o.fieldAdded=function(e){var t=this;this._fields[e.id]=e,e.subscribe(function(e){-1===t._invalidFields.indexOf(e.target.id)&&t._invalidFields.push(e.target.id)},"invalid"),e.subscribe(function(e){var n=t._invalidFields.indexOf(e.target.id);n>-1&&t._invalidFields.splice(n,1)},"valid"),e.subscribe(function(e){var n=e.target.getState();if(n){var r=new nt(e.payload.changes,n);t.dispatch(r)}})},o.validate=function(){var e=t.prototype.validate.call(this);return this.dispatch(new et(e)),e},o.isValid=function(){return 0===this._invalidFields.length},o.dispatch=function(e){"submit"===e.type?(t.prototype.queueEvent.call(this,e),this._eventQueue.runPendingQueue()):t.prototype.dispatch.call(this,e)},o.executeAction=function(e){"submit"===e.type&&0!==this._invalidFields.length||t.prototype.executeAction.call(this,e)},o.submit=function(e,t){if(0===this.validate().length){var n=(null==e?void 0:e.payload)||{};!function(e,t,n,r,i){void 0===r&&(r="multipart/form-data"),void 0===i&&(i=null);try{var o=e.form.action,a=i;"object"==typeof a&&null!=a||(a=e.form.exportData());var s,u=Lt(e.form),l=r;Object.keys(u).length>0||"multipart/form-data"===r?(s=pn({data:a},u),l="multipart/form-data"):s={data:a},Promise.resolve(dn(e,o,"POST",s,t,n,{"Content-Type":l})).then(function(){})}catch(e){return Promise.reject(e)}}(t,null==n?void 0:n.success,null==n?void 0:n.error,null==n?void 0:n.submit_as,null==n?void 0:n.data)}},o.getElement=function(e){return e==this.id?this:this._fields[e]},o.getEventQueue=function(){return this._eventQueue},n(r,[{key:"logger",get:function(){return this._logger}},{key:"metaData",get:function(){return new St(this._jsonModel.metadata||{})}},{key:"action",get:function(){return this._jsonModel.action}},{key:"type",get:function(){return"object"}},{key:"form",get:function(){return this}},{key:"ruleEngine",get:function(){return this._ruleEngine}},{key:"qualifiedName",get:function(){return"$form"}},{key:"name",get:function(){return"$form"}},{key:"value",get:function(){return null}},{key:"id",get:function(){return"$form"}},{key:"title",get:function(){return this._jsonModel.title||""}}]),r}(Dt),yn=/*#__PURE__*/function(){function e(){this._globalNames=["$form","$field","$event"]}var t=e.prototype;return t.compileRule=function(e){var t=gn.getFunctions();return new Pe(e,t,void 0,this._globalNames)},t.execute=function(e,t,n,r){void 0===r&&(r=!1);var i=this._context;this._context=n;var o=void 0;try{e.debug=[],o=e.search(t,n)}catch(e){var s,u,l;null==(s=this._context)||null==(u=s.form)||null==(l=u.logger)||l.error(e)}for(var c,h=function(e,t){var n="undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(n)return(n=n.call(e)).next.bind(n);if(Array.isArray(e)||(n=function(e,t){if(e){if("string"==typeof e)return a(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);return"Object"===n&&e.constructor&&(n=e.constructor.name),"Map"===n||"Set"===n?Array.from(e):"Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)?a(e,t):void 0}}(e))){n&&(e=n);var r=0;return function(){return r>=e.length?{done:!0}:{done:!1,value:e[r++]}}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}(e.debug);!(c=h()).done;){var d,f,p;null==(d=this._context)||null==(f=d.form)||null==(p=f.logger)||p.debug(c.value)}var v=o;return r&&"object"==typeof o&&null!==o&&(v=Object.getPrototypeOf(o).valueOf.call(o)),this._context=i,v},t.trackDependency=function(e){this._context&&void 0!==this._context.field&&this._context.field!==e&&e._addDependent(this._context.field)},e}(),_n=/*#__PURE__*/function(e){function t(){return e.apply(this,arguments)||this}return i(t,e),t.prototype.getInputHTML=function(){return'<textarea\n              title="'+(this.isTooltipVisible()?this.getTooltipValue():"")+'"\n              aria-label="'+(this.isLabelVisible()?this.getLabelValue():"")+'"\n              class="cmp-adaptiveform-textinput__widget"\n              name="'+this.getName()+'"\n              '+this.getDisabledHTML()+"\n              "+this.getReadonlyHTML()+'\n              required="'+this.isRequired()+'"\n              placeholder="'+this.getPlaceHolder()+'"\n              minlength="'+this.getMinLength()+'"\n              maxlength="'+this.getMaxLength()+'"></textarea>'},t}(d),bn=/*#__PURE__*/u("checkIfEqual"),wn=/*#__PURE__*/function(e){function t(n,r){var i;return i=e.call(this,n,r)||this,Object.defineProperty(function(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}(i),bn,{writable:!0,value:function(e,t,n){if(n){var r=!1;return e.forEach(function(e){String(e)===t&&(r=!0)}),r}return String(e)===t}}),i.qm=i.element.querySelector(t.selectors.qm),i}i(t,e);var n=t.prototype;return n.getWidget=function(){return this.element.querySelector(t.selectors.widget)},n.getDescription=function(){return this.element.querySelector(t.selectors.description)},n.getLabel=function(){return this.element.querySelector(t.selectors.label)},n.getErrorDiv=function(){return this.element.querySelector(t.selectors.errorDiv)},n.getQuestionMarkDiv=function(){return this.element.querySelector(t.selectors.qm)},n.getTooltipDiv=function(){return this.element.querySelector(t.selectors.tooltipDiv)},n._updateValue=function(e){var t=this,n=this._model.isArrayType();this.widget&&[this.widget].forEach(function(r){l(t,bn)[bn](e,r.value,n)?r.setAttribute("selected","selected"):r.removeAttribute("selected")})},n.addListener=function(){var e,t=this;null==(e=this.getWidget())||e.addEventListener("blur",function(e){if(t._model.isArrayType()){var n=[];[t.widget].forEach(function(e){e.selected&&n.push(e.value)}),t._model.value=n}else t._model.value=e.target.value})},n.getbemBlock=function(){return t.bemBlock},n.getIS=function(){return t.IS},n.getInputHTML=function(){var e,t,n=this;return'<select class="cmp-adaptiveform-dropdown__widget"\n                    aria-label="'+(this.isLabelVisible()?this.getLabelValue():"")+'"\n                    title="'+(this.isTooltipVisible()?this.getTooltipValue():"")+'"\n                    name="'+this.getName()+'"\n                    '+this.getDisabledHTML()+"\n                    "+this.getReadonlyHTML()+"\n                    "+this.getMultipleHTML()+'\n                    required="'+this.isRequired()+'">\n                '+(this.getPlaceHolder()?'<option  value="" disabled selected>'+this.getPlaceHolder()+"</option>":"")+"\n                \n                "+(null==(e=this.getState())||null==(t=e.enumNames)?void 0:t.map(function(e,t){var r;return n.getOptionsHTML(null==(r=n.getState())?void 0:r.enum[t],e,n.getDefault())}).join(""))+"\n            </select>"},n.getOptionsHTML=function(e,t,n){return'\n            <option value="'+e+'" class="cmp-adaptiveform-dropdown__option"\n                selected="'+(e==n?"selected":"")+'">'+t+"</option>\n            "},n.getMultipleHTML=function(){return(this.getState().isMultiSelect?"multiple: multiple":"")+'"'},t}(h);wn.NS="cmp",wn.IS="adaptiveFormDropDown",wn.bemBlock="cmp-adaptiveform-dropdown",wn.selectors={self:"[data-"+wn.NS+'-is="'+wn.IS+'"]',widget:"."+wn.bemBlock+"__widget",options:"."+wn.bemBlock+"__option",label:"."+wn.bemBlock+"__label",description:"."+wn.bemBlock+"__longdescription",qm:"."+wn.bemBlock+"__questionmark",errorDiv:"."+wn.bemBlock+"__errormessage",tooltipDiv:"."+wn.bemBlock+"__shortdescription"};var kn={Click:Ke,Change:ze,Submit:tt,Blur:Xe,AddItem:it,RemoveItem:ot},jn=/*#__PURE__*/function(e){function t(){return e.apply(this,arguments)||this}i(t,e);var n=t.prototype;return n.getQuestionMarkDiv=function(){return null},n.getLabel=function(){return null},n.getWidget=function(){return this.element.querySelector(".cmp-button")},n.getDescription=function(){return null},n.getErrorDiv=function(){return null},n.getTooltipDiv=function(){return null},n.addListener=function(){var e,t=this;null==(e=this.getWidget())||e.addEventListener("click",function(){t._model.dispatch(new kn.Click)})},n.getbemBlock=function(){return t.bemBlock},n.getHTML=function(){return'<button \n            type="button"\n            id="'+this.id+'"\n            class="cmp-button"\n            '+this.getDisabledHTML()+"\n            "+this.getReadonlyHTML()+'\n            title="'+this.getTooltipValue+'"\n            data-cmp-visible="'+this.isVisible()+'"\n            data-cmp-enabled="'+this.isEnabled()+'"\n            data-cmp-is="adaptiveFormButton"\n            aria-label="'+this.getLabelValue()+'"\n            data-cmp-adaptiveformcontainer-path="'+this.getFormContainerPath()+'">\n            <span class="cmp-button__text">'+this.getLabelValue()+"</span>\n        </button>"},t}(h);jn.NS="cmp",jn.IS="adaptiveFormButton",jn.bemBlock="cmp-adaptiveform-button",jn.selectors={self:"[data-"+jn.NS+'-is="'+jn.IS+'"]'};var Mn=/*#__PURE__*/u("widget"),xn=/*#__PURE__*/u("model"),En=/*#__PURE__*/u("options"),Dn=/*#__PURE__*/u("defaultOptions"),Sn=/*#__PURE__*/u("matchArray"),On=/*#__PURE__*/u("regex"),Tn=/*#__PURE__*/u("processedValue"),Nn=/*#__PURE__*/u("engRegex"),Pn=/*#__PURE__*/u("writtenInLocale"),Ln=/*#__PURE__*/u("previousCompositionVal"),In=/*#__PURE__*/u("toLatinForm"),Cn=/*#__PURE__*/u("attachEventHandlers"),An=/*#__PURE__*/u("attachCompositionEventHandlers"),Fn=/*#__PURE__*/u("getDigits"),qn=/*#__PURE__*/u("escape"),Rn=/*#__PURE__*/u("compositionUpdateCallback"),Vn=/*#__PURE__*/u("handleKeyInput"),$n=/*#__PURE__*/u("handleKeyDown"),Bn=/*#__PURE__*/u("isValidChar"),Hn=/*#__PURE__*/u("handleKeyPress"),Un=/*#__PURE__*/u("handlePaste"),zn=/*#__PURE__*/u("handleCut"),Wn=/*#__PURE__*/u("convertValueToLocale"),Gn=/*#__PURE__*/u("convertValueFromLocale"),Qn=/*#__PURE__*/u("isValueSame"),Zn=/*#__PURE__*/function(){function e(e,t){if(Object.defineProperty(this,Qn,{value:cr}),Object.defineProperty(this,Gn,{value:lr}),Object.defineProperty(this,Wn,{value:ur}),Object.defineProperty(this,zn,{value:sr}),Object.defineProperty(this,Un,{value:ar}),Object.defineProperty(this,Hn,{value:or}),Object.defineProperty(this,Bn,{value:ir}),Object.defineProperty(this,$n,{value:rr}),Object.defineProperty(this,Vn,{value:nr}),Object.defineProperty(this,Rn,{value:tr}),Object.defineProperty(this,qn,{value:er}),Object.defineProperty(this,Fn,{value:Xn}),Object.defineProperty(this,An,{value:Kn}),Object.defineProperty(this,Cn,{value:Yn}),Object.defineProperty(this,In,{value:Jn}),Object.defineProperty(this,Mn,{writable:!0,value:null}),Object.defineProperty(this,xn,{writable:!0,value:null}),Object.defineProperty(this,En,{writable:!0,value:null}),Object.defineProperty(this,Dn,{writable:!0,value:{value:null,curValue:null,pos:0,lengthLimitVisible:!0,zero:"0",decimal:".",minus:"-"}}),Object.defineProperty(this,Sn,{writable:!0,value:{integer:"^[+-]?{digits}*$",decimal:"^[+-]?{digits}{leading}({decimal}{digits}{fraction})?$",float:"^[+-]?{digits}*({decimal}{digits}*)?$"}}),Object.defineProperty(this,On,{writable:!0,value:null}),Object.defineProperty(this,Tn,{writable:!0,value:null}),Object.defineProperty(this,Nn,{writable:!0,value:null}),Object.defineProperty(this,Pn,{writable:!0,value:!1}),Object.defineProperty(this,Ln,{writable:!0,value:""}),l(this,Mn)[Mn]=e,l(this,xn)[xn]=t,l(this,En)[En]=Object.assign({},l(this,Dn)[Dn],l(this,xn)[xn]._jsonModel),l(this,Sn)[Sn][l(this,En)[En].dataType]){var n=l(this,En)[En].leadDigits,r=l(this,En)[En].fracDigits,i=r&&-1!==r?"{0,"+r+"}":"*",o=o.replace("{leading}",n&&-1!==n?"{0,"+n+"}":"*").replace("{fraction}",i),a=o.replace(/{digits}/g,l(this,Fn)[Fn]()).replace("{decimal}",l(this,qn)[qn](l(this,En)[En].decimal)),s=o.replace(/{digits}/g,"[0-9]").replace("{decimal}","\\.");l(this,Tn)[Tn]=!("[0123456789]"===l(this,Fn)[Fn]()&&"."===l(this,En)[En].decimal),l(this,On)[On]=new RegExp(a,"g"),l(this,Nn)[Nn]=new RegExp(s,"g")}l(this,Mn)[Mn].setAttribute("type","text"),l(this,Cn)[Cn](e)}var t=e.prototype;return t.getValue=function(e){return(e=l(this,In)[In](e)).length>0&&l(this,Tn)[Tn]&&!e.match(l(this,Nn)[Nn])?(l(this,Pn)[Pn]=!0,e=l(this,Gn)[Gn](e)):l(this,Pn)[Pn]=!1,e&&e.length>=l(this,En)[En].combCells&&(e=e.slice(0,l(this,En)[En].combCells)),l(this,Ln)[Ln]=e,e},t.trigger=function(e,t){if(!l(this,Mn)[Mn])return this;var n=e.split(".")[0];if(void 0!==document.body["on"+n])return l(this,Mn)[Mn].dispatchEvent(new Event(n)),this;var r=new CustomEvent(n,{detail:t||null});return l(this,Mn)[Mn].dispatchEvent(r),this},t.getHTMLSupportedAttr=function(e,t){try{return e[t]}catch(e){return}},t.isNonPrintableKey=function(e){return e&&!["MozPrintableKey","Divide","Multiply","Subtract","Add","Enter","Decimal","Spacebar","Del"].includes(e)&&1!==e.length},t.setValue=function(e){l(this,Qn)[Qn]()||(e&&l(this,Pn)[Pn]?l(this,Mn)[Mn].value=l(this,Wn)[Wn](e):l(this,Mn)[Mn].value=l(this,xn)[xn].value)},e}();function Jn(e){return e.replace(/[\uff00-\uffef]/g,function(e){return String.fromCharCode(e.charCodeAt(0)-65248)})}function Yn(e,t){var n=this;e.addEventListener("keydown",function(e){l(n,$n)[$n](e)}),e.addEventListener("keypress",function(e){l(n,Hn)[Hn](e)}),e.addEventListener("paste",function(e){l(n,Un)[Un](e)}),e.addEventListener("cut",function(e){l(n,zn)[zn](e)}),e.addEventListener("blur",function(e){l(n,xn)[xn].value=n.getValue(e.target.value)}),l(this,An)[An](e)}function Kn(e){var t=!1,n=this,r=function(){var t=window.getSelection();t.selectAllChildren(e),t.collapseToEnd()};e.addEventListener("keyup",function(e){t&&(l(n,Rn)[Rn](e)&&r(),t=!1)}),e.addEventListener("compositionstart",function(e){}),e.addEventListener("compositionupdate",function(e){l(n,Rn)[Rn](e)&&r()}),e.addEventListener("compositionend",function(e){t=!0}),e.addEventListener("keydown",function(e){229!==e.which&&(t=!1)})}function Xn(){for(var e=l(this,En)[En].zero.charCodeAt(0),t="",n=0;n<10;n++)t+=String.fromCharCode(e+n);return"["+t+"]"}function er(e){return e.replace(".","\\.")}function tr(e){var t=this,n=!1,r=l(t,En)[En].leadDigits,i=l(t,En)[En].fracDigits;if(-1!==r){var o=l(this,Mn)[Mn].value;"compositionupdate"===e.type&&e.originalEvent.data&&(o+=e.originalEvent.data.substr(e.originalEvent.data.length-1));var a=r+(-1!==i?i+l(t,En)[En].decimal.length:0);-1===o.indexOf(l(t,En)[En].decimal)&&(a=r);var s=l(this,In)[In](o),u=s.match(l(t,On)[On])||s.match(l(this,Nn)[Nn]);if(n=!u,null===u)l(t,Mn)[Mn].value=l(t,Ln)[Ln],n=!0;else if(n){var c=o.substr(0,a);l(t,Mn)[Mn].value=c,l(t,Ln)[Ln]=c,n=!0}else l(t,Ln)[Ln]=o}return n}function nr(e,t,n){if(e.ctrlKey&&!["paste","cut"].includes(e.type))return!0;l(this,$n)[$n](arguments),l(this,En)[En].lengthLimitVisible=!0;var r,i=l(this,Mn)[Mn].value,o=this.getHTMLSupportedAttr(l(this,Mn)[Mn],"selectionStart")||0,a=!(null==o),s=this.getHTMLSupportedAttr(l(this,Mn)[Mn],"selectionEnd")||0,u=parseInt(l(this,En)[En].combCells)||0,c=t;if(u>0&&(c=t.substr(0,u-i.length+s-o)),!a)return!0;r=i.substr(0,o)+c+i.substr(s);var h=l(this,In)[In](r);return null==l(this,On)[On]||h.match(l(this,On)[On])||h.match(l(this,Nn)[Nn])?!["keydown","cut"].includes(e.type)&&u&&(i.length>=u||r.length>u)&&o===s?(e.preventDefault(),!1):(l(this,En)[En].curValue=i,l(this,Ln)[Ln]=i,void(l(this,En)[En].pos=o)):(e.preventDefault(),!1)}function rr(e){if(e){var t=e.charCode||e.which||e.keyCode||0;if(8===t||46===t)l(this,Vn)[Vn](e,"",t);else if(32===t)return e.preventDefault(),!1}}function ir(e){e=l(this,In)[In](e);var t=String.fromCharCode(l(this,En)[En].zero.charCodeAt(0)+9);return e>="0"&&e<="9"||e>=l(this,En)[En].zero&&e<=t||e===l(this,En)[En].decimal||e===l(this,En)[En].minus}function or(e){if(e){var t=e.charCode||e.which||e.keyCode||0,n=String.fromCharCode(t);if(this.isNonPrintableKey(e.key))return!0;if(l(this,Bn)[Bn](n))l(this,Vn)[Vn](e,n,t);else if(!e.ctrlKey)return e.preventDefault(),!1}}function ar(e){if(e){var t=void 0;if(window.clipboardData&&window.clipboardData.getData?t=window.clipboardData.getData("Text"):(e.originalEvent||e).clipboardData&&(e.originalEvent||e).clipboardData.getData&&(t=(e.originalEvent||e).clipboardData.getData("text/plain")),t)if(t.split("").every(function(e){return l(this,Bn)[Bn](e)},this))t=l(this,In)[In](t),l(this,Vn)[Vn](e,t,0);else if(!e.ctrlKey)return e.preventDefault(),!1}}function sr(e){e&&l(this,Vn)[Vn](e,"",0)}function ur(e){var t=l(this,En)[En].zero.charCodeAt(0);return e.map(function(e){return"."===e?l(this,En)[En].decimal:"-"===e?l(this,En)[En].minus:String.fromCharCode(parseInt(e)+t)},this).join("")}function lr(e){e=l(this,In)[In](e);var t=l(this,En)[En].zero.charCodeAt(0);return e.map(function(e){return e===l(this,En)[En].decimal?".":e===l(this,En)[En].minus?"-":(e.charCodeAt(0)-t).toString()},this).join("")}function cr(){return null===l(this,xn)[xn].value&&""===l(this,Mn)[Mn].value||l(this,xn)[xn].value===l(this,Mn)[Mn].value}var hr=/*#__PURE__*/function(e){function t(){for(var t,n=arguments.length,r=new Array(n),i=0;i<n;i++)r[i]=arguments[i];return(t=e.call.apply(e,[this].concat(r))||this).widgetObject=void 0,t}i(t,e);var n=t.prototype;return n.getClass=function(){return t.IS},n.getWidget=function(){return this.element.querySelector(t.selectors.widget)},n.getDescription=function(){return this.element.querySelector(t.selectors.description)},n.getLabel=function(){return this.element.querySelector(t.selectors.label)},n.getErrorDiv=function(){return this.element.querySelector(t.selectors.errorDiv)},n.getTooltipDiv=function(){return this.element.querySelector(t.selectors.tooltipDiv)},n.getQuestionMarkDiv=function(){return this.element.querySelector(t.selectors.qm)},n._updateValue=function(t){null==this.widgetObject&&(this._model._jsonModel.editFormat||this._model._jsonModel.displayFormat)&&(this.widgetObject=new Zn(this.getWidget(),this._model)),this.widgetObject?this.widgetObject.setValue(t):e.prototype._updateValue.call(this,t)},n.addListener=function(){var e,t=this;this._model._jsonModel.editFormat||this._model._jsonModel.displayFormat?null==this.widgetObject&&(this.widgetObject=new Zn(this.getWidget(),this._model)):null==(e=this.getWidget())||e.addEventListener("blur",function(e){t._model.value=e.target.value})},n.getbemBlock=function(){return t.bemBlock},n.getIS=function(){return t.IS},n.getInputHTML=function(){return'<input\n            class="cmp-adaptiveform-numberinput__widget"\n            title="'+(this.isTooltipVisible()?this.getTooltipValue():"")+'"\n            aria-label="'+(this.isLabelVisible()?this.getLabelValue():"")+'"\n            type="number"\n            name="'+this.getName()+'"\n            value="'+this.getDefault()+'"\n            max="'+this.getMaximum()+'"\n            min="'+this.getMinimum()+'"\n            '+this.getDisabledHTML()+"\n            "+this.getReadonlyHTML()+'\n            required="'+this.isRequired()+'"\n            placeholder="'+this.getPlaceHolder()+'"/>'},t}(h);hr.NS="cmp",hr.IS="adaptiveFormNumberInput",hr.bemBlock="cmp-adaptiveform-numberinput",hr.selectors={self:"[data-"+hr.NS+'-is="'+hr.IS+'"]',widget:"."+hr.bemBlock+"__widget",label:"."+hr.bemBlock+"__label",description:"."+hr.bemBlock+"__longdescription",errorDiv:"."+hr.bemBlock+"__errormessage",qm:"."+hr.bemBlock+"__questionmark",tooltipDiv:"."+hr.bemBlock+"__shortdescription"};var dr=/*#__PURE__*/function(e){function t(n,r){var i;return(i=e.call(this,n,r)||this).qm=i.element.querySelector(t.selectors.qm),i}i(t,e);var n=t.prototype;return n.getWidget=function(){return this.element.querySelector(t.selectors.widget)},n.getWidgets=function(){return this.element.querySelectorAll(t.selectors.widget)},n.getDescription=function(){return this.element.querySelector(t.selectors.description)},n.getLabel=function(){return this.element.querySelector(t.selectors.label)},n.getQuestionMarkDiv=function(){return this.element.querySelector(t.selectors.qm)},n.getTooltipDiv=function(){return this.element.querySelector(t.selectors.tooltipDiv)},n.getErrorDiv=function(){return this.element.querySelector(t.selectors.errorDiv)},n._updateEnabled=function(e){this.toggle(e,"aria-disabled",!0),this.element.setAttribute("data-cmp-enabled",e+"");var t=this.getWidgets();null==t||t.forEach(function(t){!1===e?(t.setAttribute("disabled",!0+""),t.setAttribute("aria-disabled",!0+"")):(t.removeAttribute("disabled"),t.removeAttribute("aria-disabled"))})},n._updateValue=function(e){null!=e&&this.getWidgets().forEach(function(t){null!=t.value&&e.toString()==t.value.toString()?(t.checked=!0,t.setAttribute("checked","checked"),t.setAttribute("aria-checked",!0+"")):(t.checked=!1,t.removeAttribute("checked"),t.setAttribute("aria-checked",!1+""))},this)},n.addListener=function(){var e=this;this.getWidgets().forEach(function(t){t.addEventListener("change",function(t){e._model.value=t.target.value})})},n.getbemBlock=function(){return t.bemBlock},n.getIS=function(){return t.IS},n.getInputHTML=function(){var e,t,n=this;return"\n            "+(null==(e=this.getState())||null==(t=e.enumNames)?void 0:t.map(function(e,t){var r;return n.getRadioHTML(n,null==(r=n.getState())?void 0:r.enum[t],e,t)}).join(""))},n.getRadioHTML=function(e,t,n,r){return'<div class="cmp-adaptiveform-radiobutton__option '+e.getLayoutProperties().orientation+'">\n                    <label class="cmp-adaptiveform-radiobutton__option__label"\n                            title="'+e.getTooltipValue()+'"\n                            aria-describedby="_desc"\n                            aria-label="'+n+'">\n                        <input type="radio"\n                                name="'+e.getName()+'"\n                                class="cmp-adaptiveform-radiobutton__option__widget"\n                                id="'+e.id+"_"+r+'__widget"\n                                value="'+t+'"\n                                '+this.getDisabledHTML()+'\n                                aria-describedby="_desc"\n                                checked="'+(t==this.getDefault())+'"/>\n                        <span>'+n+"</span>\n                    </label>\n                </div>\n            </div>"},t}(h);dr.NS="cmp",dr.IS="adaptiveFormRadioButton",dr.bemBlock="cmp-adaptiveform-radiobutton",dr.selectors={self:"[data-"+dr.NS+'-is="'+dr.IS+'"]',widget:"."+dr.bemBlock+"__option__widget",label:"."+dr.bemBlock+"__label",description:"."+dr.bemBlock+"__longdescription",qm:"."+dr.bemBlock+"__questionmark",errorDiv:"."+dr.bemBlock+"__errormessage",tooltipDiv:"."+dr.bemBlock+"__shortdescription"};var fr=/*#__PURE__*/function(e){function t(){return e.apply(this,arguments)||this}i(t,e);var n=t.prototype;return n.getWidget=function(){return null},n.getDescription=function(){return null},n.getLabel=function(){return null},n.getErrorDiv=function(){return null},n.getTooltipDiv=function(){return null},n.getQuestionMarkDiv=function(){return null},n.getClass=function(){return t.IS},n.setFocus=function(){this.setActive()},n.getbemBlock=function(){return t.bemBlock},n.getIS=function(){return t.IS},n.getHTML=function(){return'\n        <div data-cmp-is="'+this.getIS()+'"\n            id="'+this.id+'"\n            data-cmp-adaptiveformcontainer-path="'+this.getFormContainerPath()+'"\n            data-cmp-visible="'+this.getDefault()+'"\n            class="cmp-adaptiveform-text">\n            <div class="cmp-adaptiveform-text__widget" tabindex="0">\n                '+this.getState().value+"\n            </div>\n        </div>"},t}(h);fr.NS="cmp",fr.IS="adaptiveFormText",fr.bemBlock="cmp-adaptiveform-text",fr.selectors={self:"[data-"+fr.NS+'-is="'+fr.IS+'"]'};var pr=/*#__PURE__*/function(e){function t(){return e.apply(this,arguments)||this}i(t,e);var n=t.prototype;return n.getWidget=function(){return this.element.querySelector(t.selectors.widget)},n.getDescription=function(){return this.element.querySelector(t.selectors.description)},n.getLabel=function(){return this.element.querySelector(t.selectors.label)},n.getErrorDiv=function(){return this.element.querySelector(t.selectors.errorDiv)},n.getTooltipDiv=function(){return this.element.querySelector(t.selectors.tooltipDiv)},n.getQuestionMarkDiv=function(){return this.element.querySelector(t.selectors.qm)},n.addListener=function(){var e,t,n=this;null==(e=this.getWidget())||e.addEventListener("blur",function(e){n._model.value=e.target.value,n.setInactive()}),null==(t=this.getWidget())||t.addEventListener("focus",function(e){n.setActive()})},n.getbemBlock=function(){return t.bemBlock},n.getIS=function(){return t.IS},n.getInputHTML=function(){return'\n            <br>\n            <p class="range-info">'+this.getMinimum()+'</p>\n            <input\n                class="cmp-adaptiveform-SliderInput__widget"\n                title="'+(this.isTooltipVisible()?this.getTooltipValue():"")+'"\n                aria-label="'+(this.isLabelVisible()?this.getLabelValue():"")+'"\n                type="range"\n                name="'+this.getName()+'"\n                value="'+this.getDefault()+'"\n                step="'+this.getState().step+'"\n                '+this.getDisabledHTML()+"\n                "+this.getReadonlyHTML()+'\n                required="'+this.isRequired()+'"\n                placeholder="'+this.getPlaceHolder()+'"\n                min="'+this.getMinimum()+'"\n                max="'+this.getMaximum()+'"/>\n            \n            <p class="range-info">'+this.getMaximum()+"</p>\n            "},t}(h);pr.NS="cmp",pr.IS="adaptiveFormSliderInput",pr.bemBlock="cmp-adaptiveform-sliderinput",pr.selectors={self:"[data-"+pr.NS+'-is="'+pr.IS+'"]',widget:"."+pr.bemBlock+"__widget",label:"."+pr.bemBlock+"__label",description:"."+pr.bemBlock+"__longdescription",qm:"."+pr.bemBlock+"__questionmark",errorDiv:"."+pr.bemBlock+"__errormessage",tooltipDiv:"."+pr.bemBlock+"__shortdescription"};var vr=/*#__PURE__*/function(e){function t(){return e.apply(this,arguments)||this}return i(t,e),t.prototype.getInputHTML=function(){return'<input\n              class="cmp-adaptiveform-textinput__widget"\n              title="'+(this.isTooltipVisible()?this.getTooltipValue():"")+'"\n              aria-label="'+(this.isLabelVisible()?this.getLabelValue():"")+'"\n              type="email"\n              name="'+this.getName()+'"\n              value="'+this.getDefault()+'"\n              '+this.getDisabledHTML()+"\n              "+this.getReadonlyHTML()+'\n              required="'+this.isRequired()+'"\n              placeholder="'+this.getPlaceHolder()+'"\n              minlength="'+this.getMinLength()+'"\n              maxlength="'+this.getMaxLength()+'"/>'},t}(d),gr=/*#__PURE__*/function(e){function t(n,r){var i;return(i=e.call(this,n,r)||this).widgetLabel=void 0,i.qm=i.element.querySelector(t.selectors.qm),i.widgetLabel=i.element.querySelector(t.selectors.widgetLabel),i}i(t,e);var n=t.prototype;return n.getWidget=function(){return this.element.querySelector(t.selectors.widget)},n.getWidgets=function(){return this.element.querySelectorAll(t.selectors.widget)},n.getDescription=function(){return this.element.querySelector(t.selectors.description)},n.getLabel=function(){return this.element.querySelector(t.selectors.label)},n.getErrorDiv=function(){return this.element.querySelector(t.selectors.errorDiv)},n.getQuestionMarkDiv=function(){return this.element.querySelector(t.selectors.qm)},n.getTooltipDiv=function(){return this.element.querySelector(t.selectors.tooltipDiv)},n._updateModelValue=function(){var e=[],t=this.getWidgets();null==t||t.forEach(function(t){t.checked&&e.push(t.value)},this),this._model.value=e},n._updateEnabled=function(e){this.toggle(e,"aria-disabled",!0),this.element.setAttribute("data-cmp-enabled",e+"");var t=this.getWidgets();null==t||t.forEach(function(t){!1===e?(t.setAttribute("disabled",!0+""),t.setAttribute("aria-disabled",!0+"")):(t.removeAttribute("disabled"),t.removeAttribute("aria-disabled"))})},n._updateValue=function(e){var t=(e=[].concat(e)).map(String),n=this.getWidgets();null==n||n.forEach(function(e){t.includes(e.value)?(e.checked=!0,e.setAttribute("checked","checked"),e.setAttribute("aria-checked",!0+"")):(e.checked=!1,e.removeAttribute("checked"),e.setAttribute("aria-checked",!1+""))},this)},n.getEnums=function(){return this.getState().enums},n.getEnumNames=function(){return this.getState().enumNames},n.addListener=function(){var e=this;this.getWidgets().forEach(function(t){t.addEventListener("change",function(t){e._updateModelValue()})})},n.getbemBlock=function(){return t.bemBlock},n.getIS=function(){return t.IS},n.getInputHTML=function(){var e,t=this;return'\n            <div class="cmp-adaptiveform-checkboxgroup__widget">\n            '+(null==(e=this.getEnumNames())?void 0:e.map(function(e,n){var r;return t.getCheckboxHTML(t,null==(r=t.getState())?void 0:r.enum[n],e,n)}).join(""))+"\n            </div>\n            "},n.getCheckboxHTML=function(e,t,n,r){return'<div class="cmp-adaptiveform-checkboxgroup-item '+e.getName+" "+e.getLayoutProperties().orientation+' ">\n            <label class="cmp-adaptiveform-checkbox__label" aria-label="'+e.getEnumNames()[r]+'"\n                title="'+e.getTooltipValue()+'"\n                for="'+e.id+"_"+r+'__widget">\n                <input class="cmp-adaptiveform-checkbox__widget" type="checkbox" id="'+e.id+"_"+r+'__widget"\n                    aria-describedby="_desc"\n                    name="'+e.getName()+'"\n                    value="'+e.getState().enums[r].toString+'"\n                    checked="'+(e.getEnums()[r]==e.getDefault())+'"\n                    '+this.getDisabledHTML()+" />\n                <span>"+e.getEnumNames()[r]+"</span>\n            </label>\n        </div>"},t}(h);gr.NS="cmp",gr.IS="adaptiveFormCheckBoxGroup",gr.bemBlock="cmp-adaptiveform-checkboxgroup",gr.checkboxBemBlock="cmp-adaptiveform-checkbox",gr.selectors={self:"[data-"+gr.NS+'-is="'+gr.IS+'"]',widgets:"."+gr.bemBlock+"__widgets",widget:"."+gr.checkboxBemBlock+"__widget",widgetLabel:"."+gr.checkboxBemBlock+"__label",label:"."+gr.bemBlock+"__label",description:"."+gr.bemBlock+"__longdescription",qm:"."+gr.bemBlock+"__questionmark",errorDiv:"."+gr.bemBlock+"__errormessage",tooltipDiv:"."+gr.bemBlock+"__shortdescription"};var mr=/*#__PURE__*/function(){function e(e){var t=this;this._model=void 0,this._path=void 0,this._fields=void 0,this._deferredParents=void 0,this.renderChildrens=function(e,n){console.log("Rendering childrens");var r=null==n?void 0:n.items;r&&r.length>0&&r.forEach(function(n){e.append(t.getRender(n))})},this.getRender=function(e){var n=document.createElement("div");try{var r,i=t.getModel(e.id),o={element:n,id:e.id};switch(null==e?void 0:e.fieldType){case"checkbox":r=new gr(o,i);break;case"email":r=new vr(o,i);break;case"slider":r=new pr(o,i);break;case"plain-text":r=new fr(o,i);break;case"radio":r=new dr(o,i);break;case"number":r=new hr(o,i);break;case"button":r=new jn(o,i);break;case"select":r=new wn(o,i);break;case"text-area":r=new _n(o,i);break;default:r=new d(o,i)}r&&r.render()}catch(e){console.error("Unexpected error ",e)}return n},this._model=function(e,t,n,r){void 0===n&&(n="error"),void 0===r&&(r=void 0);try{var i=r;null==i&&(i=new mn(Le({},e),new yn,new ln(new sn(n)),n));var o=null==e?void 0:e.data;return o&&i.importData(o),i.getEventQueue().runPendingQueue(),i}catch(e){throw console.error("Unable to create an instance of the Form "+e),new Error(e)}}(r({},e._formJson)),this._path=e._path,this._fields={},this._deferredParents={}}var t=e.prototype;return t.getField=function(e){return this._fields.hasOwnProperty(e)?this._fields[e]:null},t.getModel=function(e){return e?this._model.getElement(e):this._model},t.addField=function(e){if(e.getFormContainerPath()===this._path){var t=e.getId();this._fields[t]=e;var n=this.getModel(t);e.setModel(n);var r=n.parent.id;if("$form"!=r){var i=this._fields[r];i?e.setParent(i):(this._deferredParents[r]||(this._deferredParents[r]=[]),this._deferredParents[r].push(e))}if(this._deferredParents[t]){for(var o=this._deferredParents[t],a=0;a<o.length;a++)o[a].setParent(e);delete this._deferredParents[t]}e.subscribe()}},t.setFocus=function(e){if(e){var t=this._fields[e];t&&t.setFocus?t.setFocus():console.log("View on which focus is to be set, not initialized.")}},t.getPath=function(){return this._path},t.render=function(){var e=document.createElement("form");e.className="cmp-adaptiveform-container cmp-container";var t=this._model.getState();return this.renderChildrens(e,t),e},e}(),yr=/*#__PURE__*/u("handlePanel"),_r=/*#__PURE__*/u("handleProperty"),br=/*#__PURE__*/u("setProperty"),wr=/*#__PURE__*/u("handleMultiValues"),kr=/*#__PURE__*/u("handleHierarchy"),jr=/*#__PURE__*/u("isRule"),Mr=/*#__PURE__*/u("isConstraintMsg"),xr=/*#__PURE__*/u("isPanel"),Er=/*#__PURE__*/u("isEndingPanel"),Dr=/*#__PURE__*/u("cleanUpPanel"),Sr=/*#__PURE__*/function(){function e(){Object.defineProperty(this,Dr,{value:qr}),Object.defineProperty(this,Er,{value:Fr}),Object.defineProperty(this,xr,{value:Ar}),Object.defineProperty(this,Mr,{value:Cr}),Object.defineProperty(this,jr,{value:Ir}),Object.defineProperty(this,kr,{value:Lr}),Object.defineProperty(this,wr,{value:Pr}),Object.defineProperty(this,br,{value:Nr}),Object.defineProperty(this,_r,{value:Tr}),Object.defineProperty(this,yr,{value:Or})}var t=e.prototype;return t._getForm=function(e){try{if(!e)throw new Error("form name is required");return Promise.resolve(fetch(e)).then(function(e){return Promise.resolve(e.json()).then(function(e){return console.log("Data",e),e})})}catch(e){return Promise.reject(e)}},t.getFormModel=function(e){try{var t=this;return Promise.resolve(function(){if(e){var n={adaptiveform:"0.10.0",metadata:{grammar:"json-formula-1.0.0",version:"1.0.0"},items:[]};return Promise.resolve(t._getForm(e)).then(function(r){if(!r||!r.data)throw new Error("Unable to retrieve the form details with excel name "+e);var i=[];i.push(n.items);var o=n;return r.data.forEach(function(e){if(l(t,xr)[xr](e)){e.items={};var r=JSON.parse(JSON.stringify(e));l(t,yr)[yr](r),o.items.push(r),i.push(o),o=r}else l(t,Er)[Er](e)?(o=i.pop())||(o=n):o.items.push(l(t,_r)[_r](e))}),{formDef:n,excelData:r}})}}())}catch(e){return Promise.reject(e)}},e}();function Or(e){if(l(this,Dr)[Dr](e),l(this,jr)[jr](e)){var t=l(this,kr)[kr](e,"Rules.");t&&0!=Object.keys(t).length&&(e.rules=t)}var n=l(this,kr)[kr](e,"events.");n&&0!=Object.keys(n).length&&(e.events=n)}function Tr(e){var t=Object.fromEntries(Object.entries(e).filter(function(e){var t=e[1];return null!=t&&""!=t})),n=Sr.fieldMapping.has(t.Type)?Sr.fieldMapping.get(t.Type):t.Type,r={name:t.Field,placeholder:t.Placeholder,type:"string",fieldType:n,value:t.Value,label:{value:t.Label},required:!!t.Mandatory};if(l(this,br)[br](t,"Maximum",r,"maximum"),l(this,br)[br](t,"Minimum",r,"minimum"),l(this,br)[br](t,"MaxLength",r,"maxLength"),l(this,br)[br](t,"MinLength",r,"minLength"),l(this,br)[br](t,"Step",r,"step"),l(this,jr)[jr](t)){var i=l(this,kr)[kr](t,"Rules.");i&&0!=Object.keys(i).length&&(r.rules=i)}if(l(this,Mr)[Mr](t)){var o=l(this,kr)[kr](t,"constraintMessages.");o&&0!=Object.keys(o).length&&(r.constraintMessages=o)}var a=l(this,kr)[kr](t,"events.");a&&0!=Object.keys(a).length&&(r.events=a);var s=l(this,wr)[wr](t,"Options");return s&&(r.enumNames=r.enum=s),r}function Nr(e,t,n,r){e&&e[t]&&(n[r]=e[t])}function Pr(e,t){var n;return e&&e[t]&&(n=e[t].split(",").map(function(e){return e.trim()})),n}function Lr(e,t){var n={};return Object.keys(e).forEach(function(r){if(~r.indexOf(t)){var i=r.split(".")[1];e[r]&&(n[i]=e[r]),delete e[r]}}),n}function Ir(e){return Object.keys(e).some(function(e){return~e.indexOf("Rules.")})}function Cr(e){return Object.keys(e).some(function(e){return~e.indexOf("constraintMessages.")})}function Ar(e){return e&&"object"==e.type}function Fr(e){return e&&"page-break"==e.viewType}function qr(e){delete e.type}Sr.fieldMapping=new Map([["text-input","text"],["number-input","number"],["date-input","datetime-local"],["file-input","file"],["drop-down","select"],["radio-group",""],["checkbox-group",""],["plain-text","plain-text"],["checkbox","checkbox"],["multiline-input","text-area"],["panel","panel"],["submit","button"]]);var Rr=function(e){try{var t=e.querySelector('a[href$=".json"]'),n=function(){if(t&&null!=t&&t.href){var e=t.replaceWith;return Promise.resolve(Vr(t.href)).then(function(n){e.call(t,n)})}}();return Promise.resolve(n&&n.then?n.then(function(){}):void 0)}catch(e){return Promise.reject(e)}},Vr=function(e){try{console.log("Loading & Converting excel form to Crispr Form");var t=new Sr;return Promise.resolve(t.getFormModel(e)).then(function(e){console.log(e),console.log("Creating Form Container");var t=new mr({_formJson:null==e?void 0:e.formDef});return window.guideContainer=t,t.render()})}catch(e){return Promise.reject(e)}};Rr(document.getElementsByClassName("form")[0]);export{Rr as default};
-//# sourceMappingURL=index.esm.js.map
+function _extends$1() {
+  _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends$1.apply(this, arguments);
+}
+var id = 0;
+function _classPrivateFieldLooseKey(name) {
+  return "__private_" + id++ + "_" + name;
+}
+function _classPrivateFieldLooseBase(receiver, privateKey) {
+  if (!Object.prototype.hasOwnProperty.call(receiver, privateKey)) {
+    throw new TypeError("attempted to use private field on non-instance");
+  }
+  return receiver;
+}
+
+const Constants = {
+  /**
+   * namespsace of the data-attribute. Any data attribute will be prefixed with this name.
+   * i.e. data-name would be data-{NS}-{ComponentClass}-name. Each component will have a different
+   * component class
+   */
+  NS: "cmp",
+  /**
+   * @summary Form event to be triggered with a Form container is initialized
+   *
+   * @name  AF_FormContainerInitialised
+   * @event
+   * @property {object} event
+   * @property {object} event.detail instance of FormContainer that is initialzied
+   * @example
+   * document.on("AF_FormContainerInitialised" , function(event) {
+   *      var formContainer = event.detail;
+   *      ...
+   * }
+   */
+  FORM_CONTAINER_INITIALISED: "AF_FormContainerInitialised",
+  /**
+   * @summary Panel event to be triggered when a child view is added to panel view
+   *
+   * @name  AF_PanelChildAdded
+   * @event
+   * @property {object} event
+   * @property {object} event.detail instance of child view that is added
+   * @example
+   * panel.element.on("AF_PanelChildAdded" , function(event) {
+   *      var childView = event.detail;
+   *      ...
+   * }
+   */
+  PANEL_CHILD_ADDED: "AF_PanelChildAdded",
+  /**
+   * @summary Panel event to be triggered when a child view is removed from panel view
+   *
+   * @name  AF_PanelChildRemoved
+   * @event
+   * @property {object} event
+   * @property {object} event.detail instance of child view that was removed
+   * @example
+   * panel.element.on("AF_PanelChildRemoved" , function(event) {
+   *      var childView = event.detail;
+   *      ...
+   * }
+   */
+  PANEL_CHILD_REMOVED: "AF_PanelChildRemoved",
+  /**
+   * data attribute to store the form container path. In HTML it will be namespaced
+   * data-{NS}-{ComponentClass}-adaptiveformcontainerPath
+   */
+  FORM_CONTAINER_DATA_ATTRIBUTE: "adaptiveformcontainerPath",
+  /**
+   * data attribute to be added on clickable element to repeat a repeatable panel
+   */
+  DATA_HOOK_ADD_INSTANCE: "data-cmp-hook-add-instance",
+  /**
+   * data attribute to be added on element to remove a repeatable panel
+   */
+  DATA_HOOK_REMOVE_INSTANCE: "data-cmp-hook-remove-instance",
+  /**
+   * data attribute to mark the dragged component valid or invalid.
+   * value true for valid
+   * value false for invalid
+   */
+  DATA_ATTRIBUTE_VALID: "data-cmp-valid",
+  /**
+   * data attribute to mark the dragged component enabled or disabled.
+   * value true for enabled
+   * value false for disabled
+   */
+  DATA_ATTRIBUTE_ENABLED: "data-cmp-enabled",
+  /**
+   * data attribute to mark the dragged component visible or invisible.
+   * value true for visible
+   * value false for invisible
+   */
+  DATA_ATTRIBUTE_VISIBLE: "data-cmp-visible",
+  /**
+   * data attribute to mark the dragged component active or inactive.
+   * value true for active
+   * value false for inactive
+   */
+  DATA_ATTRIBUTE_ACTIVE: "data-cmp-active",
+  /**
+   * aria attribute to mark the dragged component disabled.
+   */
+  ARIA_DISABLED: "aria-disabled",
+  /**
+   * aria attribute to mark the dragged component hidden.
+   */
+  ARIA_HIDDEN: "aria-hidden",
+  /**
+   * aria attribute to mark the dragged component invalid.
+   */
+  ARIA_INVALID: "aria-invalid",
+  /**
+   * aria attribute to mark the dragged component checked.
+   */
+  ARIA_CHECKED: "aria-checked",
+  /**
+   * aria attribute to mark component selected
+   */
+  ARIA_SELECTED: "aria-selected",
+  /**
+   * Event to trigger when GuideBridge Initialisation Begins
+   */
+  GUIDE_BRIDGE_INITIALIZE_START: "bridgeInitializeStart",
+  HTML_ATTRS: {
+    /**
+     * attribute to mark the dragged component disabled.
+     */
+    DISABLED: "disabled",
+    /**
+     * attribute to mark the dragged component checked.
+     */
+    CHECKED: "checked"
+  },
+  TABINDEX: "tabindex",
+  /**
+   * Prefix path for all AF HTTP APIs
+   */
+  API_PATH_PREFIX: "/adobe/forms/af"
+};
+
+class FormField {
+  constructor(params, model) {
+    this.formContainer = void 0;
+    this.element = void 0;
+    this.active = void 0;
+    this.id = void 0;
+    this.parentView = void 0;
+    this._model = void 0;
+    this.options = void 0;
+    this.formContainer = params.formContainer;
+    this.id = params.id;
+    this.element = params.element; //html element of field
+    this.active = false;
+    this.setModel(model);
+  }
+  setId(id) {
+    this.id = id;
+  }
+  setParent(parentView) {
+    this.parentView = parentView;
+    if (this.parentView.addChild) {
+      this.parentView.addChild(this);
+    }
+  }
+  setActive() {
+    if (!this.isActive()) {
+      this.element.setAttribute(Constants.DATA_ATTRIBUTE_ACTIVE, "true");
+    }
+    if (this.parentView && this.parentView.setActive) {
+      this.parentView.setActive();
+    }
+  }
+  setInactive() {
+    if (this.isActive()) {
+      this.element.setAttribute(Constants.DATA_ATTRIBUTE_ACTIVE, "false");
+    }
+    if (this.parentView && this.parentView.setInactive) {
+      this.parentView.setInactive();
+    }
+  }
+  isActive() {
+    return this.active;
+  }
+  getFormContainerPath() {
+    var _this$options;
+    return (_this$options = this.options) == null ? void 0 : _this$options["adaptiveformcontainerPath"];
+  }
+  getId() {
+    return this.id;
+  }
+  setModel(model) {
+    if (typeof this._model === "undefined" || this._model === null) {
+      this._model = model;
+    } else {
+      throw "Re-initializing model is not permitted";
+    }
+  }
+  /**
+   * toggles the html element based on the property. If the property is false, then adds the data-attribute and
+   * css class
+   * @param property
+   * @param dataAttribute
+   * @param value
+   */
+  toggle(property, dataAttribute, value) {
+    this.toggleAttribute(this.element, property, dataAttribute, value);
+  }
+  /**
+   * Toggles the given @param element based on the property. If the property is false, then adds the data-attribute and
+   * css class
+   * @param element
+   * @param property
+   * @param dataAttribute
+   * @param value
+   */
+  toggleAttribute(element, property, dataAttribute, value) {
+    if (element) {
+      if (property === false) {
+        element.setAttribute(dataAttribute, value);
+      } else {
+        element.removeAttribute(dataAttribute);
+      }
+    }
+  }
+  /**
+   * @return 'afs:layout' properties. Empty object if no layout property present
+   */
+  getLayoutProperties() {
+    let layoutProperties = {};
+    const state = this.getModel().getState();
+    if (state && state.properties && state.properties['afs:layout']) {
+      layoutProperties = state.properties['afs:layout'];
+    }
+    return layoutProperties;
+  }
+  getModel() {
+    return this._model;
+  }
+  subscribe() {
+    throw "the field does not subscribe to the model";
+  }
+  getState() {
+    var _this$_model;
+    return (_this$_model = this._model) == null ? void 0 : _this$_model.getState();
+  }
+  isVisible() {
+    return (this == null ? void 0 : this.getState().visible) || true;
+  }
+  isEnabled() {
+    return (this == null ? void 0 : this.getState().enabled) || true;
+  }
+  isLabelVisible() {
+    var _this$getState, _this$getState$label;
+    return (this == null ? void 0 : (_this$getState = this.getState()) == null ? void 0 : (_this$getState$label = _this$getState.label) == null ? void 0 : _this$getState$label.visible) || true;
+  }
+  getLabelValue() {
+    var _this$getState2, _this$getState2$label;
+    return (this == null ? void 0 : (_this$getState2 = this.getState()) == null ? void 0 : (_this$getState2$label = _this$getState2.label) == null ? void 0 : _this$getState2$label.value) || "";
+  }
+  getName() {
+    var _this$getState3;
+    return (this == null ? void 0 : (_this$getState3 = this.getState()) == null ? void 0 : _this$getState3.name) || "";
+  }
+  isTooltipVisible() {
+    return false; // TBD - Missing in Spec
+  }
+
+  getTooltipValue() {
+    return ""; // TBD - Missing in Spec
+  }
+
+  isShortDescVisible() {
+    return false; // TBD - Missing in Spec
+  }
+
+  getShortDescValue() {
+    return ""; // TBD - Missing in Spec
+  }
+
+  getDescriptionValue() {
+    var _this$getState4;
+    return (this == null ? void 0 : (_this$getState4 = this.getState()) == null ? void 0 : _this$getState4.description) || "";
+  }
+  getDefault() {
+    var _this$getState5;
+    return (this == null ? void 0 : (_this$getState5 = this.getState()) == null ? void 0 : _this$getState5.default) || "";
+  }
+  isReadOnly() {
+    var _this$getState6;
+    return (this == null ? void 0 : (_this$getState6 = this.getState()) == null ? void 0 : _this$getState6.readOnly) || false;
+  }
+  isRequired() {
+    var _this$getState7;
+    return (this == null ? void 0 : (_this$getState7 = this.getState()) == null ? void 0 : _this$getState7.required) || false;
+  }
+  getPlaceHolder() {
+    var _this$getState8;
+    return (this == null ? void 0 : (_this$getState8 = this.getState()) == null ? void 0 : _this$getState8.placeholder) || "";
+  }
+  getMinLength() {
+    var _this$getState9;
+    return this == null ? void 0 : (_this$getState9 = this.getState()) == null ? void 0 : _this$getState9.minLength;
+  }
+  getMaxLength() {
+    var _this$getState10;
+    return this == null ? void 0 : (_this$getState10 = this.getState()) == null ? void 0 : _this$getState10.maxLength;
+  }
+  getMinimum() {
+    var _this$getState11;
+    return this == null ? void 0 : (_this$getState11 = this.getState()) == null ? void 0 : _this$getState11.minimum;
+  }
+  getMaximum() {
+    var _this$getState12;
+    return this == null ? void 0 : (_this$getState12 = this.getState()) == null ? void 0 : _this$getState12.maximum;
+  }
+}
+FormField.IS = "FormField";
+
+class FormFieldBase extends FormField {
+  constructor(params, model) {
+    super(params, model);
+    this.qm = void 0;
+    this.widget = void 0;
+    this.label = void 0;
+    this.errorDiv = void 0;
+    this.tooltip = void 0;
+    this.description = void 0;
+    this.element.className = this.getbemBlock();
+    this.widget = this.getWidget();
+    this.description = this.getDescription();
+    this.label = this.getLabel();
+    this.errorDiv = this.getErrorDiv();
+    this.qm = this.getQuestionMarkDiv();
+    this.tooltip = this.getTooltipDiv();
+  }
+  /**
+   * implementations should return the widget element that is used to capture the value from the user
+   * It will be a input/textarea element
+   * @returns
+   */
+  getWidget() {
+    throw "method not implemented";
+  }
+  /**
+   * implementations should return the element used to show the description of the field
+   * @returns
+   */
+  getDescription() {
+    throw "method not implemented";
+  }
+  /**
+   * implementations should return the element used to show the label of the field
+   * @returns
+   */
+  getLabel() {
+    throw "method not implemented";
+  }
+  /**
+   * implementations should return the element used to show the error on the field
+   * @returns
+   */
+  getErrorDiv() {
+    throw "method not implemented";
+  }
+  /**
+   * implementation should return the tooltip / short description div
+   */
+  getTooltipDiv() {
+    throw "method not implemented";
+  }
+  /**
+   * Implementation should return the questionMark div
+   */
+  getQuestionMarkDiv() {
+    throw "method not implemented";
+  }
+  setModel(model) {
+    super.setModel(model);
+    const state = this._model.getState();
+    this._applyState(state);
+  }
+  /**
+   * Sets the focus on component's widget.
+   */
+  setFocus() {
+    var _this$getWidget;
+    (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.focus();
+  }
+  /**
+   * applies full state of the field to the HTML. Generally done just after the model is bound to the field
+   * @param state
+   * @private
+   */
+  _applyState(state) {
+    if (state.value) {
+      this._updateValue(state.value);
+    }
+    this._updateVisible(state.visible);
+    this._updateEnabled(state.enabled);
+    this._initializeHelpContent(state);
+  }
+  _initializeHelpContent(state) {
+    // Initializing Hint ('?') and long description.
+    this._showHideLongDescriptionDiv(false);
+    if (this.getDescription()) {
+      this._addHelpIconHandler(state);
+    }
+  }
+  /**
+   *
+   * @param show If true then <div> containing tooltip(Short Description) will be shown else hidden
+   * @private
+   */
+  _showHideTooltipDiv(show) {
+    if (this.tooltip) {
+      this.toggleAttribute(this.getTooltipDiv(), show, Constants.DATA_ATTRIBUTE_VISIBLE, false);
+    }
+  }
+  /**
+   *
+   * @param show If true then <div> containing description(Long Description) will be shown
+   * @private
+   */
+  _showHideLongDescriptionDiv(show) {
+    if (this.description) {
+      this.toggleAttribute(this.description, show, Constants.DATA_ATTRIBUTE_VISIBLE, false);
+    }
+  }
+  _isTooltipAlwaysVisible() {
+    return !!this.getLayoutProperties()['tooltipVisible'];
+  }
+  /**
+   * updates html based on visible state
+   * @param visible
+   * @private
+   */
+  _updateVisible(visible) {
+    this.toggle(visible, Constants.ARIA_HIDDEN, true);
+    this.element.setAttribute(Constants.DATA_ATTRIBUTE_VISIBLE, visible + "");
+  }
+  /**
+   * udpates the html state based on enable state of the field
+   * @param enabled
+   * @private
+   */
+  _updateEnabled(enabled) {
+    if (this.getWidget()) {
+      this.toggle(enabled, Constants.ARIA_DISABLED, true);
+      this.element.setAttribute(Constants.DATA_ATTRIBUTE_ENABLED, enabled + "");
+      if (enabled === false) {
+        var _this$getWidget2, _this$getWidget3;
+        (_this$getWidget2 = this.getWidget()) == null ? void 0 : _this$getWidget2.setAttribute("disabled", "true");
+        (_this$getWidget3 = this.getWidget()) == null ? void 0 : _this$getWidget3.setAttribute(Constants.ARIA_DISABLED, "true");
+      } else {
+        var _this$getWidget4, _this$getWidget5;
+        (_this$getWidget4 = this.getWidget()) == null ? void 0 : _this$getWidget4.removeAttribute("disabled");
+        (_this$getWidget5 = this.getWidget()) == null ? void 0 : _this$getWidget5.removeAttribute(Constants.ARIA_DISABLED);
+      }
+    }
+  }
+  _updateValid(valid, state) {
+    if (this.errorDiv) {
+      this.toggle(valid, Constants.ARIA_INVALID, true);
+      this.element.setAttribute(Constants.DATA_ATTRIBUTE_VALID, valid + "");
+      if (typeof state.errorMessage !== "string" || state.errorMessage === "") {
+        const errMessage = valid === true ? '' : 'There is an error in the field';
+        this.errorDiv.innerHTML = errMessage;
+      }
+    }
+  }
+  _updateErrorMessage(errorMessage, state) {
+    if (this.errorDiv) {
+      this.errorDiv.innerHTML = state.errorMessage;
+    }
+  }
+  _updateValue(value) {
+    let inputWidget = this.getWidget();
+    if (inputWidget) {
+      inputWidget.value = value;
+    }
+  }
+  /**
+   * Shows or Hides Description Based on click of '?' mark.
+   * @private
+   */
+  _addHelpIconHandler(state) {
+    const questionMarkDiv = this.qm,
+      descriptionDiv = this.description,
+      tooltipAlwaysVisible = this._isTooltipAlwaysVisible();
+    const self = this;
+    if (questionMarkDiv && descriptionDiv) {
+      questionMarkDiv.addEventListener('click', e => {
+        e.preventDefault();
+        const longDescriptionVisibleAttribute = descriptionDiv.getAttribute(Constants.DATA_ATTRIBUTE_VISIBLE);
+        if (longDescriptionVisibleAttribute === 'false') {
+          self._showHideLongDescriptionDiv(true);
+          if (tooltipAlwaysVisible) {
+            self._showHideTooltipDiv(false);
+          }
+        } else {
+          self._showHideLongDescriptionDiv(false);
+          if (tooltipAlwaysVisible) {
+            self._showHideTooltipDiv(true);
+          }
+        }
+      });
+    }
+  }
+  getClass() {
+    return this.constructor.IS;
+  }
+  subscribe() {
+    const changeHandlerName = propName => `_update${propName[0].toUpperCase() + propName.slice(1)}`;
+    this._model.subscribe(action => {
+      let state = action.target.getState();
+      const changes = action.payload.changes;
+      changes.forEach(change => {
+        const fn = changeHandlerName(change.propertyName);
+        //@ts-ignore
+        if (typeof this[fn] === "function") {
+          //items applicable for repeatable panel
+          if ("items" === change.propertyName) {
+            //@ts-ignore
+            this[fn](change.prevValue, change.currentValue, state);
+          } else {
+            //@ts-ignore
+            this[fn](change.currentValue, state);
+          }
+        } else {
+          console.error(`changes to ${change.propertyName} are not supported. Please raise an issue`);
+        }
+      });
+    });
+  }
+  getbemBlock() {
+    throw "bemBlock not implemented";
+  }
+  getIS() {
+    throw "IS is not implemented";
+  }
+  getId() {
+    return this.getIS() + "-" + this.id;
+  }
+  addListener() {}
+  render() {
+    this.element.innerHTML = this.getHTML();
+    this.addListener();
+    this.subscribe();
+  }
+  getHTML() {
+    return `
+            <div class="${this.getbemBlock()}"
+                data-cmp-is="${this.getIS()}"
+                id="${this.getId()}"
+                data-cmp-visible="${this.isVisible()}"
+                data-cmp-enabled="${this.isEnabled()}"
+                data-cmp-adaptiveformcontainer-path="${this.getFormContainerPath()}">
+
+                ${this.renderLabel()}
+                ${this.getInputHTML()}
+                ${this.getQuestionMarkHTML()}
+                ${this.getShortDescHTML()}
+                ${this.getLongDescHTML()}
+                ${this.getErrorHTML()}
+            </div>`;
+  }
+  getInputHTML() {
+    throw "getInputHTML is not implemented";
+  }
+  renderLabel() {
+    return `${this.isLabelVisible() ? `<label id="${this.getId()}-label" for="${this.getId()}" class="${this.getbemBlock()}__label" >${this.getLabelValue()}</label>` : ""}`;
+  }
+  getQuestionMarkHTML() {
+    return `${this.getDescriptionValue() ? `<button class="${this.getbemBlock()}__questionmark" data-sly-test="${this.getDescriptionValue()}">
+        </button>` : ""}`;
+  }
+  getShortDescHTML() {
+    return `${this.isShortDescVisible() ? `<div id="${this.getId()}-shortDescription" class="${this.getbemBlock()}__shortdescription">
+                {this.getShortDescValue()}
+            </div>` : ""}`;
+  }
+  getLongDescHTML() {
+    return `<div aria-live="polite">
+                ${this.getDescriptionValue() ? `<div id="${this.getId()}-longDescription" class="${this.getbemBlock()}__longdescription"></div>` : ""}
+            </div>`;
+  }
+  getErrorHTML() {
+    return `<div id="${this.getId()}-errorMessage" class="${this.getbemBlock()}__errormessage"></div>`;
+  }
+  getDisabledHTML() {
+    return `${this.isEnabled() ? "" : ` disabled="true" `}`;
+  }
+  getReadonlyHTML() {
+    return `${this.isReadOnly() ? ` readonly="true" ` : ""}`;
+  }
+}
+
+class TextInput extends FormFieldBase {
+  getWidget() {
+    return this.element.querySelector(TextInput.selectors.widget);
+  }
+  getDescription() {
+    return this.element.querySelector(TextInput.selectors.description);
+  }
+  getLabel() {
+    return this.element.querySelector(TextInput.selectors.label);
+  }
+  getErrorDiv() {
+    return this.element.querySelector(TextInput.selectors.errorDiv);
+  }
+  getTooltipDiv() {
+    return this.element.querySelector(TextInput.selectors.tooltipDiv);
+  }
+  getQuestionMarkDiv() {
+    return this.element.querySelector(TextInput.selectors.qm);
+  }
+  addListener() {
+    var _this$getWidget, _this$getWidget2;
+    (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener('blur', e => {
+      this._model.value = e.target.value;
+      this.setInactive();
+    });
+    (_this$getWidget2 = this.getWidget()) == null ? void 0 : _this$getWidget2.addEventListener('focus', e => {
+      this.setActive();
+    });
+  }
+  getbemBlock() {
+    return TextInput.bemBlock;
+  }
+  getIS() {
+    return TextInput.IS;
+  }
+  getInputHTML() {
+    return `<input
+            class="cmp-adaptiveform-textinput__widget"
+            title="${this.isTooltipVisible() ? this.getTooltipValue() : ''}"
+            aria-label="${this.isLabelVisible() ? this.getLabelValue() : ''}"
+            type="text"
+            name="${this.getName()}"
+            value="${this.getDefault()}"
+            ${this.getDisabledHTML()}
+            ${this.getReadonlyHTML()}
+            required="${this.isRequired()}"
+            placeholder="${this.getPlaceHolder()}"
+            minlength="${this.getMinLength()}"
+            maxlength="${this.getMaxLength()}"/>`;
+  }
+}
+TextInput.NS = Constants.NS;
+TextInput.IS = "adaptiveFormTextInput";
+TextInput.bemBlock = 'cmp-adaptiveform-textinput';
+TextInput.selectors = {
+  self: "[data-" + TextInput.NS + '-is="' + TextInput.IS + '"]',
+  widget: `.${TextInput.bemBlock}__widget`,
+  label: `.${TextInput.bemBlock}__label`,
+  description: `.${TextInput.bemBlock}__longdescription`,
+  qm: `.${TextInput.bemBlock}__questionmark`,
+  errorDiv: `.${TextInput.bemBlock}__errormessage`,
+  tooltipDiv: `.${TextInput.bemBlock}__shortdescription`
+};
+
+function createCommonjsModule(fn) {
+  var module = { exports: {} };
+	return fn(module, module.exports), module.exports;
+}
+
+var _DateParser = DateParser;
+
+var getSkeleton_1 = getSkeleton;
+var parseDateTimeSkeleton_1 = parseDateTimeSkeleton;
+
+
+
+/*************************************************************************
+ * ADOBE CONFIDENTIAL
+ * ___________________
+ *
+ *  Copyright 2022 Adobe
+ *  All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe and its suppliers, if any. The intellectual
+ * and technical concepts contained herein are proprietary to Adobe
+ * and its suppliers and are protected by all applicable intellectual
+ * property laws, including trade secret and copyright laws.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe.
+ **************************************************************************/
+
+/**
+ * https://unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
+ * Credit: https://git.corp.adobe.com/dc/dfl/blob/master/src/patterns/parseDateTimeSkeleton.js
+ * Created a separate library to be used elsewhere as well.
+ */
+const DATE_TIME_REGEX = // eslint-disable-next-line max-len
+/(?:[Eec]{1,6}|G{1,5}|[Qq]{1,5}|(?:[yYur]+|U{1,5})|[ML]{1,5}|d{1,2}|D{1,3}|F{1}|[abB]{1,5}|[hkHK]{1,2}|w{1,2}|W{1}|m{1,2}|s{1,2}|[zZOvV]{1,5}|[zZOvVxX]{1,3}|S{1,3}|'(?:[^']|'')*')|[^a-zA-Z']+/g;
+
+function getSkeleton(skeleton, language) {
+  if (_DateParser.ShorthandStyles.find(type => skeleton.includes(type))) {
+    const parsed = parseDateStyle(skeleton, language);
+    const result = [];
+    const symbols = {
+      month: 'M',
+      year: 'Y',
+      day: 'd'
+    };
+    parsed.forEach(_ref => {
+      let [type, option, length] = _ref;
+
+      if (type in symbols) {
+        result.push(Array(length).fill(symbols[type]).join(''));
+      } else if (type === 'literal') {
+        result.push(option);
+      }
+    });
+    return result.join('');
+  }
+
+  return skeleton;
+}
+/**
+ *
+ * @param skeleton shorthand style for the date concatenated with shorthand style of time. The
+ * Shorthand style for both date and time is one of ['full', 'long', 'medium', 'short'].
+ * @param language {string} language to parse the date shorthand style
+ * @returns {[*,string][]}
+ */
+
+
+function parseDateStyle(skeleton, language) {
+  const options = {}; // the skeleton could have two keywords -- one for date, one for time
+
+  const styles = skeleton.split(/\s/).filter(s => s.length);
+  options.dateStyle = styles[0];
+  if (styles.length > 1) options.timeStyle = styles[1];
+  const testDate = new Date(2000, 2, 1, 2, 3, 4);
+  const parts = new Intl.DateTimeFormat(language, options).formatToParts(testDate); // oddly, the formatted month name can be different from the standalone month name
+
+  const formattedMarch = parts.find(p => p.type === 'month').value;
+  const longMarch = new Intl.DateTimeFormat(language, {
+    month: 'long'
+  }).formatToParts(testDate)[0].value;
+  const shortMarch = new Intl.DateTimeFormat(language, {
+    month: 'short'
+  }).formatToParts(testDate)[0].value;
+  const result = [];
+  parts.forEach(_ref2 => {
+    let {
+      type,
+      value
+    } = _ref2;
+    let option;
+
+    if (type === 'month') {
+      option = {
+        [formattedMarch]: skeleton === 'medium' ? 'short' : 'long',
+        [longMarch]: 'long',
+        [shortMarch]: 'short',
+        '03': '2-digit',
+        '3': 'numeric'
+      }[value];
+    }
+
+    if (type === 'year') option = {
+      '2000': 'numeric',
+      '00': '2-digit'
+    }[value];
+    if (['day', 'hour', 'minute', 'second'].includes(type)) option = value.length === 2 ? '2-digit' : 'numeric';
+    if (type === 'literal') option = value;
+    if (type === 'dayPeriod') option = 'short';
+    result.push([type, option, value.length]);
+  });
+  return result;
+}
+/**
+ * Parse Date time skeleton into Intl.DateTimeFormatOptions parts
+ * Ref: https://unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
+ */
+
+
+function parseDateTimeSkeleton(skeleton, language) {
+  if (_DateParser.ShorthandStyles.find(type => skeleton.includes(type))) {
+    return parseDateStyle(skeleton, language);
+  }
+
+  const result = [];
+  skeleton.replace(DATE_TIME_REGEX, match => {
+    const len = match.length;
+
+    switch (match[0]) {
+      // Era
+      case 'G':
+        result.push(['era', len === 4 ? 'long' : len === 5 ? 'narrow' : 'short', len]);
+        break;
+      // Year
+
+      case 'y':
+        result.push(['year', len === 2 ? '2-digit' : 'numeric', len]);
+        break;
+
+      case 'Y':
+      case 'u':
+      case 'U':
+      case 'r':
+        throw new RangeError('`Y/u/U/r` (year) patterns are not supported, use `y` instead');
+      // Quarter
+
+      case 'q':
+      case 'Q':
+        throw new RangeError('`q/Q` (quarter) patterns are not supported');
+      // Month
+
+      case 'M':
+      case 'L':
+        result.push(['month', ['numeric', '2-digit', 'short', 'long', 'narrow'][len - 1], len]);
+        break;
+      // Week
+
+      case 'w':
+      case 'W':
+        throw new RangeError('`w/W` (week) patterns are not supported');
+
+      case 'd':
+        result.push(['day', ['numeric', '2-digit'][len - 1], len]);
+        break;
+
+      case 'D':
+      case 'F':
+      case 'g':
+        throw new RangeError('`D/F/g` (day) patterns are not supported, use `d` instead');
+      // Weekday
+
+      case 'E':
+        result.push(['weekday', ['short', 'short', 'short', 'long', 'narrow', 'narrow'][len - 1], len]);
+        break;
+
+      case 'e':
+        if (len < 4) {
+          throw new RangeError('`e..eee` (weekday) patterns are not supported');
+        }
+
+        result.push(['weekday', ['short', 'long', 'narrow', 'short'][len - 4], len]);
+        break;
+
+      case 'c':
+        if (len < 3 || len > 5) {
+          throw new RangeError('`c, cc, cccccc` (weekday) patterns are not supported');
+        }
+
+        result.push(['weekday', ['short', 'long', 'narrow', 'short'][len - 3], len]);
+        break;
+      // Period
+
+      case 'a':
+        // AM, PM
+        result.push(['hour12', true, 1]);
+        break;
+
+      case 'b': // am, pm, noon, midnight
+
+      case 'B':
+        // flexible day periods
+        throw new RangeError('`b/B` (period) patterns are not supported, use `a` instead');
+      // Hour
+
+      case 'h':
+        result.push(['hourCycle', 'h12']);
+        result.push(['hour', ['numeric', '2-digit'][len - 1], len]);
+        break;
+
+      case 'H':
+        result.push(['hourCycle', 'h23', 1]);
+        result.push(['hour', ['numeric', '2-digit'][len - 1], len]);
+        break;
+
+      case 'K':
+        result.push(['hourCycle', 'h11', 1]);
+        result.push(['hour', ['numeric', '2-digit'][len - 1], len]);
+        break;
+
+      case 'k':
+        result.push(['hourCycle', 'h24', 1]);
+        result.push(['hour', ['numeric', '2-digit'][len - 1], len]);
+        break;
+
+      case 'j':
+      case 'J':
+      case 'C':
+        throw new RangeError('`j/J/C` (hour) patterns are not supported, use `h/H/K/k` instead');
+      // Minute
+
+      case 'm':
+        result.push(['minute', ['numeric', '2-digit'][len - 1], len]);
+        break;
+      // Second
+
+      case 's':
+        result.push(['second', ['numeric', '2-digit'][len - 1], len]);
+        break;
+
+      case 'S':
+        result.push(['fractionalSecondDigits', len, len]);
+        break;
+
+      case 'A':
+        throw new RangeError('`S/A` (millisecond) patterns are not supported, use `s` instead');
+      // Zone
+
+      case 'O':
+        // timeZone GMT-8 or GMT-08:00
+        result.push(['timeZoneName', len < 4 ? 'shortOffset' : 'longOffset', len]);
+        result.push(['x-timeZoneName', len < 4 ? 'O' : 'OOOO', len]);
+        break;
+
+      case 'X': // 1, 2, 3, 4: The ISO8601 varios formats
+
+      case 'x': // 1, 2, 3, 4: The ISO8601 varios formats
+
+      case 'Z':
+        // 1..3, 4, 5: The ISO8601 varios formats
+        // Z, ZZ, ZZZ should produce -0800
+        // ZZZZ should produce GMT-08:00
+        // ZZZZZ should produce -8:00 or -07:52:58
+        result.push(['timeZoneName', 'longOffset', 1]);
+        result.push(['x-timeZoneName', match, 1]);
+        break;
+
+      case 'z': // 1..3, 4: specific non-location format
+
+      case 'v': // 1, 4: generic non-location format
+
+      case 'V':
+        // 1, 2, 3, 4: time zone ID or city
+        throw new RangeError('z/v/V` (timeZone) patterns are not supported, use `X/x/Z/O` instead');
+
+      case '\'':
+        result.push(['literal', match.slice(1, -1).replace(/''/g, '\''), -1]);
+        break;
+
+      default:
+        result.push(['literal', match, -1]);
+    }
+
+    return '';
+  });
+  return result;
+}
+
+var SkeletonParser = /*#__PURE__*/Object.defineProperty({
+	getSkeleton: getSkeleton_1,
+	parseDateTimeSkeleton: parseDateTimeSkeleton_1
+}, '__esModule', {value: true});
+
+var DateParser = createCommonjsModule(function (module, exports) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ShorthandStyles = void 0;
+exports.adjustTimeZone = adjustTimeZone;
+exports.datetimeToNumber = datetimeToNumber;
+exports.formatDate = formatDate;
+exports.numberToDatetime = numberToDatetime;
+exports.offsetMS = offsetMS;
+exports.offsetMSFallback = offsetMSFallback;
+exports.parseDate = parseDate;
+exports.parseDefaultDate = parseDefaultDate;
+
+
+
+/*************************************************************************
+ * ADOBE CONFIDENTIAL
+ * ___________________
+ *
+ *  Copyright 2022 Adobe
+ *  All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe and its suppliers, if any. The intellectual
+ * and technical concepts contained herein are proprietary to Adobe
+ * and its suppliers and are protected by all applicable intellectual
+ * property laws, including trade secret and copyright laws.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe.
+ **************************************************************************/
+
+/**
+ * Credit: https://git.corp.adobe.com/dc/dfl/blob/master/src/patterns/dates.js
+ */
+// Test Japanese full/half width character support
+// get the localized month names resulting from a given pattern
+const twelveMonths = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(m => new Date(2000, m, 1));
+/**
+ * returns the name of all the months for a given locale and given Date Format Settings
+ * @param locale {string}
+ * @param options {string} instance of Intl.DateTimeFormatOptions
+ */
+
+function monthNames(locale, options) {
+  return twelveMonths.map(month => {
+    const parts = new Intl.DateTimeFormat(locale, options).formatToParts(month);
+    const m = parts.find(p => p.type === 'month');
+    return m && m.value;
+  });
+}
+/**
+ * return an array of digits used by a given locale
+ * @param locale {string}
+ */
+
+
+function digitChars(locale) {
+  return new Intl.NumberFormat(locale, {
+    style: 'decimal',
+    useGrouping: false
+  }).format(9876543210).split('').reverse();
+}
+/**
+ * returns the calendar name used in a given locale
+ * @param locale {string}
+ */
+
+
+function calendarName(locale) {
+  var _parts$find;
+
+  const parts = new Intl.DateTimeFormat(locale, {
+    era: 'short'
+  }).formatToParts(new Date());
+  const era = (_parts$find = parts.find(p => p.type === 'era')) === null || _parts$find === void 0 ? void 0 : _parts$find.value;
+  return era === 'هـ' ? 'islamic' : 'gregory';
+}
+/**
+ * returns the representation of the time of day for a given language
+ * @param language {string}
+ */
+
+
+function getDayPeriod(language) {
+  const morning = new Date(2000, 1, 1, 1, 1, 1);
+  const afternoon = new Date(2000, 1, 1, 16, 1, 1);
+  const df = new Intl.DateTimeFormat(language, {
+    dateStyle: 'full',
+    timeStyle: 'full'
+  });
+  const am = df.formatToParts(morning).find(p => p.type === 'dayPeriod');
+  const pm = df.formatToParts(afternoon).find(p => p.type === 'dayPeriod');
+  if (!am || !pm) return null;
+  return {
+    regex: `(${am.value}|${pm.value})`,
+    fn: (period, obj) => obj.hour += period === pm.value ? 12 : 0
+  };
+}
+/**
+ * get the offset in MS, given a date and timezone
+ * @param dateObj {Date}
+ * @param timeZone {string}
+ */
+
+
+function offsetMS(dateObj, timeZone) {
+  let tzOffset;
+
+  try {
+    tzOffset = new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      timeZoneName: 'longOffset'
+    }).format(dateObj);
+  } catch (e) {
+    return offsetMSFallback(dateObj, timeZone);
+  }
+
+  const offset = /GMT([+\-−])?(\d{1,2}):?(\d{0,2})?/.exec(tzOffset);
+  if (!offset) return 0;
+  const [sign, hours, minutes] = offset.slice(1);
+  const nHours = isNaN(parseInt(hours)) ? 0 : parseInt(hours);
+  const nMinutes = isNaN(parseInt(minutes)) ? 0 : parseInt(minutes);
+  const result = (nHours * 60 + nMinutes) * 60 * 1000;
+  return sign === '-' ? -result : result;
+}
+
+function getTimezoneOffsetFrom(otherTimezone) {
+  var date = new Date();
+
+  function objFromStr(str) {
+    var array = str.replace(":", " ").split(" ");
+    return {
+      day: parseInt(array[0]),
+      hour: parseInt(array[1]),
+      minute: parseInt(array[2])
+    };
+  }
+
+  var str = date.toLocaleString('en-US', {
+    timeZone: otherTimezone,
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false
+  });
+  var other = objFromStr(str);
+  str = date.toLocaleString('en-US', {
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false
+  });
+  var myLocale = objFromStr(str);
+  var otherOffset = other.day * 24 * 60 + other.hour * 60 + other.minute; // utc date + otherTimezoneDifference
+
+  var myLocaleOffset = myLocale.day * 24 * 60 + myLocale.hour * 60 + myLocale.minute; // utc date + myTimeZoneDifference
+  // (utc date + otherZoneDifference) - (utc date + myZoneDifference) - (-1 * myTimeZoneDifference)
+
+  return otherOffset - myLocaleOffset - date.getTimezoneOffset();
+}
+
+function offsetMSFallback(dateObj, timezone) {
+  //const defaultOffset = dateObj.getTimezoneOffset();
+  const timezoneOffset = getTimezoneOffsetFrom(timezone);
+  return timezoneOffset * 60 * 1000;
+}
+/**
+ * adjust from the default JavaScript timezone to the default timezone
+ * @param dateObj {Date}
+ * @param timeZone {string}
+ */
+
+
+function adjustTimeZone(dateObj, timeZone) {
+  if (dateObj === null) return null; // const defaultOffset = new Intl.DateTimeFormat('en-US', { timeZoneName: 'longOffset'}).format(dateObj);
+
+  let baseDate = dateObj.getTime() - dateObj.getTimezoneOffset() * 60 * 1000;
+  const offset = offsetMS(dateObj, timeZone);
+  offsetMSFallback(dateObj, timeZone);
+  baseDate += -offset; // get the offset for the default JS environment
+  // return days since the epoch
+
+  return new Date(baseDate);
+}
+/**
+ * Our script object model treats dates as numbers where the integer portion is days since the epoch,
+ * the fractional portion is the number hours in the day
+ * @param dateObj {Date}
+ * @returns {number}
+ */
+
+
+function datetimeToNumber(dateObj) {
+  if (dateObj === null) return 0; // return days since the epoch
+
+  return dateObj.getTime() / (1000 * 60 * 60 * 24);
+}
+/**
+ * Our script object model treats dates as numbers where the integer portion is days since the epoch,
+ * the fractional portion is the number hours in the day
+ * @param num
+ * @returns {Date}
+ */
+
+
+function numberToDatetime(num) {
+  return new Date(Math.round(num * 1000 * 60 * 60 * 24));
+}
+/**
+ * in some cases, DateTimeFormat doesn't respect the 'numeric' vs. '2-digit' setting
+ * for time values. The function corrects that
+ * @param formattedParts instance of Intl.DateTimeFormatPart[]
+ * @param parsed
+ */
+
+
+function fixDigits(formattedParts, parsed) {
+  ['hour', 'minute', 'second'].forEach(type => {
+    const defn = formattedParts.find(f => f.type === type);
+    if (!defn) return;
+    const fmt = parsed.find(pair => pair[0] === type)[1];
+    if (fmt === '2-digit' && defn.value.length === 1) defn.value = `0${defn.value}`;
+    if (fmt === 'numeric' && defn.value.length === 2 && defn.value.charAt(0) === '0') defn.value = defn.value.slice(1);
+  });
+}
+
+function fixYear(formattedParts, parsed) {
+  // two digit years are handled differently in DateTimeFormat. 00 becomes 1900
+  // providing a two digit year 0010 gets formatted to 10 and when parsed becomes 1910
+  // Hence we need to pad the year with 0 as required by the skeleton and mentioned in
+  // unicode. https://www.unicode.org/reports/tr35/tr35-dates.html#dfst-year
+  const defn = formattedParts.find(f => f.type === 'year');
+  if (!defn) return; // eslint-disable-next-line no-unused-vars
+
+  const chars = parsed.find(pair => pair[0] === 'year')[2];
+
+  while (defn.value.length < chars) {
+    defn.value = `0${defn.value}`;
+  }
+}
+/**
+ *
+ * @param dateValue {Date}
+ * @param language {string}
+ * @param skeleton {string}
+ * @param timeZone {string}
+ * @returns {T}
+ */
+
+
+function formatDateToParts(dateValue, language, skeleton, timeZone) {
+  // DateTimeFormat renames some of the options in its formatted output
+  //@ts-ignore
+  const mappings = key => ({
+    hour12: 'dayPeriod',
+    fractionalSecondDigits: 'fractionalSecond'
+  })[key] || key; // produces an array of name/value pairs of skeleton parts
+
+
+  const allParameters = (0, SkeletonParser.parseDateTimeSkeleton)(skeleton, language);
+  allParameters.push(['timeZone', timeZone]);
+  const parsed = allParameters.filter(p => !p[0].startsWith('x-'));
+  const nonStandard = allParameters.filter(p => p[0].startsWith('x-')); // reduce to a set of options that can be used to format
+
+  const options = Object.fromEntries(parsed);
+  delete options.literal;
+  const df = new Intl.DateTimeFormat(language, options); // formattedParts will have all the pieces we need for our date -- but not in the correct order
+
+  const formattedParts = df.formatToParts(dateValue);
+  fixDigits(formattedParts, allParameters);
+  fixYear(formattedParts, parsed); // iterate through the original parsed components and use its ordering and literals,
+  // and add  the formatted pieces
+
+  return parsed.reduce((result, cur) => {
+    if (cur[0] === 'literal') result.push(cur);else {
+      const v = formattedParts.find(p => p.type === mappings(cur[0]));
+
+      if (v && v.type === 'timeZoneName') {
+        const tz = nonStandard.find(p => p[0] === 'x-timeZoneName')[1];
+        const category = tz[0];
+
+        if (category === 'Z') {
+          if (tz.length < 4) {
+            // handle 'Z', 'ZZ', 'ZZZ' Time Zone: ISO8601 basic hms? / RFC 822
+            v.value = v.value.replace(/(GMT|:)/g, '');
+            if (v.value === '') v.value = '+0000';
+          } else if (tz.length === 5) {
+            // 'ZZZZZ' Time Zone: ISO8601 extended hms?
+            if (v.value === 'GMT') v.value = 'Z';else v.value = v.value.replace(/GMT/, '');
+          }
+        }
+
+        if (category === 'X' || category === 'x') {
+          if (tz.length === 1) {
+            // 'X' ISO8601 basic hm?, with Z for 0
+            // -08, +0530, Z
+            // 'x' ISO8601 basic hm?, without Z for 0
+            v.value = v.value.replace(/(GMT|:(00)?)/g, '');
+          }
+
+          if (tz.length === 2) {
+            // 'XX' ISO8601 basic hm, with Z
+            // -0800, Z
+            // 'xx' ISO8601 basic hm, without Z
+            v.value = v.value.replace(/(GMT|:)/g, '');
+          }
+
+          if (tz.length === 3) {
+            // 'XXX' ISO8601 extended hm, with Z
+            // -08:00, Z
+            // 'xxx' ISO8601 extended hm, without Z
+            v.value = v.value.replace(/GMT/g, '');
+          }
+
+          if (category === 'X' && v.value === '') v.value = 'Z';
+        } else if (tz === 'O') {
+          // eliminate 'GMT', leading and trailing zeros
+          v.value = v.value.replace(/GMT/g, '').replace(/0(\d+):/, '$1:').replace(/:00/, '');
+          if (v.value === '') v.value = '+0';
+        }
+      }
+
+      if (v) result.push([v.type, v.value]);
+    }
+    return result;
+  }, []);
+}
+
+const ShorthandStyles = ["full", "long", "medium", "short"];
+/**
+ *
+ * @param dateValue {Date}
+ * @param language {string}
+ * @param skeleton {string}
+ * @param timeZone {string}
+ */
+
+exports.ShorthandStyles = ShorthandStyles;
+
+function formatDate(dateValue, language, skeleton, timeZone) {
+  if (ShorthandStyles.find(type => skeleton.includes(type))) {
+    const options = {
+      timeZone
+    }; // the skeleton could have two keywords -- one for date, one for time
+
+    const parts = skeleton.split(/\s/).filter(s => s.length);
+
+    if (ShorthandStyles.indexOf(parts[0]) > -1) {
+      options.dateStyle = parts[0];
+    }
+
+    if (parts.length > 1 && ShorthandStyles.indexOf(parts[1]) > -1) {
+      options.timeStyle = parts[1];
+    }
+
+    return new Intl.DateTimeFormat(language, options).format(dateValue);
+  }
+
+  const parts = formatDateToParts(dateValue, language, skeleton, timeZone);
+  return parts.map(p => p[1]).join('');
+}
+/**
+ *
+ * @param dateString {string}
+ * @param language {string}
+ * @param skeleton {string}
+ * @param timeZone {string}
+ */
+
+
+function parseDate(dateString, language, skeleton, timeZone) {
+  let bUseUTC = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+  // start by getting all the localized parts of a date/time picture:
+  // digits, calendar name
+  const lookups = [];
+  const regexParts = [];
+  const calendar = calendarName(language);
+  const digits = digitChars(language);
+  const twoDigit = `([${digits[0]}-${digits[9]}]{1,2})`;
+  const threeDigit = `([${digits[0]}-${digits[9]}]{1,3})`;
+  const fourDigit = `([${digits[0]}-${digits[9]}]{1,4})`;
+  let hourCycle = 'h12';
+  let _bUseUTC = bUseUTC;
+  let _setFullYear = false; // functions to process the results of the regex match
+
+  const isSeparator = str => str.length === 1 && ':-/.'.includes(str);
+
+  const monthNumber = str => getNumber(str) - 1;
+
+  const getNumber = str => str.split('').reduce((total, digit) => total * 10 + digits.indexOf(digit), 0);
+
+  const yearNumber = templateDigits => str => {
+    let year = getNumber(str); //todo: align with AF
+
+    year = year < 100 && templateDigits === 2 ? year + 2000 : year;
+    if (calendar === 'islamic') year = Math.ceil(year * 0.97 + 622);
+
+    if (templateDigits > 2 && year < 100) {
+      _setFullYear = true;
+    }
+
+    return year;
+  };
+
+  const monthLookup = list => month => list.indexOf(month);
+
+  const parsed = (0, SkeletonParser.parseDateTimeSkeleton)(skeleton, language);
+  const months = monthNames(language, Object.fromEntries(parsed)); // build up a regex expression that identifies each option in the skeleton
+  // We build two parallel structures:
+  // 1. the regex expression that will extract parts of the date/time
+  // 2. a lookup array that will convert the matched results into date/time values
+
+  parsed.forEach(_ref => {
+    let [option, value, len] = _ref;
+
+    // use a generic regex pattern for all single-character separator literals.
+    // Then we'll be forgiving when it comes to separators: / vs - vs : etc
+    if (option === 'literal') {
+      if (isSeparator(value)) regexParts.push(`[^${digits[0]}-${digits[9]}]`);else regexParts.push(value);
+    } else if (option === 'month' && ['numeric', '2-digit'].includes(value)) {
+      regexParts.push(twoDigit);
+      lookups.push(['month', monthNumber]);
+    } else if (option === 'month' && ['formatted', 'long', 'short', 'narrow'].includes(value)) {
+      regexParts.push(`(${months.join('|')})`);
+      lookups.push(['month', monthLookup(months)]);
+    } else if (['day', 'minute', 'second'].includes(option)) {
+      if (option === 'minute' || option === 'second') {
+        _bUseUTC = false;
+      }
+
+      regexParts.push(twoDigit);
+      lookups.push([option, getNumber]);
+    } else if (option === 'fractionalSecondDigits') {
+      _bUseUTC = false;
+      regexParts.push(threeDigit);
+      lookups.push([option, (v, obj) => obj.fractionalSecondDigits + getNumber(v)]);
+    } else if (option === 'hour') {
+      _bUseUTC = false;
+      regexParts.push(twoDigit);
+      lookups.push([option, (v, obj) => obj.hour + getNumber(v)]);
+    } else if (option === 'year') {
+      regexParts.push('numeric' === value ? fourDigit : twoDigit);
+      lookups.push(['year', yearNumber(len)]);
+    } else if (option === 'dayPeriod') {
+      _bUseUTC = false;
+      const dayPeriod = getDayPeriod(language);
+
+      if (dayPeriod) {
+        regexParts.push(dayPeriod.regex);
+        lookups.push(['hour', dayPeriod.fn]);
+      } // Any other part that we don't need, we'll just add a non-greedy consumption
+
+    } else if (option === 'hourCycle') {
+      _bUseUTC = false;
+      hourCycle = value;
+    } else if (option === 'x-timeZoneName') {
+      _bUseUTC = false; // we handle only the GMT offset picture
+
+      regexParts.push('(?:GMT|UTC|Z)?([+\\-−0-9]{0,3}:?[0-9]{0,2})');
+      lookups.push([option, (v, obj) => {
+        _bUseUTC = true; // v could be undefined if we're on GMT time
+
+        if (!v) return; // replace the unicode minus, then extract hours [and minutes]
+
+        const timeParts = v.replace(/−/, '-').match(/([+\-\d]{2,3}):?(\d{0,2})/);
+        const hours = timeParts[1] * 1;
+        obj.hour -= hours;
+        const mins = timeParts.length > 2 ? timeParts[2] * 1 : 0;
+        obj.minute -= hours < 0 ? -mins : mins;
+      }]);
+    } else if (option !== 'timeZoneName') {
+      _bUseUTC = false;
+      regexParts.push('.+?');
+    }
+
+    return regexParts;
+  }, []);
+  const regex = new RegExp(regexParts.join(''));
+  const match = dateString.match(regex);
+  if (match === null) return dateString; // now loop through all the matched pieces and build up an object we'll use to create a Date object
+
+  const dateObj = {
+    year: 1972,
+    month: 0,
+    day: 1,
+    hour: 0,
+    minute: 0,
+    second: 0,
+    fractionalSecondDigits: 0
+  };
+  match.slice(1).forEach((m, index) => {
+    const [element, func] = lookups[index];
+    dateObj[element] = func(m, dateObj);
+  });
+  if (hourCycle === 'h24' && dateObj.hour === 24) dateObj.hour = 0;
+  if (hourCycle === 'h12' && dateObj.hour === 12) dateObj.hour = 0;
+
+  if (_bUseUTC) {
+    const utcDate = new Date(Date.UTC(dateObj.year, dateObj.month, dateObj.day, dateObj.hour, dateObj.minute, dateObj.second, dateObj.fractionalSecondDigits));
+
+    if (_setFullYear) {
+      utcDate.setUTCFullYear(dateObj.year);
+    }
+
+    return utcDate;
+  }
+
+  const jsDate = new Date(dateObj.year, dateObj.month, dateObj.day, dateObj.hour, dateObj.minute, dateObj.second, dateObj.fractionalSecondDigits);
+
+  if (_setFullYear) {
+    jsDate.setFullYear(dateObj.year);
+  }
+
+  return timeZone == null ? jsDate : adjustTimeZone(jsDate, timeZone);
+}
+
+function parseDefaultDate(dateString, language, bUseUTC) {
+  return parseDate(dateString, language, 'short', null, false);
+}
+});
+
+var date = createCommonjsModule(function (module, exports) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "formatDate", {
+  enumerable: true,
+  get: function () {
+    return _DateParser.formatDate;
+  }
+});
+Object.defineProperty(exports, "getSkeleton", {
+  enumerable: true,
+  get: function () {
+    return SkeletonParser.getSkeleton;
+  }
+});
+Object.defineProperty(exports, "parseDate", {
+  enumerable: true,
+  get: function () {
+    return _DateParser.parseDate;
+  }
+});
+});
+
+var lib = createCommonjsModule(function (module, exports) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "formatDate", {
+  enumerable: true,
+  get: function () {
+    return date.formatDate;
+  }
+});
+Object.defineProperty(exports, "getSkeleton", {
+  enumerable: true,
+  get: function () {
+    return date.getSkeleton;
+  }
+});
+Object.defineProperty(exports, "parseDate", {
+  enumerable: true,
+  get: function () {
+    return date.parseDate;
+  }
+});
+});
+
+var t = {
+    TYPE_NUMBER: 0,
+    TYPE_ANY: 1,
+    TYPE_STRING: 2,
+    TYPE_ARRAY: 3,
+    TYPE_OBJECT: 4,
+    TYPE_BOOLEAN: 5,
+    TYPE_EXPREF: 6,
+    TYPE_NULL: 7,
+    TYPE_ARRAY_NUMBER: 8,
+    TYPE_ARRAY_STRING: 9,
+    TYPE_CLASS: 10,
+    TYPE_ARRAY_ARRAY: 11
+  },
+  e = {
+    TOK_EOF: "EOF",
+    TOK_UNQUOTEDIDENTIFIER: "UnquotedIdentifier",
+    TOK_QUOTEDIDENTIFIER: "QuotedIdentifier",
+    TOK_RBRACKET: "Rbracket",
+    TOK_RPAREN: "Rparen",
+    TOK_COMMA: "Comma",
+    TOK_COLON: "Colon",
+    TOK_CONCATENATE: "Concatenate",
+    TOK_RBRACE: "Rbrace",
+    TOK_NUMBER: "Number",
+    TOK_CURRENT: "Current",
+    TOK_GLOBAL: "Global",
+    TOK_FIELD: "Field",
+    TOK_EXPREF: "Expref",
+    TOK_PIPE: "Pipe",
+    TOK_OR: "Or",
+    TOK_AND: "And",
+    TOK_ADD: "Add",
+    TOK_SUBTRACT: "Subtract",
+    TOK_MULTIPLY: "Multiply",
+    TOK_POWER: "Power",
+    TOK_UNION: "Union",
+    TOK_DIVIDE: "Divide",
+    TOK_EQ: "EQ",
+    TOK_GT: "GT",
+    TOK_LT: "LT",
+    TOK_GTE: "GTE",
+    TOK_LTE: "LTE",
+    TOK_NE: "NE",
+    TOK_FLATTEN: "Flatten",
+    TOK_STAR: "Star",
+    TOK_FILTER: "Filter",
+    TOK_DOT: "Dot",
+    TOK_NOT: "Not",
+    TOK_LBRACE: "Lbrace",
+    TOK_LBRACKET: "Lbracket",
+    TOK_LPAREN: "Lparen",
+    TOK_LITERAL: "Literal"
+  };
+const {
+    TYPE_NUMBER: r,
+    TYPE_ANY: n,
+    TYPE_STRING: s,
+    TYPE_ARRAY: i,
+    TYPE_OBJECT: u,
+    TYPE_BOOLEAN: o,
+    TYPE_EXPREF: c,
+    TYPE_NULL: a,
+    TYPE_ARRAY_NUMBER: l,
+    TYPE_ARRAY_STRING: h,
+    TYPE_CLASS: _,
+    TYPE_ARRAY_ARRAY: p
+  } = t,
+  {
+    TOK_EXPREF: T
+  } = e,
+  E = {
+    [r]: "number",
+    [n]: "any",
+    [s]: "string",
+    [i]: "array",
+    [u]: "object",
+    [o]: "boolean",
+    [c]: "expression",
+    [a]: "null",
+    [l]: "Array<number>",
+    [h]: "Array<string>",
+    [_]: "class",
+    [p]: "Array<array>"
+  };
+function f(t, e = !0) {
+  if (null === t) return a;
+  let n = t;
+  if (e) {
+    if ("function" != typeof t.valueOf) return u;
+    n = t.valueOf.call(t);
+  }
+  switch (Object.prototype.toString.call(n)) {
+    case "[object String]":
+      return s;
+    case "[object Number]":
+      return r;
+    case "[object Array]":
+      return i;
+    case "[object Boolean]":
+      return o;
+    case "[object Null]":
+      return a;
+    case "[object Object]":
+      return n.jmespathType === T ? c : u;
+    default:
+      return u;
+  }
+}
+function d(t) {
+  return [f(t), f(t, !1)];
+}
+function y(t, e, c, T, f, g) {
+  const O = t[0];
+  if (-1 !== e.findIndex(t => t === n || O === t)) return c;
+  let R = !1;
+  if ((O === u || 1 === e.length && e[0] === _) && (R = !0), O === i && 1 === e.length && e[0] === u && (R = !0), e.includes(p)) {
+    if (O === i && (c.forEach(t => {
+      t instanceof Array || (R = !0);
+    }), !R)) return c;
+    R = !0;
+  }
+  if (R) throw new Error(`TypeError: ${T} expected argument to be type ${E[e[0]]} but received type ${E[O]} instead.`);
+  let N = -1;
+  if (O === i && e.includes(h) && e.includes(l) && (N = c.length > 0 && "string" == typeof c[0] ? h : l), -1 === N && [h, l, i].includes(O) && (N = e.find(t => [h, l, i].includes(t))), -1 === N && ([N] = e), N === n) return c;
+  if (N === h || N === l || N === i) {
+    if (N === i) return O === l || O === h ? c : null === c ? [] : [c];
+    const _e2 = N === l ? r : s;
+    if (O === i) {
+      const _t2 = c.slice();
+      for (let r = 0; r < _t2.length; r += 1) {
+        const n = d(_t2[r]);
+        _t2[r] = y(n, [_e2], _t2[r], T, f, g);
+      }
+      return _t2;
+    }
+    if ([r, s, a, o].includes(_e2)) return [y(t, [_e2], c, T, f, g)];
+  } else {
+    if (N === r) return [s, o, a].includes(O) ? f(c) : 0;
+    if (N === s) return O === a || O === u ? "" : g(c);
+    if (N === o) return !!c;
+    if (N === u && t[1] === u) return c;
+  }
+  throw new Error("unhandled argument");
+}
+function g(t) {
+  return null !== t && "[object Array]" === Object.prototype.toString.call(t);
+}
+function O(t) {
+  return null !== t && "[object Object]" === Object.prototype.toString.call(t);
+}
+function R(t) {
+  return null == t ? t : g(t) ? t.map(t => R(t)) : "function" != typeof t.valueOf ? t : t.valueOf();
+}
+function N(t, e) {
+  const r = R(t),
+    n = R(e);
+  if (r === n) return !0;
+  if (Object.prototype.toString.call(r) !== Object.prototype.toString.call(n)) return !1;
+  if (!0 === g(r)) {
+    if (r.length !== n.length) return !1;
+    for (let _t3 = 0; _t3 < r.length; _t3 += 1) if (!1 === N(r[_t3], n[_t3])) return !1;
+    return !0;
+  }
+  if (!0 === O(r)) {
+    const _t4 = {};
+    for (const _e3 in r) if (hasOwnProperty.call(r, _e3)) {
+      if (!1 === N(r[_e3], n[_e3])) return !1;
+      _t4[_e3] = !0;
+    }
+    for (const _e4 in n) if (hasOwnProperty.call(n, _e4) && !0 !== _t4[_e4]) return !1;
+    return !0;
+  }
+  return !1;
+}
+const {
+    TOK_CURRENT: P,
+    TOK_GLOBAL: m,
+    TOK_EXPREF: Y,
+    TOK_PIPE: v,
+    TOK_EQ: A,
+    TOK_GT: K,
+    TOK_LT: I,
+    TOK_GTE: S,
+    TOK_LTE: b,
+    TOK_NE: x,
+    TOK_FLATTEN: U
+  } = e,
+  {
+    TYPE_STRING: M,
+    TYPE_ARRAY_STRING: w,
+    TYPE_ARRAY: L
+  } = t;
+function B(t) {
+  if (null === t) return !0;
+  const e = R(t);
+  if ("" === e || !1 === e || null === e) return !0;
+  if (g(e) && 0 === e.length) return !0;
+  if (O(e)) {
+    for (const _t5 in e) if (Object.prototype.hasOwnProperty.call(e, _t5)) return !1;
+    return !0;
+  }
+  return !e;
+}
+class k {
+  constructor(t, e, r, n, s, i) {
+    this.runtime = t, this.globals = e, this.toNumber = r, this.toString = n, this.debug = s, this.language = i;
+  }
+  search(t, e) {
+    return this.visit(t, e);
+  }
+  visit(t, e) {
+    const r = t && {
+      Field: (t, e) => {
+        if (null !== e && (O(e) || g(e))) {
+          let r = e[t.name];
+          if ("function" == typeof r && (r = void 0), void 0 === r) {
+            try {
+              this.debug.push(`Failed to find: '${t.name}'`);
+              const _r = Object.keys(e).map(t => `'${t}'`).toString();
+              _r.length && this.debug.push(`Available fields: ${_r}`);
+            } catch (t) {}
+            return null;
+          }
+          return r;
+        }
+        return null;
+      },
+      Subexpression: (t, e) => {
+        let r = this.visit(t.children[0], e);
+        for (let _e5 = 1; _e5 < t.children.length; _e5 += 1) if (r = this.visit(t.children[1], r), null === r) return null;
+        return r;
+      },
+      IndexExpression: (t, e) => {
+        const r = this.visit(t.children[0], e);
+        return this.visit(t.children[1], r);
+      },
+      Index: (t, e) => {
+        if (g(e)) {
+          let r = this.toNumber(this.visit(t.value, e));
+          r < 0 && (r = e.length + r);
+          const n = e[r];
+          return void 0 === n ? (this.debug.push(`Index ${r} out of range`), null) : n;
+        }
+        if (O(e)) {
+          const r = this.toString(this.visit(t.value, e)),
+            n = e[r];
+          return void 0 === n ? (this.debug.push(`Key ${r} does not exist`), null) : n;
+        }
+        return this.debug.push(`left side of index expression ${e} is not an array or object.`), null;
+      },
+      Slice: (t, e) => {
+        if (!g(e)) return null;
+        const r = t.children.slice(0).map(t => null != t ? this.toNumber(this.visit(t, e)) : null),
+          n = this.computeSliceParams(e.length, r),
+          [s, i, u] = n,
+          o = [];
+        if (u > 0) for (let _t6 = s; _t6 < i; _t6 += u) o.push(e[_t6]);else for (let _t7 = s; _t7 > i; _t7 += u) o.push(e[_t7]);
+        return o;
+      },
+      Projection: (t, e) => {
+        const r = this.visit(t.children[0], e);
+        if (!g(r)) return null;
+        const n = [];
+        return r.forEach(e => {
+          const r = this.visit(t.children[1], e);
+          null !== r && n.push(r);
+        }), n;
+      },
+      ValueProjection: (t, e) => {
+        const r = this.visit(t.children[0], e);
+        if (!O(R(r))) return null;
+        const n = [];
+        return Object.values(r).forEach(e => {
+          const r = this.visit(t.children[1], e);
+          null !== r && n.push(r);
+        }), n;
+      },
+      FilterProjection: (t, e) => {
+        const r = this.visit(t.children[0], e);
+        if (!g(r)) return null;
+        const n = r.filter(e => !B(this.visit(t.children[2], e))),
+          s = [];
+        return n.forEach(e => {
+          const r = this.visit(t.children[1], e);
+          null !== r && s.push(r);
+        }), s;
+      },
+      Comparator: (t, e) => {
+        const r = this.visit(t.children[0], e),
+          n = this.visit(t.children[1], e);
+        if (t.name === A) return N(r, n);
+        if (t.name === x) return !N(r, n);
+        if (t.name === K) return r > n;
+        if (t.name === S) return r >= n;
+        if (t.name === I) return r < n;
+        if (t.name === b) return r <= n;
+        throw new Error(`Unknown comparator: ${t.name}`);
+      },
+      [U]: (t, e) => {
+        const r = this.visit(t.children[0], e);
+        if (!g(r)) return null;
+        const n = [];
+        return r.forEach(t => {
+          g(t) ? n.push(...t) : n.push(t);
+        }), n;
+      },
+      Identity: (t, e) => e,
+      MultiSelectList: (t, e) => null === e ? null : t.children.map(t => this.visit(t, e)),
+      MultiSelectHash: (t, e) => {
+        if (null === e) return null;
+        const r = {};
+        return t.children.forEach(t => {
+          r[t.name] = this.visit(t.value, e);
+        }), r;
+      },
+      OrExpression: (t, e) => {
+        let r = this.visit(t.children[0], e);
+        return B(r) && (r = this.visit(t.children[1], e)), r;
+      },
+      AndExpression: (t, e) => {
+        const r = this.visit(t.children[0], e);
+        return !0 === B(r) ? r : this.visit(t.children[1], e);
+      },
+      AddExpression: (t, e) => {
+        const r = this.visit(t.children[0], e),
+          n = this.visit(t.children[1], e);
+        return this.applyOperator(r, n, "+");
+      },
+      ConcatenateExpression: (t, e) => {
+        let r = this.visit(t.children[0], e),
+          n = this.visit(t.children[1], e);
+        return r = y(d(r), [M, w], r, "concatenate", this.toNumber, this.toString), n = y(d(n), [M, w], n, "concatenate", this.toNumber, this.toString), this.applyOperator(r, n, "&");
+      },
+      UnionExpression: (t, e) => {
+        let r = this.visit(t.children[0], e),
+          n = this.visit(t.children[1], e);
+        return r = y(d(r), [L], r, "union", this.toNumber, this.toString), n = y(d(n), [L], n, "union", this.toNumber, this.toString), r.concat(n);
+      },
+      SubtractExpression: (t, e) => {
+        const r = this.visit(t.children[0], e),
+          n = this.visit(t.children[1], e);
+        return this.applyOperator(r, n, "-");
+      },
+      MultiplyExpression: (t, e) => {
+        const r = this.visit(t.children[0], e),
+          n = this.visit(t.children[1], e);
+        return this.applyOperator(r, n, "*");
+      },
+      DivideExpression: (t, e) => {
+        const r = this.visit(t.children[0], e),
+          n = this.visit(t.children[1], e);
+        return this.applyOperator(r, n, "/");
+      },
+      PowerExpression: (t, e) => {
+        const r = this.visit(t.children[0], e),
+          n = this.visit(t.children[1], e);
+        return this.applyOperator(r, n, "^");
+      },
+      NotExpression: (t, e) => B(this.visit(t.children[0], e)),
+      Literal: t => t.value,
+      Number: t => t.value,
+      [v]: (t, e) => {
+        const r = this.visit(t.children[0], e);
+        return this.visit(t.children[1], r);
+      },
+      [P]: (t, e) => e,
+      [m]: t => {
+        const e = this.globals[t.name];
+        return void 0 === e ? null : e;
+      },
+      Function: (t, e) => {
+        if ("if" === t.name) return this.runtime.callFunction(t.name, t.children, e, this, !1);
+        const r = t.children.map(t => this.visit(t, e));
+        return this.runtime.callFunction(t.name, r, e, this);
+      },
+      ExpressionReference: t => {
+        const [e] = t.children;
+        return e.jmespathType = Y, e;
+      }
+    }[t.type];
+    if (!r) throw new Error(`Unknown/missing node type ${t && t.type || ""}`);
+    return r(t, e);
+  }
+  computeSliceParams(t, e) {
+    function r(t, e, r) {
+      let n = e;
+      return n < 0 ? (n += t, n < 0 && (n = r < 0 ? -1 : 0)) : n >= t && (n = r < 0 ? t - 1 : t), n;
+    }
+    let [n, s, i] = e;
+    if (null === i) i = 1;else if (0 === i) {
+      const _t8 = new Error("Invalid slice, step cannot be 0");
+      throw _t8.name = "RuntimeError", _t8;
+    }
+    const u = i < 0;
+    return n = null === n ? u ? t - 1 : 0 : r(t, n, i), s = null === s ? u ? -1 : t : r(t, s, i), [n, s, i];
+  }
+  applyOperator(t, e, r) {
+    if (g(t) && g(e)) {
+      const n = t.length < e.length ? t : e,
+        s = Math.abs(t.length - e.length);
+      n.length += s, n.fill(null, n.length - s);
+      const i = [];
+      for (let _n = 0; _n < t.length; _n += 1) i.push(this.applyOperator(t[_n], e[_n], r));
+      return i;
+    }
+    if (g(t)) return t.map(t => this.applyOperator(t, e, r));
+    if (g(e)) return e.map(e => this.applyOperator(t, e, r));
+    if ("*" === r) return this.toNumber(t) * this.toNumber(e);
+    if ("&" === r) return t + e;
+    if ("+" === r) return this.toNumber(t) + this.toNumber(e);
+    if ("-" === r) return this.toNumber(t) - this.toNumber(e);
+    if ("/" === r) {
+      const _r2 = t / e;
+      return Number.isFinite(_r2) ? _r2 : null;
+    }
+    if ("^" === r) return t ** e;
+    throw new Error(`Unknown operator: ${r}`);
+  }
+}
+const {
+    TOK_UNQUOTEDIDENTIFIER: C,
+    TOK_QUOTEDIDENTIFIER: j,
+    TOK_RBRACKET: D,
+    TOK_RPAREN: G,
+    TOK_COMMA: F,
+    TOK_COLON: $,
+    TOK_CONCATENATE: H,
+    TOK_RBRACE: Q,
+    TOK_NUMBER: J,
+    TOK_CURRENT: q,
+    TOK_GLOBAL: z,
+    TOK_EXPREF: X,
+    TOK_PIPE: V,
+    TOK_OR: W,
+    TOK_AND: Z,
+    TOK_ADD: tt,
+    TOK_SUBTRACT: et,
+    TOK_MULTIPLY: rt,
+    TOK_POWER: nt,
+    TOK_DIVIDE: st,
+    TOK_UNION: it,
+    TOK_EQ: ut,
+    TOK_GT: ot,
+    TOK_LT: ct,
+    TOK_GTE: at,
+    TOK_LTE: lt,
+    TOK_NE: ht,
+    TOK_FLATTEN: _t,
+    TOK_STAR: pt,
+    TOK_FILTER: Tt,
+    TOK_DOT: Et,
+    TOK_NOT: ft,
+    TOK_LBRACE: dt,
+    TOK_LBRACKET: yt,
+    TOK_LPAREN: gt,
+    TOK_LITERAL: Ot
+  } = e,
+  Rt = {
+    ".": Et,
+    ",": F,
+    ":": $,
+    "{": dt,
+    "}": Q,
+    "]": D,
+    "(": gt,
+    ")": G,
+    "@": q
+  },
+  Nt = {
+    "<": !0,
+    ">": !0,
+    "=": !0,
+    "!": !0
+  },
+  Pt = {
+    " ": !0,
+    "\t": !0,
+    "\n": !0
+  };
+function mt(t, e) {
+  return t >= "0" && t <= "9" || e && "-" === t || "." === t;
+}
+function Yt(t) {
+  return t >= "a" && t <= "z" || t >= "A" && t <= "Z" || t >= "0" && t <= "9" || "_" === t;
+}
+function vt(t, e) {
+  const r = t[e];
+  return "$" === r ? t.length > e && Yt(t[e + 1]) : r >= "a" && r <= "z" || r >= "A" && r <= "Z" || "_" === r;
+}
+class At {
+  constructor(t = [], e = []) {
+    this._allowedGlobalNames = t, this.debug = e;
+  }
+  tokenize(t) {
+    const e = [];
+    let r, n, s;
+    for (this._current = 0; this._current < t.length;) {
+      const i = e.length ? e.slice(-1)[0].type : null;
+      if (this._isGlobal(i, t, this._current)) e.push(this._consumeGlobal(t));else if (vt(t, this._current)) r = this._current, n = this._consumeUnquotedIdentifier(t), e.push({
+        type: C,
+        value: n,
+        start: r
+      });else if (void 0 !== Rt[t[this._current]]) e.push({
+        type: Rt[t[this._current]],
+        value: t[this._current],
+        start: this._current
+      }), this._current += 1;else if ("-" === t[this._current] && ![q, J, G, C, j, D].includes(i) || mt(t[this._current], !1)) s = this._consumeNumber(t), e.push(s);else if ("[" === t[this._current]) s = this._consumeLBracket(t), e.push(s);else if ('"' === t[this._current]) r = this._current, n = this._consumeQuotedIdentifier(t), e.push({
+        type: j,
+        value: n,
+        start: r
+      });else if ("'" === t[this._current]) r = this._current, n = this._consumeRawStringLiteral(t), e.push({
+        type: Ot,
+        value: n,
+        start: r
+      });else if ("`" === t[this._current]) {
+        r = this._current;
+        const _n2 = this._consumeLiteral(t);
+        e.push({
+          type: Ot,
+          value: _n2,
+          start: r
+        });
+      } else if (void 0 !== Nt[t[this._current]]) e.push(this._consumeOperator(t));else if (void 0 !== Pt[t[this._current]]) this._current += 1;else if ("&" === t[this._current]) r = this._current, this._current += 1, "&" === t[this._current] ? (this._current += 1, e.push({
+        type: Z,
+        value: "&&",
+        start: r
+      })) : e.push(i === F || i === gt ? {
+        type: X,
+        value: "&",
+        start: r
+      } : {
+        type: H,
+        value: "&",
+        start: r
+      });else if ("~" === t[this._current]) r = this._current, this._current += 1, e.push({
+        type: it,
+        value: "~",
+        start: r
+      });else if ("+" === t[this._current]) r = this._current, this._current += 1, e.push({
+        type: tt,
+        value: "+",
+        start: r
+      });else if ("-" === t[this._current]) r = this._current, this._current += 1, e.push({
+        type: et,
+        value: "-",
+        start: r
+      });else if ("*" === t[this._current]) {
+        r = this._current, this._current += 1;
+        const _t9 = e.length && e.slice(-1)[0].type;
+        0 === e.length || [yt, Et, V, Z, W, F, $].includes(_t9) ? e.push({
+          type: pt,
+          value: "*",
+          start: r
+        }) : e.push({
+          type: rt,
+          value: "*",
+          start: r
+        });
+      } else if ("/" === t[this._current]) r = this._current, this._current += 1, e.push({
+        type: st,
+        value: "/",
+        start: r
+      });else if ("^" === t[this._current]) r = this._current, this._current += 1, e.push({
+        type: nt,
+        value: "^",
+        start: r
+      });else {
+        if ("|" !== t[this._current]) {
+          const _e6 = new Error(`Unknown character:${t[this._current]}`);
+          throw _e6.name = "LexerError", _e6;
+        }
+        r = this._current, this._current += 1, "|" === t[this._current] ? (this._current += 1, e.push({
+          type: W,
+          value: "||",
+          start: r
+        })) : e.push({
+          type: V,
+          value: "|",
+          start: r
+        });
+      }
+    }
+    return e;
+  }
+  _consumeUnquotedIdentifier(t) {
+    const e = this._current;
+    for (this._current += 1; this._current < t.length && Yt(t[this._current]);) this._current += 1;
+    return t.slice(e, this._current);
+  }
+  _consumeQuotedIdentifier(t) {
+    const e = this._current;
+    this._current += 1;
+    const r = t.length;
+    let n = !vt(t, e + 1);
+    for (; '"' !== t[this._current] && this._current < r;) {
+      let _e7 = this._current;
+      Yt(t[_e7]) || (n = !0), _e7 += "\\" !== t[_e7] || "\\" !== t[_e7 + 1] && '"' !== t[_e7 + 1] ? 1 : 2, this._current = _e7;
+    }
+    this._current += 1;
+    const s = t.slice(e, this._current);
+    try {
+      n && !s.includes(" ") || (this.debug.push(`Suspicious quotes: ${s}`), this.debug.push(`Did you intend a literal? '${s.replace(/"/g, "")}'?`));
+    } catch (t) {}
+    return JSON.parse(s);
+  }
+  _consumeRawStringLiteral(t) {
+    const e = this._current;
+    this._current += 1;
+    const r = t.length;
+    for (; "'" !== t[this._current] && this._current < r;) {
+      let _e8 = this._current;
+      _e8 += "\\" !== t[_e8] || "\\" !== t[_e8 + 1] && "'" !== t[_e8 + 1] ? 1 : 2, this._current = _e8;
+    }
+    return this._current += 1, t.slice(e + 1, this._current - 1).replaceAll("\\'", "'");
+  }
+  _consumeNumber(t) {
+    const e = this._current;
+    this._current += 1;
+    const r = t.length;
+    for (; mt(t[this._current], !1) && this._current < r;) this._current += 1;
+    const n = t.slice(e, this._current);
+    let s;
+    return s = n.includes(".") ? parseFloat(n) : parseInt(n, 10), {
+      type: J,
+      value: s,
+      start: e
+    };
+  }
+  _consumeLBracket(t) {
+    const e = this._current;
+    return this._current += 1, "?" === t[this._current] ? (this._current += 1, {
+      type: Tt,
+      value: "[?",
+      start: e
+    }) : "]" === t[this._current] ? (this._current += 1, {
+      type: _t,
+      value: "[]",
+      start: e
+    }) : {
+      type: yt,
+      value: "[",
+      start: e
+    };
+  }
+  _isGlobal(t, e, r) {
+    if (null !== t && t === Et) return !1;
+    if ("$" !== e[r]) return !1;
+    let n = r + 1;
+    for (; n < e.length && Yt(e[n]);) n += 1;
+    const s = e.slice(r, n);
+    return this._allowedGlobalNames.includes(s);
+  }
+  _consumeGlobal(t) {
+    const e = this._current;
+    for (this._current += 1; this._current < t.length && Yt(t[this._current]);) this._current += 1;
+    const r = t.slice(e, this._current);
+    return {
+      type: z,
+      name: r,
+      start: e
+    };
+  }
+  _consumeOperator(t) {
+    const e = this._current,
+      r = t[e];
+    return this._current += 1, "!" === r ? "=" === t[this._current] ? (this._current += 1, {
+      type: ht,
+      value: "!=",
+      start: e
+    }) : {
+      type: ft,
+      value: "!",
+      start: e
+    } : "<" === r ? "=" === t[this._current] ? (this._current += 1, {
+      type: lt,
+      value: "<=",
+      start: e
+    }) : {
+      type: ct,
+      value: "<",
+      start: e
+    } : ">" === r ? "=" === t[this._current] ? (this._current += 1, {
+      type: at,
+      value: ">=",
+      start: e
+    }) : {
+      type: ot,
+      value: ">",
+      start: e
+    } : "=" === t[this._current] ? (this._current += 1, {
+      type: ut,
+      value: "==",
+      start: e
+    }) : {
+      type: ut,
+      value: "=",
+      start: e
+    };
+  }
+  _consumeLiteral(t) {
+    this._current += 1;
+    const e = this._current,
+      r = t.length;
+    let n,
+      s = !1;
+    for (; (s || "`" !== t[this._current]) && this._current < r;) {
+      let _e9 = this._current;
+      s && "\\" === t[_e9] && '"' === t[_e9 + 1] ? _e9 += 2 : ('"' === t[_e9] && (s = !s), _e9 += s && "`" === t[_e9 + 1] ? 2 : "\\" !== t[_e9] || "\\" !== t[_e9 + 1] && "`" !== t[_e9 + 1] ? 1 : 2), this._current = _e9;
+    }
+    let i = t.slice(e, this._current).trimStart();
+    return i = i.replaceAll("\\`", "`"), n = function (t) {
+      if ("" === t) return !1;
+      if ('[{"'.includes(t[0])) return !0;
+      if (["true", "false", "null"].includes(t)) return !0;
+      if (!"-0123456789".includes(t[0])) return !1;
+      try {
+        return JSON.parse(t), !0;
+      } catch (t) {
+        return !1;
+      }
+    }(i) ? JSON.parse(i) : JSON.parse(`"${i}"`), this._current += 1, n;
+  }
+}
+const {
+    TOK_LITERAL: Kt,
+    TOK_COLON: It,
+    TOK_EOF: St,
+    TOK_UNQUOTEDIDENTIFIER: bt,
+    TOK_QUOTEDIDENTIFIER: xt,
+    TOK_RBRACKET: Ut,
+    TOK_RPAREN: Mt,
+    TOK_COMMA: wt,
+    TOK_CONCATENATE: Lt,
+    TOK_RBRACE: Bt,
+    TOK_NUMBER: kt,
+    TOK_CURRENT: Ct,
+    TOK_GLOBAL: jt,
+    TOK_FIELD: Dt,
+    TOK_EXPREF: Gt,
+    TOK_PIPE: Ft,
+    TOK_OR: $t,
+    TOK_AND: Ht,
+    TOK_ADD: Qt,
+    TOK_SUBTRACT: Jt,
+    TOK_MULTIPLY: qt,
+    TOK_POWER: zt,
+    TOK_DIVIDE: Xt,
+    TOK_UNION: Vt,
+    TOK_EQ: Wt,
+    TOK_GT: Zt,
+    TOK_LT: te,
+    TOK_GTE: ee,
+    TOK_LTE: re,
+    TOK_NE: ne,
+    TOK_FLATTEN: se,
+    TOK_STAR: ie,
+    TOK_FILTER: ue,
+    TOK_DOT: oe,
+    TOK_NOT: ce,
+    TOK_LBRACE: ae,
+    TOK_LBRACKET: le,
+    TOK_LPAREN: he
+  } = e,
+  _e = {
+    [St]: 0,
+    [bt]: 0,
+    [xt]: 0,
+    [Ut]: 0,
+    [Mt]: 0,
+    [wt]: 0,
+    [Bt]: 0,
+    [kt]: 0,
+    [Ct]: 0,
+    [jt]: 0,
+    [Dt]: 0,
+    [Gt]: 0,
+    [Ft]: 1,
+    [$t]: 2,
+    [Ht]: 3,
+    [Qt]: 6,
+    [Jt]: 6,
+    [Lt]: 7,
+    [qt]: 7,
+    [Xt]: 7,
+    [zt]: 7,
+    [Vt]: 7,
+    [Wt]: 5,
+    [Zt]: 5,
+    [te]: 5,
+    [ee]: 5,
+    [re]: 5,
+    [ne]: 5,
+    [se]: 9,
+    [ie]: 20,
+    [ue]: 21,
+    [oe]: 40,
+    [ce]: 45,
+    [ae]: 50,
+    [le]: 55,
+    [he]: 60
+  };
+class pe {
+  constructor(t = []) {
+    this._allowedGlobalNames = t;
+  }
+  parse(t, e) {
+    this._loadTokens(t, e), this.index = 0;
+    const r = this.expression(0);
+    if (this._lookahead(0) !== St) {
+      const _t10 = this._lookaheadToken(0),
+        _e10 = new Error(`Unexpected token type: ${_t10.type}, value: ${_t10.value}`);
+      throw _e10.name = "ParserError", _e10;
+    }
+    return r;
+  }
+  _loadTokens(t, e) {
+    const r = new At(this._allowedGlobalNames, e).tokenize(t);
+    r.push({
+      type: St,
+      value: "",
+      start: t.length
+    }), this.tokens = r;
+  }
+  expression(t) {
+    const e = this._lookaheadToken(0);
+    this._advance();
+    let r = this.nud(e),
+      n = this._lookahead(0);
+    for (; t < _e[n];) this._advance(), r = this.led(n, r), n = this._lookahead(0);
+    return r;
+  }
+  _lookahead(t) {
+    return this.tokens[this.index + t].type;
+  }
+  _lookaheadToken(t) {
+    return this.tokens[this.index + t];
+  }
+  _advance() {
+    this.index += 1;
+  }
+  _getIndex() {
+    return this.index;
+  }
+  _setIndex(t) {
+    this.index = t;
+  }
+  nud(t) {
+    let e, r, n, s, i;
+    switch (t.type) {
+      case Kt:
+        return {
+          type: "Literal",
+          value: t.value
+        };
+      case kt:
+        return {
+          type: "Number",
+          value: t.value
+        };
+      case bt:
+        return {
+          type: "Field",
+          name: t.value
+        };
+      case xt:
+        if (s = {
+          type: "Field",
+          name: t.value
+        }, this._lookahead(0) === he) throw new Error("Quoted identifier not allowed for function names.");
+        return s;
+      case ce:
+        return r = this.expression(_e.Not), {
+          type: "NotExpression",
+          children: [r]
+        };
+      case ie:
+        return e = {
+          type: "Identity"
+        }, r = this._lookahead(0) === Ut ? {
+          type: "Identity"
+        } : this._parseProjectionRHS(_e.Star), {
+          type: "ValueProjection",
+          children: [e, r]
+        };
+      case ue:
+        return this.led(t.type, {
+          type: "Identity"
+        });
+      case ae:
+        return this._parseMultiselectHash();
+      case se:
+        return e = {
+          type: se,
+          children: [{
+            type: "Identity"
+          }]
+        }, r = this._parseProjectionRHS(_e.Flatten), {
+          type: "Projection",
+          children: [e, r]
+        };
+      case le:
+        return this._lookahead(0) === ie && this._lookahead(1) === Ut ? (this._advance(), this._advance(), r = this._parseProjectionRHS(_e.Star), {
+          type: "Projection",
+          children: [{
+            type: "Identity"
+          }, r]
+        }) : this._parseUnchainedIndexExpression();
+      case Ct:
+        return {
+          type: Ct
+        };
+      case jt:
+        return {
+          type: jt,
+          name: t.name
+        };
+      case Dt:
+        return {
+          type: Dt
+        };
+      case Gt:
+        return n = this.expression(_e.Expref), {
+          type: "ExpressionReference",
+          children: [n]
+        };
+      case he:
+        for (i = []; this._lookahead(0) !== Mt;) n = this.expression(0), i.push(n);
+        return this._match(Mt), i[0];
+      default:
+        this._errorToken(t);
+    }
+  }
+  led(t, e) {
+    let r, n, s, i, u, o, c, a, l;
+    switch (t) {
+      case Lt:
+        return n = this.expression(_e.Concatenate), {
+          type: "ConcatenateExpression",
+          children: [e, n]
+        };
+      case oe:
+        return c = _e.Dot, this._lookahead(0) !== ie ? (n = this._parseDotRHS(c), {
+          type: "Subexpression",
+          children: [e, n]
+        }) : (this._advance(), n = this._parseProjectionRHS(c), {
+          type: "ValueProjection",
+          children: [e, n]
+        });
+      case Ft:
+        return n = this.expression(_e.Pipe), {
+          type: Ft,
+          children: [e, n]
+        };
+      case $t:
+        return n = this.expression(_e.Or), {
+          type: "OrExpression",
+          children: [e, n]
+        };
+      case Ht:
+        return n = this.expression(_e.And), {
+          type: "AndExpression",
+          children: [e, n]
+        };
+      case Qt:
+        return n = this.expression(_e.Add), {
+          type: "AddExpression",
+          children: [e, n]
+        };
+      case Jt:
+        return n = this.expression(_e.Subtract), {
+          type: "SubtractExpression",
+          children: [e, n]
+        };
+      case qt:
+        return n = this.expression(_e.Multiply), {
+          type: "MultiplyExpression",
+          children: [e, n]
+        };
+      case Xt:
+        return n = this.expression(_e.Divide), {
+          type: "DivideExpression",
+          children: [e, n]
+        };
+      case zt:
+        return n = this.expression(_e.Power), {
+          type: "PowerExpression",
+          children: [e, n]
+        };
+      case Vt:
+        return n = this.expression(_e.Power), {
+          type: "UnionExpression",
+          children: [e, n]
+        };
+      case he:
+        for (s = e.name, i = []; this._lookahead(0) !== Mt;) u = this.expression(0), this._lookahead(0) === wt && this._match(wt), i.push(u);
+        return this._match(Mt), o = {
+          type: "Function",
+          name: s,
+          children: i
+        }, o;
+      case ue:
+        return r = this.expression(0), this._match(Ut), n = this._lookahead(0) === se ? {
+          type: "Identity"
+        } : this._parseProjectionRHS(_e.Filter), {
+          type: "FilterProjection",
+          children: [e, n, r]
+        };
+      case se:
+        return a = {
+          type: se,
+          children: [e]
+        }, l = this._parseProjectionRHS(_e.Flatten), {
+          type: "Projection",
+          children: [a, l]
+        };
+      case Wt:
+      case ne:
+      case Zt:
+      case ee:
+      case te:
+      case re:
+        return this._parseComparator(e, t);
+      case le:
+        return this._lookahead(0) === ie && this._lookahead(1) === Ut ? (this._advance(), this._advance(), n = this._parseProjectionRHS(_e.Star), {
+          type: "Projection",
+          children: [e, n]
+        }) : (n = this._parseChainedIndexExpression(), this._projectIfSlice(e, n));
+      default:
+        this._errorToken(this._lookaheadToken(0));
+    }
+  }
+  _match(t) {
+    if (this._lookahead(0) !== t) {
+      const e = this._lookaheadToken(0),
+        r = new Error(`Expected ${t}, got: ${e.type}`);
+      throw r.name = "ParserError", r;
+    }
+    this._advance();
+  }
+  _errorToken(t) {
+    const e = new Error(`Invalid token (${t.type}): "${t.value}"`);
+    throw e.name = "ParserError", e;
+  }
+  _parseChainedIndexExpression() {
+    const t = this._getIndex();
+    if (this._lookahead(0) === It) return this._parseSliceExpression();
+    const e = this.expression(0);
+    return this._lookahead(0) === It ? (this._setIndex(t), this._parseSliceExpression()) : (this._match(Ut), {
+      type: "Index",
+      value: e
+    });
+  }
+  _parseUnchainedIndexExpression() {
+    const t = this._getIndex(),
+      e = this._lookahead(0);
+    if (e === It) {
+      const _t11 = this._parseSliceExpression();
+      return this._projectIfSlice({
+        type: "Identity"
+      }, _t11);
+    }
+    const r = this.expression(0),
+      n = this._lookahead(0);
+    if (n === wt) return this._setIndex(t), this._parseMultiselectList();
+    if (n === It) {
+      this._setIndex(t);
+      const _e11 = this._parseSliceExpression();
+      return this._projectIfSlice({
+        type: "Identity"
+      }, _e11);
+    }
+    return e === kt ? (this._match(Ut), {
+      type: "Index",
+      value: r
+    }) : (this._setIndex(t), this._parseMultiselectList());
+  }
+  _projectIfSlice(t, e) {
+    const r = {
+      type: "IndexExpression",
+      children: [t, e]
+    };
+    return "Slice" === e.type ? {
+      type: "Projection",
+      children: [r, this._parseProjectionRHS(_e.Star)]
+    } : r;
+  }
+  _parseSliceExpression() {
+    const t = [null, null, null];
+    let e = 0,
+      r = this._lookahead(0);
+    for (; r !== Ut && e < 3;) {
+      if (r === It && e < 2) e += 1, this._advance();else {
+        t[e] = this.expression(0);
+        const _r3 = this._lookahead(0);
+        if (_r3 !== It && _r3 !== Ut) {
+          const _t12 = new Error(`Syntax error, unexpected token: ${_r3.value}(${_r3.type})`);
+          throw _t12.name = "Parsererror", _t12;
+        }
+      }
+      r = this._lookahead(0);
+    }
+    return this._match(Ut), {
+      type: "Slice",
+      children: t
+    };
+  }
+  _parseComparator(t, e) {
+    return {
+      type: "Comparator",
+      name: e,
+      children: [t, this.expression(_e[e])]
+    };
+  }
+  _parseDotRHS(t) {
+    const e = this._lookahead(0);
+    return [bt, xt, ie].indexOf(e) >= 0 ? this.expression(t) : e === le ? (this._match(le), this._parseMultiselectList()) : e === ae ? (this._match(ae), this._parseMultiselectHash()) : void 0;
+  }
+  _parseProjectionRHS(t) {
+    let e;
+    if (_e[this._lookahead(0)] < 10) e = {
+      type: "Identity"
+    };else if (this._lookahead(0) === le) e = this.expression(t);else if (this._lookahead(0) === ue) e = this.expression(t);else {
+      if (this._lookahead(0) !== oe) {
+        const _t13 = this._lookaheadToken(0),
+          _e12 = new Error(`Sytanx error, unexpected token: ${_t13.value}(${_t13.type})`);
+        throw _e12.name = "ParserError", _e12;
+      }
+      this._match(oe), e = this._parseDotRHS(t);
+    }
+    return e;
+  }
+  _parseMultiselectList() {
+    const t = [];
+    for (; this._lookahead(0) !== Ut;) {
+      const e = this.expression(0);
+      if (t.push(e), this._lookahead(0) === wt && (this._match(wt), this._lookahead(0) === Ut)) throw new Error("Unexpected token Rbracket");
+    }
+    return this._match(Ut), {
+      type: "MultiSelectList",
+      children: t
+    };
+  }
+  _parseMultiselectHash() {
+    const t = [],
+      e = [bt, xt];
+    let r, n, s, i;
+    if (this._lookahead(0) === Bt) return this._advance(), {
+      type: "MultiSelectHash",
+      children: []
+    };
+    for (;;) {
+      if (r = this._lookaheadToken(0), e.indexOf(r.type) < 0) throw new Error(`Expecting an identifier token, got: ${r.type}`);
+      if (n = r.value, this._advance(), this._match(It), s = this.expression(0), i = {
+        type: "KeyValuePair",
+        name: n,
+        value: s
+      }, t.push(i), this._lookahead(0) === wt) this._match(wt);else if (this._lookahead(0) === Bt) {
+        this._match(Bt);
+        break;
+      }
+    }
+    return {
+      type: "MultiSelectHash",
+      children: t
+    };
+  }
+}
+function Te(t, e) {
+  const r = 10 ** e;
+  return Math.round(t * r) / r;
+}
+function Ee(e, r, n, s = []) {
+  return {
+    casefold: {
+      _func: (t, e, n) => r(t[0]).toLocaleUpperCase(n.language).toLocaleLowerCase(n.language),
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }]
+    },
+    and: {
+      _func: t => {
+        let r = !!e(t[0]);
+        return t.slice(1).forEach(t => {
+          r = r && !!e(t);
+        }), r;
+      },
+      _signature: [{
+        types: [t.TYPE_ANY],
+        variadic: !0
+      }]
+    },
+    deepScan: {
+      _func: t => {
+        const [e, r] = t,
+          n = r.toString(),
+          s = [];
+        return null === e || function t(e) {
+          Object.entries(e).forEach(([e, r]) => {
+            e === n && s.push(r), "object" == typeof r && t(r);
+          });
+        }(e), s;
+      },
+      _signature: [{
+        types: [t.TYPE_OBJECT, t.TYPE_ARRAY, t.TYPE_NULL]
+      }, {
+        types: [t.TYPE_STRING, t.TYPE_NUMBER]
+      }]
+    },
+    or: {
+      _func: t => {
+        let r = !!e(t[0]);
+        return t.slice(1).forEach(t => {
+          r = r || !!e(t);
+        }), r;
+      },
+      _signature: [{
+        types: [t.TYPE_ANY],
+        variadic: !0
+      }]
+    },
+    not: {
+      _func: t => !e(t[0]),
+      _signature: [{
+        types: [t.TYPE_ANY]
+      }]
+    },
+    null: {
+      _func: () => null,
+      _signature: []
+    },
+    true: {
+      _func: () => !0,
+      _signature: []
+    },
+    false: {
+      _func: () => !1,
+      _signature: []
+    },
+    if: {
+      _func: (t, r, n) => {
+        const s = t[1],
+          i = t[2],
+          u = n.visit(t[0], r);
+        return e(u) ? n.visit(s, r) : n.visit(i, r);
+      },
+      _signature: [{
+        types: [t.TYPE_ANY]
+      }, {
+        types: [t.TYPE_ANY]
+      }, {
+        types: [t.TYPE_ANY]
+      }]
+    },
+    substitute: {
+      _func: t => {
+        const e = r(t[0]),
+          s = r(t[1]),
+          i = r(t[2]);
+        if (t.length <= 3) return e.replaceAll(s, i);
+        const u = n(t[3]);
+        if (u < 1) return e;
+        let o = -1;
+        for (let _t14 = 0; _t14 < u; _t14 += 1) {
+          o += 1;
+          const _t15 = e.slice(o).indexOf(s);
+          if (-1 === _t15) return e;
+          o += _t15;
+        }
+        return e.slice(0, o) + e.slice(o).replace(s, i);
+      },
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }, {
+        types: [t.TYPE_STRING]
+      }, {
+        types: [t.TYPE_STRING]
+      }, {
+        types: [t.TYPE_NUMBER],
+        optional: !0
+      }]
+    },
+    value: {
+      _func: t => {
+        const e = t[0] || {},
+          r = t[1],
+          n = e[r];
+        if (void 0 === n) {
+          s.push(`Failed to find: '${r}'`);
+          const _t16 = Object.keys(e).map(t => `'${t}'`).toString();
+          return _t16.length && s.push(`Available fields: ${_t16}`), null;
+        }
+        return n;
+      },
+      _signature: [{
+        types: [t.TYPE_OBJECT, t.TYPE_ARRAY, t.TYPE_NULL]
+      }, {
+        types: [t.TYPE_STRING, t.TYPE_NUMBER]
+      }]
+    },
+    lower: {
+      _func: t => r(t[0]).toLowerCase(),
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }]
+    },
+    upper: {
+      _func: t => r(t[0]).toUpperCase(),
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }]
+    },
+    exp: {
+      _func: t => {
+        const e = n(t[0]);
+        return Math.exp(e);
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    power: {
+      _func: t => n(t[0]) ** n(t[1]),
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    find: {
+      _func: t => {
+        const e = r(t[0]),
+          s = r(t[1]),
+          i = t.length > 2 ? n(t[2]) : 0,
+          u = s.indexOf(e, i);
+        return -1 === u ? null : u;
+      },
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }, {
+        types: [t.TYPE_STRING]
+      }, {
+        types: [t.TYPE_NUMBER],
+        optional: !0
+      }]
+    },
+    left: {
+      _func: t => {
+        const e = t.length > 1 ? n(t[1]) : 1;
+        return e < 0 ? null : t[0] instanceof Array ? t[0].slice(0, e) : r(t[0]).substr(0, e);
+      },
+      _signature: [{
+        types: [t.TYPE_STRING, t.TYPE_ARRAY]
+      }, {
+        types: [t.TYPE_NUMBER],
+        optional: !0
+      }]
+    },
+    right: {
+      _func: t => {
+        const e = t.length > 1 ? n(t[1]) : 1;
+        if (e < 0) return null;
+        if (t[0] instanceof Array) return 0 === e ? [] : t[0].slice(-1 * e);
+        const s = r(t[0]);
+        return s.substr(s.length - e, e);
+      },
+      _signature: [{
+        types: [t.TYPE_STRING, t.TYPE_ARRAY]
+      }, {
+        types: [t.TYPE_NUMBER],
+        optional: !0
+      }]
+    },
+    mid: {
+      _func: t => {
+        const e = n(t[1]),
+          s = n(t[2]);
+        return e < 0 ? null : t[0] instanceof Array ? t[0].slice(e, e + s) : r(t[0]).substr(e, s);
+      },
+      _signature: [{
+        types: [t.TYPE_STRING, t.TYPE_ARRAY]
+      }, {
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    mod: {
+      _func: t => n(t[0]) % n(t[1]),
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    proper: {
+      _func: t => r(t[0]).split(" ").map(t => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase()).join(" "),
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }]
+    },
+    rept: {
+      _func: t => {
+        const e = r(t[0]),
+          s = n(t[1]);
+        return s < 0 ? null : e.repeat(s);
+      },
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }, {
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    replace: {
+      _func: t => {
+        const e = r(t[0]),
+          s = n(t[1]),
+          i = n(t[2]),
+          u = r(t[3]);
+        return s < 0 ? null : e.substr(0, s) + u + e.substr(s + i);
+      },
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }, {
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_STRING]
+      }]
+    },
+    round: {
+      _func: t => Te(n(t[0]), n(t[1])),
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    sqrt: {
+      _func: t => {
+        const e = Math.sqrt(n(t[0]));
+        return Number.isNaN(e) ? null : e;
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    stdevp: {
+      _func: t => {
+        const e = t[0] || [];
+        if (0 === e.length) return null;
+        const r = e.map(t => n(t)),
+          s = r.reduce((t, e) => t + e, 0) / e.length,
+          i = r.reduce((t, e) => t + e * e, 0) / e.length,
+          u = Math.sqrt(i - s * s);
+        return Number.isNaN(u) ? null : u;
+      },
+      _signature: [{
+        types: [t.TYPE_ARRAY_NUMBER]
+      }]
+    },
+    stdev: {
+      _func: t => {
+        const e = t[0] || [];
+        if (e.length <= 1) return null;
+        const r = e.map(t => n(t)),
+          s = r.reduce((t, e) => t + e, 0) / e.length,
+          i = r.reduce((t, e) => t + e * e, 0),
+          u = Math.sqrt((i - e.length * s * s) / (e.length - 1));
+        return Number.isNaN(u) ? null : u;
+      },
+      _signature: [{
+        types: [t.TYPE_ARRAY_NUMBER]
+      }]
+    },
+    trim: {
+      _func: t => r(t[0]).split(" ").filter(t => t).join(" "),
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }]
+    },
+    trunc: {
+      _func: t => {
+        const e = n(t[0]),
+          r = t.length > 1 ? n(t[1]) : 0;
+        return (e >= 0 ? Math.floor : Math.ceil)(e * 10 ** r) / 10 ** r;
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_NUMBER],
+        optional: !0
+      }]
+    },
+    charCode: {
+      _func: t => {
+        const e = n(t[0]);
+        return Number.isInteger(e) ? String.fromCharCode(e) : null;
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    codePoint: {
+      _func: t => {
+        const e = r(t[0]);
+        return 0 === e.length ? null : e.codePointAt(0);
+      },
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }]
+    },
+    datetime: {
+      _func: t => {
+        const e = n(t[0]),
+          s = n(t[1]),
+          i = n(t[2]),
+          u = t.length > 3 ? n(t[3]) : 0,
+          o = t.length > 4 ? n(t[4]) : 0,
+          c = t.length > 5 ? n(t[5]) : 0,
+          a = t.length > 6 ? n(t[6]) : 0,
+          l = t.length > 7 ? r(t[7]) : null;
+        let h = new Date(e, s - 1, i, u, o, c, a);
+        return l && (h = function (t, e) {
+          if (null === t) return null;
+          let r = Date.UTC(t.getFullYear(), t.getMonth(), t.getDate(), t.getHours(), t.getMinutes(), t.getSeconds(), t.getMilliseconds());
+          return r += function (t, e) {
+            const r = new Intl.DateTimeFormat("en-US", {
+                timeZone: e,
+                timeZoneName: "longOffset"
+              }).format(t),
+              n = /GMT([+\-−])?(\d{1,2}):?(\d{0,2})?/.exec(r);
+            if (!n) return 0;
+            const [s, i, u] = n.slice(1),
+              o = 60 * (60 * (i || 0) + 1 * (u || 0)) * 1e3;
+            return "-" === s ? -1 * o : o;
+          }(t, e), new Date(r);
+        }(h, l)), h.getTime() / 864e5;
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_NUMBER],
+        optional: !0
+      }, {
+        types: [t.TYPE_NUMBER],
+        optional: !0
+      }, {
+        types: [t.TYPE_NUMBER],
+        optional: !0
+      }, {
+        types: [t.TYPE_NUMBER],
+        optional: !0
+      }, {
+        types: [t.TYPE_STRING],
+        optional: !0
+      }]
+    },
+    datedif: {
+      _func: t => {
+        const e = n(t[0]),
+          s = n(t[1]),
+          i = r(t[2]).toLowerCase();
+        if (s === e) return 0;
+        if (s < e) return null;
+        if ("d" === i) return Math.floor(s - e);
+        const u = new Date(864e5 * e),
+          o = new Date(864e5 * s),
+          c = o.getFullYear() - u.getFullYear();
+        let a = o.getMonth() - u.getMonth();
+        const l = o.getDate() - u.getDate();
+        if ("y" === i) {
+          let _t17 = c;
+          return a < 0 && (_t17 -= 1), 0 === a && l < 0 && (_t17 -= 1), _t17;
+        }
+        if ("m" === i) return 12 * c + a + (l < 0 ? -1 : 0);
+        if ("ym" === i) return l < 0 && (a -= 1), a <= 0 && c > 0 ? 12 + a : a;
+        if ("yd" === i) return l < 0 && (a -= 1), o.setFullYear(a < 0 ? u.getFullYear() + 1 : u.getFullYear()), Math.floor((o.getTime() - u.getTime()) / 864e5);
+        throw new TypeError(`Unrecognized unit parameter "${i}" for datedif()`);
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_STRING]
+      }]
+    },
+    eomonth: {
+      _func: t => {
+        const e = n(t[0]),
+          r = n(t[1]),
+          s = new Date(864e5 * e);
+        return new Date(s.getFullYear(), s.getMonth() + r + 1, 0).getTime() / 864e5;
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    day: {
+      _func: t => {
+        const e = n(t[0]);
+        return new Date(864e5 * e).getDate();
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    month: {
+      _func: t => {
+        const e = n(t[0]);
+        return new Date(864e5 * e).getMonth() + 1;
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    year: {
+      _func: t => {
+        const e = n(t[0]);
+        return new Date(864e5 * e).getFullYear();
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    time: {
+      _func: t => {
+        const e = (3600 * n(t[0]) + 60 * n(t[1]) + n(t[2])) / 86400;
+        return e < 0 ? null : e - Math.floor(e);
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    hour: {
+      _func: t => {
+        const e = n(t[0]) % 1;
+        if (e < 0) return null;
+        const r = Te(24 * e, 14);
+        return Math.floor(r % 24);
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    minute: {
+      _func: t => {
+        const e = n(t[0]) % 1;
+        if (e < 0) return null;
+        const r = Math.round(1440 * e, 10);
+        return Math.floor(r % 60);
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    second: {
+      _func: t => {
+        const e = n(t[0]) % 1;
+        if (e < 0) return null;
+        const r = Te(86400 * e, 10);
+        return Math.floor(r % 60);
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }]
+    },
+    now: {
+      _func: () => Date.now() / 864e5,
+      _signature: []
+    },
+    today: {
+      _func: () => Math.floor(Date.now() / 864e5),
+      _signature: []
+    },
+    weekday: {
+      _func: t => {
+        const e = n(t[0]),
+          r = t.length > 1 ? n(t[1]) : 1,
+          s = new Date(864e5 * e).getDay();
+        switch (r) {
+          case 1:
+            return s + 1;
+          case 2:
+            return (s + 6) % 7 + 1;
+          case 3:
+            return (s + 6) % 7;
+          default:
+            return null;
+        }
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER]
+      }, {
+        types: [t.TYPE_NUMBER],
+        optional: !0
+      }]
+    },
+    entries: {
+      _func: t => {
+        const r = e(t[0]);
+        return Object.entries(r);
+      },
+      _signature: [{
+        types: [t.TYPE_NUMBER, t.TYPE_STRING, t.TYPE_ARRAY, t.TYPE_OBJECT, t.TYPE_BOOLEAN]
+      }]
+    },
+    fromEntries: {
+      _func: t => Object.fromEntries(t[0]),
+      _signature: [{
+        types: [t.TYPE_ARRAY_ARRAY]
+      }]
+    },
+    split: {
+      _func: t => {
+        const e = r(t[0]),
+          n = r(t[1]);
+        return e.split(n);
+      },
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }, {
+        types: [t.TYPE_STRING]
+      }]
+    },
+    unique: {
+      _func: t => {
+        const r = t[0].map(t => e(t));
+        return t[0].filter((t, n) => r.indexOf(e(t)) === n);
+      },
+      _signature: [{
+        types: [t.TYPE_ARRAY]
+      }]
+    },
+    encodeUrlComponent: {
+      _func: t => encodeURIComponent(t[0]),
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }]
+    },
+    encodeUrl: {
+      _func: t => encodeURI(t[0]),
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }]
+    },
+    decodeUrlComponent: {
+      _func: t => decodeURIComponent(t[0]),
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }]
+    },
+    decodeUrl: {
+      _func: t => decodeURI(t[0]),
+      _signature: [{
+        types: [t.TYPE_STRING]
+      }]
+    }
+  };
+}
+function fe(e, r, n, s, i, u, o) {
+  const {
+    TYPE_NUMBER: c,
+    TYPE_ANY: a,
+    TYPE_STRING: l,
+    TYPE_ARRAY: h,
+    TYPE_OBJECT: _,
+    TYPE_BOOLEAN: p,
+    TYPE_EXPREF: T,
+    TYPE_NULL: E,
+    TYPE_ARRAY_NUMBER: f,
+    TYPE_ARRAY_STRING: d
+  } = t;
+  function y(t, r) {
+    return n => {
+      const s = e.visit(t, n);
+      if (r.indexOf(i(s)) < 0) {
+        const t = `TypeError: expected one of ${r}, received ${i(s)}`;
+        throw new Error(t);
+      }
+      return s;
+    };
+  }
+  return {
+    abs: {
+      _func: t => Math.abs(t[0]),
+      _signature: [{
+        types: [c]
+      }]
+    },
+    avg: {
+      _func: t => {
+        let e = 0;
+        const r = t[0];
+        return r.forEach(t => {
+          e += t;
+        }), e / r.length;
+      },
+      _signature: [{
+        types: [f]
+      }]
+    },
+    ceil: {
+      _func: t => Math.ceil(t[0]),
+      _signature: [{
+        types: [c]
+      }]
+    },
+    contains: {
+      _func: t => u(t[0]).indexOf(u(t[1])) >= 0,
+      _signature: [{
+        types: [l, h]
+      }, {
+        types: [a]
+      }]
+    },
+    endsWith: {
+      _func: t => {
+        const e = u(t[0]),
+          r = u(t[1]);
+        return -1 !== e.indexOf(r, e.length - r.length);
+      },
+      _signature: [{
+        types: [l]
+      }, {
+        types: [l]
+      }]
+    },
+    floor: {
+      _func: t => Math.floor(t[0]),
+      _signature: [{
+        types: [c]
+      }]
+    },
+    length: {
+      _func: t => {
+        const e = u(t[0]);
+        return r(e) ? Object.keys(e).length : n(e) ? e.length : o(e).length;
+      },
+      _signature: [{
+        types: [l, h, _]
+      }]
+    },
+    map: {
+      _func: t => {
+        const r = t[0];
+        return t[1].map(t => e.visit(r, t));
+      },
+      _signature: [{
+        types: [T]
+      }, {
+        types: [h]
+      }]
+    },
+    reduce: {
+      _func: t => {
+        const r = t[0];
+        return t[1].reduce((t, n, s, i) => e.visit(r, {
+          accumulated: t,
+          current: n,
+          index: s,
+          array: i
+        }), 3 === t.length ? t[2] : null);
+      },
+      _signature: [{
+        types: [T]
+      }, {
+        types: [h]
+      }, {
+        types: [a],
+        optional: !0
+      }]
+    },
+    max: {
+      _func: t => {
+        if (t[0].length > 0) {
+          const e = i(t[0][0]);
+          return t[0].reduce(e === c ? (t, e) => s(t) >= s(e) ? t : e : (t, e) => o(e).localeCompare(o(t)) < 0 ? t : e, t[0][0]);
+        }
+        return null;
+      },
+      _signature: [{
+        types: [h, f, d]
+      }]
+    },
+    merge: {
+      _func: t => {
+        const e = {};
+        return t.forEach(t => {
+          Object.entries(t).forEach(([t, r]) => {
+            e[t] = r;
+          });
+        }), e;
+      },
+      _signature: [{
+        types: [_],
+        variadic: !0
+      }]
+    },
+    maxBy: {
+      _func: t => {
+        const e = t[0],
+          r = y(t[1], [c, l]);
+        let n,
+          s,
+          i = -Infinity;
+        return e.forEach(t => {
+          s = r(t), s > i && (i = s, n = t);
+        }), n;
+      },
+      _signature: [{
+        types: [h]
+      }, {
+        types: [T]
+      }]
+    },
+    sum: {
+      _func: t => {
+        let e = 0;
+        return t[0].forEach(t => {
+          e += 1 * t;
+        }), e;
+      },
+      _signature: [{
+        types: [f]
+      }]
+    },
+    startsWith: {
+      _func: t => u(t[0]).startsWith(u(t[1])),
+      _signature: [{
+        types: [l]
+      }, {
+        types: [l]
+      }]
+    },
+    min: {
+      _func: t => {
+        if (t[0].length > 0) {
+          if (i(t[0][0]) === c) return t[0].reduce((t, e) => s(t) <= s(e) ? t : e, t[0][0]);
+          const e = t[0];
+          let r = e[0];
+          for (let _t18 = 1; _t18 < e.length; _t18 += 1) o(e[_t18]).localeCompare(o(r)) < 0 && (r = e[_t18]);
+          return r;
+        }
+        return null;
+      },
+      _signature: [{
+        types: [h, f, d]
+      }]
+    },
+    minBy: {
+      _func: t => {
+        const e = t[0],
+          r = y(t[1], [c, l]);
+        let n,
+          s,
+          i = Infinity;
+        return e.forEach(t => {
+          s = r(t), s < i && (i = s, n = t);
+        }), n;
+      },
+      _signature: [{
+        types: [h]
+      }, {
+        types: [T]
+      }]
+    },
+    type: {
+      _func: t => ({
+        [c]: "number",
+        [l]: "string",
+        [h]: "array",
+        [_]: "object",
+        [p]: "boolean",
+        [T]: "expref",
+        [E]: "null"
+      })[i(t[0])],
+      _signature: [{
+        types: [a]
+      }]
+    },
+    keys: {
+      _func: t => null === t[0] ? [] : Object.keys(t[0]),
+      _signature: [{
+        types: [a]
+      }]
+    },
+    values: {
+      _func: t => {
+        const e = u(t[0]);
+        return null === e ? [] : Object.values(e);
+      },
+      _signature: [{
+        types: [a]
+      }]
+    },
+    sort: {
+      _func: t => {
+        const e = t[0].slice(0);
+        if (e.length > 0) {
+          const r = i(t[0][0]) === c ? s : o;
+          e.sort((t, e) => {
+            const n = r(t),
+              s = r(e);
+            return n < s ? -1 : n > s ? 1 : 0;
+          });
+        }
+        return e;
+      },
+      _signature: [{
+        types: [h, d, f]
+      }]
+    },
+    sortBy: {
+      _func: t => {
+        const r = t[0].slice(0);
+        if (0 === r.length) return r;
+        const n = t[1],
+          s = i(e.visit(n, r[0]));
+        if ([c, l].indexOf(s) < 0) throw new Error("TypeError");
+        const u = [];
+        for (let _t19 = 0; _t19 < r.length; _t19 += 1) u.push([_t19, r[_t19]]);
+        u.sort((t, r) => {
+          const u = e.visit(n, t[1]),
+            o = e.visit(n, r[1]);
+          if (i(u) !== s) throw new Error(`TypeError: expected ${s}, received ${i(u)}`);
+          if (i(o) !== s) throw new Error(`TypeError: expected ${s}, received ${i(o)}`);
+          return u > o ? 1 : u < o ? -1 : t[0] - r[0];
+        });
+        for (let _t20 = 0; _t20 < u.length; _t20 += 1) [, r[_t20]] = u[_t20];
+        return r;
+      },
+      _signature: [{
+        types: [h]
+      }, {
+        types: [T]
+      }]
+    },
+    join: {
+      _func: t => t[1].join(t[0]),
+      _signature: [{
+        types: [l]
+      }, {
+        types: [d]
+      }]
+    },
+    reverse: {
+      _func: t => {
+        const e = u(t[0]);
+        if (i(e) === l) {
+          let _t21 = "";
+          for (let _r4 = e.length - 1; _r4 >= 0; _r4 -= 1) _t21 += e[_r4];
+          return _t21;
+        }
+        const r = t[0].slice(0);
+        return r.reverse(), r;
+      },
+      _signature: [{
+        types: [l, h]
+      }]
+    },
+    toArray: {
+      _func: t => i(t[0]) === h ? t[0] : [t[0]],
+      _signature: [{
+        types: [a]
+      }]
+    },
+    toString: {
+      _func: t => i(t[0]) === l ? t[0] : JSON.stringify(t[0]),
+      _signature: [{
+        types: [a]
+      }]
+    },
+    toNumber: {
+      _func: t => {
+        const e = i(t[0]);
+        return e === c ? t[0] : e === l ? s(t[0]) : null;
+      },
+      _signature: [{
+        types: [a]
+      }]
+    },
+    notNull: {
+      _func: t => t.find(t => i(t) !== E) || null,
+      _signature: [{
+        types: [a],
+        variadic: !0
+      }]
+    },
+    zip: {
+      _func: t => {
+        const e = t.reduce((t, e) => Math.min(t, e.length), t[0].length),
+          r = new Array(e);
+        for (let n = 0; n < e; n += 1) r[n] = [], t.forEach(t => {
+          r[n].push(t[n]);
+        });
+        return r;
+      },
+      _signature: [{
+        types: [h],
+        variadic: !0
+      }]
+    }
+  };
+}
+const {
+  TYPE_CLASS: de,
+  TYPE_ANY: ye
+} = t;
+var ge = new function () {
+  let t;
+  function e(t) {
+    return null == t ? "" : t.toString();
+  }
+  class r {
+    addFunctions(r, n = {}) {
+      this.functionTable = _extends$1({}, fe(this._interpreter, O, g, t, f, R, e), Ee(R, e, t, r), n);
+    }
+    _validateArgs(r, n, s, i) {
+      if (0 === s.length) return;
+      let u;
+      const o = s.filter(t => !t.optional).length;
+      if (s[s.length - 1].variadic) {
+        if (n.length < s.length) throw u = 1 === s.length ? " argument" : " arguments", new Error(`ArgumentError: ${r}() takes at least${s.length}${u} but received ${n.length}`);
+      } else if (n.length < o || n.length > s.length) throw u = 1 === s.length ? " argument" : " arguments", new Error(`ArgumentError: ${r}() takes ${s.length}${u} but received ${n.length}`);
+      if (!i) return;
+      let c, a;
+      const l = Math.min(s.length, n.length);
+      for (let _i = 0; _i < l; _i += 1) c = s[_i].types, h = n[_i], _ = void 0, c.includes(de) && null !== (_ = h) && !Array.isArray(_) && "Object" !== _.constructor.name || c.includes(ye) || (a = d(n[_i]), n[_i] = y(a, c, n[_i], r, t, e));
+      var h, _;
+    }
+    callFunction(t, e, r, n, s = !0) {
+      if (!Object.prototype.hasOwnProperty.call(this.functionTable, t)) throw new Error(`Unknown function: ${t}()`);
+      const i = this.functionTable[t];
+      return this._validateArgs(t, e, i._signature, s), i._func.call(this, e, r, n);
+    }
+  }
+  this.compile = function (t, e = [], r = []) {
+    let n;
+    try {
+      n = new pe(e).parse(t, r);
+    } catch (t) {
+      throw r.push(t.toString()), t;
+    }
+    return n;
+  }, this.search = function (n, s, i, u, o, c = [], a = "en-US") {
+    const l = new r(u);
+    l.debug = c, t = function (t, e = []) {
+      return r => {
+        const n = R(r);
+        if (null === n) return null;
+        if (n instanceof Array) return e.push("Converted array to zero"), 0;
+        const s = typeof n;
+        return "number" === s ? n : "string" === s ? t(n, e) : "boolean" === s ? n ? 1 : 0 : (e.push("Converted object to zero"), 0);
+      };
+    }(o || (t => {
+      const e = +t;
+      return Number.isNaN(e) ? 0 : e;
+    }), c);
+    const h = new k(l, i, t, e, c, a);
+    l._interpreter = h, l.addFunctions(c, u);
+    try {
+      return h.search(n, s);
+    } catch (t) {
+      throw c.push(t.message || t.toString()), t;
+    }
+  }, this.strictDeepEqual = N;
+}();
+class Oe {
+  constructor(t, e = {}, r = null, n = [], s = [], i = "en-US") {
+    this.expression = t, this.customFunctions = e, this.stringToNumber = r, this.node = ge.compile(t, n, s), this.debug = s, this.language = i;
+  }
+  search(t, e) {
+    return ge.search(this.node, t, e, _extends$1({}, this.customFunctions), this.stringToNumber, this.debug, this.language);
+  }
+}
+
+function _extends() {
+  _extends = Object.assign ? Object.assign.bind() : function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends.apply(this, arguments);
+}
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+/**
+ * Implementation of {@link IValidationError | Validation Error} interface
+ */
+class ValidationError {
+  constructor(fieldName = '', errorMessages = []) {
+    this.errorMessages = errorMessages;
+    this.fieldName = fieldName;
+  }
+}
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+// const primitives = ['string', 'boolean', 'number'];
+// const containers = ['object', 'array', 'number'];
+const objToMap = o => new Map(Object.entries(o));
+const stringViewTypes = objToMap({
+  'date': 'date-input',
+  'data-url': 'file-input',
+  'binary': 'file-input'
+});
+const typeToViewTypes = objToMap({
+  'number': 'number-input',
+  'boolean': 'checkbox',
+  'object': 'panel',
+  'array': 'panel',
+  'file': 'file-input',
+  'file[]': 'file-input'
+});
+const arrayTypes = ['string[]', 'boolean[]', 'number[]', 'array'];
+/**
+ * Returns the default view type for a given form field object based on `adaptive form specification`
+ * @param schema    schema item for which default view type is to found
+ * @returns default view type
+ */
+const defaultFieldTypes = schema => {
+  const type = schema.type || 'string';
+  if ('enum' in schema) {
+    const enums = schema.enum;
+    if (enums.length > 2 || arrayTypes.indexOf(type) > -1) {
+      return 'drop-down';
+    } else {
+      return 'checkbox';
+    }
+  }
+  if (type === 'string' || type === 'string[]') {
+    return stringViewTypes.get(schema.format) || 'text-input';
+  }
+  return typeToViewTypes.get(type) || 'text-input';
+};
+
+/**
+ * Get the property value form the json
+ * @param data      object as json
+ * @param key       name of the key
+ * @param def       default value
+ * @typeParam P     type for the default value
+ */
+const getProperty = (data, key, def) => {
+  if (key in data) {
+    return data[key];
+  } else if (!key.startsWith(':')) {
+    const prefixedKey = `:${key}`;
+    if (prefixedKey in data) {
+      return data[prefixedKey];
+    }
+  }
+  return def;
+};
+/**
+ * Checks if the input item provided is a form file attachment field
+ * @param item  input item it could be {@link FieldsetJson | Fieldset} or {@link FieldJson | Field}
+ * @returns `true` if `item` is a form file attachment, `false` otherwise
+ */
+const isFile = function isFile(item) {
+  return (item == null ? void 0 : item.type) === 'file' || (item == null ? void 0 : item.type) === 'file[]' || ((item == null ? void 0 : item.type) === 'string' || (item == null ? void 0 : item.type) === 'string[]') && ((item == null ? void 0 : item.format) === 'binary' || (item == null ? void 0 : item.format) === 'data-url');
+};
+/**
+ * Checks if the input item provided is a form check box field
+ * @param item  input item it could be {@link FieldsetJson | Fieldset} or {@link FieldJson | Field}
+ * @returns `true` if `item` is a form check box, `false` otherwise
+ */
+const isCheckbox = function isCheckbox(item) {
+  const fieldType = (item == null ? void 0 : item.fieldType) || defaultFieldTypes(item);
+  return fieldType === 'checkbox';
+};
+/**
+ * Checks if the input item provided is a form check box group field
+ * @param item  input item it could be {@link FieldsetJson | Fieldset} or {@link FieldJson | Field}
+ * @returns `true` if `item` is a form check box group, `false` otherwise
+ */
+const isCheckboxGroup = function isCheckboxGroup(item) {
+  const fieldType = (item == null ? void 0 : item.fieldType) || defaultFieldTypes(item);
+  return fieldType === 'checkbox-group';
+};
+/**
+ * Checks if the input item provided is a date field
+ * @param item  input item it could be {@link FieldsetJson | Fieldset} or {@link FieldJson | Field}
+ * @returns `true` if `item` is a form check box group, `false` otherwise
+ */
+const isDateField = function isDateField(item) {
+  const fieldType = (item == null ? void 0 : item.fieldType) || defaultFieldTypes(item);
+  return fieldType === 'text-input' && (item == null ? void 0 : item.format) === 'date' || fieldType === 'date-input';
+};
+/**
+ * Clones an object completely including any nested objects or arrays
+ * @param obj
+ * @param idGenerator
+ * @private
+ */
+function deepClone(obj, idGenerator) {
+  let result;
+  if (obj instanceof Array) {
+    result = [];
+    result = obj.map(x => deepClone(x, idGenerator));
+  } else if (typeof obj === 'object' && obj !== null) {
+    result = {};
+    Object.entries(obj).forEach(([key, value]) => {
+      result[key] = deepClone(value, idGenerator);
+    });
+  } else {
+    result = obj;
+  }
+  //if idGenerator is specified, and id exists in the object
+  if (idGenerator && result && result.id) {
+    result.id = idGenerator();
+  }
+  return result;
+}
+/**
+ * Prettifies obj as json string
+ * @param obj object to prettify
+ * @return json string
+ */
+const jsonString = obj => {
+  return JSON.stringify(obj, null, 2);
+};
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+/**
+ * Implementation of generic event
+ * @private
+ */
+class ActionImpl {
+  //@ts-ignore
+
+  constructor(payload, type, _metadata) {
+    this._metadata = _metadata;
+    this._payload = payload;
+    this._type = type;
+  }
+  get type() {
+    return this._type;
+  }
+  get payload() {
+    return this._payload;
+  }
+  get metadata() {
+    return this._metadata;
+  }
+  get target() {
+    return this._target;
+  }
+  get isCustomEvent() {
+    return false;
+  }
+  payloadToJson() {
+    return this.payload;
+  }
+  toJson() {
+    return {
+      payload: this.payloadToJson(),
+      type: this.type,
+      isCustomEvent: this.isCustomEvent
+    };
+  }
+  toString() {
+    return JSON.stringify(this.toJson());
+  }
+}
+/**
+ * Implementation of `change` event. The change event is triggered on the field whenever the value of the field is changed
+ */
+class Change extends ActionImpl {
+  /**
+   * @constructor
+   * @param [payload] event payload
+   * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
+   */
+  constructor(payload, dispatch = false) {
+    super(payload, 'change', {
+      dispatch
+    });
+  }
+  withAdditionalChange(change) {
+    return new Change(this.payload.changes.concat(change.payload.changes), this.metadata);
+  }
+}
+/**
+ * Implementation of `invalid` event. The invalid event is triggered when a Field’s value becomes invalid after a change event or whenever its value property change
+ */
+class Invalid extends ActionImpl {
+  /**
+   * @constructor
+   * @param [payload] event payload
+   */
+  constructor(payload = {}) {
+    super(payload, 'invalid', {});
+  }
+}
+/**
+ * Implementation of `valid` event. The valid event is triggered whenever the field’s valid state is changed from invalid to valid.
+ */
+class Valid extends ActionImpl {
+  /**
+   * @constructor
+   * @param [payload] event payload
+   */
+  constructor(payload = {}) {
+    super(payload, 'valid', {});
+  }
+}
+/**
+ * Implementation of an ExecuteRule event.
+ * @private
+ */
+class ExecuteRule extends ActionImpl {
+  /**
+   * @constructor
+   * @param [payload] event payload
+   * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
+   */
+  constructor(payload = {}, dispatch = false) {
+    super(payload, 'executeRule', {
+      dispatch
+    });
+  }
+}
+/**
+ * Creates a change event
+ * @param propertyName  name of the form field property
+ * @param currentValue  current value
+ * @param prevValue     previous value
+ * @returns {@link Change} change event
+ */
+const propertyChange = (propertyName, currentValue, prevValue) => {
+  return new Change({
+    changes: [{
+      propertyName,
+      currentValue,
+      prevValue
+    }]
+  });
+};
+/**
+ * Implementation of `initialize` event. The event is triggered on all the fields when the form initialisation is complete
+ */
+class Initialize extends ActionImpl {
+  /**
+   * @constructor
+   * @param [payload] event payload
+   * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
+   */
+  constructor(payload, dispatch = false) {
+    super(payload, 'initialize', {
+      dispatch
+    });
+  }
+}
+/**
+ * Implementation of `load` event. The event is when the form initialization is complete
+ */
+class FormLoad extends ActionImpl {
+  /**
+   * @constructor
+   */
+  constructor() {
+    super({}, 'load', {
+      dispatch: false
+    });
+  }
+}
+/**
+ * Implementation of `click` event. The event is triggered when user clicks on an element.
+ */
+class Click extends ActionImpl {
+  /**
+   * @constructor
+   * @param [payload] event payload
+   * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
+   */
+  constructor(payload, dispatch = false) {
+    super(payload, 'click', {
+      dispatch
+    });
+  }
+}
+/**
+ * Implementation of `blur` event. The event is triggered when the element loses focus.
+ */
+class Blur extends ActionImpl {
+  /**
+   * @constructor
+   * @param [payload] event payload
+   * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
+   */
+  constructor(payload, dispatch = false) {
+    super(payload, 'blur', {
+      dispatch
+    });
+  }
+}
+/**
+ * Implementation of `ValidationComplete` event. The ValidationComplete event is triggered once validation is completed
+ * on the form.
+ *
+ * An example of using this event,
+ * ```
+ * function onValidationComplete(event) {
+ *	 const x = event.payload[0].id;
+ *	 // do something with the invalid field
+ * }
+ * ```
+ */
+class ValidationComplete extends ActionImpl {
+  /**
+   * @constructor
+   * @param [payload] event payload (ie) list of {@link ValidationError | validation errors}
+   * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
+   */
+  constructor(payload, dispatch = false) {
+    super(payload, 'validationComplete', {
+      dispatch
+    });
+  }
+}
+/**
+ * Implementation of `submit` event. The submit event is triggered on the Form.
+ * To trigger the submit event, submit function needs to be invoked or one can invoke dispatchEvent API.
+ */
+class Submit extends ActionImpl {
+  /**
+   * @constructor
+   * @param [payload] event payload
+   * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
+   */
+  constructor(payload, dispatch = false) {
+    super(payload, 'submit', {
+      dispatch
+    });
+  }
+}
+/**
+ * Implementation of `fieldChanged` event. The field changed event is triggered on the field which it has changed.
+ */
+class FieldChanged extends ActionImpl {
+  constructor(changes, field) {
+    super({
+      field,
+      changes
+    }, 'fieldChanged');
+  }
+}
+/**
+ * Implementation of `custom event`.
+ */
+class CustomEvent$1 extends ActionImpl {
+  /**
+   * @constructor
+   * @param [eventName] name of the event
+   * @param [payload] event payload
+   * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
+   */
+  constructor(eventName, payload = {}, dispatch = false) {
+    super(payload, eventName, {
+      dispatch
+    });
+  }
+  /**
+   * Defines if the event is custom
+   */
+  get isCustomEvent() {
+    return true;
+  }
+}
+/**
+ * Implementation of `addItem` event. The event is triggered on a panel to add a new instance of items inside it.
+ */
+class AddItem extends ActionImpl {
+  /**
+   * @constructor
+   * @param [payload] event payload
+   */
+  constructor(payload) {
+    super(payload, 'addItem');
+  }
+}
+/**
+ * Implementation of `removeItem` event. The event is triggered on a panel to remove an instance of items inside it.
+ */
+class RemoveItem extends ActionImpl {
+  /**
+   * @constructor
+   * @param [payload] event payload
+   */
+  constructor(payload) {
+    super(payload, 'removeItem');
+  }
+}
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+/**
+ * @private
+ */
+class DataValue {
+  constructor($_name, $_value, $_type = typeof $_value) {
+    this.$_fields = [];
+    this.$_name = $_name;
+    this.$_value = $_value;
+    this.$_type = $_type;
+  }
+  valueOf() {
+    return this.$_value;
+  }
+  get $name() {
+    return this.$_name;
+  }
+  get $value() {
+    return this.$_value;
+  }
+  setValue(typedValue, originalValue, fromField) {
+    this.$_value = typedValue;
+    this.$_fields.forEach(x => {
+      if (fromField !== x) {
+        x.value = originalValue;
+      }
+    });
+  }
+  get $type() {
+    return this.$_type;
+  }
+  $bindToField(field) {
+    if (this.$_fields.indexOf(field) === -1) {
+      this.$_fields.push(field);
+    }
+  }
+  $convertToDataValue() {
+    return this;
+  }
+  get $isDataGroup() {
+    return false;
+  }
+}
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+const value = Symbol('NullValue');
+class NullDataValueClass extends DataValue {
+  constructor() {
+    super('', value, 'null');
+  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setValue() {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  $bindToField() {}
+  $length() {
+    return 0;
+  }
+  $convertToDataValue() {
+    return this;
+  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  $addDataNode() {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  $removeDataNode() {}
+  $getDataNode() {
+    return this;
+  }
+  $containsDataNode() {
+    return false;
+  }
+}
+//@ts-ignore
+const NullDataValue = new NullDataValueClass();
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+/**
+ * @private
+ */
+class DataGroup extends DataValue {
+  createEntry(key, value) {
+    const t = value instanceof Array ? 'array' : typeof value;
+    if (typeof value === 'object' && value != null) {
+      return new DataGroup(key, value, t);
+    } else {
+      return new DataValue(key, value, t);
+    }
+  }
+  constructor(_name, _value, _type = typeof _value) {
+    super(_name, _value, _type);
+    if (_value instanceof Array) {
+      this.$_items = _value.map((value, index) => {
+        return this.createEntry(index, value);
+      });
+    } else {
+      this.$_items = Object.fromEntries(Object.entries(_value).map(([key, value]) => {
+        return [key, this.createEntry(key, value)];
+      }));
+    }
+  }
+  get $value() {
+    if (this.$type === 'array') {
+      return Object.values(this.$_items).filter(x => typeof x !== 'undefined').map(x => x.$value);
+    } else {
+      return Object.fromEntries(Object.values(this.$_items).filter(x => typeof x !== 'undefined').map(x => {
+        return [x.$name, x.$value];
+      }));
+    }
+  }
+  get $length() {
+    return Object.entries(this.$_items).length;
+  }
+  $convertToDataValue() {
+    return new DataValue(this.$name, this.$value, this.$type);
+  }
+  $addDataNode(name, value, override = false) {
+    if (value !== NullDataValue) {
+      if (this.$type === 'array') {
+        const index = name;
+        if (!override) {
+          this.$_items.splice(index, 0, value);
+        } else {
+          this.$_items[name] = value;
+        }
+      } else {
+        this.$_items[name] = value;
+      }
+    }
+  }
+  $removeDataNode(name) {
+    //@ts-ignore not calling delete
+    this.$_items[name] = undefined;
+  }
+  $getDataNode(name) {
+    if (this.$_items.hasOwnProperty(name)) {
+      return this.$_items[name];
+    }
+  }
+  $containsDataNode(name) {
+    return this.$_items.hasOwnProperty(name) && typeof this.$_items[name] !== 'undefined';
+  }
+  get $isDataGroup() {
+    return true;
+  }
+}
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+const TOK_DOT = 'DOT';
+const TOK_IDENTIFIER = 'Identifier';
+const TOK_GLOBAL = 'Global';
+const TOK_BRACKET = 'bracket';
+const TOK_NUMBER = 'Number';
+const globalStartToken = '$';
+const identifier = (value, start) => {
+  return {
+    type: TOK_IDENTIFIER,
+    value,
+    start
+  };
+};
+const bracket = (value, start) => {
+  return {
+    type: TOK_BRACKET,
+    value,
+    start
+  };
+};
+const global$ = () => {
+  return {
+    type: TOK_GLOBAL,
+    start: 0,
+    value: globalStartToken
+  };
+};
+const isAlphaNum = function isAlphaNum(ch) {
+  return ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch >= '0' && ch <= '9' || ch === '_';
+};
+const isGlobal = (prev, stream, pos) => {
+  // global tokens occur only at the start of an expression
+  return prev === null && stream[pos] === globalStartToken;
+};
+const isIdentifier = (stream, pos) => {
+  const ch = stream[pos];
+  // $ is special -- it's allowed to be part of an identifier if it's the first character
+  if (ch === '$') {
+    return stream.length > pos && isAlphaNum(stream[pos + 1]);
+  }
+  // return whether character 'isAlpha'
+  return ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch === '_';
+};
+const isNum = ch => {
+  return ch >= '0' && ch <= '9';
+};
+class Tokenizer {
+  constructor(stream) {
+    this._tokens = [];
+    this._result_tokens = [];
+    this.stream = stream;
+    this._current = 0;
+  }
+  _consumeGlobal() {
+    this._current += 1;
+    return global$();
+  }
+  _consumeUnquotedIdentifier(stream) {
+    const start = this._current;
+    this._current += 1;
+    while (this._current < stream.length && isAlphaNum(stream[this._current])) {
+      this._current += 1;
+    }
+    return identifier(stream.slice(start, this._current), start);
+  }
+  _consumeQuotedIdentifier(stream) {
+    const start = this._current;
+    this._current += 1;
+    const maxLength = stream.length;
+    while (stream[this._current] !== '"' && this._current < maxLength) {
+      // You can escape a double quote and you can escape an escape.
+      let current = this._current;
+      if (stream[current] === '\\' && (stream[current + 1] === '\\' || stream[current + 1] === '"')) {
+        current += 2;
+      } else {
+        current += 1;
+      }
+      this._current = current;
+    }
+    this._current += 1;
+    return identifier(JSON.parse(stream.slice(start, this._current)), start);
+  }
+  _consumeNumber(stream) {
+    const start = this._current;
+    this._current += 1;
+    const maxLength = stream.length;
+    while (isNum(stream[this._current]) && this._current < maxLength) {
+      this._current += 1;
+    }
+    const n = stream.slice(start, this._current);
+    const value = parseInt(n, 10);
+    return {
+      type: TOK_NUMBER,
+      value,
+      start
+    };
+  }
+  _consumeBracket(stream) {
+    const start = this._current;
+    this._current += 1;
+    let value;
+    if (isNum(stream[this._current])) {
+      value = this._consumeNumber(stream).value;
+    } else {
+      throw new Error(`unexpected exception at position ${this._current}. Must be a character`);
+    }
+    if (this._current < this.stream.length && stream[this._current] !== ']') {
+      throw new Error(`unexpected exception at position ${this._current}. Must be a character`);
+    }
+    this._current++;
+    return bracket(value, start);
+  }
+  tokenize() {
+    const stream = this.stream;
+    while (this._current < stream.length) {
+      const prev = this._tokens.length ? this._tokens.slice(-1)[0] : null;
+      if (isGlobal(prev, stream, this._current)) {
+        const token = this._consumeGlobal();
+        this._tokens.push(token);
+        this._result_tokens.push(token);
+      } else if (isIdentifier(stream, this._current)) {
+        const token = this._consumeUnquotedIdentifier(stream);
+        this._tokens.push(token);
+        this._result_tokens.push(token);
+      } else if (stream[this._current] === '.' && prev != null && prev.type !== TOK_DOT) {
+        this._tokens.push({
+          type: TOK_DOT,
+          value: '.',
+          start: this._current
+        });
+        this._current += 1;
+      } else if (stream[this._current] === '[') {
+        // No need to increment this._current.  This happens
+        // in _consumeLBracket
+        const token = this._consumeBracket(stream);
+        this._tokens.push(token);
+        this._result_tokens.push(token);
+      } else if (stream[this._current] === '"') {
+        const token = this._consumeQuotedIdentifier(stream);
+        this._tokens.push(token);
+        this._result_tokens.push(token);
+      } else {
+        const p = Math.max(0, this._current - 2);
+        const s = Math.min(this.stream.length, this._current + 2);
+        throw new Error(`Exception at parsing stream ${this.stream.slice(p, s)}`);
+      }
+    }
+    return this._result_tokens;
+  }
+}
+const tokenize = stream => {
+  return new Tokenizer(stream).tokenize();
+};
+const resolveData = (data, input, create) => {
+  let tokens;
+  if (typeof input === 'string') {
+    tokens = tokenize(input);
+  } else {
+    tokens = input;
+  }
+  let result = data;
+  let i = 0;
+  const createIntermediateNode = (token, nextToken, create) => {
+    return nextToken === null ? create : nextToken.type === TOK_BRACKET ? new DataGroup(token.value, [], 'array') : new DataGroup(token.value, {});
+  };
+  while (i < tokens.length && result != null) {
+    const token = tokens[i];
+    if (token.type === TOK_GLOBAL) {
+      result = data;
+    } else if (token.type === TOK_IDENTIFIER) {
+      if (result instanceof DataGroup && result.$type === 'object') {
+        //@ts-ignore
+        if (result.$containsDataNode(token.value) && result.$getDataNode(token.value).$value !== null) {
+          result = result.$getDataNode(token.value);
+        } else if (create) {
+          const nextToken = i < tokens.length - 1 ? tokens[i + 1] : null;
+          const toCreate = createIntermediateNode(token, nextToken, create);
+          result.$addDataNode(token.value, toCreate);
+          result = toCreate;
+        } else {
+          result = undefined;
+        }
+      } else {
+        throw new Error(`Looking for ${token.value} in ${result.$value}`);
+      }
+    } else if (token.type === TOK_BRACKET) {
+      if (result instanceof DataGroup && result.$type === 'array') {
+        const index = token.value;
+        if (index < result.$length) {
+          //@ts-ignore
+          result = result.$getDataNode(index);
+        } else if (create) {
+          const nextToken = i < tokens.length - 1 ? tokens[i + 1] : null;
+          const toCreate = createIntermediateNode(token, nextToken, create);
+          result.$addDataNode(index, toCreate);
+          result = toCreate;
+        } else {
+          result = undefined;
+        }
+      } else {
+        throw new Error(`Looking for index ${token.value} in non array${result.$value}`);
+      }
+    }
+    i += 1;
+  }
+  return result;
+};
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+var __decorate$2 = function (decorators, target, key, desc) {
+  var c = arguments.length,
+    r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+    d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+/**
+ * Defines the properties that are editable. These properties can be modified during rule execution.
+ */
+const editableProperties = ['value', 'label', 'description', 'visible', 'enabled', 'readOnly', 'enum', 'enumNames', 'required', 'properties',
+// 'enforceEnum', // not exposed for now
+'exclusiveMinimum', 'exclusiveMaximum', 'maxLength', 'maximum', 'maxItems', 'minLength', 'minimum', 'minItems', 'step'
+// 'placeholder' // not exposed for now.
+];
+/**
+ * Defines props that are dynamic and can be changed at runtime.
+ */
+const dynamicProps = [...editableProperties, 'valid', 'index', 'activeChild'];
+/**
+ * Implementation of action with target
+ * @private
+ */
+class ActionImplWithTarget {
+  /**
+   * @constructor
+   * @param _action
+   * @param _target
+   * @private
+   */
+  constructor(_action, _target) {
+    this._action = _action;
+    this._target = _target;
+  }
+  get type() {
+    return this._action.type;
+  }
+  get payload() {
+    return this._action.payload;
+  }
+  get metadata() {
+    return this._action.metadata;
+  }
+  get target() {
+    return this._target;
+  }
+  get isCustomEvent() {
+    return this._action.isCustomEvent;
+  }
+  get originalAction() {
+    return this._action.originalAction;
+  }
+  toString() {
+    return this._action.toString();
+  }
+}
+const target = Symbol('target');
+const qualifiedName = Symbol('qualifiedName');
+function dependencyTracked() {
+  return function (target, propertyKey, descriptor) {
+    const get = descriptor.get;
+    if (get != undefined) {
+      descriptor.get = function () {
+        // @ts-ignore
+        this.ruleEngine.trackDependency(this);
+        return get.call(this);
+      };
+    }
+  };
+}
+/**
+ * Defines a generic base class which all objects of form runtime model should extend from.
+ * @typeparam T type of the form object which extends from {@link BaseJson | base type}
+ */
+class BaseNode {
+  //@ts-ignore
+
+  get isContainer() {
+    return false;
+  }
+  /**
+   * @constructor
+   * @param params
+   * @param _options
+   * @private
+   */
+  constructor(params,
+  //@ts_ignore
+  _options) {
+    this._callbacks = {};
+    this._dependents = [];
+    this._tokens = [];
+    this._options = _options;
+    //@ts-ignore
+    this[qualifiedName] = null;
+    this._jsonModel = _extends({}, params, {
+      //@ts-ignore
+      id: 'id' in params ? params.id : this.form.getUniqueId()
+    });
+  }
+  setupRuleNode() {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const self = this;
+    this._ruleNode = new Proxy(this.ruleNodeReference(), {
+      get: (ruleNodeReference, prop) => {
+        return self.getFromRule(ruleNodeReference, prop);
+      }
+    });
+  }
+  /**
+   * @private
+   */
+  ruleNodeReference() {
+    return this;
+  }
+  /**
+   * @private
+   */
+  getRuleNode() {
+    return this._ruleNode;
+  }
+  getFromRule(ruleNodeReference, prop) {
+    if (prop === Symbol.toPrimitive || prop === 'valueOf' && !ruleNodeReference.hasOwnProperty('valueOf')) {
+      return this.valueOf;
+    } else if (prop === target) {
+      return this;
+    } else if (typeof prop === 'string') {
+      //look for property
+      if (prop.startsWith('$')) {
+        prop = prop.substr(1);
+        //@ts-ignore
+        //@todo: create a list of properties that are allowed
+        //@ts-ignore
+        // return only non functional properties in this object
+        if (typeof this[prop] !== 'function') {
+          //@ts-ignore
+          const retValue = this[prop];
+          if (retValue instanceof BaseNode) {
+            //$parent
+            return retValue.getRuleNode();
+          } else if (retValue instanceof Array) {
+            //$items
+            return retValue.map(r => r instanceof BaseNode ? r.getRuleNode() : r);
+          } else {
+            return retValue;
+          }
+        }
+      } else {
+        //look in the items
+        if (ruleNodeReference.hasOwnProperty(prop)) {
+          return ruleNodeReference[prop];
+        } else if (typeof ruleNodeReference[prop] === 'function') {
+          //todo : create allow list of functions
+          //to support panel instanceof Array panel1.map(..)
+          return ruleNodeReference[prop];
+        }
+      }
+    }
+  }
+  get id() {
+    return this._jsonModel.id;
+  }
+  get index() {
+    return this.parent.indexOf(this);
+  }
+  get parent() {
+    return this._options.parent;
+  }
+  get type() {
+    return this._jsonModel.type;
+  }
+  get fieldType() {
+    return this._jsonModel.fieldType || 'text-input';
+  }
+  get ':type'() {
+    return this._jsonModel[':type'] || this.fieldType;
+  }
+  get name() {
+    return this._jsonModel.name;
+  }
+  get description() {
+    return this._jsonModel.description;
+  }
+  set description(d) {
+    this._setProperty('description', d);
+  }
+  get dataRef() {
+    return this._jsonModel.dataRef;
+  }
+  get visible() {
+    return this._jsonModel.visible;
+  }
+  set visible(v) {
+    if (v !== this._jsonModel.visible) {
+      const changeAction = propertyChange('visible', v, this._jsonModel.visible);
+      this._jsonModel.visible = v;
+      this.notifyDependents(changeAction);
+    }
+  }
+  get form() {
+    return this._options.form;
+  }
+  get ruleEngine() {
+    return this.form.ruleEngine;
+  }
+  get label() {
+    return this._jsonModel.label;
+  }
+  set label(l) {
+    if (l !== this._jsonModel.label) {
+      const changeAction = propertyChange('label', l, this._jsonModel.label);
+      this._jsonModel = _extends({}, this._jsonModel, {
+        label: l
+      });
+      this.notifyDependents(changeAction);
+    }
+  }
+  get uniqueItems() {
+    return this._jsonModel.uniqueItems;
+  }
+  /**
+   * Transparent form fields are meant only for creation of view. They are also not part of data
+   */
+  isTransparent() {
+    var _this$parent;
+    // named form fields are not transparent
+    // @ts-ignore
+    // handling array use-case as items of array can be unnamed
+    const isNonTransparent = ((_this$parent = this.parent) == null ? void 0 : _this$parent._jsonModel.type) === 'array';
+    return !this._jsonModel.name && !isNonTransparent;
+  }
+  getState() {
+    return _extends({}, this._jsonModel, {
+      ':type': this[':type']
+    });
+  }
+  /**
+   * @private
+   */
+  subscribe(callback, eventName = 'change') {
+    this._callbacks[eventName] = this._callbacks[eventName] || [];
+    this._callbacks[eventName].push(callback);
+    //console.log(`subscription added : ${this._elem.id}, count : ${this._callbacks[eventName].length}`);
+    return {
+      unsubscribe: () => {
+        this._callbacks[eventName] = this._callbacks[eventName].filter(x => x !== callback);
+        //console.log(`subscription removed : ${this._elem.id}, count : ${this._callbacks[eventName].length}`);
+      }
+    };
+  }
+  /**
+   * @private
+   */
+  _addDependent(dependent) {
+    if (this._dependents.find(({
+      node
+    }) => node === dependent) === undefined) {
+      const subscription = this.subscribe(change => {
+        const changes = change.payload.changes;
+        const propsToLook = [...dynamicProps, 'items'];
+        // @ts-ignore
+        const isPropChanged = changes.findIndex(x => {
+          return propsToLook.indexOf(x.propertyName) > -1;
+        }) > -1;
+        if (isPropChanged) {
+          dependent.dispatch(new ExecuteRule());
+        }
+      });
+      this._dependents.push({
+        node: dependent,
+        subscription
+      });
+    }
+  }
+  /**
+   * @private
+   */
+  removeDependent(dependent) {
+    const index = this._dependents.findIndex(({
+      node
+    }) => node === dependent);
+    if (index > -1) {
+      this._dependents[index].subscription.unsubscribe();
+      this._dependents.splice(index, 1);
+    }
+  }
+  /**
+   * @private
+   */
+  queueEvent(action) {
+    const actionWithTarget = new ActionImplWithTarget(action, this);
+    this.form.getEventQueue().queue(this, actionWithTarget, ['valid', 'invalid'].indexOf(actionWithTarget.type) > -1);
+  }
+  dispatch(action) {
+    this.queueEvent(action);
+    this.form.getEventQueue().runPendingQueue();
+  }
+  /**
+   * @private
+   */
+  notifyDependents(action) {
+    const handlers = this._callbacks[action.type] || [];
+    handlers.forEach(x => {
+      x(new ActionImplWithTarget(action, this));
+    });
+  }
+  /**
+   * @param prop
+   * @param newValue
+   * @private
+   */
+  _setProperty(prop, newValue, notify = true) {
+    //@ts-ignore
+    const oldValue = this._jsonModel[prop];
+    let isValueSame = false;
+    if (newValue !== null && oldValue !== null && typeof newValue === 'object' && typeof oldValue === 'object') {
+      isValueSame = JSON.stringify(newValue) === JSON.stringify(oldValue);
+    } else {
+      // @ts-ignore
+      isValueSame = oldValue === newValue;
+    }
+    if (!isValueSame) {
+      //@ts-ignore
+      this._jsonModel[prop] = newValue;
+      const changeAction = propertyChange(prop, newValue, oldValue);
+      if (notify) {
+        this.notifyDependents(changeAction);
+      }
+      return changeAction.payload.changes;
+    }
+    return [];
+  }
+  /**
+   * @private
+   */
+  _bindToDataModel(contextualDataModel) {
+    if (this.id === '$form') {
+      this._data = contextualDataModel;
+      return;
+    }
+    const dataRef = this._jsonModel.dataRef;
+    let _data,
+      _parent = contextualDataModel,
+      _key = '';
+    if (dataRef === null) {
+      // null data binding
+      _data = NullDataValue;
+    } else if (dataRef !== undefined) {
+      // explicit data binding
+      if (this._tokens.length === 0) {
+        this._tokens = tokenize(dataRef);
+      }
+      let searchData = contextualDataModel;
+      if (this._tokens[0].type === TOK_GLOBAL) {
+        searchData = this.form.getDataNode();
+      }
+      if (typeof searchData !== 'undefined') {
+        const name = this._tokens[this._tokens.length - 1].value;
+        const create = this.defaultDataModel(name);
+        _data = resolveData(searchData, this._tokens, create);
+        // @ts-ignore
+        _parent = resolveData(searchData, this._tokens.slice(0, -1));
+        _key = name;
+      }
+    } else {
+      // name data binding
+      if (
+      //@ts-ignore
+      contextualDataModel !== NullDataValue) {
+        _parent = contextualDataModel;
+        const name = this._jsonModel.name || '';
+        const key = contextualDataModel.$type === 'array' ? this.index : name;
+        _key = key;
+        if (key !== '') {
+          const create = this.defaultDataModel(key);
+          if (create !== undefined) {
+            _data = contextualDataModel.$getDataNode(key);
+            if (_data === undefined) {
+              _data = create;
+              contextualDataModel.$addDataNode(key, _data);
+            }
+          }
+        } else {
+          _data = undefined;
+        }
+      }
+    }
+    if (_data) {
+      var _data3;
+      //@ts-ignore
+      if (!this.isContainer && _parent !== NullDataValue && _data !== NullDataValue) {
+        var _data2;
+        _data = (_data2 = _data) == null ? void 0 : _data2.$convertToDataValue();
+        _parent.$addDataNode(_key, _data, true);
+      }
+      (_data3 = _data) == null ? void 0 : _data3.$bindToField(this);
+      this._data = _data;
+    }
+  }
+  /**
+   * @private
+   */
+  getDataNode() {
+    return this._data;
+  }
+  get properties() {
+    return this._jsonModel.properties || {};
+  }
+  set properties(p) {
+    this._setProperty('properties', _extends({}, p));
+  }
+  getNonTransparentParent() {
+    let nonTransparentParent = this.parent;
+    while (nonTransparentParent != null && nonTransparentParent.isTransparent()) {
+      nonTransparentParent = nonTransparentParent.parent;
+    }
+    return nonTransparentParent;
+  }
+  /**
+   * called after the node is inserted in the parent
+   * @private
+   */
+  _initialize() {
+    if (typeof this._data === 'undefined') {
+      let dataNode,
+        parent = this.parent;
+      do {
+        //@ts-ignore
+        dataNode = parent.getDataNode();
+        parent = parent.parent;
+      } while (dataNode === undefined);
+      this._bindToDataModel(dataNode);
+    }
+  }
+  /**
+   * Checks whether there are any updates in the properties. If there are applies them to the
+   * json model as well.
+   * @param propNames
+   * @param updates
+   * @private
+   */
+  _applyUpdates(propNames, updates) {
+    return propNames.reduce((acc, propertyName) => {
+      //@ts-ignore
+      const currentValue = updates[propertyName];
+      const changes = this._setProperty(propertyName, currentValue, false);
+      if (changes.length > 0) {
+        acc[propertyName] = changes[0];
+      }
+      return acc;
+    }, {});
+  }
+  get qualifiedName() {
+    if (this.isTransparent()) {
+      return null;
+    }
+    // @ts-ignore
+    if (this[qualifiedName] !== null) {
+      // @ts-ignore
+      return this[qualifiedName];
+    }
+    // use qualified name
+    const parent = this.getNonTransparentParent();
+    if (parent && parent.type === 'array') {
+      //@ts-ignore
+      this[qualifiedName] = `${parent.qualifiedName}[${this.index}]`;
+    } else {
+      //@ts-ignore
+      this[qualifiedName] = `${parent.qualifiedName}.${this.name}`;
+    }
+    //@ts-ignore
+    return this[qualifiedName];
+  }
+  focus() {
+    if (this.parent) {
+      this.parent.activeChild = this;
+    }
+  }
+}
+__decorate$2([dependencyTracked()], BaseNode.prototype, "index", null);
+__decorate$2([dependencyTracked()], BaseNode.prototype, "description", null);
+__decorate$2([dependencyTracked()], BaseNode.prototype, "visible", null);
+__decorate$2([dependencyTracked()], BaseNode.prototype, "label", null);
+__decorate$2([dependencyTracked()], BaseNode.prototype, "properties", null);
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+/**
+ * Defines scriptable aspects (ie rules, events) of form runtime model. Any form runtime object which requires
+ * execution of rules/events should extend from this class.
+ */
+class Scriptable extends BaseNode {
+  constructor(...args) {
+    super(...args);
+    this._events = {};
+    this._rules = {};
+  }
+  get rules() {
+    return this._jsonModel.rules || {};
+  }
+  getCompiledRule(eName, rule) {
+    if (!(eName in this._rules)) {
+      const eString = rule || this.rules[eName];
+      if (typeof eString === 'string' && eString.length > 0) {
+        try {
+          this._rules[eName] = this.ruleEngine.compileRule(eString);
+        } catch (e) {
+          this.form.logger.error(`Unable to compile rule \`"${eName}" : "${eString}"\` Exception : ${e}`);
+        }
+      } else {
+        throw new Error(`only expression strings are supported. ${typeof eString} types are not supported`);
+      }
+    }
+    return this._rules[eName];
+  }
+  getCompiledEvent(eName) {
+    if (!(eName in this._events)) {
+      var _this$_jsonModel$even;
+      let eString = (_this$_jsonModel$even = this._jsonModel.events) == null ? void 0 : _this$_jsonModel$even[eName];
+      if (typeof eString === 'string' && eString.length > 0) {
+        eString = [eString];
+      }
+      if (typeof eString !== 'undefined' && eString.length > 0) {
+        this._events[eName] = eString.map(x => {
+          try {
+            return this.ruleEngine.compileRule(x);
+          } catch (e) {
+            this.form.logger.error(`Unable to compile expression \`"${eName}" : "${eString}"\` Exception : ${e}`);
+          }
+          return null;
+        }).filter(x => x !== null);
+      }
+    }
+    return this._events[eName] || [];
+  }
+  applyUpdates(updates) {
+    Object.entries(updates).forEach(([key, value]) => {
+      // @ts-ignore
+      // the first check is to disable accessing this.value & this.items property
+      // otherwise that will trigger dependency tracking
+      if (key in editableProperties || key in this && typeof this[key] !== 'function') {
+        try {
+          // @ts-ignore
+          this[key] = value;
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    });
+  }
+  executeAllRules(context) {
+    const entries = Object.entries(this.rules);
+    if (entries.length > 0) {
+      const scope = this.getExpressionScope();
+      entries.forEach(([prop, rule]) => {
+        const node = this.getCompiledRule(prop, rule);
+        if (node) {
+          const newVal = this.ruleEngine.execute(node, scope, context, true);
+          if (editableProperties.indexOf(prop) > -1) {
+            //@ts-ignore
+            this[prop] = newVal;
+          } else {
+            this.form.logger.warn(`${prop} is not a valid editable property.`);
+          }
+        }
+      });
+    }
+  }
+  getExpressionScope() {
+    const parent = this.getNonTransparentParent();
+    const target = {
+      self: this.getRuleNode(),
+      siblings: (parent == null ? void 0 : parent.ruleNodeReference()) || {}
+    };
+    const scope = new Proxy(target, {
+      get: (target, prop) => {
+        if (prop === Symbol.toStringTag) {
+          return 'Object';
+        }
+        prop = prop;
+        // The order of resolution is
+        // 1. property
+        // 2. sibling
+        // 3. child
+        if (prop.startsWith('$')) {
+          //this returns children as well, so adding an explicit check for property name
+          const retValue = target.self[prop];
+          if (retValue instanceof BaseNode) {
+            //$parent
+            return retValue.getRuleNode();
+          } else if (retValue instanceof Array) {
+            //$items
+            return retValue.map(r => r instanceof BaseNode ? r.getRuleNode() : r);
+          } else {
+            return retValue;
+          }
+        } else {
+          if (prop in target.siblings) {
+            return target.siblings[prop];
+          } else {
+            return target.self[prop];
+          }
+        }
+      },
+      has: (target, prop) => {
+        prop = prop;
+        const selfPropertyOrChild = target.self[prop];
+        const sibling = target.siblings[prop];
+        return typeof selfPropertyOrChild != 'undefined' || typeof sibling != 'undefined';
+      }
+    });
+    return scope;
+  }
+  executeEvent(context, node) {
+    let updates;
+    if (node) {
+      updates = this.ruleEngine.execute(node, this.getExpressionScope(), context);
+    }
+    if (typeof updates !== 'undefined' && updates != null) {
+      this.applyUpdates(updates);
+    }
+  }
+  /**
+   * Executes the given rule
+   * @param event
+   * @param context
+   * @private
+   */
+  executeRule(event, context) {
+    if (typeof event.payload.ruleName === 'undefined') {
+      this.executeAllRules(context);
+    }
+  }
+  executeExpression(expr) {
+    const ruleContext = {
+      'form': this.form,
+      '$form': this.form.getRuleNode(),
+      '$field': this.getRuleNode(),
+      'field': this
+    };
+    const node = this.ruleEngine.compileRule(expr);
+    return this.ruleEngine.execute(node, this.getExpressionScope(), ruleContext);
+  }
+  /**
+   * Executes the given action
+   * @param action    {@link Action | event object}
+   */
+  executeAction(action) {
+    const context = {
+      'form': this.form,
+      '$form': this.form.getRuleNode(),
+      '$field': this.getRuleNode(),
+      'field': this,
+      '$event': {
+        type: action.type,
+        payload: action.payload,
+        target: this.getRuleNode()
+      }
+    };
+    const eventName = action.isCustomEvent ? `custom:${action.type}` : action.type;
+    const funcName = action.isCustomEvent ? `custom_${action.type}` : action.type;
+    const node = this.getCompiledEvent(eventName);
+    //todo: apply all the updates at the end  or
+    // not trigger the change event until the execution is finished
+    node.forEach(n => this.executeEvent(context, n));
+    // @ts-ignore
+    if (funcName in this && typeof this[funcName] === 'function') {
+      //@ts-ignore
+      this[funcName](action, context);
+    }
+    this.notifyDependents(action);
+  }
+}
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+var __decorate$1 = function (decorators, target, key, desc) {
+  var c = arguments.length,
+    r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+    d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+/**
+ * Defines a generic container class which any form container should extend from.
+ * @typeparam T type of the node which extends {@link ContainerJson} and {@link RulesJson}
+ */
+class Container extends Scriptable {
+  constructor(...args) {
+    super(...args);
+    this._children = [];
+    this._itemTemplate = null;
+    this._activeChild = null;
+  }
+  /**
+   * @private
+   */
+  ruleNodeReference() {
+    return this._childrenReference;
+  }
+  //todo : this should not be public
+  get items() {
+    return this._children;
+  }
+  get maxItems() {
+    return this._jsonModel.maxItems;
+  }
+  set maxItems(m) {
+    this._jsonModel.maxItems = m;
+    const minItems = this._jsonModel.minItems || 1;
+    const itemsLength = this._children.length;
+    const items2Remove = Math.min(itemsLength - m, itemsLength - minItems);
+    if (items2Remove > 0) {
+      for (let i = 0; i < items2Remove; i++) {
+        this.getDataNode().$removeDataNode(m + i);
+        this._childrenReference.pop();
+      }
+      const elems = this._children.splice(m, items2Remove);
+      this.notifyDependents(propertyChange('items', elems, null));
+    }
+  }
+  get minItems() {
+    return this._jsonModel.minItems;
+  }
+  /**
+   * returns whether the items in the Panel can repeat or not
+   */
+  hasDynamicItems() {
+    return this._itemTemplate != null;
+  }
+  get isContainer() {
+    return true;
+  }
+  /**
+   * Returns the current container state
+   */
+  getState() {
+    return _extends({}, this._jsonModel, {
+      ':type': this[':type'],
+      items: this._children.map(x => {
+        return _extends({}, x.getState());
+      })
+    });
+  }
+  _addChildToRuleNode(child, options) {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const self = this;
+    const {
+      parent = this
+    } = options;
+    //the child has not been added to the array, hence using the length as new index
+    // this means unnamed panel inside repeatable named parent // this is an edge case, handling it gracefully
+    // todo: rules don't work inside repeatable array
+    const name = parent.type == 'array' ? parent._children.length + '' : child.name || '';
+    if (name.length > 0) {
+      Object.defineProperty(parent._childrenReference, name, {
+        get: () => {
+          if (child.isContainer && child.hasDynamicItems()) {
+            self.ruleEngine.trackDependency(child); //accessing dynamic panel directly
+          }
+
+          if (self.hasDynamicItems()) {
+            self.ruleEngine.trackDependency(self); //accessing a child of dynamic panel
+            if (this._children[name] !== undefined) {
+              // pop function calls this getter in order to return the item
+              return this._children[name].getRuleNode();
+            }
+          } else {
+            return child.getRuleNode();
+          }
+        },
+        configurable: true,
+        enumerable: true
+      });
+    }
+  }
+  _addChild(itemJson, index, cloneIds = false) {
+    // get first non transparent parent
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    let nonTransparentParent = this;
+    while (nonTransparentParent != null && nonTransparentParent.isTransparent()) {
+      // @ts-ignore
+      nonTransparentParent = nonTransparentParent.parent;
+    }
+    if (typeof index !== 'number' || index > nonTransparentParent._children.length) {
+      index = this._children.length;
+    }
+    const form = this.form;
+    const itemTemplate = _extends({
+      index
+    }, deepClone(itemJson, cloneIds ? () => {
+      return form.getUniqueId();
+    } : undefined));
+    //@ts-ignore
+    const retVal = this._createChild(itemTemplate, {
+      parent: this,
+      index
+    });
+    this._addChildToRuleNode(retVal, {
+      parent: nonTransparentParent
+    });
+    if (index === this._children.length) {
+      this._children.push(retVal);
+    } else {
+      // @ts-ignore
+      this._children.splice(index, 0, retVal);
+    }
+    return retVal;
+  }
+  indexOf(f) {
+    return this._children.indexOf(f);
+  }
+  /**
+   * @private
+   */
+  defaultDataModel(name) {
+    const type = this._jsonModel.type || undefined;
+    if (type === undefined) {
+      return undefined;
+    } else {
+      const instance = type === 'array' ? [] : {};
+      return new DataGroup(name, instance, type);
+    }
+  }
+  /**
+   * @private
+   */
+  _initialize() {
+    super._initialize();
+    const items = this._jsonModel.items;
+    this._jsonModel.items = [];
+    this._childrenReference = this._jsonModel.type == 'array' ? [] : {};
+    if (this._jsonModel.type == 'array' && items.length === 1 && this.getDataNode() != null) {
+      this._itemTemplate = deepClone(items[0]);
+      if (typeof this._jsonModel.minItems !== 'number') {
+        this._jsonModel.minItems = 0;
+      }
+      if (typeof this._jsonModel.maxItems !== 'number') {
+        this._jsonModel.maxItems = -1;
+      }
+      if (typeof this._jsonModel.initialItems !== 'number') {
+        this._jsonModel.initialItems = Math.max(1, this._jsonModel.minItems);
+      }
+      for (let i = 0; i < this._jsonModel.initialItems; i++) {
+        //@ts-ignore
+        const child = this._addChild(this._itemTemplate);
+        child._initialize();
+      }
+    } else if (items.length > 0) {
+      items.forEach(item => {
+        const child = this._addChild(item);
+        child._initialize();
+      });
+      this._jsonModel.minItems = this._children.length;
+      this._jsonModel.maxItems = this._children.length;
+      this._jsonModel.initialItems = this._children.length;
+    }
+    this.setupRuleNode();
+  }
+  /**
+   * @private
+   */
+  addItem(action) {
+    if (action.type === 'addItem' && this._itemTemplate != null) {
+      //@ts-ignore
+      if (this._jsonModel.maxItems === -1 || this._children.length < this._jsonModel.maxItems) {
+        const dataNode = this.getDataNode();
+        let index = action.payload;
+        if (typeof index !== 'number' || index > this._children.length) {
+          index = this._children.length;
+        }
+        const retVal = this._addChild(this._itemTemplate, action.payload, true);
+        const _data = retVal.defaultDataModel(index);
+        if (_data) {
+          dataNode.$addDataNode(index, _data);
+        }
+        retVal._initialize();
+        this.notifyDependents(propertyChange('items', retVal.getState, null));
+        retVal.dispatch(new Initialize());
+        retVal.dispatch(new ExecuteRule());
+        for (let i = index + 1; i < this._children.length; i++) {
+          this._children[i].dispatch(new ExecuteRule());
+        }
+      }
+    }
+  }
+  /**
+   * @private
+   */
+  removeItem(action) {
+    if (action.type === 'removeItem' && this._itemTemplate != null) {
+      if (this._children.length == 0) {
+        //can't remove item if there isn't any
+        return;
+      }
+      const index = typeof action.payload === 'number' ? action.payload : this._children.length - 1;
+      const state = this._children[index].getState();
+      //@ts-ignore
+      if (this._children.length > this._jsonModel.minItems) {
+        // clear child
+        //remove field
+        this._childrenReference.pop();
+        this._children.splice(index, 1);
+        this.getDataNode().$removeDataNode(index);
+        for (let i = index; i < this._children.length; i++) {
+          this._children[i].dispatch(new ExecuteRule());
+        }
+        this.notifyDependents(propertyChange('items', null, state));
+      }
+    }
+  }
+  /**
+   * @private
+   */
+  queueEvent(action) {
+    var _action$metadata;
+    super.queueEvent(action);
+    if ((_action$metadata = action.metadata) != null && _action$metadata.dispatch) {
+      this.items.forEach(x => {
+        //@ts-ignore
+        x.queueEvent(action);
+      });
+    }
+  }
+  validate() {
+    return this.items.flatMap(x => {
+      return x.validate();
+    }).filter(x => x.fieldName !== '');
+  }
+  /**
+   * @private
+   */
+  dispatch(action) {
+    super.dispatch(action);
+  }
+  /**
+   * @private
+   */
+  importData(contextualDataModel) {
+    this._bindToDataModel(contextualDataModel);
+    const dataNode = this.getDataNode() || contextualDataModel;
+    this.syncDataAndFormModel(dataNode);
+  }
+  /**
+   * prefill the form with data on the given element
+   * @param dataModel
+   * @param contextualDataModel
+   * @param operation
+   * @private
+   */
+  syncDataAndFormModel(contextualDataModel) {
+    if ((contextualDataModel == null ? void 0 : contextualDataModel.$type) === 'array' && this._itemTemplate != null) {
+      const dataLength = contextualDataModel == null ? void 0 : contextualDataModel.$value.length;
+      const itemsLength = this._children.length;
+      const maxItems = this._jsonModel.maxItems === -1 ? dataLength : this._jsonModel.maxItems;
+      const minItems = this._jsonModel.minItems;
+      //@ts-ignore
+      let items2Add = Math.min(dataLength - itemsLength, maxItems - itemsLength);
+      //@ts-ignore
+      const items2Remove = Math.min(itemsLength - dataLength, itemsLength - minItems);
+      while (items2Add > 0) {
+        items2Add--;
+        const child = this._addChild(this._itemTemplate);
+        child._initialize();
+      }
+      if (items2Remove > 0) {
+        this._children.splice(dataLength, items2Remove);
+        for (let i = 0; i < items2Remove; i++) {
+          this._childrenReference.pop();
+        }
+      }
+    }
+    this._children.forEach(x => {
+      x.importData(contextualDataModel);
+    });
+  }
+  get activeChild() {
+    return this._activeChild;
+  }
+  set activeChild(c) {
+    if (c !== this._activeChild) {
+      let activeChild = this._activeChild;
+      while (activeChild instanceof Container) {
+        const temp = activeChild.activeChild;
+        activeChild.activeChild = null;
+        activeChild = temp;
+      }
+      const change = propertyChange('activeChild', c, this._activeChild);
+      this._activeChild = c;
+      if (this.parent && c !== null) {
+        this.parent.activeChild = this;
+      }
+      this._jsonModel.activeChild = c == null ? void 0 : c.id;
+      this.notifyDependents(change);
+    }
+  }
+}
+__decorate$1([dependencyTracked()], Container.prototype, "maxItems", null);
+__decorate$1([dependencyTracked()], Container.prototype, "minItems", null);
+__decorate$1([dependencyTracked()], Container.prototype, "activeChild", null);
+
+/**
+ * Defines generic form object class which any form runtime model (like textbox, checkbox etc)
+ * should extend from.
+ * @typeparam T type of the node (for example, {@link MetaDataJson | form meta data}
+ */
+class Node {
+  constructor(inputModel) {
+    this._jsonModel = _extends({}, inputModel);
+  }
+  getP(key, def) {
+    return getProperty(this._jsonModel, key, def);
+  }
+  get isContainer() {
+    return false;
+  }
+}
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+/**
+ * Defines form metadata which implements {@link FormMetaDataModel | Form MetaData Model}
+ */
+class FormMetaData extends Node {
+  get version() {
+    return this.getP('version', '');
+  }
+  get locale() {
+    return this.getP('locale', '');
+  }
+  get grammar() {
+    return this.getP('grammar', '');
+  }
+}
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+/**
+ * Defines a file object which implements the {@link IFileObject | file object interface}
+ */
+class FileObject {
+  constructor(init) {
+    this.type = 'application/octet-stream';
+    this.name = 'unknown';
+    this.size = 0;
+    Object.assign(this, init);
+  }
+  toJSON() {
+    return {
+      'name': this.name,
+      'size': this.size,
+      'type': this.type,
+      'data': this.data.toString()
+    };
+  }
+  equals(obj) {
+    return this.data === obj.data && this.type === obj.type && this.name === obj.name && this.size === obj.size;
+  }
+}
+const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'.split('');
+const fileSizeRegex = /^(\d*\.?\d+)(\\?(?=[KMGT])([KMGT])(?:i?B)?|B?)$/i;
+/**
+ * Utility to generate a random word from seed
+ * @param l seed value
+ * @returns random word
+ */
+const randomWord = l => {
+  const ret = [];
+  for (let i = 0; i <= l; i++) {
+    const randIndex = Math.floor(Math.random() * chars.length);
+    ret.push(chars[randIndex]);
+  }
+  return ret.join('');
+};
+/**
+ * Returns the list of attachments with its data reference
+ * @param input form model
+ * @returns list of file attachments {@link FileObject} present in the form
+ */
+const getAttachments = input => {
+  const items = input.items || [];
+  return items == null ? void 0 : items.reduce((acc, item) => {
+    let ret = null;
+    if (item.isContainer) {
+      ret = getAttachments(item);
+    } else {
+      if (isFile(item.getState())) {
+        ret = {}; // @ts-ignore
+        const name = item.name || '';
+        const dataRef = item.dataRef != null ? item.dataRef : name.length > 0 ? item.name : undefined;
+        //@ts-ignore
+        if (item.value instanceof Array) {
+          // @ts-ignore
+          ret[item.id] = item.value.map(x => {
+            return _extends({}, x, {
+              'dataRef': dataRef
+            });
+          });
+        } else if (item.value != null) {
+          // @ts-ignore
+          ret[item.id] = _extends({}, item.value, {
+            'dataRef': dataRef
+          });
+        }
+      }
+    }
+    return Object.assign(acc, ret);
+  }, {});
+};
+/**
+ * Converts file size in string to bytes based on IEC specification
+ * @param str   file size
+ * @returns file size as bytes (in kb) based on IEC specification
+ */
+const getFileSizeInBytes = str => {
+  let retVal = 0;
+  if (typeof str === 'string') {
+    const matches = fileSizeRegex.exec(str.trim());
+    if (matches != null) {
+      retVal = sizeToBytes(parseFloat(matches[1]), (matches[2] || 'kb').toUpperCase());
+    }
+  }
+  return retVal;
+};
+/**
+ * Converts number to bytes based on the symbol as per IEC specification
+ * @param size      size as number
+ * @param symbol    symbol to use (for example, kb, mb, gb or tb)
+ * @returns number as bytes based on the symbol
+ */
+const sizeToBytes = (size, symbol) => {
+  const sizes = {
+    'KB': 1,
+    'MB': 2,
+    'GB': 3,
+    'TB': 4
+  };
+  // @ts-ignore
+  const i = Math.pow(1024, sizes[symbol]);
+  return Math.round(size * i);
+};
+/**
+ * ID Generator
+ * @param initial
+ * @constructor
+ * @private
+ */
+const IdGenerator = function* IdGenerator(initial = 50) {
+  const initialize = function initialize() {
+    const arr = [];
+    for (let i = 0; i < initial; i++) {
+      arr.push(randomWord(10));
+    }
+    return arr;
+  };
+  const passedIds = {};
+  let ids = initialize();
+  do {
+    let x = ids.pop();
+    while (x in passedIds) {
+      if (ids.length === 0) {
+        ids = initialize();
+      }
+      x = ids.pop();
+    }
+    passedIds[x] = true;
+    yield ids.pop();
+    if (ids.length === 0) {
+      ids = initialize();
+    }
+  } while (ids.length > 0);
+};
+/**
+ * Utility to extract {@link FileObject} from string or HTML File data type
+ * @param file
+ * @returns list of {@link FileObject}
+ */
+const extractFileInfo = file => {
+  if (file !== null) {
+    let retVal = null;
+    if (file instanceof FileObject) {
+      retVal = file;
+    } else if (typeof File !== 'undefined' && file instanceof File) {
+      // case: file object
+      retVal = {
+        name: file.name,
+        type: file.type,
+        size: file.size,
+        data: file
+      };
+    } else if (typeof file === 'string' && isDataUrl(file)) {
+      // case: data URL
+      const result = dataURItoBlob(file);
+      if (result !== null) {
+        const {
+          blob,
+          name
+        } = result;
+        retVal = {
+          name: name,
+          type: blob.type,
+          size: blob.size,
+          data: blob
+        };
+      }
+    } else {
+      var _jFile, _jFile2;
+      // case: string as file object
+      let jFile = file;
+      try {
+        jFile = JSON.parse(file);
+        retVal = jFile;
+      } catch (ex) {
+        // do nothing
+      }
+      if (typeof ((_jFile = jFile) == null ? void 0 : _jFile.data) === 'string' && isDataUrl((_jFile2 = jFile) == null ? void 0 : _jFile2.data)) {
+        var _jFile3;
+        // case: data URL
+        const result = dataURItoBlob((_jFile3 = jFile) == null ? void 0 : _jFile3.data);
+        if (result !== null) {
+          var _jFile4, _jFile5;
+          const blob = result.blob;
+          retVal = {
+            name: (_jFile4 = jFile) == null ? void 0 : _jFile4.name,
+            type: (_jFile5 = jFile) == null ? void 0 : _jFile5.type,
+            size: blob.size,
+            data: blob
+          };
+        }
+      } else if (typeof jFile === 'string') {
+        // case: data as external url
+        const fileName = jFile.split('/').pop();
+        retVal = {
+          name: fileName,
+          type: 'application/octet-stream',
+          size: 0,
+          data: jFile
+        };
+      } else if (typeof jFile === 'object') {
+        var _jFile6, _jFile7, _jFile8, _jFile9;
+        // todo: just added for ease of integration for the view layer
+        retVal = {
+          name: (_jFile6 = jFile) == null ? void 0 : _jFile6.name,
+          type: (_jFile7 = jFile) == null ? void 0 : _jFile7.type,
+          size: (_jFile8 = jFile) == null ? void 0 : _jFile8.size,
+          data: (_jFile9 = jFile) == null ? void 0 : _jFile9.data
+        };
+      }
+    }
+    if (retVal !== null && retVal.data != null) {
+      return new FileObject(retVal);
+    }
+    return null;
+  } else {
+    return null;
+  }
+};
+/**
+ * Utility to convert data URI to a `blob` object
+ * @param dataURI uri to convert to blob
+ * @returns `Blob` object for the data URI
+ */
+const dataURItoBlob = dataURI => {
+  const regex = /^data:([a-z]+\/[a-z0-9-+.]+)?(?:;name=([^;]+))?(;base64)?,(.+)$/;
+  const groups = regex.exec(dataURI);
+  if (groups !== null) {
+    const type = groups[1] || '';
+    const name = groups[2] || 'unknown';
+    const isBase64 = typeof groups[3] === 'string';
+    if (isBase64) {
+      const binary = atob(groups[4]);
+      const array = [];
+      for (let i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      const blob = new window.Blob([new Uint8Array(array)], {
+        type
+      });
+      return {
+        name,
+        blob
+      };
+    } else {
+      const blob = new window.Blob([groups[4]], {
+        type
+      });
+      return {
+        name,
+        blob
+      };
+    }
+  } else {
+    return null;
+  }
+};
+
+/**
+ * Defines generic utilities to validate form runtime model based on the constraints defined
+ * as per `adaptive form specification`
+ */
+// issue with import
+//import {FieldJson, isFileObject} from '../types';
+const dateRegex = /^(\d{4})-(\d{1,2})-(\d{1,2})$/;
+const dataUrlRegex = /^data:([a-z]+\/[a-z0-9-+.]+)?;(?:name=(.*);)?base64,(.*)$/;
+const days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const daysInMonth = (leapYear, month) => {
+  if (leapYear && month == 2) {
+    return 29;
+  }
+  return days[month - 1];
+};
+const isLeapYear = year => {
+  return year % 400 === 0 || year % 4 === 0 && year % 100 !== 0;
+};
+const isDataUrl = str => {
+  return dataUrlRegex.exec(str.trim()) != null;
+};
+/**
+ * Checks whether inputVal is valid number value or not
+ *
+ * ```
+ * const x = checkNumber('12')
+ * ```
+ * would return
+ * ```
+ * {
+ *     value : 12,
+ *     valid : true
+ * }
+ * ```
+ * @param inputVal input value
+ * @returns {@link ValidationResult | Validation result}
+ */
+const checkNumber = inputVal => {
+  let value = parseFloat(inputVal);
+  const valid = !isNaN(value);
+  if (!valid) {
+    value = inputVal;
+  }
+  return {
+    value,
+    valid
+  };
+};
+const checkInteger = inputVal => {
+  let value = parseFloat(inputVal);
+  const valid = !isNaN(value) && Math.round(value) === value;
+  if (!valid) {
+    value = inputVal;
+  }
+  return {
+    value,
+    valid
+  };
+};
+/**
+ * Wraps a non-null value and not an array value into an array
+ * @param inputVal input value
+ * @returns wraps the input value into an array
+ */
+const toArray = inputVal => {
+  if (inputVal != null && !(inputVal instanceof Array)) {
+    return [inputVal];
+  }
+  return inputVal;
+};
+/**
+ * Checks whether inputVal is valid boolean value or not
+ *
+ * ```
+ * const x = checkBool('false')
+ * ```
+ * would return
+ * ```
+ * {
+ *     value : false,
+ *     valid : true
+ * }
+ * ```
+ * @param inputVal input value
+ * @returns {@link ValidationResult | Validation result}
+ */
+const checkBool = inputVal => {
+  const valid = typeof inputVal === 'boolean' || inputVal === 'true' || inputVal === 'false';
+  const value = typeof inputVal === 'boolean' ? inputVal : valid ? inputVal === 'true' : inputVal;
+  return {
+    valid,
+    value
+  };
+};
+/**
+ *
+ * @param inputVal
+ */
+const checkFile = inputVal => {
+  const value = extractFileInfo(inputVal);
+  const valid = value !== null;
+  return {
+    value: valid ? value : inputVal,
+    valid
+  };
+};
+/**
+ * validates whether the mediaType is one present in the accepts list
+ * @param mediaType
+ * @param accepts
+ */
+const matchMediaType = (mediaType, accepts) => {
+  return !mediaType || accepts.some(accept => {
+    const trimmedAccept = accept.trim();
+    const prefixAccept = trimmedAccept.split('/')[0];
+    const suffixAccept = trimmedAccept.split('.')[1];
+    return trimmedAccept.includes('*') && mediaType.startsWith(prefixAccept) || trimmedAccept.includes('.') && mediaType.endsWith(suffixAccept) || trimmedAccept === mediaType;
+  });
+};
+/**
+ * Validates an array of values using a validator function.
+ * @param inputVal
+ * @param validatorFn
+ * @return an array containing two arrays, the first one with all the valid values and the second one with one invalid
+ * value (if there is).
+ */
+const partitionArray = (inputVal, validatorFn) => {
+  const value = toArray(inputVal);
+  if (value == null) {
+    return [[], [value]];
+  }
+  return value.reduce((acc, x) => {
+    if (acc[1].length == 0) {
+      const r = validatorFn(x);
+      const index = r.valid ? 0 : 1;
+      acc[index].push(r.value);
+    }
+    return acc;
+  }, [[], []]);
+};
+const ValidConstraints = {
+  date: ['minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum', 'format'],
+  string: ['minLength', 'maxLength', 'pattern'],
+  number: ['minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum'],
+  array: ['minItems', 'maxItems', 'uniqueItems'],
+  file: ['accept', 'maxFileSize']
+};
+/**
+ * Implementation of all constraints defined by `adaptive form specification`
+ */
+const Constraints = {
+  /**
+   * Implementation of type constraint
+   * @param constraint    `type` property of the form object
+   * @param inputVal      value of the form object
+   * @return {@link ValidationResult | validation result}
+   */
+  type: (constraint, inputVal) => {
+    let value = inputVal;
+    if (inputVal == undefined) {
+      return {
+        valid: true,
+        value: inputVal
+      };
+    }
+    let valid = true,
+      res;
+    switch (constraint) {
+      case 'string':
+        valid = true;
+        value = inputVal.toString();
+        break;
+      case 'string[]':
+        value = toArray(inputVal);
+        break;
+      case 'number':
+        res = checkNumber(inputVal);
+        value = res.value;
+        valid = res.valid;
+        break;
+      case 'boolean':
+        res = checkBool(inputVal);
+        valid = res.valid;
+        value = res.value;
+        break;
+      case 'integer':
+        res = checkInteger(inputVal);
+        valid = res.valid;
+        value = res.value;
+        break;
+      case 'integer[]':
+        res = partitionArray(inputVal, checkInteger);
+        valid = res[1].length === 0;
+        value = valid ? res[0] : inputVal;
+        break;
+      case 'file':
+        // for file types only, we support setting value via an array
+        res = checkFile(inputVal instanceof Array ? inputVal[0] : inputVal);
+        valid = res.valid;
+        value = res.value;
+        break;
+      case 'file[]':
+        res = partitionArray(inputVal, checkFile);
+        valid = res[1].length === 0;
+        value = valid ? res[0] : inputVal;
+        break;
+      case 'number[]':
+        res = partitionArray(inputVal, checkNumber);
+        valid = res[1].length === 0;
+        value = valid ? res[0] : inputVal;
+        break;
+      case 'boolean[]':
+        res = partitionArray(inputVal, checkBool);
+        valid = res[1].length === 0;
+        value = valid ? res[0] : inputVal;
+        break;
+    }
+    return {
+      valid,
+      value
+    };
+  },
+  /**
+   * Implementation of format constraint
+   * @param constraint    `format` property of the form object
+   * @param input         value of the form object
+   * @return {@link ValidationResult | validation result}
+   */
+  format: (constraint, input) => {
+    let valid = true;
+    const value = input;
+    if (input === null) {
+      return {
+        value,
+        valid
+      };
+    }
+    let res;
+    switch (constraint) {
+      case 'date':
+        res = dateRegex.exec((input || '').trim());
+        if (res != null) {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const [match, year, month, date] = res;
+          const [nMonth, nDate] = [+month, +date];
+          const leapYear = isLeapYear(+year);
+          valid = nMonth >= 1 && nMonth <= 12 && nDate >= 1 && nDate <= daysInMonth(leapYear, nMonth);
+        } else {
+          valid = false;
+        }
+        break;
+      case 'data-url':
+        // todo: input is of type file, do we need this format ? since value is always of type file object
+        //res = dataUrlRegex.exec(input.trim());
+        //valid = res != null;
+        valid = true;
+        break;
+    }
+    return {
+      valid,
+      value
+    };
+  },
+  //todo : add support for date
+  /**
+   * Implementation of minimum constraint
+   * @param constraint    `minimum` property of the form object
+   * @param value         value of the form object
+   * @return {@link ValidationResult | validation result}
+   */
+  minimum: (constraint, value) => {
+    return {
+      valid: value >= constraint,
+      value
+    };
+  },
+  //todo : add support for date
+  /**
+   * Implementation of maximum constraint
+   * @param constraint    `maximum` property of the form object
+   * @param value         value of the form object
+   * @return {@link ValidationResult | validation result}
+   */
+  maximum: (constraint, value) => {
+    return {
+      valid: value <= constraint,
+      value
+    };
+  },
+  /**
+   * Implementation of exclusiveMinimum constraint
+   * @param constraint    `minimum` property of the form object
+   * @param value         value of the form object
+   * @return {@link ValidationResult | validation result}
+   */
+  exclusiveMinimum: (constraint, value) => {
+    return {
+      valid: value > constraint,
+      value
+    };
+  },
+  //todo : add support for date
+  /**
+   * Implementation of exclusiveMaximum constraint
+   * @param constraint    `maximum` property of the form object
+   * @param value         value of the form object
+   * @return {@link ValidationResult | validation result}
+   */
+  exclusiveMaximum: (constraint, value) => {
+    return {
+      valid: value < constraint,
+      value
+    };
+  },
+  /**
+   * Implementation of the minItems constraint
+   * @param constraint `minItems` constraint from object
+   * @param value value of the form object
+   */
+  minItems: (constraint, value) => {
+    return {
+      valid: value instanceof Array && value.length >= constraint,
+      value
+    };
+  },
+  /**
+   * Implementation of the maxItems constraint
+   * @param constraint `maxItems` constraint from object
+   * @param value value of the form object
+   */
+  maxItems: (constraint, value) => {
+    return {
+      valid: value instanceof Array && value.length <= constraint,
+      value
+    };
+  },
+  /**
+   * Implementation of the uniqueItems constraint
+   * @param constraint `uniqueItems` constraint from object
+   * @param value value of the form object
+   */
+  uniqueItems: (constraint, value) => {
+    return {
+      valid: !constraint || value instanceof Array && value.length === new Set(value).size,
+      value
+    };
+  },
+  /**
+   * Implementation of minLength constraint
+   * @param constraint    `minLength` property of the form object
+   * @param value         value of the form object
+   * @return {@link ValidationResult | validation result}
+   */
+  minLength: (constraint, value) => {
+    return _extends({}, Constraints.minimum(constraint, typeof value === 'string' ? value.length : 0), {
+      value
+    });
+  },
+  /**
+   * Implementation of maxLength constraint
+   * @param constraint    `maxLength` property of the form object
+   * @param value         value of the form object
+   * @return {@link ValidationResult | validation result}
+   */
+  maxLength: (constraint, value) => {
+    return _extends({}, Constraints.maximum(constraint, typeof value === 'string' ? value.length : 0), {
+      value
+    });
+  },
+  /**
+   * Implementation of pattern constraint
+   * @param constraint    `pattern` property of the form object
+   * @param value         value of the form object
+   * @return {@link ValidationResult | validation result}
+   */
+  pattern: (constraint, value) => {
+    let regex;
+    if (typeof constraint === 'string') {
+      regex = new RegExp(constraint);
+    } else {
+      regex = constraint;
+    }
+    return {
+      valid: regex.test(value),
+      value
+    };
+  },
+  /**
+   * Implementation of required constraint
+   * @param constraint    `required` property of the form object
+   * @param value         value of the form object
+   * @return {@link ValidationResult | validation result}
+   */
+  required: (constraint, value) => {
+    const valid = constraint ? value != null && value !== '' : true;
+    return {
+      valid,
+      value
+    };
+  },
+  /**
+   * Implementation of enum constraint
+   * @param constraint    `enum` property of the form object
+   * @param value         value of the form object
+   * @return {@link ValidationResult | validation result}
+   */
+  enum: (constraint, value) => {
+    return {
+      valid: constraint.indexOf(value) > -1,
+      value
+    };
+  },
+  /**
+   *
+   * @param constraint
+   * @param value
+   */
+  accept: (constraint, value) => {
+    if (!constraint || constraint.length === 0 || value === null || value === undefined) {
+      return {
+        valid: true,
+        value
+      };
+    }
+    const tempValue = value instanceof Array ? value : [value];
+    const invalidFile = tempValue.some(file => !matchMediaType(file.type, constraint));
+    return {
+      valid: !invalidFile,
+      value
+    };
+  },
+  /**
+   * @param constraint
+   * @param value
+   */
+  maxFileSize: (constraint, value) => {
+    const sizeLimit = typeof constraint === 'string' ? getFileSizeInBytes(constraint) : constraint;
+    return {
+      valid: !(value instanceof FileObject) || value.size <= sizeLimit,
+      value
+    };
+  }
+};
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+var __decorate = function (decorators, target, key, desc) {
+  var c = arguments.length,
+    r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+    d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+/**
+ * Defines a form object field which implements {@link FieldModel | field model} interface
+ */
+class Field extends Scriptable {
+  /**
+   * @param params
+   * @param _options
+   * @private
+   */
+  constructor(params, _options) {
+    super(params, _options);
+    this._ruleNodeReference = [];
+    this._applyDefaults();
+    this.queueEvent(new Initialize());
+    this.queueEvent(new ExecuteRule());
+  }
+  /**
+   * @private
+   */
+  _initialize() {
+    super._initialize();
+    this.setupRuleNode();
+  }
+  ruleNodeReference() {
+    var _this$type;
+    if ((_this$type = this.type) != null && _this$type.endsWith('[]')) {
+      this._ruleNodeReference = [];
+    } else {
+      this._ruleNodeReference = this;
+    }
+    return this._ruleNodeReference;
+  }
+  _getDefaults() {
+    return {
+      readOnly: false,
+      enabled: true,
+      visible: true,
+      type: this._getFallbackType()
+    };
+  }
+  /**
+   * Returns the fallback type to be used for this field, in case type is not defined. Otherwise returns
+   * undefined
+   * @protected
+   */
+  _getFallbackType() {
+    const type = this._jsonModel.type;
+    if (typeof type !== 'string') {
+      const _enum = this.enum;
+      return _enum && _enum.length > 0 ? typeof _enum[0] : 'string';
+    }
+  }
+  _applyDefaults() {
+    Object.entries(this._getDefaults()).map(([key, value]) => {
+      //@ts-ignore
+      if (this._jsonModel[key] === undefined && value !== undefined) {
+        //@ts-ignore
+        this._jsonModel[key] = value;
+      }
+    });
+    const value = this._jsonModel.value;
+    if (value === undefined) {
+      const typedRes = Constraints.type(this.getInternalType() || 'string', this._jsonModel.default);
+      this._jsonModel.value = typedRes.value;
+    }
+    if (this._jsonModel.fieldType === undefined) {
+      //@ts-ignore
+      if (this._jsonModel.viewType) {
+        //@ts-ignore
+        if (this._jsonModel.viewType.startsWith('custom:')) {
+          this.form.logger.error('viewType property has been removed. For custom types, use :type property');
+        } else {
+          this.form.logger.error('viewType property has been removed. Use fieldType property');
+        }
+        //@ts-ignore
+        this._jsonModel.fieldType = this._jsonModel.viewType;
+      } else {
+        this._jsonModel.fieldType = defaultFieldTypes(this._jsonModel);
+      }
+    }
+    if (this._jsonModel.enum === undefined) {
+      const type = this._jsonModel.type;
+      if (type === 'boolean') {
+        this._jsonModel.enum = [true, false];
+      }
+    }
+    if (typeof this._jsonModel.step !== 'number' || this._jsonModel.type !== 'number') {
+      this._jsonModel.step = undefined;
+    }
+  }
+  get editFormat() {
+    return this._jsonModel.editFormat;
+  }
+  get displayFormat() {
+    return this._jsonModel.displayFormat;
+  }
+  get placeholder() {
+    return this._jsonModel.placeholder;
+  }
+  get readOnly() {
+    return this._jsonModel.readOnly;
+  }
+  set readOnly(e) {
+    this._setProperty('readOnly', e);
+  }
+  get language() {
+    //todo: add this in the specification and take it as a property
+    return Intl.DateTimeFormat().resolvedOptions().locale;
+  }
+  get enabled() {
+    return this._jsonModel.enabled;
+  }
+  set enabled(e) {
+    this._setProperty('enabled', e);
+  }
+  get valid() {
+    return this._jsonModel.valid;
+  }
+  get emptyValue() {
+    if (this._jsonModel.emptyValue === 'null') {
+      return null;
+    } else if (this._jsonModel.emptyValue === '' && this.type === 'string') {
+      return '';
+    } else {
+      return undefined;
+    }
+  }
+  get enum() {
+    return this._jsonModel.enum;
+  }
+  set enum(e) {
+    this._setProperty('enum', e);
+  }
+  get enumNames() {
+    return this._jsonModel.enumNames;
+  }
+  set enumNames(e) {
+    this._setProperty('enumNames', e);
+  }
+  get required() {
+    return this._jsonModel.required || false;
+  }
+  set required(r) {
+    this._setProperty('required', r);
+  }
+  get maximum() {
+    return this._jsonModel.maximum;
+  }
+  set maximum(m) {
+    this._setProperty('maximum', m);
+  }
+  get minimum() {
+    return this._jsonModel.minimum;
+  }
+  set minimum(m) {
+    this._setProperty('minimum', m);
+  }
+  /**
+   * returns whether the value is empty. Empty value is either a '', undefined or null
+   * @private
+   */
+  isEmpty() {
+    return this._jsonModel.value === undefined || this._jsonModel.value === null || this._jsonModel.value === '';
+  }
+  get editValue() {
+    const format = this.editFormat;
+    if (this.format == 'date' && this.value != null && this.valid !== false) {
+      return lib.formatDate(new Date(this.value), this.language, format);
+    } else {
+      return this.value;
+    }
+  }
+  get displayValue() {
+    const format = this.displayFormat;
+    if (this.format == 'date' && this.value != null && this.valid !== false) {
+      return lib.formatDate(new Date(this.value), this.language, format);
+    } else {
+      return this.value;
+    }
+  }
+  getDataNodeValue(typedValue) {
+    return this.isEmpty() ? this.emptyValue : typedValue;
+  }
+  get value() {
+    if (this._jsonModel.value === undefined) {
+      return null;
+    } else {
+      return this._jsonModel.value;
+    }
+  }
+  set value(v) {
+    const Constraints = this._getConstraintObject();
+    const typeRes = Constraints.type(this.getInternalType() || 'string', v);
+    const changes = this._setProperty('value', typeRes.value, false);
+    let uniqueRes = {
+      valid: true
+    };
+    if (changes.length > 0) {
+      this._updateRuleNodeReference(typeRes.value);
+      const dataNode = this.getDataNode();
+      if (typeof dataNode !== 'undefined') {
+        dataNode.setValue(this.getDataNodeValue(this._jsonModel.value), this._jsonModel.value, this);
+      }
+      if (this.parent.uniqueItems && this.parent.type === 'array') {
+        // @ts-ignore
+        uniqueRes = Constraints.uniqueItems(this.parent.uniqueItems, this.parent.getDataNode().$value);
+      }
+      let updates;
+      if (typeRes.valid && uniqueRes.valid) {
+        updates = this.evaluateConstraints();
+      } else {
+        const _changes = {
+          'valid': typeRes.valid && uniqueRes.valid,
+          'errorMessage': typeRes.valid && uniqueRes.valid ? '' : this.getErrorMessage('type')
+        };
+        updates = this._applyUpdates(['valid', 'errorMessage'], _changes);
+      }
+      if (updates.valid) {
+        this.triggerValidationEvent(updates);
+      }
+      const changeAction = new Change({
+        changes: changes.concat(Object.values(updates))
+      });
+      this.dispatch(changeAction);
+    }
+  }
+  _updateRuleNodeReference(value) {
+    var _this$type2;
+    if ((_this$type2 = this.type) != null && _this$type2.endsWith('[]')) {
+      if (value != null) {
+        value.forEach((val, index) => {
+          this._ruleNodeReference[index] = val;
+        });
+        while (value.length !== this._ruleNodeReference.length) {
+          this._ruleNodeReference.pop();
+        }
+      } else {
+        while (this._ruleNodeReference.length !== 0) {
+          this._ruleNodeReference.pop();
+        }
+      }
+    }
+  }
+  getInternalType() {
+    return this.type;
+  }
+  valueOf() {
+    // @ts-ignore
+    const obj = this[target];
+    const actualField = obj === undefined ? this : obj;
+    actualField.ruleEngine.trackDependency(actualField);
+    return actualField._jsonModel.value || null;
+  }
+  toString() {
+    var _actualField$_jsonMod;
+    // @ts-ignore
+    const obj = this[target];
+    const actualField = obj === undefined ? this : obj;
+    return ((_actualField$_jsonMod = actualField._jsonModel.value) == null ? void 0 : _actualField$_jsonMod.toString()) || '';
+  }
+  /**
+   * Returns the error message for a given constraint
+   * @param constraint
+   */
+  getErrorMessage(constraint) {
+    var _this$_jsonModel$cons;
+    return ((_this$_jsonModel$cons = this._jsonModel.constraintMessages) == null ? void 0 : _this$_jsonModel$cons[constraint]) || '';
+  }
+  /**
+   *
+   * @private
+   */
+  _getConstraintObject() {
+    return Constraints;
+  }
+  /**
+   * returns whether the field is array type or not
+   * @private
+   */
+  isArrayType() {
+    return this.type ? this.type.indexOf('[]') > -1 : false;
+  }
+  /**
+   *
+   * @param value
+   * @param constraints
+   * @private
+   */
+  checkEnum(value, constraints) {
+    if (this._jsonModel.enforceEnum === true && value != null) {
+      const fn = constraints.enum;
+      if (value instanceof Array && this.isArrayType()) {
+        return value.every(x => fn(this.enum || [], x).valid);
+      } else {
+        return fn(this.enum || [], value).valid;
+      }
+    }
+    return true;
+  }
+  /**
+   * checks whether the value can be achieved by stepping the min/default value by the step constraint.
+   * Basically to find a integer solution for n in the equation
+   * initialValue + n * step = value
+   * @param constraints
+   * @private
+   */
+  checkStep() {
+    const value = this._jsonModel.value;
+    if (typeof this._jsonModel.step === 'number') {
+      const initialValue = this._jsonModel.minimum || this._jsonModel.default || 0;
+      return (value - initialValue) % this._jsonModel.step === 0;
+    }
+    return true;
+  }
+  /**
+   * checks whether the validation expression returns a boolean value or not
+   * @private
+   */
+  checkValidationExpression() {
+    if (typeof this._jsonModel.validationExpression === 'string') {
+      return this.executeExpression(this._jsonModel.validationExpression);
+    }
+    return true;
+  }
+  /**
+   * Returns the applicable constraints for a given type
+   * @private
+   */
+  getConstraints() {
+    switch (this.type) {
+      case 'string':
+        switch (this.format) {
+          case 'date':
+            return ValidConstraints.date;
+          case 'binary':
+            return ValidConstraints.file;
+          case 'data-url':
+            return ValidConstraints.file;
+          default:
+            return ValidConstraints.string;
+        }
+      case 'file':
+        return ValidConstraints.file;
+      case 'number':
+      case 'integer':
+        return ValidConstraints.number;
+    }
+    if (this.isArrayType()) {
+      return ValidConstraints.array;
+    }
+    return [];
+  }
+  /**
+   * returns the format constraint
+   */
+  get format() {
+    return this._jsonModel.format || '';
+  }
+  /**
+   * @private
+   */
+  evaluateConstraints() {
+    let constraint = 'type';
+    const elem = this._jsonModel;
+    const value = this._jsonModel.value;
+    const Constraints = this._getConstraintObject();
+    const supportedConstraints = this.getConstraints();
+    let valid = true;
+    if (valid) {
+      valid = Constraints.required(this.required, value).valid && (this.isArrayType() && this.required ? value.length > 0 : true);
+      constraint = 'required';
+    }
+    if (valid && value != this.emptyValue) {
+      const invalidConstraint = supportedConstraints.find(key => {
+        if (key in elem) {
+          // @ts-ignore
+          const restriction = elem[key];
+          // @ts-ignore
+          const fn = Constraints[key];
+          if (value instanceof Array && this.isArrayType()) {
+            if (ValidConstraints.array.indexOf(key) !== -1) {
+              return !fn(restriction, value).valid;
+            } else {
+              return value.some(x => !fn(restriction, x).valid);
+            }
+          } else if (typeof fn === 'function') {
+            return !fn(restriction, value).valid;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+      if (invalidConstraint != null) {
+        valid = false;
+        constraint = invalidConstraint;
+      } else {
+        valid = this.checkEnum(value, Constraints);
+        constraint = 'enum';
+        if (valid && this.type === 'number') {
+          valid = this.checkStep();
+          constraint = 'step';
+        }
+        if (valid) {
+          valid = this.checkValidationExpression();
+          constraint = 'validationExpression';
+        }
+      }
+    }
+    if (!valid) {
+      //@ts-ignore
+      this.form.logger.log(`${constraint} constraint evaluation failed ${this[constraint]}. Received ${this._jsonModel.value}`);
+    }
+    const changes = {
+      'valid': valid,
+      'errorMessage': valid ? '' : this.getErrorMessage(constraint)
+    };
+    return this._applyUpdates(['valid', 'errorMessage'], changes);
+  }
+  triggerValidationEvent(changes) {
+    if (changes.valid) {
+      if (this.valid) {
+        this.dispatch(new Valid());
+      } else {
+        this.dispatch(new Invalid());
+      }
+    }
+  }
+  /**
+   * Validates the current form object
+   */
+  validate() {
+    const changes = this.evaluateConstraints();
+    if (changes.valid) {
+      this.triggerValidationEvent(changes);
+      this.notifyDependents(new Change({
+        changes: Object.values(changes)
+      }));
+    }
+    return this.valid ? [] : [new ValidationError(this.id, [this._jsonModel.errorMessage])];
+  }
+  importData(contextualDataModel) {
+    this._bindToDataModel(contextualDataModel);
+    const dataNode = this.getDataNode();
+    // only if the value has changed, queue change event
+    if (dataNode !== undefined && dataNode !== NullDataValue && dataNode.$value !== this._jsonModel.value) {
+      const changeAction = propertyChange('value', dataNode.$value, this._jsonModel.value);
+      this._jsonModel.value = dataNode.$value;
+      this.queueEvent(changeAction);
+    }
+  }
+  /**
+   * @param name
+   * @private
+   */
+  defaultDataModel(name) {
+    return new DataValue(name, this.getDataNodeValue(this._jsonModel.value), this.type || 'string');
+  }
+  getState() {
+    return _extends({}, super.getState(), {
+      editValue: this.editValue,
+      displayValue: this.displayValue
+    });
+  }
+}
+__decorate([dependencyTracked()], Field.prototype, "readOnly", null);
+__decorate([dependencyTracked()], Field.prototype, "enabled", null);
+__decorate([dependencyTracked()], Field.prototype, "valid", null);
+__decorate([dependencyTracked()], Field.prototype, "enum", null);
+__decorate([dependencyTracked()], Field.prototype, "enumNames", null);
+__decorate([dependencyTracked()], Field.prototype, "required", null);
+__decorate([dependencyTracked()], Field.prototype, "value", null);
+function addNameToDataURL(dataURL, name) {
+  return dataURL.replace(';base64', `;name=${encodeURIComponent(name)};base64`);
+}
+function processFiles(files) {
+  return Promise.all([].map.call(files, processFile));
+}
+async function processFile(file) {
+  const {
+    name,
+    size,
+    type
+  } = file;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const fileObj = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = event => {
+      resolve(new FileObject({
+        // @ts-ignore
+        data: addNameToDataURL(event.target.result, name),
+        type,
+        name,
+        size
+      }));
+    };
+    reader.readAsDataURL(file.data);
+  });
+  return fileObj;
+}
+/**
+ * Implementation of FileUpload runtime model which extends from {@link Field | field}
+ */
+class FileUpload extends Field {
+  //private _files: FileObject[];
+  _getDefaults() {
+    return _extends({}, super._getDefaults(), {
+      accept: ['audio/*', 'video/*', 'image/*', 'text/*', 'application/pdf'],
+      maxFileSize: '2MB',
+      type: 'file'
+    });
+  }
+  /**
+   * Returns the max file size in bytes as per IEC specification
+   */
+  get maxFileSize() {
+    return getFileSizeInBytes(this._jsonModel.maxFileSize);
+  }
+  /**
+   * Returns the list of mime types which file attachment can accept
+   */
+  get accept() {
+    return this._jsonModel.accept;
+  }
+  /**
+   * Checks whether there are any updates in the properties
+   * @param propNames
+   * @param updates
+   * @private
+   */
+  _applyUpdates(propNames, updates) {
+    return propNames.reduce((acc, propertyName) => {
+      //@ts-ignore
+      const prevValue = this._jsonModel[propertyName];
+      const currentValue = updates[propertyName];
+      if (currentValue !== prevValue) {
+        acc[propertyName] = {
+          propertyName,
+          currentValue,
+          prevValue
+        };
+        if (prevValue instanceof FileObject && typeof currentValue === 'object' && propertyName === 'value') {
+          // @ts-ignore
+          this._jsonModel[propertyName] = new FileObject(_extends({}, prevValue, {
+            'data': currentValue.data
+          }));
+        } else {
+          // @ts-ignore
+          this._jsonModel[propertyName] = currentValue;
+        }
+      }
+      return acc;
+    }, {});
+  }
+  getInternalType() {
+    var _this$type;
+    return (_this$type = this.type) != null && _this$type.endsWith('[]') ? 'file[]' : 'file';
+  }
+  getDataNodeValue(typedValue) {
+    let dataNodeValue = typedValue;
+    if (dataNodeValue != null) {
+      if (this.type === 'string') {
+        var _dataNodeValue$data;
+        dataNodeValue = (_dataNodeValue$data = dataNodeValue.data) == null ? void 0 : _dataNodeValue$data.toString();
+      } else if (this.type === 'string[]') {
+        dataNodeValue = dataNodeValue instanceof Array ? dataNodeValue : [dataNodeValue];
+        dataNodeValue = dataNodeValue.map(_ => {
+          var _$data;
+          return _ == null ? void 0 : (_$data = _.data) == null ? void 0 : _$data.toString();
+        });
+      }
+    }
+    return dataNodeValue;
+  }
+  async _serialize() {
+    const val = this._jsonModel.value;
+    if (val === undefined) {
+      return null;
+    }
+    // @ts-ignore
+    const filesInfo = await processFiles(val instanceof Array ? val : [val]);
+    return filesInfo;
+  }
+  importData(dataModel) {
+    this._bindToDataModel(dataModel);
+    const dataNode = this.getDataNode();
+    if (dataNode !== undefined) {
+      const value = dataNode == null ? void 0 : dataNode.$value;
+      // only if not undefined, proceed further
+      if (value != null) {
+        const res = Constraints.type(this.getInternalType(), value);
+        if (!res.valid) {
+          this.form.logger.error(`unable to bind ${this.name} to data`);
+        }
+        // is this needed ?
+        this.form.getEventQueue().queue(this, propertyChange('value', res.value, this._jsonModel.value));
+        this._jsonModel.value = res.value;
+      } else {
+        this._jsonModel.value = null;
+      }
+    }
+  }
+}
+
+/**
+ * @param offValue
+ * @private
+ */
+const requiredConstraint = offValue => (constraint, value) => {
+  const valid = Constraints.required(constraint, value).valid && (!constraint || value != offValue);
+  return {
+    valid,
+    value
+  };
+};
+/**
+ * Implementation of check box runtime model which extends from {@link Field | field} model
+ */
+class Checkbox extends Field {
+  offValue() {
+    const opts = this.enum;
+    return opts.length > 1 ? opts[1] : null;
+  }
+  /**
+   * @private
+   */
+  _getConstraintObject() {
+    const baseConstraints = _extends({}, super._getConstraintObject());
+    baseConstraints.required = requiredConstraint(this.offValue());
+    return baseConstraints;
+  }
+  _getDefaults() {
+    return _extends({}, super._getDefaults(), {
+      enforceEnum: true
+    });
+  }
+  /**
+   * Returns the `enum` constraints from the json
+   */
+  get enum() {
+    return this._jsonModel.enum || [];
+  }
+}
+
+/**
+ * Implementation of CheckBoxGroup runtime model which extends from {@link Field | field}
+ */
+class CheckboxGroup extends Field {
+  /**
+   * @param params
+   * @param _options
+   * @private
+   */
+  constructor(params, _options) {
+    super(params, _options);
+  }
+  /**
+   * converts the fallback type, if required, to an array. Since checkbox-group has an array type
+   * @protected
+   */
+  _getFallbackType() {
+    const fallbackType = super._getFallbackType();
+    if (typeof fallbackType === 'string') {
+      return `${fallbackType}[]`;
+    }
+  }
+  _getDefaults() {
+    return _extends({}, super._getDefaults(), {
+      enforceEnum: true,
+      enum: []
+    });
+  }
+}
+
+/*
+ *
+ *  * Copyright 2022 Adobe, Inc.
+ *  *
+ *  * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *  *
+ *  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ */
+class DateField extends Field {
+  _applyDefaults() {
+    super._applyDefaults();
+    const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
+    if (!this._jsonModel.editFormat) {
+      this._jsonModel.editFormat = 'short';
+    }
+    if (!this._jsonModel.displayFormat) {
+      this._jsonModel.displayFormat = this._jsonModel.editFormat;
+    }
+    if (!this._jsonModel.placeholder) {
+      this._jsonModel.placeholder = lib.getSkeleton(this._jsonModel.editFormat, locale);
+    }
+    if (!this._jsonModel.description) {
+      this._jsonModel.description = `To enter today's date use ${lib.formatDate(new Date(), locale, this._jsonModel.editFormat)}`;
+    }
+  }
+}
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+/**
+ * Creates a child model inside the given parent
+ * @param child
+ * @param options
+ * @private
+ */
+const createChild = (child, options) => {
+  let retVal;
+  if ('items' in child) {
+    retVal = new Fieldset(child, options);
+  } else {
+    if (isFile(child) || child.fieldType === 'file-input') {
+      // @ts-ignore
+      retVal = new FileUpload(child, options);
+    } else if (isCheckbox(child)) {
+      retVal = new Checkbox(child, options);
+    } else if (isCheckboxGroup(child)) {
+      retVal = new CheckboxGroup(child, options);
+    } else if (isDateField(child)) {
+      retVal = new DateField(child, options);
+    } else {
+      retVal = new Field(child, options);
+    }
+  }
+  options.form.fieldAdded(retVal);
+  return retVal;
+};
+const defaults = {
+  visible: true
+};
+/**
+ * Defines a field set class which extends from {@link Container | container}
+ */
+class Fieldset extends Container {
+  /**
+   * @param params
+   * @param _options
+   * @private
+   */
+  constructor(params, _options) {
+    super(params, _options);
+    this._applyDefaults();
+    this.queueEvent(new Initialize());
+    this.queueEvent(new ExecuteRule());
+  }
+  _applyDefaults() {
+    Object.entries(defaults).map(([key, value]) => {
+      //@ts-ignore
+      if (this._jsonModel[key] === undefined) {
+        //@ts-ignore
+        this._jsonModel[key] = value;
+      }
+    });
+    if (this._jsonModel.dataRef && this._jsonModel.type === undefined) {
+      this._jsonModel.type = 'object';
+    }
+  }
+  get type() {
+    const ret = super.type;
+    if (ret === 'array' || ret === 'object') {
+      return ret;
+    }
+    return undefined;
+  }
+  // @ts-ignore
+  _createChild(child, options) {
+    const {
+      parent = this
+    } = options;
+    return createChild(child, {
+      form: this.form,
+      parent: parent
+    });
+  }
+  get items() {
+    return super.items;
+  }
+  get value() {
+    return null;
+  }
+  get fieldType() {
+    return 'panel';
+  }
+  get enabled() {
+    return this._jsonModel.enabled;
+  }
+  set enabled(e) {
+    this._setProperty('enabled', e);
+  }
+}
+const levels = {
+  off: 0,
+  debug: 1,
+  info: 2,
+  warn: 3,
+  error: 4
+};
+/**
+ * @private
+ */
+class Logger {
+  debug(msg) {
+    this.log(msg, 'debug');
+  }
+  info(msg) {
+    this.log(msg, 'info');
+  }
+  warn(msg) {
+    this.log(msg, 'warn');
+  }
+  error(msg) {
+    this.log(msg, 'error');
+  }
+  log(msg, level) {
+    if (this.logLevel !== 0 && this.logLevel <= levels[level]) {
+      console[level](msg);
+    }
+  }
+  constructor(logLevel = 'off') {
+    this.logLevel = levels[logLevel];
+  }
+}
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+/**
+ * Implementation of event node
+ * @private
+ */
+class EventNode {
+  constructor(_node, _event) {
+    this._node = _node;
+    this._event = _event;
+  }
+  get node() {
+    return this._node;
+  }
+  get event() {
+    return this._event;
+  }
+  isEqual(that) {
+    return that !== null && that !== undefined && this._node == that._node && this._event.type == that._event.type;
+  }
+  toString() {
+    return this._node.id + '__' + this.event.type;
+  }
+  valueOf() {
+    return this.toString();
+  }
+}
+/**
+ * Implementation of event queue. When a user event, like change or click, is captured the expression to be evaluated
+ * must be put in an Event Queue and then evaluated.
+ * @private
+ */
+class EventQueue {
+  constructor(logger = new Logger('off')) {
+    this._isProcessing = false;
+    this._pendingEvents = [];
+    this.logger = logger;
+    this._runningEventCount = {};
+  }
+  get length() {
+    return this._pendingEvents.length;
+  }
+  get isProcessing() {
+    return this._isProcessing;
+  }
+  isQueued(node, event) {
+    const evntNode = new EventNode(node, event);
+    return this._pendingEvents.find(x => evntNode.isEqual(x)) !== undefined;
+  }
+  queue(node, events, priority = false) {
+    if (!node || !events) {
+      return;
+    }
+    if (!(events instanceof Array)) {
+      events = [events];
+    }
+    events.forEach(e => {
+      const evntNode = new EventNode(node, e);
+      const counter = this._runningEventCount[evntNode.valueOf()] || 0;
+      if (counter < EventQueue.MAX_EVENT_CYCLE_COUNT) {
+        this.logger.info(`Queued event : ${e.type} node: ${node.id} - ${node.name}`);
+        //console.log(`Event Details ${e.toString()}`)
+        if (priority) {
+          const index = this._isProcessing ? 1 : 0;
+          this._pendingEvents.splice(index, 0, evntNode);
+        } else {
+          this._pendingEvents.push(evntNode);
+        }
+        this._runningEventCount[evntNode.valueOf()] = counter + 1;
+      } else {
+        this.logger.info(`Skipped queueing event : ${e.type} node: ${node.id} - ${node.name} with count=${counter}`);
+      }
+    });
+  }
+  runPendingQueue() {
+    if (this._isProcessing) {
+      return;
+    }
+    this._isProcessing = true;
+    while (this._pendingEvents.length > 0) {
+      const e = this._pendingEvents[0];
+      this.logger.info(`Dequeued event : ${e.event.type} node: ${e.node.id} - ${e.node.name}`);
+      //console.log(`Event Details ${e.event.toString()}`);
+      e.node.executeAction(e.event);
+      this._pendingEvents.shift();
+    }
+    this._runningEventCount = {};
+    this._isProcessing = false;
+  }
+}
+EventQueue.MAX_EVENT_CYCLE_COUNT = 10;
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+const request$1 = (url, data = null, options = {}) => {
+  const opts = _extends({}, defaultRequestOptions, options);
+  return fetch(url, _extends({}, opts, {
+    body: data
+  })).then(response => {
+    var _response$headers$get;
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    if (response != null && (_response$headers$get = response.headers.get('Content-Type')) != null && _response$headers$get.includes('application/json')) {
+      return response.json();
+    } else {
+      return response.text();
+    }
+  });
+};
+const defaultRequestOptions = {
+  method: 'GET'
+};
+const getCustomEventName = name => {
+  const eName = name;
+  if (eName.length > 0 && eName.startsWith('custom:')) {
+    return eName.substring('custom:'.length);
+  }
+  return eName;
+};
+/**
+ * Implementation of generic request API. This API can be used to make external web request
+ * @param context                   expression execution context(consists of current form, current field, current event)
+ * @param uri                       request URI
+ * @param httpVerb                  http verb (for example, GET or POST)
+ * @param payload                   request payload
+ * @param success                   success handler
+ * @param error                     error handler
+ * @param headers                   headers
+ * @private
+ */
+const request = async (context, uri, httpVerb, payload, success, error, headers) => {
+  const endpoint = uri;
+  const requestOptions = {
+    method: httpVerb
+  };
+  let result;
+  let inputPayload;
+  try {
+    if (payload && payload instanceof FileObject && payload.data instanceof File) {
+      // todo: have to implement array type
+      const formData = new FormData();
+      formData.append(payload.name, payload.data);
+      inputPayload = formData;
+    } else if (payload instanceof FormData) {
+      inputPayload = payload;
+    } else if (payload && typeof payload === 'object' && Object.keys(payload).length > 0) {
+      var _requestOptions$heade;
+      const headerNames = Object.keys(headers);
+      if (headerNames.length > 0) {
+        requestOptions.headers = _extends({}, headers, headerNames.indexOf('Content-Type') === -1 ? {
+          'Content-Type': 'application/json'
+        } : {});
+      } else {
+        requestOptions.headers = {
+          'Content-Type': 'application/json'
+        };
+      }
+      const contentType = (requestOptions == null ? void 0 : (_requestOptions$heade = requestOptions.headers) == null ? void 0 : _requestOptions$heade['Content-Type']) || 'application/json';
+      if (contentType === 'application/json') {
+        inputPayload = JSON.stringify(payload);
+      } else if (contentType.indexOf('multipart/form-data') > -1) {
+        inputPayload = multipartFormData(payload);
+      } else if (contentType.indexOf('application/x-www-form-urlencoded') > -1) {
+        inputPayload = urlEncoded(payload);
+      }
+    }
+    result = await request$1(endpoint, inputPayload, requestOptions);
+  } catch (e) {
+    //todo: define error payload
+    context.form.logger.error('Error invoking a rest API');
+    const _eName = getCustomEventName(error);
+    context.form.dispatch(new CustomEvent$1(_eName, {}, true));
+    return;
+  }
+  const eName = getCustomEventName(success);
+  context.form.dispatch(new CustomEvent$1(eName, result, true));
+};
+const urlEncoded = data => {
+  const formData = new URLSearchParams();
+  Object.entries(data).forEach(([key, value]) => {
+    if (value != null && typeof value === 'object') {
+      formData.append(key, jsonString(value));
+    } else {
+      formData.append(key, value);
+    }
+  });
+  return formData;
+};
+/**
+ * Create multi part form data using form data and form attachments
+ * @param data              form data
+ * @param attachments       form events
+ * @private
+ */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const multipartFormData = (data, attachments) => {
+  const formData = new FormData();
+  Object.entries(data).forEach(([key, value]) => {
+    if (value != null && typeof value === 'object') {
+      formData.append(key, jsonString(value));
+    } else {
+      formData.append(key, value);
+    }
+  });
+  const addAttachmentToFormData = (objValue, formData) => {
+    if ((objValue == null ? void 0 : objValue.data) instanceof File) {
+      let attIdentifier = `${objValue == null ? void 0 : objValue.dataRef}/${objValue == null ? void 0 : objValue.name}`;
+      if (!attIdentifier.startsWith('/')) {
+        attIdentifier = `/${attIdentifier}`;
+      }
+      formData.append(attIdentifier, objValue.data);
+    }
+  };
+  if (attachments) {
+    // @ts-ignore
+    Object.keys(attachments).reduce((acc, curr) => {
+      const objValue = attachments[curr];
+      if (objValue && objValue instanceof Array) {
+        return [...acc, ...objValue.map(x => addAttachmentToFormData(x, formData))];
+      } else {
+        return [...acc, addAttachmentToFormData(objValue, formData)];
+      }
+    }, []);
+  }
+  return formData;
+};
+const submit = async (context, success, error, submitAs = 'multipart/form-data', input_data = null) => {
+  const endpoint = context.form.action;
+  let data = input_data;
+  if (typeof data != 'object' || data == null) {
+    data = context.form.exportData();
+  }
+  // todo: have to implement sending of attachments here
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const attachments = getAttachments(context.form);
+  let submitContentType = submitAs;
+  let formData;
+  if (Object.keys(attachments).length > 0 || submitAs === 'multipart/form-data') {
+    formData = multipartFormData({
+      'data': data
+    }, attachments);
+    submitContentType = 'multipart/form-data';
+  } else {
+    formData = {
+      'data': data
+    };
+  }
+  // submitContentType = submitAs;
+  // note: don't send multipart/form-data let browser decide on the content type
+  await request(context, endpoint, 'POST', formData, success, error, {
+    'Content-Type': submitContentType
+  });
+};
+/**
+ * Helper function to create an action
+ * @param name          name of the event
+ * @param payload       event payload
+ * @param dispatch      true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
+ * @private
+ */
+const createAction = (name, payload = {}) => {
+  switch (name) {
+    case 'change':
+      return new Change(payload);
+    case 'submit':
+      return new Submit(payload);
+    case 'click':
+      return new Click(payload);
+    case 'addItem':
+      return new AddItem(payload);
+    case 'removeItem':
+      return new RemoveItem(payload);
+    default:
+      console.error('invalid action');
+  }
+};
+/**
+ * Implementation of function runtime
+ * @private
+ */
+class FunctionRuntimeImpl {
+  constructor() {
+    this.customFunctions = {};
+  }
+  registerFunctions(functions) {
+    Object.entries(functions).forEach(([name, funcDef]) => {
+      let finalFunction = funcDef;
+      if (typeof funcDef === 'function') {
+        finalFunction = {
+          _func: args => {
+            // eslint-disable-next-line @typescript-eslint/ban-types
+            return funcDef(...args);
+          },
+          _signature: []
+        };
+      }
+      if (!finalFunction.hasOwnProperty('_func')) {
+        console.warn(`Unable to register function with name ${name}.`);
+        return;
+      }
+      this.customFunctions[name] = finalFunction;
+    });
+  }
+  unregisterFunctions(...names) {
+    names.forEach(name => {
+      if (name in this.customFunctions) {
+        delete this.customFunctions[name];
+      }
+    });
+  }
+  getFunctions() {
+    // todo: remove these once json-formula exposes a way to call them from custom functions
+    function isArray(obj) {
+      if (obj !== null) {
+        return Object.prototype.toString.call(obj) === '[object Array]';
+      }
+      return false;
+    }
+    function valueOf(a) {
+      if (a === null || a === undefined) {
+        return a;
+      }
+      if (isArray(a)) {
+        return a.map(i => valueOf(i));
+      }
+      return a.valueOf();
+    }
+    function toString(a) {
+      if (a === null || a === undefined) {
+        return '';
+      }
+      return a.toString();
+    }
+    const defaultFunctions = {
+      validate: {
+        _func: (args, data, interpreter) => {
+          const element = args[0];
+          let validation;
+          if (typeof element === 'string' || typeof element === 'undefined') {
+            validation = interpreter.globals.form.validate();
+          } else {
+            validation = interpreter.globals.form.getElement(element.$id).validate();
+          }
+          if (Array.isArray(validation) && validation.length) {
+            interpreter.globals.form.logger.error('Form Validation Error');
+          }
+          return validation;
+        },
+        _signature: []
+      },
+      setFocus: {
+        _func: (args, data, interpreter) => {
+          const element = args[0];
+          try {
+            const field = interpreter.globals.form.getElement(element.$id);
+            interpreter.globals.form.setFocus(field);
+          } catch (e) {
+            interpreter.globals.form.logger.error('Invalid argument passed in setFocus. An element is expected');
+          }
+        },
+        _signature: []
+      },
+      getData: {
+        _func: (args, data, interpreter) => {
+          // deprecated. left for backward compatability.
+          interpreter.globals.form.logger.warn('The `getData` function is depricated. Use `exportData` instead.');
+          return interpreter.globals.form.exportData();
+        },
+        _signature: []
+      },
+      exportData: {
+        _func: (args, data, interpreter) => {
+          return interpreter.globals.form.exportData();
+        },
+        _signature: []
+      },
+      importData: {
+        _func: (args, data, interpreter) => {
+          const inputData = args[0];
+          if (typeof inputData === 'object' && inputData !== null) {
+            interpreter.globals.form.importData(inputData);
+          }
+          return {};
+        },
+        _signature: []
+      },
+      submitForm: {
+        _func: (args, data, interpreter) => {
+          // success: string, error: string, submit_as: 'json' | 'multipart' = 'json', data: any = null
+          const success = toString(args[0]);
+          const error = toString(args[1]);
+          const submit_as = args.length > 2 ? toString(args[2]) : 'multipart/form-data';
+          const submit_data = args.length > 3 ? valueOf(args[3]) : null;
+          interpreter.globals.form.dispatch(new Submit({
+            success,
+            error,
+            submit_as,
+            data: submit_data
+          }));
+          return {};
+        },
+        _signature: []
+      },
+      // todo: only supports application/json for now
+      request: {
+        _func: (args, data, interpreter) => {
+          const uri = toString(args[0]);
+          const httpVerb = toString(args[1]);
+          const payload = valueOf(args[2]);
+          let success,
+            error,
+            headers = {};
+          if (typeof args[3] === 'string') {
+            interpreter.globals.form.logger.warn('This usage of request is deprecated. Please see the documentation and update');
+            success = valueOf(args[3]);
+            error = valueOf(args[4]);
+          } else {
+            headers = valueOf(args[3]);
+            success = valueOf(args[4]);
+            error = valueOf(args[5]);
+          }
+          request(interpreter.globals, uri, httpVerb, payload, success, error, headers);
+          return {};
+        },
+        _signature: []
+      },
+      /**
+       *
+       * @name dispatchEvent
+       * @param [element] element on which to trigger the event. If not defined the event will be triggered on entire form
+       * @param eventName name of the event to trigger
+       * @param payload payload to pass in the event
+       */
+      dispatchEvent: {
+        _func: (args, data, interpreter) => {
+          const element = args[0];
+          let eventName = valueOf(args[1]);
+          let payload = args.length > 2 ? valueOf(args[2]) : undefined;
+          let dispatch = false;
+          if (typeof element === 'string') {
+            payload = eventName;
+            eventName = element;
+            dispatch = true;
+          }
+          let event;
+          if (eventName.startsWith('custom:')) {
+            event = new CustomEvent$1(eventName.substring('custom:'.length), payload, dispatch);
+          } else {
+            event = createAction(eventName, payload);
+          }
+          if (event != null) {
+            if (typeof element === 'string') {
+              interpreter.globals.form.dispatch(event);
+            } else {
+              interpreter.globals.form.getElement(element.$id).dispatch(event);
+            }
+          }
+          return {};
+        },
+        _signature: []
+      }
+    };
+    return _extends({}, defaultFunctions, this.customFunctions);
+  }
+}
+const FunctionRuntime = new FunctionRuntimeImpl();
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+/**
+ * Defines `form model` which implements {@link FormModel | form model}
+ */
+class Form extends Container {
+  /**
+   * @private
+   */
+
+  /**
+   * @private
+   */
+
+  /**
+   * @param n
+   * @param _ruleEngine
+   * @param _eventQueue
+   * @param logLevel
+   * @private
+   */
+  constructor(n, _ruleEngine, _eventQueue = new EventQueue(), logLevel = 'off') {
+    //@ts-ignore
+    super(n, {});
+    this._fields = {};
+    this._invalidFields = [];
+    this.dataRefRegex = /("[^"]+?"|[^.]+?)(?:\.|$)/g;
+    this._ruleEngine = _ruleEngine;
+    this._eventQueue = _eventQueue;
+    this._logger = new Logger(logLevel);
+    this.queueEvent(new Initialize());
+    this.queueEvent(new ExecuteRule());
+    this._ids = IdGenerator();
+    this._bindToDataModel(new DataGroup('$form', {}));
+    this._initialize();
+    this.queueEvent(new FormLoad());
+  }
+  get logger() {
+    return this._logger;
+  }
+  get metaData() {
+    const metaData = this._jsonModel.metadata || {};
+    return new FormMetaData(metaData);
+  }
+  get action() {
+    return this._jsonModel.action;
+  }
+  _createChild(child) {
+    return createChild(child, {
+      form: this,
+      parent: this
+    });
+  }
+  importData(dataModel) {
+    this._bindToDataModel(new DataGroup('$form', dataModel));
+    this.syncDataAndFormModel(this.getDataNode());
+    this._eventQueue.runPendingQueue();
+  }
+  exportData() {
+    var _this$getDataNode;
+    return (_this$getDataNode = this.getDataNode()) == null ? void 0 : _this$getDataNode.$value;
+  }
+  setFocus(field) {
+    const parent = field.parent;
+    const currentField = field;
+    while (parent != null && parent.activeChild != currentField) {
+      parent.activeChild = currentField;
+    }
+  }
+  /**
+   * Returns the current state of the form
+   *
+   * To access the form data and attachments, one needs to use the `data` and `attachments` property.
+   * For example,
+   * ```
+   * const data = form.getState().data
+   * const attachments = form.getState().attachments
+   * ```
+   */
+  getState() {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const self = this;
+    const res = super.getState();
+    res.id = '$form';
+    Object.defineProperty(res, 'data', {
+      get: function () {
+        return self.exportData();
+      }
+    });
+    Object.defineProperty(res, 'attachments', {
+      get: function () {
+        return getAttachments(self);
+      }
+    });
+    return res;
+  }
+  get type() {
+    return 'object';
+  }
+  isTransparent() {
+    return false;
+  }
+  get form() {
+    return this;
+  }
+  get ruleEngine() {
+    return this._ruleEngine;
+  }
+  getUniqueId() {
+    if (this._ids == null) {
+      return '';
+    }
+    return this._ids.next().value;
+  }
+  /**
+   * @param field
+   * @private
+   */
+  fieldAdded(field) {
+    this._fields[field.id] = field;
+    field.subscribe(action => {
+      if (this._invalidFields.indexOf(action.target.id) === -1) {
+        this._invalidFields.push(action.target.id);
+      }
+    }, 'invalid');
+    field.subscribe(action => {
+      const index = this._invalidFields.indexOf(action.target.id);
+      if (index > -1) {
+        this._invalidFields.splice(index, 1);
+      }
+    }, 'valid');
+    field.subscribe(action => {
+      //@ts-ignore
+      const field = action.target.getState();
+      if (field) {
+        const fieldChangedAction = new FieldChanged(action.payload.changes, field);
+        this.dispatch(fieldChangedAction);
+      }
+    });
+  }
+  validate() {
+    const validationErrors = super.validate();
+    // trigger event on form so that user's can customize their application
+    this.dispatch(new ValidationComplete(validationErrors));
+    return validationErrors;
+  }
+  /**
+   * Checks if the given form is valid or not
+   * @returns `true`, if form is valid, `false` otherwise
+   */
+  isValid() {
+    return this._invalidFields.length === 0;
+  }
+  /**
+   * @param field
+   * @private
+   */
+  dispatch(action) {
+    if (action.type === 'submit') {
+      super.queueEvent(action);
+      this._eventQueue.runPendingQueue();
+    } else {
+      super.dispatch(action);
+    }
+  }
+  /**
+   * @param action
+   * @private
+   */
+  executeAction(action) {
+    if (action.type !== 'submit' || this._invalidFields.length === 0) {
+      super.executeAction(action);
+    }
+  }
+  /**
+   * @param action
+   * @param context
+   * @private
+   */
+  submit(action, context) {
+    // if no errors, only then submit
+    if (this.validate().length === 0) {
+      const payload = (action == null ? void 0 : action.payload) || {};
+      submit(context, payload == null ? void 0 : payload.success, payload == null ? void 0 : payload.error, payload == null ? void 0 : payload.submit_as, payload == null ? void 0 : payload.data);
+    }
+  }
+  getElement(id) {
+    if (id == this.id) {
+      return this;
+    }
+    return this._fields[id];
+  }
+  get qualifiedName() {
+    return '$form';
+  }
+  /**
+   * @private
+   */
+  getEventQueue() {
+    return this._eventQueue;
+  }
+  get name() {
+    return '$form';
+  }
+  get value() {
+    return null;
+  }
+  get id() {
+    return '$form';
+  }
+  get title() {
+    return this._jsonModel.title || '';
+  }
+}
+
+/*
+ * Copyright 2022 Adobe, Inc.
+ *
+ * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+/**
+ * Implementation of rule engine
+ * @private
+ */
+class RuleEngine {
+  constructor() {
+    this._globalNames = ['$form', '$field', '$event'];
+  }
+  compileRule(rule) {
+    const customFunctions = FunctionRuntime.getFunctions();
+    return new Oe(rule, customFunctions, undefined, this._globalNames);
+  }
+  execute(node, data, globals, useValueOf = false) {
+    const oldContext = this._context;
+    this._context = globals;
+    let res = undefined;
+    try {
+      node.debug = []; // clean previous debug info
+      res = node.search(data, globals);
+    } catch (err) {
+      var _this$_context, _this$_context$form, _this$_context$form$l;
+      (_this$_context = this._context) == null ? void 0 : (_this$_context$form = _this$_context.form) == null ? void 0 : (_this$_context$form$l = _this$_context$form.logger) == null ? void 0 : _this$_context$form$l.error(err);
+    }
+    for (const debugInfo of node.debug) {
+      var _this$_context2, _this$_context2$form, _this$_context2$form$;
+      (_this$_context2 = this._context) == null ? void 0 : (_this$_context2$form = _this$_context2.form) == null ? void 0 : (_this$_context2$form$ = _this$_context2$form.logger) == null ? void 0 : _this$_context2$form$.debug(debugInfo);
+    }
+    let finalRes = res;
+    if (useValueOf) {
+      if (typeof res === 'object' && res !== null) {
+        finalRes = Object.getPrototypeOf(res).valueOf.call(res);
+      }
+    }
+    this._context = oldContext;
+    return finalRes;
+  }
+  /**
+   * Listen to subscriber for
+   * @param subscriber
+   */
+  trackDependency(subscriber) {
+    if (this._context && this._context.field !== undefined && this._context.field !== subscriber) {
+      subscriber._addDependent(this._context.field);
+    }
+  }
+}
+
+/**
+ * Creates form instance using form model definition as per `adaptive form specification`
+ * @param formModel form model definition
+ * @param callback a callback that recieves the FormModel instance that gets executed before any event in the Form
+ * is executed
+ * @param logLevel Logging Level for the form. Setting it off will disable the logging
+ * @param fModel existing form model, this is additional optimization to prevent creation of form instance
+ * @returns {@link FormModel | form model}
+ */
+const createFormInstance = (formModel, callback, logLevel = 'error', fModel = undefined) => {
+  try {
+    let f = fModel;
+    if (f == null) {
+      f = new Form(_extends({}, formModel), new RuleEngine(), new EventQueue(new Logger(logLevel)), logLevel);
+    }
+    const formData = formModel == null ? void 0 : formModel.data;
+    if (formData) {
+      f.importData(formData);
+    }
+    if (typeof callback === 'function') {
+      callback(f);
+    }
+    // Once the field or panel is initialized, execute the initialization script
+    // this means initialization happens after prefill and restore
+    // Before execution of calcExp, visibleExp, enabledExp, validate, options, navigationChange, we execute init script
+    //f.queueEvent(new Initialize(undefined, true));
+    //f.queueEvent(new ExecuteRule(undefined, true));
+    f.getEventQueue().runPendingQueue();
+    return f;
+  } catch (e) {
+    console.error(`Unable to create an instance of the Form ${e}`);
+    throw new Error(e);
+  }
+};
+
+class TextArea extends TextInput {
+  getInputHTML() {
+    return `<textarea
+              title="${this.isTooltipVisible() ? this.getTooltipValue() : ''}"
+              aria-label="${this.isLabelVisible() ? this.getLabelValue() : ''}"
+              class="cmp-adaptiveform-textinput__widget"
+              name="${this.getName()}"
+              ${this.getDisabledHTML()}
+              ${this.getReadonlyHTML()}
+              required="${this.isRequired()}"
+              placeholder="${this.getPlaceHolder()}"
+              minlength="${this.getMinLength()}"
+              maxlength="${this.getMaxLength()}"></textarea>`;
+  }
+}
+
+var _checkIfEqual = /*#__PURE__*/_classPrivateFieldLooseKey("checkIfEqual");
+class DropDown extends FormFieldBase {
+  /**
+   * Each FormField has a data attribute class that is prefixed along with the global namespace to
+   * distinguish between them. If a component wants to put a data-attribute X, the attribute in HTML would be
+   * data-{NS}-{IS}-x=""
+   * @type {string}
+   */
+
+  constructor(params, model) {
+    super(params, model);
+    Object.defineProperty(this, _checkIfEqual, {
+      writable: true,
+      value: function (value, optionValue, multiSelect) {
+        if (multiSelect) {
+          let isPresent = false;
+          value.forEach(saveValue => {
+            if (String(saveValue) === optionValue)
+              // save value can be number and boolean also.
+              isPresent = true;
+          });
+          return isPresent;
+        }
+        return String(value) === optionValue;
+      }
+    });
+    this.qm = this.element.querySelector(DropDown.selectors.qm);
+  }
+  getWidget() {
+    return this.element.querySelector(DropDown.selectors.widget);
+  }
+  getDescription() {
+    return this.element.querySelector(DropDown.selectors.description);
+  }
+  getLabel() {
+    return this.element.querySelector(DropDown.selectors.label);
+  }
+  getErrorDiv() {
+    return this.element.querySelector(DropDown.selectors.errorDiv);
+  }
+  getQuestionMarkDiv() {
+    return this.element.querySelector(DropDown.selectors.qm);
+  }
+  getTooltipDiv() {
+    return this.element.querySelector(DropDown.selectors.tooltipDiv);
+  }
+  _updateValue(value) {
+    let isMultiSelect = this._model.isArrayType();
+    if (this.widget) {
+      let select = this.widget;
+      [select].forEach(option => {
+        if (_classPrivateFieldLooseBase(this, _checkIfEqual)[_checkIfEqual](value, option.value, isMultiSelect)) {
+          option.setAttribute('selected', 'selected');
+        } else {
+          option.removeAttribute('selected');
+        }
+      });
+    }
+  }
+  addListener() {
+    var _this$getWidget;
+    (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener('blur', e => {
+      if (this._model.isArrayType()) {
+        let valueArray = [];
+        let select = this.widget;
+        [select].forEach(option => {
+          if (option.selected) {
+            valueArray.push(option.value);
+          }
+        });
+        this._model.value = valueArray;
+      } else {
+        this._model.value = e.target.value;
+      }
+    });
+  }
+  getbemBlock() {
+    return DropDown.bemBlock;
+  }
+  getIS() {
+    return DropDown.IS;
+  }
+  getInputHTML() {
+    var _this$getState, _this$getState$enumNa;
+    return `<select class="cmp-adaptiveform-dropdown__widget"
+                    aria-label="${this.isLabelVisible() ? this.getLabelValue() : ''}"
+                    title="${this.isTooltipVisible() ? this.getTooltipValue() : ''}"
+                    name="${this.getName()}"
+                    ${this.getDisabledHTML()}
+                    ${this.getReadonlyHTML()}
+                    ${this.getMultipleHTML()}
+                    required="${this.isRequired()}">
+                ${this.getPlaceHolder() ? `<option  value="" disabled selected>${this.getPlaceHolder()}</option>` : ""}
+                
+                ${(_this$getState = this.getState()) == null ? void 0 : (_this$getState$enumNa = _this$getState.enumNames) == null ? void 0 : _this$getState$enumNa.map((enumDisplayName, index) => {
+      var _this$getState2;
+      return this.getOptionsHTML((_this$getState2 = this.getState()) == null ? void 0 : _this$getState2.enum[index], enumDisplayName, this.getDefault());
+    }).join("")}
+            </select>`;
+  }
+  getOptionsHTML(enumValue, enumDisplayName, defaultVal) {
+    return `
+            <option value="${enumValue}" class="cmp-adaptiveform-dropdown__option"
+                selected="${enumValue == defaultVal ? 'selected' : ''}">${enumDisplayName}</option>
+            `;
+  }
+  getMultipleHTML() {
+    return `${this.getState().isMultiSelect ? 'multiple: multiple' : ''}"`;
+  }
+}
+DropDown.NS = Constants.NS;
+DropDown.IS = "adaptiveFormDropDown";
+DropDown.bemBlock = 'cmp-adaptiveform-dropdown';
+DropDown.selectors = {
+  self: "[data-" + DropDown.NS + '-is="' + DropDown.IS + '"]',
+  widget: `.${DropDown.bemBlock}__widget`,
+  options: `.${DropDown.bemBlock}__option`,
+  label: `.${DropDown.bemBlock}__label`,
+  description: `.${DropDown.bemBlock}__longdescription`,
+  qm: `.${DropDown.bemBlock}__questionmark`,
+  errorDiv: `.${DropDown.bemBlock}__errormessage`,
+  tooltipDiv: `.${DropDown.bemBlock}__shortdescription`
+};
+
+const Actions = {
+  Click,
+  Change,
+  Submit,
+  Blur,
+  AddItem,
+  RemoveItem
+};
+
+class Button extends FormFieldBase {
+  /**
+   * Each FormField has a data attribute class that is prefixed along with the global namespace to
+   * distinguish between them. If a component wants to put a data-attribute X, the attribute in HTML would be
+   * data-{NS}-{IS}-x=""
+   * @type {string}
+   */
+
+  getQuestionMarkDiv() {
+    return null;
+  }
+  getLabel() {
+    return null;
+  }
+  getWidget() {
+    return this.element.querySelector(".cmp-button");
+  }
+  /**
+   * Return the description element.
+   * @returns {HTMLElement}
+   */
+  getDescription() {
+    return null;
+  }
+  getErrorDiv() {
+    return null;
+  }
+  getTooltipDiv() {
+    return null;
+  }
+  addListener() {
+    var _this$getWidget;
+    (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener("click", () => {
+      this._model.dispatch(new Actions.Click());
+    });
+  }
+  getbemBlock() {
+    return Button.bemBlock;
+  }
+  getIS() {
+    return Button.IS;
+  }
+  // TODO - Icon part of spec?
+  getHTML() {
+    return `<button 
+            type="button"
+            id="${this.getId()}"
+            class="cmp-button"
+            ${this.getDisabledHTML()}
+            ${this.getReadonlyHTML()}
+            title="${this.getTooltipValue}"
+            data-cmp-visible="${this.isVisible()}"
+            data-cmp-enabled="${this.isEnabled()}"
+            data-cmp-is="adaptiveFormButton"
+            aria-label="${this.getLabelValue()}"
+            data-cmp-adaptiveformcontainer-path="${this.getFormContainerPath()}">
+            <span class="cmp-button__text">${this.getLabelValue()}</span>
+        </button>`;
+  }
+}
+Button.NS = Constants.NS;
+Button.IS = "adaptiveFormButton";
+Button.bemBlock = 'cmp-adaptiveform-button';
+Button.selectors = {
+  self: "[data-" + Button.NS + '-is="' + Button.IS + '"]'
+};
+
+var _widget = /*#__PURE__*/_classPrivateFieldLooseKey("widget");
+var _model = /*#__PURE__*/_classPrivateFieldLooseKey("model");
+var _options = /*#__PURE__*/_classPrivateFieldLooseKey("options");
+var _defaultOptions = /*#__PURE__*/_classPrivateFieldLooseKey("defaultOptions");
+var _matchArray = /*#__PURE__*/_classPrivateFieldLooseKey("matchArray");
+var _regex = /*#__PURE__*/_classPrivateFieldLooseKey("regex");
+var _processedValue = /*#__PURE__*/_classPrivateFieldLooseKey("processedValue");
+var _engRegex = /*#__PURE__*/_classPrivateFieldLooseKey("engRegex");
+var _writtenInLocale = /*#__PURE__*/_classPrivateFieldLooseKey("writtenInLocale");
+var _previousCompositionVal = /*#__PURE__*/_classPrivateFieldLooseKey("previousCompositionVal");
+var _toLatinForm = /*#__PURE__*/_classPrivateFieldLooseKey("toLatinForm");
+var _attachEventHandlers = /*#__PURE__*/_classPrivateFieldLooseKey("attachEventHandlers");
+var _attachCompositionEventHandlers = /*#__PURE__*/_classPrivateFieldLooseKey("attachCompositionEventHandlers");
+var _getDigits = /*#__PURE__*/_classPrivateFieldLooseKey("getDigits");
+var _escape = /*#__PURE__*/_classPrivateFieldLooseKey("escape");
+var _compositionUpdateCallback = /*#__PURE__*/_classPrivateFieldLooseKey("compositionUpdateCallback");
+var _handleKeyInput = /*#__PURE__*/_classPrivateFieldLooseKey("handleKeyInput");
+var _handleKeyDown = /*#__PURE__*/_classPrivateFieldLooseKey("handleKeyDown");
+var _isValidChar = /*#__PURE__*/_classPrivateFieldLooseKey("isValidChar");
+var _handleKeyPress = /*#__PURE__*/_classPrivateFieldLooseKey("handleKeyPress");
+var _handlePaste = /*#__PURE__*/_classPrivateFieldLooseKey("handlePaste");
+var _handleCut = /*#__PURE__*/_classPrivateFieldLooseKey("handleCut");
+var _convertValueToLocale = /*#__PURE__*/_classPrivateFieldLooseKey("convertValueToLocale");
+var _convertValueFromLocale = /*#__PURE__*/_classPrivateFieldLooseKey("convertValueFromLocale");
+var _isValueSame = /*#__PURE__*/_classPrivateFieldLooseKey("isValueSame");
+/**
+ * This class is responsible for interacting with the numeric input widget. It implements edit/display format
+ * for numeric input, along with the following features
+ * - Convert's input type number to text to support display/edit format (for example `$` symbol)
+ * - One cannot type or paste alphabets in the html input element
+ */
+class NumericInputWidget {
+  // passed by reference
+
+  //TODO: to support writing in different locales \d should be replaced by [0-9] for different locales
+
+  constructor(_widget2, model) {
+    Object.defineProperty(this, _isValueSame, {
+      value: _isValueSame2
+    });
+    Object.defineProperty(this, _convertValueFromLocale, {
+      value: _convertValueFromLocale2
+    });
+    Object.defineProperty(this, _convertValueToLocale, {
+      value: _convertValueToLocale2
+    });
+    Object.defineProperty(this, _handleCut, {
+      value: _handleCut2
+    });
+    Object.defineProperty(this, _handlePaste, {
+      value: _handlePaste2
+    });
+    Object.defineProperty(this, _handleKeyPress, {
+      value: _handleKeyPress2
+    });
+    Object.defineProperty(this, _isValidChar, {
+      value: _isValidChar2
+    });
+    Object.defineProperty(this, _handleKeyDown, {
+      value: _handleKeyDown2
+    });
+    Object.defineProperty(this, _handleKeyInput, {
+      value: _handleKeyInput2
+    });
+    Object.defineProperty(this, _compositionUpdateCallback, {
+      value: _compositionUpdateCallback2
+    });
+    Object.defineProperty(this, _escape, {
+      value: _escape2
+    });
+    Object.defineProperty(this, _getDigits, {
+      value: _getDigits2
+    });
+    Object.defineProperty(this, _attachCompositionEventHandlers, {
+      value: _attachCompositionEventHandlers2
+    });
+    Object.defineProperty(this, _attachEventHandlers, {
+      value: _attachEventHandlers2
+    });
+    Object.defineProperty(this, _toLatinForm, {
+      value: _toLatinForm2
+    });
+    Object.defineProperty(this, _widget, {
+      writable: true,
+      value: null
+    });
+    Object.defineProperty(this, _model, {
+      writable: true,
+      value: null
+    });
+    Object.defineProperty(this, _options, {
+      writable: true,
+      value: null
+    });
+    Object.defineProperty(this, _defaultOptions, {
+      writable: true,
+      value: {
+        value: null,
+        curValue: null,
+        pos: 0,
+        lengthLimitVisible: true,
+        zero: "0",
+        decimal: ".",
+        minus: "-"
+      }
+    });
+    Object.defineProperty(this, _matchArray, {
+      writable: true,
+      value: {
+        "integer": "^[+-]?{digits}*$",
+        "decimal": "^[+-]?{digits}{leading}({decimal}{digits}{fraction})?$",
+        "float": "^[+-]?{digits}*({decimal}{digits}*)?$"
+      }
+    });
+    Object.defineProperty(this, _regex, {
+      writable: true,
+      value: null
+    });
+    Object.defineProperty(this, _processedValue, {
+      writable: true,
+      value: null
+    });
+    Object.defineProperty(this, _engRegex, {
+      writable: true,
+      value: null
+    });
+    Object.defineProperty(this, _writtenInLocale, {
+      writable: true,
+      value: false
+    });
+    Object.defineProperty(this, _previousCompositionVal, {
+      writable: true,
+      value: ""
+    });
+    // initialize the widget and model
+    _classPrivateFieldLooseBase(this, _widget)[_widget] = _widget2;
+    _classPrivateFieldLooseBase(this, _model)[_model] = model;
+    // initialize options for backward compatibility
+    _classPrivateFieldLooseBase(this, _options)[_options] = Object.assign({}, _classPrivateFieldLooseBase(this, _defaultOptions)[_defaultOptions], _classPrivateFieldLooseBase(this, _model)[_model]._jsonModel);
+    let matchStr = _classPrivateFieldLooseBase(this, _matchArray)[_matchArray][_classPrivateFieldLooseBase(this, _options)[_options].dataType];
+    if (matchStr) {
+      let ld = _classPrivateFieldLooseBase(this, _options)[_options].leadDigits,
+        fd = _classPrivateFieldLooseBase(this, _options)[_options].fracDigits,
+        ldstr = ld && ld !== -1 ? "{0," + ld + "}" : "*",
+        fdstr = fd && fd !== -1 ? "{0," + fd + "}" : "*",
+        _matchStr = _matchStr.replace("{leading}", ldstr).replace("{fraction}", fdstr),
+        localeStr = _matchStr.replace(/{digits}/g, _classPrivateFieldLooseBase(this, _getDigits)[_getDigits]()).replace("{decimal}", _classPrivateFieldLooseBase(this, _escape)[_escape](_classPrivateFieldLooseBase(this, _options)[_options].decimal)),
+        engStr = _matchStr.replace(/{digits}/g, "[0-9]").replace("{decimal}", "\\.");
+      _classPrivateFieldLooseBase(this, _processedValue)[_processedValue] = !(_classPrivateFieldLooseBase(this, _getDigits)[_getDigits]() === "[0123456789]" && _classPrivateFieldLooseBase(this, _options)[_options].decimal === ".");
+      _classPrivateFieldLooseBase(this, _regex)[_regex] = new RegExp(localeStr, "g");
+      _classPrivateFieldLooseBase(this, _engRegex)[_engRegex] = new RegExp(engStr, "g");
+    }
+    // change the input type to text for patterns
+    _classPrivateFieldLooseBase(this, _widget)[_widget].setAttribute("type", "text");
+    _classPrivateFieldLooseBase(this, _attachEventHandlers)[_attachEventHandlers](_widget2);
+  }
+  getValue(value) {
+    // we support full width, half width and locale specific numbers
+    value = _classPrivateFieldLooseBase(this, _toLatinForm)[_toLatinForm](value);
+    if (value.length > 0 && _classPrivateFieldLooseBase(this, _processedValue)[_processedValue] && !value.match(_classPrivateFieldLooseBase(this, _engRegex)[_engRegex])) {
+      _classPrivateFieldLooseBase(this, _writtenInLocale)[_writtenInLocale] = true;
+      value = _classPrivateFieldLooseBase(this, _convertValueFromLocale)[_convertValueFromLocale](value);
+    } else {
+      _classPrivateFieldLooseBase(this, _writtenInLocale)[_writtenInLocale] = false;
+    }
+    if (value && value.length >= _classPrivateFieldLooseBase(this, _options)[_options].combCells) value = value.slice(0, _classPrivateFieldLooseBase(this, _options)[_options].combCells);
+    _classPrivateFieldLooseBase(this, _previousCompositionVal)[_previousCompositionVal] = value;
+    return value;
+  }
+  trigger(event, detail) {
+    if (!_classPrivateFieldLooseBase(this, _widget)[_widget]) {
+      return this;
+    }
+    const eventName = event.split('.')[0];
+    const isNativeEvent = typeof document.body[`on${eventName}`] !== 'undefined';
+    if (isNativeEvent) {
+      _classPrivateFieldLooseBase(this, _widget)[_widget].dispatchEvent(new Event(eventName));
+      return this;
+    }
+    const customEvent = new CustomEvent(eventName, {
+      detail: detail || null
+    });
+    _classPrivateFieldLooseBase(this, _widget)[_widget].dispatchEvent(customEvent);
+    return this;
+  }
+  getHTMLSupportedAttr(domElement, attr) {
+    try {
+      return domElement[attr];
+    } catch (err) {
+      return undefined;
+    }
+  }
+  isNonPrintableKey(key) {
+    return key // In IE, event.key returns words instead of actual characters for some keys.
+    && !['MozPrintableKey', 'Divide', 'Multiply', 'Subtract', 'Add', 'Enter', 'Decimal', 'Spacebar', 'Del'].includes(key) && key.length !== 1;
+  }
+  setValue(value) {
+    // if the value is same, don't do anything
+    if (!_classPrivateFieldLooseBase(this, _isValueSame)[_isValueSame]()) {
+      if (value && _classPrivateFieldLooseBase(this, _writtenInLocale)[_writtenInLocale]) {
+        _classPrivateFieldLooseBase(this, _widget)[_widget].value = _classPrivateFieldLooseBase(this, _convertValueToLocale)[_convertValueToLocale](value);
+      } else {
+        _classPrivateFieldLooseBase(this, _widget)[_widget].value = _classPrivateFieldLooseBase(this, _model)[_model].value;
+      }
+    }
+  }
+}
+function _toLatinForm2(halfOrFullWidthStr) {
+  // refer http://www.fileformat.info/info/unicode/block/halfwidth_and_fullwidth_forms/utf8test.htm
+  return halfOrFullWidthStr.replace(/[\uff00-\uffef]/g, function (ch) {
+    return String.fromCharCode(ch.charCodeAt(0) - 0xfee0);
+  });
+}
+function _attachEventHandlers2(widget, model) {
+  widget.addEventListener('keydown', e => {
+    _classPrivateFieldLooseBase(this, _handleKeyDown)[_handleKeyDown](e);
+  });
+  widget.addEventListener('keypress', e => {
+    _classPrivateFieldLooseBase(this, _handleKeyPress)[_handleKeyPress](e);
+  });
+  widget.addEventListener('paste', e => {
+    _classPrivateFieldLooseBase(this, _handlePaste)[_handlePaste](e);
+  });
+  widget.addEventListener('cut', e => {
+    _classPrivateFieldLooseBase(this, _handleCut)[_handleCut](e);
+  });
+  widget.addEventListener('blur', e => {
+    _classPrivateFieldLooseBase(this, _model)[_model].value = this.getValue(e.target.value);
+  });
+  // IME specific handling, to handle japanese languages max limit
+  _classPrivateFieldLooseBase(this, _attachCompositionEventHandlers)[_attachCompositionEventHandlers](widget);
+}
+function _attachCompositionEventHandlers2(widget) {
+  let hasCompositionJustEnded = false; // Used to swallow keyup event related to compositionend
+  // IME specific handling, to handle japanese languages max limit
+  // since enter can also be invoked during composing, a special handling is done here
+  let that = this,
+    changeCaratPosition = function changeCaratPosition() {
+      // change the carat selection position to further limit input of characters
+      let range = window.getSelection();
+      range.selectAllChildren(widget);
+      range.collapseToEnd();
+    };
+  widget.addEventListener('keyup', function (event) {
+    if ( /*isComposing || */hasCompositionJustEnded) {
+      if (_classPrivateFieldLooseBase(that, _compositionUpdateCallback)[_compositionUpdateCallback](event)) {
+        changeCaratPosition();
+      }
+      // IME composing fires keydown/keyup events
+      hasCompositionJustEnded = false;
+    }
+  });
+  widget.addEventListener('compositionstart', function (event) {
+  });
+  widget.addEventListener("compositionupdate", function (event) {
+    // event.originalEvent.data refers to the actual content
+    if (_classPrivateFieldLooseBase(that, _compositionUpdateCallback)[_compositionUpdateCallback](event)) {
+      changeCaratPosition();
+    }
+  });
+  widget.addEventListener("compositionend", function (event) {
+    // some browsers (IE, Firefox, Safari) send a keyup event after
+    //  compositionend, some (Chrome, Edge) don't. This is to swallow
+    // the next keyup event, unless a keydown event happens first
+    hasCompositionJustEnded = true;
+  });
+  widget.addEventListener("keydown", function (event) {
+    // Safari on OS X may send a keydown of 229 after compositionend
+    if (event.which !== 229) {
+      hasCompositionJustEnded = false;
+    }
+  });
+}
+function _getDigits2() {
+  let zeroCode = _classPrivateFieldLooseBase(this, _options)[_options].zero.charCodeAt(0),
+    digits = "";
+  for (let i = 0; i < 10; i++) {
+    digits += String.fromCharCode(zeroCode + i);
+  }
+  return "[" + digits + "]";
+}
+function _escape2(str) {
+  return str.replace(".", "\\.");
+}
+function _compositionUpdateCallback2(event) {
+  let that = this;
+  let flag = false;
+  let leadDigits = _classPrivateFieldLooseBase(that, _options)[_options].leadDigits;
+  let fracDigits = _classPrivateFieldLooseBase(that, _options)[_options].fracDigits;
+  // we don't check use-case where just fracDigits is set since in case of composition update, the value to update is not known
+  if (leadDigits !== -1) {
+    let val = _classPrivateFieldLooseBase(this, _widget)[_widget].value;
+    if (event.type === "compositionupdate" && event.originalEvent.data) {
+      val = val + event.originalEvent.data.substr(event.originalEvent.data.length - 1);
+    }
+    // can't use the existing regex (since current regex checks for english digits), rather doing leadDigit compare
+    let totalLength = leadDigits + (fracDigits !== -1 ? fracDigits + _classPrivateFieldLooseBase(that, _options)[_options].decimal.length : 0);
+    if (val.indexOf(_classPrivateFieldLooseBase(that, _options)[_options].decimal) === -1) {
+      totalLength = leadDigits;
+    }
+    let latinVal = _classPrivateFieldLooseBase(this, _toLatinForm)[_toLatinForm](val);
+    // match both since we support full width, half width and locale specific input
+    let match = latinVal.match(_classPrivateFieldLooseBase(that, _regex)[_regex]) || latinVal.match(_classPrivateFieldLooseBase(this, _engRegex)[_engRegex]);
+    flag = !match;
+    if (match === null) {
+      // entered invalid character, revert to previous value
+      _classPrivateFieldLooseBase(that, _widget)[_widget].value = _classPrivateFieldLooseBase(that, _previousCompositionVal)[_previousCompositionVal];
+      flag = true;
+    } else if (flag) {
+      // if max reached
+      let newVal = val.substr(0, totalLength);
+      _classPrivateFieldLooseBase(that, _widget)[_widget].value = newVal;
+      _classPrivateFieldLooseBase(that, _previousCompositionVal)[_previousCompositionVal] = newVal;
+      flag = true;
+    } else {
+      _classPrivateFieldLooseBase(that, _previousCompositionVal)[_previousCompositionVal] = val;
+    }
+  }
+  return flag;
+}
+function _handleKeyInput2(event, character, code) {
+  if (event.ctrlKey && !['paste', 'cut'].includes(event.type)) {
+    return true;
+  }
+  _classPrivateFieldLooseBase(this, _handleKeyDown)[_handleKeyDown](arguments);
+  _classPrivateFieldLooseBase(this, _options)[_options].lengthLimitVisible = true;
+  let val = _classPrivateFieldLooseBase(this, _widget)[_widget].value,
+    // if selectionStart attribute isn't supported then its value will be undefined
+    selectionStart = this.getHTMLSupportedAttr(_classPrivateFieldLooseBase(this, _widget)[_widget], "selectionStart") || 0,
+    isSelectionAttrSupported = !(selectionStart === undefined || selectionStart === null),
+    selectionEnd = this.getHTMLSupportedAttr(_classPrivateFieldLooseBase(this, _widget)[_widget], "selectionEnd") || 0,
+    combCells = parseInt(_classPrivateFieldLooseBase(this, _options)[_options].combCells) || 0,
+    current,
+    change = character;
+  if (combCells > 0) {
+    change = character.substr(0, combCells - val.length + selectionEnd - selectionStart);
+  }
+
+  // CQ-4245407 : selectionStart and selectionEnd attributes aren't supported in case of input type = number
+  // it is used for providing native HTML5 implementation for numeric field, so no further processing is required
+  // As it is specific to AF and AF doesn't support change event on each keypress, so this change should be fine
+  if (!isSelectionAttrSupported) {
+    return true;
+  }
+  current = val.substr(0, selectionStart) + change + val.substr(selectionEnd);
+  // done to handle support for both full width, half width or mixed input in number field
+  let latinCurrentValue = _classPrivateFieldLooseBase(this, _toLatinForm)[_toLatinForm](current);
+  if (!(_classPrivateFieldLooseBase(this, _regex)[_regex] == null || latinCurrentValue.match(_classPrivateFieldLooseBase(this, _regex)[_regex]) || latinCurrentValue.match(_classPrivateFieldLooseBase(this, _engRegex)[_engRegex]))) {
+    event.preventDefault();
+    return false;
+  }
+  if (!['keydown', 'cut'].includes(event.type) && combCells && (val.length >= combCells || current.length > combCells) && selectionStart === selectionEnd) {
+    event.preventDefault();
+    return false;
+  }
+  _classPrivateFieldLooseBase(this, _options)[_options].curValue = val;
+  _classPrivateFieldLooseBase(this, _previousCompositionVal)[_previousCompositionVal] = val;
+  _classPrivateFieldLooseBase(this, _options)[_options].pos = selectionStart;
+}
+function _handleKeyDown2(event) {
+  if (event) {
+    let code = event.charCode || event.which || event.keyCode || 0;
+    if (code === 8 || code === 46)
+      // backspace and del
+      _classPrivateFieldLooseBase(this, _handleKeyInput)[_handleKeyInput](event, "", code);else if (code === 32) {
+      // suppress space
+      event.preventDefault();
+      return false;
+    }
+  }
+}
+function _isValidChar2(character) {
+  character = _classPrivateFieldLooseBase(this, _toLatinForm)[_toLatinForm](character);
+  let lastSingleDigitChar = String.fromCharCode(_classPrivateFieldLooseBase(this, _options)[_options].zero.charCodeAt(0) + 9);
+  // we only full width, half width and also locale specific if customer has overlayed the i18n file
+  return character >= "0" && character <= "9" || character >= _classPrivateFieldLooseBase(this, _options)[_options].zero && character <= lastSingleDigitChar || character === _classPrivateFieldLooseBase(this, _options)[_options].decimal || character === _classPrivateFieldLooseBase(this, _options)[_options].minus;
+}
+function _handleKeyPress2(event) {
+  if (event) {
+    let code = event.charCode || event.which || event.keyCode || 0,
+      character = String.fromCharCode(code);
+    if (this.isNonPrintableKey(event.key)) {
+      // mozilla also generates a keypress, along with keydown
+      return true; // for all keys, so only handling printable keys in keypress
+    }
+
+    if (_classPrivateFieldLooseBase(this, _isValidChar)[_isValidChar](character)) _classPrivateFieldLooseBase(this, _handleKeyInput)[_handleKeyInput](event, character, code);else if (!event.ctrlKey) {
+      event.preventDefault();
+      return false;
+    }
+  }
+}
+function _handlePaste2(event) {
+  if (event) {
+    // get the contents
+    let pastedChar = undefined;
+    if (window.clipboardData && window.clipboardData.getData) {
+      // IE
+      pastedChar = window.clipboardData.getData('Text');
+    } else if ((event.originalEvent || event).clipboardData && (event.originalEvent || event).clipboardData.getData) {
+      pastedChar = (event.originalEvent || event).clipboardData.getData('text/plain');
+    }
+    if (pastedChar) {
+      let allPastedCharsValid = pastedChar.split('').every(function (character) {
+        return _classPrivateFieldLooseBase(this, _isValidChar)[_isValidChar](character);
+      }, this);
+      if (allPastedCharsValid) {
+        // during paste we support both half width, full width and locale specific numbers
+        pastedChar = _classPrivateFieldLooseBase(this, _toLatinForm)[_toLatinForm](pastedChar);
+        _classPrivateFieldLooseBase(this, _handleKeyInput)[_handleKeyInput](event, pastedChar, 0);
+      } else if (!event.ctrlKey) {
+        event.preventDefault();
+        return false;
+      }
+    }
+  }
+}
+function _handleCut2(event) {
+  if (event) {
+    _classPrivateFieldLooseBase(this, _handleKeyInput)[_handleKeyInput](event, "", 0);
+  }
+}
+function _convertValueToLocale2(val) {
+  let zeroCode = _classPrivateFieldLooseBase(this, _options)[_options].zero.charCodeAt(0);
+  return val.map(function (c) {
+    if (c === ".") {
+      return _classPrivateFieldLooseBase(this, _options)[_options].decimal;
+    } else if (c === "-") {
+      return _classPrivateFieldLooseBase(this, _options)[_options].minus;
+    } else {
+      return String.fromCharCode(parseInt(c) + zeroCode);
+    }
+  }, this).join("");
+}
+function _convertValueFromLocale2(val) {
+  val = _classPrivateFieldLooseBase(this, _toLatinForm)[_toLatinForm](val);
+  let zeroCode = _classPrivateFieldLooseBase(this, _options)[_options].zero.charCodeAt(0);
+  return val.map(function (c) {
+    if (c === _classPrivateFieldLooseBase(this, _options)[_options].decimal) {
+      return ".";
+    } else if (c === _classPrivateFieldLooseBase(this, _options)[_options].minus) {
+      return "-";
+    } else {
+      return (c.charCodeAt(0) - zeroCode).toString();
+    }
+  }, this).join("");
+}
+function _isValueSame2() {
+  return _classPrivateFieldLooseBase(this, _model)[_model].value === null && _classPrivateFieldLooseBase(this, _widget)[_widget].value === "" || _classPrivateFieldLooseBase(this, _model)[_model].value === _classPrivateFieldLooseBase(this, _widget)[_widget].value;
+}
+
+class NumberInput extends FormFieldBase {
+  constructor(...args) {
+    super(...args);
+    this.widgetObject = void 0;
+  }
+  getClass() {
+    return NumberInput.IS;
+  }
+  getWidget() {
+    return this.element.querySelector(NumberInput.selectors.widget);
+  }
+  getDescription() {
+    return this.element.querySelector(NumberInput.selectors.description);
+  }
+  getLabel() {
+    return this.element.querySelector(NumberInput.selectors.label);
+  }
+  getErrorDiv() {
+    return this.element.querySelector(NumberInput.selectors.errorDiv);
+  }
+  getTooltipDiv() {
+    return this.element.querySelector(NumberInput.selectors.tooltipDiv);
+  }
+  getQuestionMarkDiv() {
+    return this.element.querySelector(NumberInput.selectors.qm);
+  }
+  _updateValue(value) {
+    if (this.widgetObject == null && (this._model._jsonModel.editFormat || this._model._jsonModel.displayFormat)) {
+      this.widgetObject = new NumericInputWidget(this.getWidget(), this._model);
+    }
+    if (this.widgetObject) {
+      this.widgetObject.setValue(value);
+    } else {
+      super._updateValue(value);
+    }
+  }
+  addListener() {
+    // only initialize if patterns are set
+    if (this._model._jsonModel.editFormat || this._model._jsonModel.displayFormat) {
+      if (this.widgetObject == null) {
+        this.widgetObject = new NumericInputWidget(this.getWidget(), this._model);
+      }
+    } else {
+      var _this$getWidget;
+      (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener('blur', e => {
+        this._model.value = e.target.value;
+      });
+    }
+  }
+  getbemBlock() {
+    return NumberInput.bemBlock;
+  }
+  getIS() {
+    return NumberInput.IS;
+  }
+  getInputHTML() {
+    return `<input
+            class="cmp-adaptiveform-numberinput__widget"
+            title="${this.isTooltipVisible() ? this.getTooltipValue() : ''}"
+            aria-label="${this.isLabelVisible() ? this.getLabelValue() : ''}"
+            type="number"
+            name="${this.getName()}"
+            value="${this.getDefault()}"
+            max="${this.getMaximum()}"
+            min="${this.getMinimum()}"
+            ${this.getDisabledHTML()}
+            ${this.getReadonlyHTML()}
+            required="${this.isRequired()}"
+            placeholder="${this.getPlaceHolder()}"/>`;
+  }
+}
+NumberInput.NS = Constants.NS;
+NumberInput.IS = "adaptiveFormNumberInput";
+NumberInput.bemBlock = 'cmp-adaptiveform-numberinput';
+NumberInput.selectors = {
+  self: "[data-" + NumberInput.NS + '-is="' + NumberInput.IS + '"]',
+  widget: `.${NumberInput.bemBlock}__widget`,
+  label: `.${NumberInput.bemBlock}__label`,
+  description: `.${NumberInput.bemBlock}__longdescription`,
+  errorDiv: `.${NumberInput.bemBlock}__errormessage`,
+  qm: `.${NumberInput.bemBlock}__questionmark`,
+  tooltipDiv: `.${NumberInput.bemBlock}__shortdescription`
+};
+
+class RadioButton extends FormFieldBase {
+  constructor(params, model) {
+    super(params, model);
+    this.qm = this.element.querySelector(RadioButton.selectors.qm);
+  }
+  getWidget() {
+    return this.element.querySelector(RadioButton.selectors.widget);
+  }
+  getWidgets() {
+    return this.element.querySelectorAll(RadioButton.selectors.widget);
+  }
+  getDescription() {
+    return this.element.querySelector(RadioButton.selectors.description);
+  }
+  getLabel() {
+    return this.element.querySelector(RadioButton.selectors.label);
+  }
+  getQuestionMarkDiv() {
+    return this.element.querySelector(RadioButton.selectors.qm);
+  }
+  getTooltipDiv() {
+    return this.element.querySelector(RadioButton.selectors.tooltipDiv);
+  }
+  getErrorDiv() {
+    return this.element.querySelector(RadioButton.selectors.errorDiv);
+  }
+  _updateValue(modelValue) {
+    if (modelValue != null) {
+      this.getWidgets().forEach(widget => {
+        if (widget.value != null && modelValue.toString() == widget.value.toString()) {
+          widget.checked = true;
+          widget.setAttribute(Constants.HTML_ATTRS.CHECKED, Constants.HTML_ATTRS.CHECKED);
+          widget.setAttribute(Constants.ARIA_CHECKED, true + "");
+        } else {
+          widget.checked = false;
+          widget.removeAttribute(Constants.HTML_ATTRS.CHECKED);
+          widget.setAttribute(Constants.ARIA_CHECKED, false + "");
+        }
+      }, this);
+    }
+  }
+  _updateEnabled(enabled) {
+    this.toggle(enabled, Constants.ARIA_DISABLED, true);
+    this.element.setAttribute(Constants.DATA_ATTRIBUTE_ENABLED, enabled + "");
+    let widgets = this.getWidgets();
+    widgets == null ? void 0 : widgets.forEach(widget => {
+      if (enabled === false) {
+        widget.setAttribute(Constants.HTML_ATTRS.DISABLED, true + "");
+        widget.setAttribute(Constants.ARIA_DISABLED, true + "");
+      } else {
+        widget.removeAttribute(Constants.HTML_ATTRS.DISABLED);
+        widget.removeAttribute(Constants.ARIA_DISABLED);
+      }
+    });
+  }
+  addListener() {
+    this.getWidgets().forEach(widget => {
+      widget.addEventListener('change', e => {
+        this._model.value = e.target.value;
+      });
+    });
+  }
+  getbemBlock() {
+    return RadioButton.bemBlock;
+  }
+  getIS() {
+    return RadioButton.IS;
+  }
+  getInputHTML() {
+    var _this$getState, _this$getState$enum;
+    return `
+            ${(_this$getState = this.getState()) == null ? void 0 : (_this$getState$enum = _this$getState.enum) == null ? void 0 : _this$getState$enum.map((enumVal, index) => {
+      var _this$getState2;
+      return this.getRadioHTML(this, enumVal, (_this$getState2 = this.getState()) == null ? void 0 : _this$getState2.enumNames[index], index);
+    }).join("")}`;
+  }
+  getRadioHTML(radioButton, enumValue, enumDisplayName, index) {
+    return `<div class="cmp-adaptiveform-radiobutton__option ${radioButton.getLayoutProperties().orientation}">
+                    <label class="cmp-adaptiveform-radiobutton__option__label"
+                            title="${radioButton.getTooltipValue()}"
+                            aria-describedby="_desc"
+                            aria-label="${enumDisplayName}">
+                        <input type="radio"
+                                name="${radioButton.getName()}"
+                                class="cmp-adaptiveform-radiobutton__option__widget"
+                                id="${radioButton.getId()}${'_'}${index}__widget"
+                                value="${enumValue}"
+                                ${this.getDisabledHTML()}
+                                aria-describedby="_desc"
+                                checked="${enumValue == this.getDefault()}"/>
+                        <span>${enumDisplayName}</span>
+                    </label>
+                </div>
+            </div>`;
+  }
+}
+RadioButton.NS = Constants.NS;
+RadioButton.IS = "adaptiveFormRadioButton";
+RadioButton.bemBlock = 'cmp-adaptiveform-radiobutton';
+RadioButton.selectors = {
+  self: "[data-" + RadioButton.NS + '-is="' + RadioButton.IS + '"]',
+  widget: `.${RadioButton.bemBlock}__option__widget`,
+  label: `.${RadioButton.bemBlock}__label`,
+  description: `.${RadioButton.bemBlock}__longdescription`,
+  qm: `.${RadioButton.bemBlock}__questionmark`,
+  errorDiv: `.${RadioButton.bemBlock}__errormessage`,
+  tooltipDiv: `.${RadioButton.bemBlock}__shortdescription`
+};
+
+class Text extends FormFieldBase {
+  getWidget() {
+    return null;
+  }
+  getDescription() {
+    return null;
+  }
+  getLabel() {
+    return null;
+  }
+  getErrorDiv() {
+    return null;
+  }
+  getTooltipDiv() {
+    return null;
+  }
+  getQuestionMarkDiv() {
+    return null;
+  }
+  getClass() {
+    return Text.IS;
+  }
+  setFocus() {
+    this.setActive();
+  }
+  getbemBlock() {
+    return Text.bemBlock;
+  }
+  getIS() {
+    return Text.IS;
+  }
+  getHTML() {
+    return `
+        <div data-cmp-is="${this.getIS()}"
+            id="${this.id}"
+            data-cmp-adaptiveformcontainer-path="${this.getFormContainerPath()}"
+            data-cmp-visible="${this.getDefault()}"
+            class="cmp-adaptiveform-text">
+            <div class="cmp-adaptiveform-text__widget" tabindex="0">
+                ${this.getState().value}
+            </div>
+        </div>`;
+  }
+}
+Text.NS = Constants.NS;
+Text.IS = "adaptiveFormText";
+Text.bemBlock = 'cmp-adaptiveform-text';
+Text.selectors = {
+  self: "[data-" + Text.NS + '-is="' + Text.IS + '"]'
+};
+
+class SliderInput extends FormFieldBase {
+  getWidget() {
+    return this.element.querySelector(SliderInput.selectors.widget);
+  }
+  getDescription() {
+    return this.element.querySelector(SliderInput.selectors.description);
+  }
+  getLabel() {
+    return this.element.querySelector(SliderInput.selectors.label);
+  }
+  getErrorDiv() {
+    return this.element.querySelector(SliderInput.selectors.errorDiv);
+  }
+  getTooltipDiv() {
+    return this.element.querySelector(SliderInput.selectors.tooltipDiv);
+  }
+  getQuestionMarkDiv() {
+    return this.element.querySelector(SliderInput.selectors.qm);
+  }
+  addListener() {
+    var _this$getWidget, _this$getWidget2;
+    (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener('blur', e => {
+      this._model.value = e.target.value;
+      this.setInactive();
+    });
+    (_this$getWidget2 = this.getWidget()) == null ? void 0 : _this$getWidget2.addEventListener('focus', e => {
+      this.setActive();
+    });
+  }
+  getbemBlock() {
+    return SliderInput.bemBlock;
+  }
+  getIS() {
+    return SliderInput.IS;
+  }
+  getInputHTML() {
+    return `
+            <br>
+            <p class="range-info">${this.getMinimum()}</p>
+            <input
+                class="cmp-adaptiveform-SliderInput__widget"
+                title="${this.isTooltipVisible() ? this.getTooltipValue() : ''}"
+                aria-label="${this.isLabelVisible() ? this.getLabelValue() : ''}"
+                type="range"
+                name="${this.getName()}"
+                value="${this.getDefault()}"
+                step="${this.getState().step}"
+                ${this.getDisabledHTML()}
+                ${this.getReadonlyHTML()}
+                required="${this.isRequired()}"
+                placeholder="${this.getPlaceHolder()}"
+                min="${this.getMinimum()}"
+                max="${this.getMaximum()}"/>
+            
+            <p class="range-info">${this.getMaximum()}</p>
+            `;
+  }
+}
+SliderInput.NS = Constants.NS;
+SliderInput.IS = "adaptiveFormSliderInput";
+SliderInput.bemBlock = 'cmp-adaptiveform-sliderinput';
+SliderInput.selectors = {
+  self: "[data-" + SliderInput.NS + '-is="' + SliderInput.IS + '"]',
+  widget: `.${SliderInput.bemBlock}__widget`,
+  label: `.${SliderInput.bemBlock}__label`,
+  description: `.${SliderInput.bemBlock}__longdescription`,
+  qm: `.${SliderInput.bemBlock}__questionmark`,
+  errorDiv: `.${SliderInput.bemBlock}__errormessage`,
+  tooltipDiv: `.${SliderInput.bemBlock}__shortdescription`
+};
+
+class EmailInput extends TextInput {
+  getInputHTML() {
+    return `<input
+              class="cmp-adaptiveform-textinput__widget"
+              title="${this.isTooltipVisible() ? this.getTooltipValue() : ''}"
+              aria-label="${this.isLabelVisible() ? this.getLabelValue() : ''}"
+              type="email"
+              name="${this.getName()}"
+              value="${this.getDefault()}"
+              ${this.getDisabledHTML()}
+              ${this.getReadonlyHTML()}
+              required="${this.isRequired()}"
+              placeholder="${this.getPlaceHolder()}"
+              minlength="${this.getMinLength()}"
+              maxlength="${this.getMaxLength()}"/>`;
+  }
+}
+
+class CheckBoxGroup extends FormFieldBase {
+  constructor(params, model) {
+    super(params, model);
+    this.widgetLabel = void 0;
+    this.qm = this.element.querySelector(CheckBoxGroup.selectors.qm);
+    this.widgetLabel = this.element.querySelector(CheckBoxGroup.selectors.widgetLabel);
+  }
+  getWidget() {
+    return this.element.querySelector(CheckBoxGroup.selectors.widget);
+  }
+  getWidgets() {
+    return this.element.querySelectorAll(CheckBoxGroup.selectors.widget);
+  }
+  getDescription() {
+    return this.element.querySelector(CheckBoxGroup.selectors.description);
+  }
+  getLabel() {
+    return this.element.querySelector(CheckBoxGroup.selectors.label);
+  }
+  getErrorDiv() {
+    return this.element.querySelector(CheckBoxGroup.selectors.errorDiv);
+  }
+  getQuestionMarkDiv() {
+    return this.element.querySelector(CheckBoxGroup.selectors.qm);
+  }
+  getTooltipDiv() {
+    return this.element.querySelector(CheckBoxGroup.selectors.tooltipDiv);
+  }
+  _updateModelValue() {
+    let value = [];
+    let widgets = this.getWidgets();
+    widgets == null ? void 0 : widgets.forEach(widget => {
+      if (widget.checked) {
+        value.push(widget.value);
+      }
+    }, this);
+    this._model.value = value;
+  }
+  _updateEnabled(enabled) {
+    this.toggle(enabled, Constants.ARIA_DISABLED, true);
+    this.element.setAttribute(Constants.DATA_ATTRIBUTE_ENABLED, enabled + "");
+    let widgets = this.getWidgets();
+    widgets == null ? void 0 : widgets.forEach(widget => {
+      if (enabled === false) {
+        widget.setAttribute(Constants.HTML_ATTRS.DISABLED, true + "");
+        widget.setAttribute(Constants.ARIA_DISABLED, true + "");
+      } else {
+        widget.removeAttribute(Constants.HTML_ATTRS.DISABLED);
+        widget.removeAttribute(Constants.ARIA_DISABLED);
+      }
+    });
+  }
+  getEnum() {
+    var _this$getState;
+    return (_this$getState = this.getState()) == null ? void 0 : _this$getState.enum;
+  }
+  getEnumNames() {
+    var _this$getState2;
+    return (_this$getState2 = this.getState()) == null ? void 0 : _this$getState2.enumNames;
+  }
+  addListener() {
+    let widgets = this.getWidgets();
+    widgets.forEach(widget => {
+      widget.addEventListener('change', e => {
+        this._updateModelValue();
+      });
+    });
+  }
+  getbemBlock() {
+    return CheckBoxGroup.bemBlock;
+  }
+  getIS() {
+    return CheckBoxGroup.IS;
+  }
+  getInputHTML() {
+    var _this$getEnum;
+    return `
+            <div class="cmp-adaptiveform-checkboxgroup__widget">
+            ${(_this$getEnum = this.getEnum()) == null ? void 0 : _this$getEnum.map((enumVal, index, enums) => {
+      var _this$getEnumNames;
+      return this.getCheckboxHTML(this, enumVal, ((_this$getEnumNames = this.getEnumNames()) == null ? void 0 : _this$getEnumNames[index]) || enumVal, index, enums == null ? void 0 : enums.length);
+    }).join("")}
+            </div>
+            `;
+  }
+  getCheckboxHTML(checkbox, enumValue, enumDisplayName, index, size) {
+    return `<div class="cmp-adaptiveform-checkboxgroup-item ${checkbox.getName()} ${checkbox.getLayoutProperties().orientation} ">
+                <label class="cmp-adaptiveform-checkbox__label" aria-label="${enumDisplayName}"
+                    title="${checkbox.getTooltipValue()}" for="${checkbox.id}${'_'}${index}__widget">
+                    <input class="cmp-adaptiveform-checkbox__widget" type="checkbox" id="${checkbox.id}${'_'}${index}__widget"
+                        aria-describedby="_desc"
+                        name="${size > 1 ? checkbox.getName() : checkbox.getLabelValue()}"
+                        value="${enumValue.toString()}"
+                        checked="${enumValue == checkbox.getDefault()}"
+                        ${this.getDisabledHTML()} />
+                    <span>${this.getEnum().length > 1 ? enumDisplayName : checkbox.getLabelValue()}</span>
+                </label>
+            </div>`;
+  }
+  renderLabel() {
+    return `${this.isLabelVisible() && this.getEnum().length > 1 ? `<label id="${this.getId()}-label" for="${this.getId()}" class="${this.getbemBlock()}__label" >${this.getLabelValue()}</label>` : ""}`;
+  }
+}
+CheckBoxGroup.NS = Constants.NS;
+CheckBoxGroup.IS = "adaptiveFormCheckBoxGroup";
+CheckBoxGroup.bemBlock = 'cmp-adaptiveform-checkboxgroup';
+CheckBoxGroup.checkboxBemBlock = 'cmp-adaptiveform-checkbox';
+CheckBoxGroup.selectors = {
+  self: "[data-" + CheckBoxGroup.NS + '-is="' + CheckBoxGroup.IS + '"]',
+  widgets: `.${CheckBoxGroup.bemBlock}__widgets`,
+  widget: `.${CheckBoxGroup.checkboxBemBlock}__widget`,
+  widgetLabel: `.${CheckBoxGroup.checkboxBemBlock}__label`,
+  label: `.${CheckBoxGroup.bemBlock}__label`,
+  description: `.${CheckBoxGroup.bemBlock}__longdescription`,
+  qm: `.${CheckBoxGroup.bemBlock}__questionmark`,
+  errorDiv: `.${CheckBoxGroup.bemBlock}__errormessage`,
+  tooltipDiv: `.${CheckBoxGroup.bemBlock}__shortdescription`
+};
+
+class FormContainer {
+  constructor(_params) {
+    this._model = void 0;
+    this._path = void 0;
+    this._fields = void 0;
+    this._deferredParents = void 0;
+    this.renderChildrens = (form, state) => {
+      console.log("Rendering childrens");
+      let items = state == null ? void 0 : state.items;
+      if (items && items.length > 0) {
+        items.forEach(field => {
+          form.append(this.getRender(field));
+        });
+      }
+    };
+    this.getRender = field => {
+      const fieldWrapper = document.createElement('div');
+      try {
+        let fieldViewModel;
+        let fieldModel = this.getModel(field.id);
+        let params = {
+          element: fieldWrapper,
+          id: field.id
+        };
+        switch (field == null ? void 0 : field.fieldType) {
+          case "checkbox":
+            fieldViewModel = new CheckBoxGroup(params, fieldModel);
+            break;
+          case "email":
+            fieldViewModel = new EmailInput(params, fieldModel);
+            break;
+          case "slider":
+            fieldViewModel = new SliderInput(params, fieldModel);
+            break;
+          case "plain-text":
+            fieldViewModel = new Text(params, fieldModel);
+            break;
+          case "radio":
+            fieldViewModel = new RadioButton(params, fieldModel);
+            break;
+          case "number":
+            fieldViewModel = new NumberInput(params, fieldModel);
+            break;
+          case "button":
+            fieldViewModel = new Button(params, fieldModel);
+            break;
+          case "select":
+            fieldViewModel = new DropDown(params, fieldModel);
+            break;
+          case "text-area":
+            fieldViewModel = new TextArea(params, fieldModel);
+            break;
+          default:
+            fieldViewModel = new TextInput(params, fieldModel);
+        }
+        if (fieldViewModel) {
+          fieldViewModel.render();
+        }
+      } catch (error) {
+        console.error("Unexpected error ", error);
+      }
+      return fieldWrapper;
+    };
+    //@ts-ignore
+    //let createFormInstance = FormView.createFormInstance; // TODO - replace with import after AF-Core is available as ESM
+    this._model = createFormInstance(_extends$1({}, _params._formJson));
+    this._path = _params._path;
+    this._fields = {};
+    this._deferredParents = {};
+  }
+  /**
+   * returns the form field view
+   * @param fieldId
+   */
+  getField(fieldId) {
+    if (this._fields.hasOwnProperty(fieldId)) {
+      return this._fields[fieldId];
+    }
+    return null;
+  }
+  getModel(id) {
+    return id ? this._model.getElement(id) : this._model;
+  }
+  addField(fieldView) {
+    if (fieldView.getFormContainerPath() === this._path) {
+      let fieldId = fieldView.getId();
+      this._fields[fieldId] = fieldView;
+      let model = this.getModel(fieldId);
+      fieldView.setModel(model);
+      //todo fix parentId for non form elements, right now parent id might be non form element
+      let parentId = model.parent.id;
+      if (parentId != '$form') {
+        let parentView = this._fields[parentId];
+        //if parent view has been initialized then add parent relationship, otherwise add it to deferred parent-child relationship
+        if (parentView) {
+          fieldView.setParent(parentView);
+        } else {
+          if (!this._deferredParents[parentId]) {
+            this._deferredParents[parentId] = [];
+          }
+          this._deferredParents[parentId].push(fieldView);
+        }
+      }
+      // check if field id is in deferred relationship, if it is add parent child relationships
+      if (this._deferredParents[fieldId]) {
+        let childList = this._deferredParents[fieldId];
+        for (let index = 0; index < childList.length; index++) {
+          childList[index].setParent(fieldView);
+        }
+        // remove the parent from deferred parents, once child-parent relationship is established
+        delete this._deferredParents[fieldId];
+      }
+      fieldView.subscribe();
+    }
+  }
+  setFocus(id) {
+    if (id) {
+      let fieldView = this._fields[id];
+      if (fieldView && fieldView.setFocus) {
+        fieldView.setFocus();
+      } else {
+        // todo proper error handling, for AF 2.0 model exceptions as well
+        // logging the error right now.
+        console.log("View on which focus is to be set, not initialized.");
+      }
+    }
+  }
+  getPath() {
+    return this._path;
+  }
+  render() {
+    const form = document.createElement('form');
+    form.className = "cmp-adaptiveform-container cmp-container";
+    let state = this._model.getState();
+    this.renderChildrens(form, state);
+    return form;
+  }
+}
+
+const PANEL_TYPE = "object";
+const PANEL_END = "page-break";
+const RULE_TYPE = "Rules.";
+const EVENTS = "events.";
+const CONSTRAINT_MESSAGE = "constraintMessages.";
+var _handlePanel = /*#__PURE__*/_classPrivateFieldLooseKey("handlePanel");
+var _handleProperty = /*#__PURE__*/_classPrivateFieldLooseKey("handleProperty");
+var _handleCheckbox = /*#__PURE__*/_classPrivateFieldLooseKey("handleCheckbox");
+var _setProperty = /*#__PURE__*/_classPrivateFieldLooseKey("setProperty");
+var _handleMultiValues = /*#__PURE__*/_classPrivateFieldLooseKey("handleMultiValues");
+var _handleHierarchy = /*#__PURE__*/_classPrivateFieldLooseKey("handleHierarchy");
+var _isRule = /*#__PURE__*/_classPrivateFieldLooseKey("isRule");
+var _isConstraintMsg = /*#__PURE__*/_classPrivateFieldLooseKey("isConstraintMsg");
+var _isPanel = /*#__PURE__*/_classPrivateFieldLooseKey("isPanel");
+var _isEndingPanel = /*#__PURE__*/_classPrivateFieldLooseKey("isEndingPanel");
+var _cleanUpPanel = /*#__PURE__*/_classPrivateFieldLooseKey("cleanUpPanel");
+class ExcelToFormModel {
+  constructor() {
+    Object.defineProperty(this, _cleanUpPanel, {
+      value: _cleanUpPanel2
+    });
+    Object.defineProperty(this, _isEndingPanel, {
+      value: _isEndingPanel2
+    });
+    Object.defineProperty(this, _isPanel, {
+      value: _isPanel2
+    });
+    Object.defineProperty(this, _isConstraintMsg, {
+      value: _isConstraintMsg2
+    });
+    Object.defineProperty(this, _isRule, {
+      value: _isRule2
+    });
+    Object.defineProperty(this, _handleHierarchy, {
+      value: _handleHierarchy2
+    });
+    Object.defineProperty(this, _handleMultiValues, {
+      value: _handleMultiValues2
+    });
+    Object.defineProperty(this, _setProperty, {
+      value: _setProperty2
+    });
+    Object.defineProperty(this, _handleCheckbox, {
+      value: _handleCheckbox2
+    });
+    Object.defineProperty(this, _handleProperty, {
+      value: _handleProperty2
+    });
+    Object.defineProperty(this, _handlePanel, {
+      value: _handlePanel2
+    });
+  }
+  async _getForm(formName) {
+    if (!formName) {
+      throw new Error("form name is required");
+    }
+    const resp = await fetch(formName);
+    const json = await resp.json();
+    console.log("Data", json);
+    return json;
+  }
+  async getFormModel(formName) {
+    if (formName) {
+      let formDef = {
+        adaptiveform: "0.10.0",
+        metadata: {
+          grammar: "json-formula-1.0.0",
+          version: "1.0.0"
+        },
+        items: []
+      };
+      let exData = await this._getForm(formName);
+      if (!exData || !exData.data) {
+        throw new Error("Unable to retrieve the form details with excel name " + formName);
+      }
+      var stack = [];
+      stack.push(formDef.items);
+      let currentPanel = formDef;
+      exData.data.forEach(item => {
+        if (_classPrivateFieldLooseBase(this, _isPanel)[_isPanel](item)) {
+          item.items = {};
+          let panel = JSON.parse(JSON.stringify(item));
+          _classPrivateFieldLooseBase(this, _handlePanel)[_handlePanel](panel);
+          currentPanel.items.push(panel);
+          stack.push(currentPanel);
+          currentPanel = panel;
+        } else if (_classPrivateFieldLooseBase(this, _isEndingPanel)[_isEndingPanel](item)) {
+          currentPanel = stack.pop();
+          if (!currentPanel) {
+            currentPanel = formDef;
+          }
+        } else {
+          currentPanel.items.push(_classPrivateFieldLooseBase(this, _handleProperty)[_handleProperty](item));
+        }
+      });
+      return {
+        formDef: formDef,
+        excelData: exData
+      };
+    }
+  }
+}
+function _handlePanel2(item) {
+  _classPrivateFieldLooseBase(this, _cleanUpPanel)[_cleanUpPanel](item);
+  if (_classPrivateFieldLooseBase(this, _isRule)[_isRule](item)) {
+    let rule = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](item, RULE_TYPE);
+    if (rule && Object.keys(rule).length != 0) {
+      item.rules = rule;
+    }
+  }
+  // Handle Events
+  let events = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](item, EVENTS);
+  if (events && Object.keys(events).length != 0) {
+    item.events = events;
+  }
+}
+function _handleProperty2(item) {
+  let source = Object.fromEntries(Object.entries(item).filter(([_, v]) => v != null && v != ""));
+  let fieldType = ExcelToFormModel.fieldMapping.has(source.Type) ? ExcelToFormModel.fieldMapping.get(source.Type) : source.Type;
+  let field = {
+    name: source.Field,
+    placeholder: source.Placeholder,
+    type: "string",
+    fieldType: fieldType,
+    value: source.Value,
+    label: {
+      value: source.Label
+    },
+    required: source.Mandatory ? true : false
+  };
+  _classPrivateFieldLooseBase(this, _setProperty)[_setProperty](source, "Maximum", field, "maximum");
+  _classPrivateFieldLooseBase(this, _setProperty)[_setProperty](source, "Minimum", field, "minimum");
+  _classPrivateFieldLooseBase(this, _setProperty)[_setProperty](source, "MaxLength", field, "maxLength");
+  _classPrivateFieldLooseBase(this, _setProperty)[_setProperty](source, "MinLength", field, "minLength");
+  _classPrivateFieldLooseBase(this, _setProperty)[_setProperty](source, "Step", field, "step");
+  if (_classPrivateFieldLooseBase(this, _isRule)[_isRule](source)) {
+    let rule = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](source, RULE_TYPE);
+    if (rule && Object.keys(rule).length != 0) {
+      field.rules = rule;
+    }
+  }
+  if (_classPrivateFieldLooseBase(this, _isConstraintMsg)[_isConstraintMsg](source)) {
+    let constraints = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](source, CONSTRAINT_MESSAGE);
+    if (constraints && Object.keys(constraints).length != 0) {
+      field.constraintMessages = constraints;
+    }
+  }
+  // Handle Events
+  let events = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](source, EVENTS);
+  if (events && Object.keys(events).length != 0) {
+    field.events = events;
+  }
+  let enumNames = _classPrivateFieldLooseBase(this, _handleMultiValues)[_handleMultiValues](source, "Options");
+  if (enumNames) {
+    field.enumNames = field.enum = enumNames;
+  }
+  _classPrivateFieldLooseBase(this, _handleCheckbox)[_handleCheckbox](field);
+  return field;
+}
+function _handleCheckbox2(field) {
+  if ((field == null ? void 0 : field.fieldType) == "checkbox" && (!field.enum || field.enum.length == 0)) {
+    field.enum = ["on"];
+  }
+}
+function _setProperty2(source, sourceKey, target, targetKey) {
+  if (source && source[sourceKey]) {
+    target[targetKey] = source[sourceKey];
+  }
+}
+function _handleMultiValues2(item, source) {
+  let values;
+  if (item && item[source]) {
+    values = item[source].split(",").map(value => value.trim());
+  }
+  return values;
+}
+function _handleHierarchy2(item, match) {
+  let constraints = {};
+  Object.keys(item).forEach(key => {
+    if (~key.indexOf(match)) {
+      let constraint = key.split(".")[1];
+      if (item[key]) {
+        constraints[constraint] = item[key];
+      }
+      delete item[key];
+    }
+  });
+  return constraints;
+}
+function _isRule2(item) {
+  return Object.keys(item).some(function (key) {
+    return ~key.indexOf(RULE_TYPE);
+  });
+}
+function _isConstraintMsg2(item) {
+  return Object.keys(item).some(function (key) {
+    return ~key.indexOf(CONSTRAINT_MESSAGE);
+  });
+}
+function _isPanel2(item) {
+  return item && item.type == PANEL_TYPE;
+}
+function _isEndingPanel2(item) {
+  return item && item.viewType == PANEL_END;
+}
+function _cleanUpPanel2(item) {
+  //delete item.viewType;
+  delete item.type;
+}
+ExcelToFormModel.fieldMapping = new Map([["text-input", "text"], ["number-input", "number"], ["date-input", "datetime-local"], ["file-input", "file"], ["drop-down", "select"], ["radio-group", ""], ["checkbox-group", ""], ["plain-text", "plain-text"], ["checkbox", "checkbox"], ["multiline-input", "text-area"], ["panel", "panel"], ["submit", "button"]]);
+
+let createFormContainer = async url => {
+  console.log("Loading & Converting excel form to Crispr Form");
+  const transform = new ExcelToFormModel();
+  const convertedData = await transform.getFormModel(url);
+  console.log(convertedData);
+  console.log("Creating Form Container");
+  let formContainer = new FormContainer({
+    _formJson: convertedData == null ? void 0 : convertedData.formDef
+  });
+  //@ts-ignore
+  window.guideContainer = formContainer;
+  return formContainer.render();
+};
+async function decorate(block) {
+  const form = block.querySelector('a[href$=".json"]');
+  if (form && form != null && form.href) {
+    // Adaptive Form
+    form.replaceWith(await createFormContainer(form.href));
+  }
+}
+decorate(document.getElementsByClassName("form")[0]);
+
+export { decorate as default };
+//# sourceMappingURL=index.modern.js.map
