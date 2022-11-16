@@ -1,3 +1,326 @@
+function _regeneratorRuntime() {
+  _regeneratorRuntime = function () {
+    return exports;
+  };
+  var exports = {},
+    Op = Object.prototype,
+    hasOwn = Op.hasOwnProperty,
+    defineProperty = Object.defineProperty || function (obj, key, desc) {
+      obj[key] = desc.value;
+    },
+    $Symbol = "function" == typeof Symbol ? Symbol : {},
+    iteratorSymbol = $Symbol.iterator || "@@iterator",
+    asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator",
+    toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+  function define(obj, key, value) {
+    return Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }), obj[key];
+  }
+  try {
+    define({}, "");
+  } catch (err) {
+    define = function (obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator,
+      generator = Object.create(protoGenerator.prototype),
+      context = new Context(tryLocsList || []);
+    return defineProperty(generator, "_invoke", {
+      value: makeInvokeMethod(innerFn, self, context)
+    }), generator;
+  }
+  function tryCatch(fn, obj, arg) {
+    try {
+      return {
+        type: "normal",
+        arg: fn.call(obj, arg)
+      };
+    } catch (err) {
+      return {
+        type: "throw",
+        arg: err
+      };
+    }
+  }
+  exports.wrap = wrap;
+  var ContinueSentinel = {};
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+  var IteratorPrototype = {};
+  define(IteratorPrototype, iteratorSymbol, function () {
+    return this;
+  });
+  var getProto = Object.getPrototypeOf,
+    NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype);
+  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function (method) {
+      define(prototype, method, function (arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if ("throw" !== record.type) {
+        var result = record.arg,
+          value = result.value;
+        return value && "object" == typeof value && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) {
+          invoke("next", value, resolve, reject);
+        }, function (err) {
+          invoke("throw", err, resolve, reject);
+        }) : PromiseImpl.resolve(value).then(function (unwrapped) {
+          result.value = unwrapped, resolve(result);
+        }, function (error) {
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+      reject(record.arg);
+    }
+    var previousPromise;
+    defineProperty(this, "_invoke", {
+      value: function (method, arg) {
+        function callInvokeWithMethodAndArg() {
+          return new PromiseImpl(function (resolve, reject) {
+            invoke(method, arg, resolve, reject);
+          });
+        }
+        return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
+      }
+    });
+  }
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = "suspendedStart";
+    return function (method, arg) {
+      if ("executing" === state) throw new Error("Generator is already running");
+      if ("completed" === state) {
+        if ("throw" === method) throw arg;
+        return doneResult();
+      }
+      for (context.method = method, context.arg = arg;;) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+        if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) {
+          if ("suspendedStart" === state) throw state = "completed", context.arg;
+          context.dispatchException(context.arg);
+        } else "return" === context.method && context.abrupt("return", context.arg);
+        state = "executing";
+        var record = tryCatch(innerFn, self, context);
+        if ("normal" === record.type) {
+          if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue;
+          return {
+            value: record.arg,
+            done: context.done
+          };
+        }
+        "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg);
+      }
+    };
+  }
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (undefined === method) {
+      if (context.delegate = null, "throw" === context.method) {
+        if (delegate.iterator.return && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel;
+        context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method");
+      }
+      return ContinueSentinel;
+    }
+    var record = tryCatch(method, delegate.iterator, context.arg);
+    if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel;
+    var info = record.arg;
+    return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel);
+  }
+  function pushTryEntry(locs) {
+    var entry = {
+      tryLoc: locs[0]
+    };
+    1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry);
+  }
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal", delete record.arg, entry.completion = record;
+  }
+  function Context(tryLocsList) {
+    this.tryEntries = [{
+      tryLoc: "root"
+    }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0);
+  }
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) return iteratorMethod.call(iterable);
+      if ("function" == typeof iterable.next) return iterable;
+      if (!isNaN(iterable.length)) {
+        var i = -1,
+          next = function next() {
+            for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
+            return next.value = undefined, next.done = !0, next;
+          };
+        return next.next = next;
+      }
+    }
+    return {
+      next: doneResult
+    };
+  }
+  function doneResult() {
+    return {
+      value: undefined,
+      done: !0
+    };
+  }
+  return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", {
+    value: GeneratorFunctionPrototype,
+    configurable: !0
+  }), defineProperty(GeneratorFunctionPrototype, "constructor", {
+    value: GeneratorFunction,
+    configurable: !0
+  }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) {
+    var ctor = "function" == typeof genFun && genFun.constructor;
+    return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name));
+  }, exports.mark = function (genFun) {
+    return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun;
+  }, exports.awrap = function (arg) {
+    return {
+      __await: arg
+    };
+  }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+    return this;
+  }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    void 0 === PromiseImpl && (PromiseImpl = Promise);
+    var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
+    return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) {
+      return result.done ? result.value : iter.next();
+    });
+  }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () {
+    return this;
+  }), define(Gp, "toString", function () {
+    return "[object Generator]";
+  }), exports.keys = function (val) {
+    var object = Object(val),
+      keys = [];
+    for (var key in object) keys.push(key);
+    return keys.reverse(), function next() {
+      for (; keys.length;) {
+        var key = keys.pop();
+        if (key in object) return next.value = key, next.done = !1, next;
+      }
+      return next.done = !0, next;
+    };
+  }, exports.values = values, Context.prototype = {
+    constructor: Context,
+    reset: function (skipTempReset) {
+      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
+    },
+    stop: function () {
+      this.done = !0;
+      var rootRecord = this.tryEntries[0].completion;
+      if ("throw" === rootRecord.type) throw rootRecord.arg;
+      return this.rval;
+    },
+    dispatchException: function (exception) {
+      if (this.done) throw exception;
+      var context = this;
+      function handle(loc, caught) {
+        return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught;
+      }
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i],
+          record = entry.completion;
+        if ("root" === entry.tryLoc) return handle("end");
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc"),
+            hasFinally = hasOwn.call(entry, "finallyLoc");
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+            if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+          } else {
+            if (!hasFinally) throw new Error("try statement without catch or finally");
+            if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+          }
+        }
+      }
+    },
+    abrupt: function (type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+      finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null);
+      var record = finallyEntry ? finallyEntry.completion : {};
+      return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record);
+    },
+    complete: function (record, afterLoc) {
+      if ("throw" === record.type) throw record.arg;
+      return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel;
+    },
+    finish: function (finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel;
+      }
+    },
+    catch: function (tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if ("throw" === record.type) {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+      throw new Error("illegal catch attempt");
+    },
+    delegateYield: function (iterable, resultName, nextLoc) {
+      return this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      }, "next" === this.method && (this.arg = undefined), ContinueSentinel;
+    }
+  }, exports;
+}
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", {
+    writable: false
+  });
+  return Constructor;
+}
 function _extends$1() {
   _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -12,6 +335,55 @@ function _extends$1() {
   };
   return _extends$1.apply(this, arguments);
 }
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  _setPrototypeOf(subClass, superClass);
+}
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+  return _setPrototypeOf(o, p);
+}
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+  return self;
+}
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+function _createForOfIteratorHelperLoose(o, allowArrayLike) {
+  var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+  if (it) return (it = it.call(o)).next.bind(it);
+  if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+    if (it) o = it;
+    var i = 0;
+    return function () {
+      if (i >= o.length) return {
+        done: true
+      };
+      return {
+        done: false,
+        value: o[i++]
+      };
+    };
+  }
+  throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
 var id = 0;
 function _classPrivateFieldLooseKey(name) {
   return "__private_" + id++ + "_" + name;
@@ -23,7 +395,7 @@ function _classPrivateFieldLooseBase(receiver, privateKey) {
   return receiver;
 }
 
-const Constants = {
+var Constants = {
   /**
    * namespsace of the data-attribute. Any data attribute will be prefixed with this name.
    * i.e. data-name would be data-{NS}-{ComponentClass}-name. Each component will have a different
@@ -150,8 +522,8 @@ const Constants = {
   API_PATH_PREFIX: "/adobe/forms/af"
 };
 
-class FormField {
-  constructor(params, model) {
+var FormField = /*#__PURE__*/function () {
+  function FormField(params, model) {
     this.formContainer = void 0;
     this.element = void 0;
     this.active = void 0;
@@ -165,42 +537,43 @@ class FormField {
     this.active = false;
     this.setModel(model);
   }
-  setId(id) {
+  var _proto = FormField.prototype;
+  _proto.setId = function setId(id) {
     this.id = id;
-  }
-  setParent(parentView) {
+  };
+  _proto.setParent = function setParent(parentView) {
     this.parentView = parentView;
     if (this.parentView.addChild) {
       this.parentView.addChild(this);
     }
-  }
-  setActive() {
+  };
+  _proto.setActive = function setActive() {
     if (!this.isActive()) {
       this.element.setAttribute(Constants.DATA_ATTRIBUTE_ACTIVE, "true");
     }
     if (this.parentView && this.parentView.setActive) {
       this.parentView.setActive();
     }
-  }
-  setInactive() {
+  };
+  _proto.setInactive = function setInactive() {
     if (this.isActive()) {
       this.element.setAttribute(Constants.DATA_ATTRIBUTE_ACTIVE, "false");
     }
     if (this.parentView && this.parentView.setInactive) {
       this.parentView.setInactive();
     }
-  }
-  isActive() {
+  };
+  _proto.isActive = function isActive() {
     return this.active;
-  }
-  getFormContainerPath() {
+  };
+  _proto.getFormContainerPath = function getFormContainerPath() {
     var _this$options;
     return (_this$options = this.options) == null ? void 0 : _this$options["adaptiveformcontainerPath"];
-  }
-  getId() {
+  };
+  _proto.getId = function getId() {
     return this.id;
-  }
-  setModel(model) {
+  };
+  _proto.setModel = function setModel(model) {
     if (typeof this._model === "undefined" || this._model === null) {
       this._model = model;
     } else {
@@ -213,8 +586,8 @@ class FormField {
    * @param property
    * @param dataAttribute
    * @param value
-   */
-  toggle(property, dataAttribute, value) {
+   */;
+  _proto.toggle = function toggle(property, dataAttribute, value) {
     this.toggleAttribute(this.element, property, dataAttribute, value);
   }
   /**
@@ -224,8 +597,8 @@ class FormField {
    * @param property
    * @param dataAttribute
    * @param value
-   */
-  toggleAttribute(element, property, dataAttribute, value) {
+   */;
+  _proto.toggleAttribute = function toggleAttribute(element, property, dataAttribute, value) {
     if (element) {
       if (property === false) {
         element.setAttribute(dataAttribute, value);
@@ -236,165 +609,166 @@ class FormField {
   }
   /**
    * @return 'afs:layout' properties. Empty object if no layout property present
-   */
-  getLayoutProperties() {
-    let layoutProperties = {};
-    const state = this.getModel().getState();
+   */;
+  _proto.getLayoutProperties = function getLayoutProperties() {
+    var layoutProperties = {};
+    var state = this.getModel().getState();
     if (state && state.properties && state.properties['afs:layout']) {
       layoutProperties = state.properties['afs:layout'];
     }
     return layoutProperties;
-  }
-  getModel() {
+  };
+  _proto.getModel = function getModel() {
     return this._model;
-  }
-  subscribe() {
+  };
+  _proto.subscribe = function subscribe() {
     throw "the field does not subscribe to the model";
-  }
-  getState() {
+  };
+  _proto.getState = function getState() {
     var _this$_model;
     return (_this$_model = this._model) == null ? void 0 : _this$_model.getState();
-  }
-  isVisible() {
+  };
+  _proto.isVisible = function isVisible() {
     return (this == null ? void 0 : this.getState().visible) || true;
-  }
-  isEnabled() {
+  };
+  _proto.isEnabled = function isEnabled() {
     return (this == null ? void 0 : this.getState().enabled) || true;
-  }
-  isLabelVisible() {
+  };
+  _proto.isLabelVisible = function isLabelVisible() {
     var _this$getState, _this$getState$label;
     return (this == null ? void 0 : (_this$getState = this.getState()) == null ? void 0 : (_this$getState$label = _this$getState.label) == null ? void 0 : _this$getState$label.visible) || true;
-  }
-  getLabelValue() {
+  };
+  _proto.getLabelValue = function getLabelValue() {
     var _this$getState2, _this$getState2$label;
     return (this == null ? void 0 : (_this$getState2 = this.getState()) == null ? void 0 : (_this$getState2$label = _this$getState2.label) == null ? void 0 : _this$getState2$label.value) || "";
-  }
-  getName() {
+  };
+  _proto.getName = function getName() {
     var _this$getState3;
     return (this == null ? void 0 : (_this$getState3 = this.getState()) == null ? void 0 : _this$getState3.name) || "";
-  }
-  isTooltipVisible() {
+  };
+  _proto.isTooltipVisible = function isTooltipVisible() {
     return false; // TBD - Missing in Spec
-  }
-
-  getTooltipValue() {
+  };
+  _proto.getTooltipValue = function getTooltipValue() {
     return ""; // TBD - Missing in Spec
-  }
-
-  isShortDescVisible() {
+  };
+  _proto.isShortDescVisible = function isShortDescVisible() {
     return false; // TBD - Missing in Spec
-  }
-
-  getShortDescValue() {
+  };
+  _proto.getShortDescValue = function getShortDescValue() {
     return ""; // TBD - Missing in Spec
-  }
-
-  getDescriptionValue() {
+  };
+  _proto.getDescriptionValue = function getDescriptionValue() {
     var _this$getState4;
     return (this == null ? void 0 : (_this$getState4 = this.getState()) == null ? void 0 : _this$getState4.description) || "";
-  }
-  getDefault() {
+  };
+  _proto.getDefault = function getDefault() {
     var _this$getState5;
-    return (this == null ? void 0 : (_this$getState5 = this.getState()) == null ? void 0 : _this$getState5.default) || "";
-  }
-  isReadOnly() {
+    return (this == null ? void 0 : (_this$getState5 = this.getState()) == null ? void 0 : _this$getState5["default"]) || "";
+  };
+  _proto.isReadOnly = function isReadOnly() {
     var _this$getState6;
     return (this == null ? void 0 : (_this$getState6 = this.getState()) == null ? void 0 : _this$getState6.readOnly) || false;
-  }
-  isRequired() {
+  };
+  _proto.isRequired = function isRequired() {
     var _this$getState7;
     return (this == null ? void 0 : (_this$getState7 = this.getState()) == null ? void 0 : _this$getState7.required) || false;
-  }
-  getPlaceHolder() {
+  };
+  _proto.getPlaceHolder = function getPlaceHolder() {
     var _this$getState8;
     return (this == null ? void 0 : (_this$getState8 = this.getState()) == null ? void 0 : _this$getState8.placeholder) || "";
-  }
-  getMinLength() {
+  };
+  _proto.getMinLength = function getMinLength() {
     var _this$getState9;
     return this == null ? void 0 : (_this$getState9 = this.getState()) == null ? void 0 : _this$getState9.minLength;
-  }
-  getMaxLength() {
+  };
+  _proto.getMaxLength = function getMaxLength() {
     var _this$getState10;
     return this == null ? void 0 : (_this$getState10 = this.getState()) == null ? void 0 : _this$getState10.maxLength;
-  }
-  getMinimum() {
+  };
+  _proto.getMinimum = function getMinimum() {
     var _this$getState11;
     return this == null ? void 0 : (_this$getState11 = this.getState()) == null ? void 0 : _this$getState11.minimum;
-  }
-  getMaximum() {
+  };
+  _proto.getMaximum = function getMaximum() {
     var _this$getState12;
     return this == null ? void 0 : (_this$getState12 = this.getState()) == null ? void 0 : _this$getState12.maximum;
-  }
-}
+  };
+  return FormField;
+}();
 FormField.IS = "FormField";
 
-class FormFieldBase extends FormField {
-  constructor(params, model) {
-    super(params, model);
-    this.qm = void 0;
-    this.widget = void 0;
-    this.label = void 0;
-    this.errorDiv = void 0;
-    this.tooltip = void 0;
-    this.description = void 0;
-    this.element.className = this.getbemBlock();
-    this.widget = this.getWidget();
-    this.description = this.getDescription();
-    this.label = this.getLabel();
-    this.errorDiv = this.getErrorDiv();
-    this.qm = this.getQuestionMarkDiv();
-    this.tooltip = this.getTooltipDiv();
+var FormFieldBase = /*#__PURE__*/function (_FormField) {
+  _inheritsLoose(FormFieldBase, _FormField);
+  function FormFieldBase(params, model) {
+    var _this;
+    _this = _FormField.call(this, params, model) || this;
+    _this.qm = void 0;
+    _this.widget = void 0;
+    _this.label = void 0;
+    _this.errorDiv = void 0;
+    _this.tooltip = void 0;
+    _this.description = void 0;
+    _this.element.className = _this.getbemBlock();
+    _this.widget = _this.getWidget();
+    _this.description = _this.getDescription();
+    _this.label = _this.getLabel();
+    _this.errorDiv = _this.getErrorDiv();
+    _this.qm = _this.getQuestionMarkDiv();
+    _this.tooltip = _this.getTooltipDiv();
+    return _this;
   }
   /**
    * implementations should return the widget element that is used to capture the value from the user
    * It will be a input/textarea element
    * @returns
    */
-  getWidget() {
+  var _proto = FormFieldBase.prototype;
+  _proto.getWidget = function getWidget() {
     throw "method not implemented";
   }
   /**
    * implementations should return the element used to show the description of the field
    * @returns
-   */
-  getDescription() {
+   */;
+  _proto.getDescription = function getDescription() {
     throw "method not implemented";
   }
   /**
    * implementations should return the element used to show the label of the field
    * @returns
-   */
-  getLabel() {
+   */;
+  _proto.getLabel = function getLabel() {
     throw "method not implemented";
   }
   /**
    * implementations should return the element used to show the error on the field
    * @returns
-   */
-  getErrorDiv() {
+   */;
+  _proto.getErrorDiv = function getErrorDiv() {
     throw "method not implemented";
   }
   /**
    * implementation should return the tooltip / short description div
-   */
-  getTooltipDiv() {
+   */;
+  _proto.getTooltipDiv = function getTooltipDiv() {
     throw "method not implemented";
   }
   /**
    * Implementation should return the questionMark div
-   */
-  getQuestionMarkDiv() {
+   */;
+  _proto.getQuestionMarkDiv = function getQuestionMarkDiv() {
     throw "method not implemented";
-  }
-  setModel(model) {
-    super.setModel(model);
-    const state = this._model.getState();
+  };
+  _proto.setModel = function setModel(model) {
+    _FormField.prototype.setModel.call(this, model);
+    var state = this._model.getState();
     this._applyState(state);
   }
   /**
    * Sets the focus on component's widget.
-   */
-  setFocus() {
+   */;
+  _proto.setFocus = function setFocus() {
     var _this$getWidget;
     (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.focus();
   }
@@ -402,16 +776,16 @@ class FormFieldBase extends FormField {
    * applies full state of the field to the HTML. Generally done just after the model is bound to the field
    * @param state
    * @private
-   */
-  _applyState(state) {
+   */;
+  _proto._applyState = function _applyState(state) {
     if (state.value) {
       this._updateValue(state.value);
     }
     this._updateVisible(state.visible);
     this._updateEnabled(state.enabled);
     this._initializeHelpContent(state);
-  }
-  _initializeHelpContent(state) {
+  };
+  _proto._initializeHelpContent = function _initializeHelpContent(state) {
     // Initializing Hint ('?') and long description.
     this._showHideLongDescriptionDiv(false);
     if (this.getDescription()) {
@@ -422,8 +796,8 @@ class FormFieldBase extends FormField {
    *
    * @param show If true then <div> containing tooltip(Short Description) will be shown else hidden
    * @private
-   */
-  _showHideTooltipDiv(show) {
+   */;
+  _proto._showHideTooltipDiv = function _showHideTooltipDiv(show) {
     if (this.tooltip) {
       this.toggleAttribute(this.getTooltipDiv(), show, Constants.DATA_ATTRIBUTE_VISIBLE, false);
     }
@@ -432,21 +806,21 @@ class FormFieldBase extends FormField {
    *
    * @param show If true then <div> containing description(Long Description) will be shown
    * @private
-   */
-  _showHideLongDescriptionDiv(show) {
+   */;
+  _proto._showHideLongDescriptionDiv = function _showHideLongDescriptionDiv(show) {
     if (this.description) {
       this.toggleAttribute(this.description, show, Constants.DATA_ATTRIBUTE_VISIBLE, false);
     }
-  }
-  _isTooltipAlwaysVisible() {
+  };
+  _proto._isTooltipAlwaysVisible = function _isTooltipAlwaysVisible() {
     return !!this.getLayoutProperties()['tooltipVisible'];
   }
   /**
    * updates html based on visible state
    * @param visible
    * @private
-   */
-  _updateVisible(visible) {
+   */;
+  _proto._updateVisible = function _updateVisible(visible) {
     this.toggle(visible, Constants.ARIA_HIDDEN, true);
     this.element.setAttribute(Constants.DATA_ATTRIBUTE_VISIBLE, visible + "");
   }
@@ -454,8 +828,8 @@ class FormFieldBase extends FormField {
    * udpates the html state based on enable state of the field
    * @param enabled
    * @private
-   */
-  _updateEnabled(enabled) {
+   */;
+  _proto._updateEnabled = function _updateEnabled(enabled) {
     if (this.getWidget()) {
       this.toggle(enabled, Constants.ARIA_DISABLED, true);
       this.element.setAttribute(Constants.DATA_ATTRIBUTE_ENABLED, enabled + "");
@@ -469,24 +843,24 @@ class FormFieldBase extends FormField {
         (_this$getWidget5 = this.getWidget()) == null ? void 0 : _this$getWidget5.removeAttribute(Constants.ARIA_DISABLED);
       }
     }
-  }
-  _updateValid(valid, state) {
+  };
+  _proto._updateValid = function _updateValid(valid, state) {
     if (this.errorDiv) {
       this.toggle(valid, Constants.ARIA_INVALID, true);
       this.element.setAttribute(Constants.DATA_ATTRIBUTE_VALID, valid + "");
       if (typeof state.errorMessage !== "string" || state.errorMessage === "") {
-        const errMessage = valid === true ? '' : 'There is an error in the field';
+        var errMessage = valid === true ? '' : 'There is an error in the field';
         this.errorDiv.innerHTML = errMessage;
       }
     }
-  }
-  _updateErrorMessage(errorMessage, state) {
+  };
+  _proto._updateErrorMessage = function _updateErrorMessage(errorMessage, state) {
     if (this.errorDiv) {
       this.errorDiv.innerHTML = state.errorMessage;
     }
-  }
-  _updateValue(value) {
-    let inputWidget = this.getWidget();
+  };
+  _proto._updateValue = function _updateValue(value) {
+    var inputWidget = this.getWidget();
     if (inputWidget) {
       inputWidget.value = value;
     }
@@ -494,16 +868,16 @@ class FormFieldBase extends FormField {
   /**
    * Shows or Hides Description Based on click of '?' mark.
    * @private
-   */
-  _addHelpIconHandler(state) {
-    const questionMarkDiv = this.qm,
+   */;
+  _proto._addHelpIconHandler = function _addHelpIconHandler(state) {
+    var questionMarkDiv = this.qm,
       descriptionDiv = this.description,
       tooltipAlwaysVisible = this._isTooltipAlwaysVisible();
-    const self = this;
+    var self = this;
     if (questionMarkDiv && descriptionDiv) {
-      questionMarkDiv.addEventListener('click', e => {
+      questionMarkDiv.addEventListener('click', function (e) {
         e.preventDefault();
-        const longDescriptionVisibleAttribute = descriptionDiv.getAttribute(Constants.DATA_ATTRIBUTE_VISIBLE);
+        var longDescriptionVisibleAttribute = descriptionDiv.getAttribute(Constants.DATA_ATTRIBUTE_VISIBLE);
         if (longDescriptionVisibleAttribute === 'false') {
           self._showHideLongDescriptionDiv(true);
           if (tooltipAlwaysVisible) {
@@ -517,158 +891,139 @@ class FormFieldBase extends FormField {
         }
       });
     }
-  }
-  getClass() {
+  };
+  _proto.getClass = function getClass() {
     return this.constructor.IS;
-  }
-  subscribe() {
-    const changeHandlerName = propName => `_update${propName[0].toUpperCase() + propName.slice(1)}`;
-    this._model.subscribe(action => {
-      let state = action.target.getState();
-      const changes = action.payload.changes;
-      changes.forEach(change => {
-        const fn = changeHandlerName(change.propertyName);
+  };
+  _proto.subscribe = function subscribe() {
+    var _this2 = this;
+    var changeHandlerName = function changeHandlerName(propName) {
+      return "_update" + (propName[0].toUpperCase() + propName.slice(1));
+    };
+    this._model.subscribe(function (action) {
+      var state = action.target.getState();
+      var changes = action.payload.changes;
+      changes.forEach(function (change) {
+        var fn = changeHandlerName(change.propertyName);
         //@ts-ignore
-        if (typeof this[fn] === "function") {
+        if (typeof _this2[fn] === "function") {
           //items applicable for repeatable panel
           if ("items" === change.propertyName) {
             //@ts-ignore
-            this[fn](change.prevValue, change.currentValue, state);
+            _this2[fn](change.prevValue, change.currentValue, state);
           } else {
             //@ts-ignore
-            this[fn](change.currentValue, state);
+            _this2[fn](change.currentValue, state);
           }
         } else {
-          console.error(`changes to ${change.propertyName} are not supported. Please raise an issue`);
+          console.error("changes to " + change.propertyName + " are not supported. Please raise an issue");
         }
       });
     });
-  }
-  getbemBlock() {
+  };
+  _proto.getbemBlock = function getbemBlock() {
     throw "bemBlock not implemented";
-  }
-  getIS() {
+  };
+  _proto.getIS = function getIS() {
     throw "IS is not implemented";
-  }
-  getId() {
+  };
+  _proto.getId = function getId() {
     return this.getIS() + "-" + this.id;
-  }
-  addListener() {}
-  render() {
+  };
+  _proto.addListener = function addListener() {};
+  _proto.render = function render() {
     this.element.innerHTML = this.getHTML();
     this.addListener();
     this.subscribe();
-  }
-  getHTML() {
-    return `
-            <div class="${this.getbemBlock()}"
-                data-cmp-is="${this.getIS()}"
-                id="${this.getId()}"
-                data-cmp-visible="${this.isVisible()}"
-                data-cmp-enabled="${this.isEnabled()}"
-                data-cmp-adaptiveformcontainer-path="${this.getFormContainerPath()}">
-
-                ${this.renderLabel()}
-                ${this.getInputHTML()}
-                ${this.getQuestionMarkHTML()}
-                ${this.getShortDescHTML()}
-                ${this.getLongDescHTML()}
-                ${this.getErrorHTML()}
-            </div>`;
-  }
-  getInputHTML() {
+  };
+  _proto.getHTML = function getHTML() {
+    return "\n            <div class=\"" + this.getbemBlock() + "\"\n                data-cmp-is=\"" + this.getIS() + "\"\n                id=\"" + this.getId() + "\"\n                data-cmp-visible=\"" + this.isVisible() + "\"\n                data-cmp-enabled=\"" + this.isEnabled() + "\"\n                data-cmp-adaptiveformcontainer-path=\"" + this.getFormContainerPath() + "\">\n\n                " + this.renderLabel() + "\n                " + this.getInputHTML() + "\n                " + this.getQuestionMarkHTML() + "\n                " + this.getShortDescHTML() + "\n                " + this.getLongDescHTML() + "\n                " + this.getErrorHTML() + "\n            </div>";
+  };
+  _proto.getInputHTML = function getInputHTML() {
     throw "getInputHTML is not implemented";
-  }
-  renderLabel() {
-    return `${this.isLabelVisible() ? `<label id="${this.getId()}-label" for="${this.getId()}" class="${this.getbemBlock()}__label" >${this.getLabelValue()}</label>` : ""}`;
-  }
-  getQuestionMarkHTML() {
-    return `${this.getDescriptionValue() ? `<button class="${this.getbemBlock()}__questionmark" data-sly-test="${this.getDescriptionValue()}">
-        </button>` : ""}`;
-  }
-  getShortDescHTML() {
-    return `${this.isShortDescVisible() ? `<div id="${this.getId()}-shortDescription" class="${this.getbemBlock()}__shortdescription">
-                {this.getShortDescValue()}
-            </div>` : ""}`;
-  }
-  getLongDescHTML() {
-    return `<div aria-live="polite">
-                ${this.getDescriptionValue() ? `<div id="${this.getId()}-longDescription" class="${this.getbemBlock()}__longdescription"></div>` : ""}
-            </div>`;
-  }
-  getErrorHTML() {
-    return `<div id="${this.getId()}-errorMessage" class="${this.getbemBlock()}__errormessage"></div>`;
-  }
-  getDisabledHTML() {
-    return `${this.isEnabled() ? "" : ` disabled="true" `}`;
-  }
-  getReadonlyHTML() {
-    return `${this.isReadOnly() ? ` readonly="true" ` : ""}`;
-  }
-}
+  };
+  _proto.renderLabel = function renderLabel() {
+    return "" + (this.isLabelVisible() ? "<label id=\"" + this.getId() + "-label\" for=\"" + this.getId() + "\" class=\"" + this.getbemBlock() + "__label\" >" + this.getLabelValue() + "</label>" : "");
+  };
+  _proto.getQuestionMarkHTML = function getQuestionMarkHTML() {
+    return "" + (this.getDescriptionValue() ? "<button class=\"" + this.getbemBlock() + "__questionmark\" data-sly-test=\"" + this.getDescriptionValue() + "\">\n        </button>" : "");
+  };
+  _proto.getShortDescHTML = function getShortDescHTML() {
+    return "" + (this.isShortDescVisible() ? "<div id=\"" + this.getId() + "-shortDescription\" class=\"" + this.getbemBlock() + "__shortdescription\">\n                {this.getShortDescValue()}\n            </div>" : "");
+  };
+  _proto.getLongDescHTML = function getLongDescHTML() {
+    return "<div aria-live=\"polite\">\n                " + (this.getDescriptionValue() ? "<div id=\"" + this.getId() + "-longDescription\" class=\"" + this.getbemBlock() + "__longdescription\"></div>" : "") + "\n            </div>";
+  };
+  _proto.getErrorHTML = function getErrorHTML() {
+    return "<div id=\"" + this.getId() + "-errorMessage\" class=\"" + this.getbemBlock() + "__errormessage\"></div>";
+  };
+  _proto.getDisabledHTML = function getDisabledHTML() {
+    return "" + (this.isEnabled() ? "" : " disabled=\"true\" ");
+  };
+  _proto.getReadonlyHTML = function getReadonlyHTML() {
+    return "" + (this.isReadOnly() ? " readonly=\"true\" " : "");
+  };
+  return FormFieldBase;
+}(FormField);
 
-class TextInput extends FormFieldBase {
-  getWidget() {
+var TextInput = /*#__PURE__*/function (_FormFieldBase) {
+  _inheritsLoose(TextInput, _FormFieldBase);
+  function TextInput() {
+    return _FormFieldBase.apply(this, arguments) || this;
+  }
+  var _proto = TextInput.prototype;
+  _proto.getWidget = function getWidget() {
     return this.element.querySelector(TextInput.selectors.widget);
-  }
-  getDescription() {
+  };
+  _proto.getDescription = function getDescription() {
     return this.element.querySelector(TextInput.selectors.description);
-  }
-  getLabel() {
+  };
+  _proto.getLabel = function getLabel() {
     return this.element.querySelector(TextInput.selectors.label);
-  }
-  getErrorDiv() {
+  };
+  _proto.getErrorDiv = function getErrorDiv() {
     return this.element.querySelector(TextInput.selectors.errorDiv);
-  }
-  getTooltipDiv() {
+  };
+  _proto.getTooltipDiv = function getTooltipDiv() {
     return this.element.querySelector(TextInput.selectors.tooltipDiv);
-  }
-  getQuestionMarkDiv() {
+  };
+  _proto.getQuestionMarkDiv = function getQuestionMarkDiv() {
     return this.element.querySelector(TextInput.selectors.qm);
-  }
-  addListener() {
-    var _this$getWidget, _this$getWidget2;
-    (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener('blur', e => {
-      this._model.value = e.target.value;
-      this.setInactive();
+  };
+  _proto.addListener = function addListener() {
+    var _this$getWidget,
+      _this = this,
+      _this$getWidget2;
+    (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener('blur', function (e) {
+      _this._model.value = e.target.value;
+      _this.setInactive();
     });
-    (_this$getWidget2 = this.getWidget()) == null ? void 0 : _this$getWidget2.addEventListener('focus', e => {
-      this.setActive();
+    (_this$getWidget2 = this.getWidget()) == null ? void 0 : _this$getWidget2.addEventListener('focus', function (e) {
+      _this.setActive();
     });
-  }
-  getbemBlock() {
+  };
+  _proto.getbemBlock = function getbemBlock() {
     return TextInput.bemBlock;
-  }
-  getIS() {
+  };
+  _proto.getIS = function getIS() {
     return TextInput.IS;
-  }
-  getInputHTML() {
-    return `<input
-            class="cmp-adaptiveform-textinput__widget"
-            title="${this.isTooltipVisible() ? this.getTooltipValue() : ''}"
-            aria-label="${this.isLabelVisible() ? this.getLabelValue() : ''}"
-            type="text"
-            name="${this.getName()}"
-            value="${this.getDefault()}"
-            ${this.getDisabledHTML()}
-            ${this.getReadonlyHTML()}
-            required="${this.isRequired()}"
-            placeholder="${this.getPlaceHolder()}"
-            minlength="${this.getMinLength()}"
-            maxlength="${this.getMaxLength()}"/>`;
-  }
-}
+  };
+  _proto.getInputHTML = function getInputHTML() {
+    return "<input\n            class=\"cmp-adaptiveform-textinput__widget\"\n            title=\"" + (this.isTooltipVisible() ? this.getTooltipValue() : '') + "\"\n            aria-label=\"" + (this.isLabelVisible() ? this.getLabelValue() : '') + "\"\n            type=\"text\"\n            name=\"" + this.getName() + "\"\n            value=\"" + this.getDefault() + "\"\n            " + this.getDisabledHTML() + "\n            " + this.getReadonlyHTML() + "\n            required=\"" + this.isRequired() + "\"\n            placeholder=\"" + this.getPlaceHolder() + "\"\n            minlength=\"" + this.getMinLength() + "\"\n            maxlength=\"" + this.getMaxLength() + "\"/>";
+  };
+  return TextInput;
+}(FormFieldBase);
 TextInput.NS = Constants.NS;
 TextInput.IS = "adaptiveFormTextInput";
 TextInput.bemBlock = 'cmp-adaptiveform-textinput';
 TextInput.selectors = {
   self: "[data-" + TextInput.NS + '-is="' + TextInput.IS + '"]',
-  widget: `.${TextInput.bemBlock}__widget`,
-  label: `.${TextInput.bemBlock}__label`,
-  description: `.${TextInput.bemBlock}__longdescription`,
-  qm: `.${TextInput.bemBlock}__questionmark`,
-  errorDiv: `.${TextInput.bemBlock}__errormessage`,
-  tooltipDiv: `.${TextInput.bemBlock}__shortdescription`
+  widget: "." + TextInput.bemBlock + "__widget",
+  label: "." + TextInput.bemBlock + "__label",
+  description: "." + TextInput.bemBlock + "__longdescription",
+  qm: "." + TextInput.bemBlock + "__questionmark",
+  errorDiv: "." + TextInput.bemBlock + "__errormessage",
+  tooltipDiv: "." + TextInput.bemBlock + "__shortdescription"
 };
 
 function createCommonjsModule(fn) {
@@ -1538,6 +1893,7 @@ Object.defineProperty(exports, "parseDate", {
 });
 });
 
+var _E, _e11;
 var t = {
     TYPE_NUMBER: 0,
     TYPE_ANY: 1,
@@ -1592,40 +1948,26 @@ var t = {
     TOK_LPAREN: "Lparen",
     TOK_LITERAL: "Literal"
   };
-const {
-    TYPE_NUMBER: r,
-    TYPE_ANY: n,
-    TYPE_STRING: s,
-    TYPE_ARRAY: i,
-    TYPE_OBJECT: u,
-    TYPE_BOOLEAN: o,
-    TYPE_EXPREF: c,
-    TYPE_NULL: a,
-    TYPE_ARRAY_NUMBER: l,
-    TYPE_ARRAY_STRING: h,
-    TYPE_CLASS: _,
-    TYPE_ARRAY_ARRAY: p
-  } = t,
-  {
-    TOK_EXPREF: T
-  } = e,
-  E = {
-    [r]: "number",
-    [n]: "any",
-    [s]: "string",
-    [i]: "array",
-    [u]: "object",
-    [o]: "boolean",
-    [c]: "expression",
-    [a]: "null",
-    [l]: "Array<number>",
-    [h]: "Array<string>",
-    [_]: "class",
-    [p]: "Array<array>"
-  };
-function f(t, e = !0) {
+var r = t.TYPE_NUMBER,
+  n = t.TYPE_ANY,
+  s = t.TYPE_STRING,
+  i = t.TYPE_ARRAY,
+  u = t.TYPE_OBJECT,
+  o = t.TYPE_BOOLEAN,
+  c = t.TYPE_EXPREF,
+  a = t.TYPE_NULL,
+  l = t.TYPE_ARRAY_NUMBER,
+  h = t.TYPE_ARRAY_STRING,
+  _ = t.TYPE_CLASS,
+  p = t.TYPE_ARRAY_ARRAY,
+  T = e.TOK_EXPREF,
+  E = (_E = {}, _E[r] = "number", _E[n] = "any", _E[s] = "string", _E[i] = "array", _E[u] = "object", _E[o] = "boolean", _E[c] = "expression", _E[a] = "null", _E[l] = "Array<number>", _E[h] = "Array<string>", _E[_] = "class", _E[p] = "Array<array>", _E);
+function f(t, e) {
+  if (e === void 0) {
+    e = !0;
+  }
   if (null === t) return a;
-  let n = t;
+  var n = t;
   if (e) {
     if ("function" != typeof t.valueOf) return u;
     n = t.valueOf.call(t);
@@ -1651,30 +1993,35 @@ function d(t) {
   return [f(t), f(t, !1)];
 }
 function y(t, e, c, T, f, g) {
-  const O = t[0];
-  if (-1 !== e.findIndex(t => t === n || O === t)) return c;
-  let R = !1;
+  var _e2;
+  var O = t[0];
+  if (-1 !== e.findIndex(function (t) {
+    return t === n || O === t;
+  })) return c;
+  var R = !1;
   if ((O === u || 1 === e.length && e[0] === _) && (R = !0), O === i && 1 === e.length && e[0] === u && (R = !0), e.includes(p)) {
-    if (O === i && (c.forEach(t => {
+    if (O === i && (c.forEach(function (t) {
       t instanceof Array || (R = !0);
     }), !R)) return c;
     R = !0;
   }
-  if (R) throw new Error(`TypeError: ${T} expected argument to be type ${E[e[0]]} but received type ${E[O]} instead.`);
-  let N = -1;
-  if (O === i && e.includes(h) && e.includes(l) && (N = c.length > 0 && "string" == typeof c[0] ? h : l), -1 === N && [h, l, i].includes(O) && (N = e.find(t => [h, l, i].includes(t))), -1 === N && ([N] = e), N === n) return c;
+  if (R) throw new Error("TypeError: " + T + " expected argument to be type " + E[e[0]] + " but received type " + E[O] + " instead.");
+  var N = -1;
+  if (O === i && e.includes(h) && e.includes(l) && (N = c.length > 0 && "string" == typeof c[0] ? h : l), -1 === N && [h, l, i].includes(O) && (N = e.find(function (t) {
+    return [h, l, i].includes(t);
+  })), -1 === N && (_e2 = e, N = _e2[0], _e2), N === n) return c;
   if (N === h || N === l || N === i) {
     if (N === i) return O === l || O === h ? c : null === c ? [] : [c];
-    const _e2 = N === l ? r : s;
+    var _e3 = N === l ? r : s;
     if (O === i) {
-      const _t2 = c.slice();
-      for (let r = 0; r < _t2.length; r += 1) {
-        const n = d(_t2[r]);
-        _t2[r] = y(n, [_e2], _t2[r], T, f, g);
+      var _t2 = c.slice();
+      for (var _r = 0; _r < _t2.length; _r += 1) {
+        var _n = d(_t2[_r]);
+        _t2[_r] = y(_n, [_e3], _t2[_r], T, f, g);
       }
       return _t2;
     }
-    if ([r, s, a, o].includes(_e2)) return [y(t, [_e2], c, T, f, g)];
+    if ([r, s, a, o].includes(_e3)) return [y(t, [_e3], c, T, f, g)];
   } else {
     if (N === r) return [s, o, a].includes(O) ? f(c) : 0;
     if (N === s) return O === a || O === u ? "" : g(c);
@@ -1690,312 +2037,339 @@ function O(t) {
   return null !== t && "[object Object]" === Object.prototype.toString.call(t);
 }
 function R(t) {
-  return null == t ? t : g(t) ? t.map(t => R(t)) : "function" != typeof t.valueOf ? t : t.valueOf();
+  return null == t ? t : g(t) ? t.map(function (t) {
+    return R(t);
+  }) : "function" != typeof t.valueOf ? t : t.valueOf();
 }
 function N(t, e) {
-  const r = R(t),
+  var r = R(t),
     n = R(e);
   if (r === n) return !0;
   if (Object.prototype.toString.call(r) !== Object.prototype.toString.call(n)) return !1;
   if (!0 === g(r)) {
     if (r.length !== n.length) return !1;
-    for (let _t3 = 0; _t3 < r.length; _t3 += 1) if (!1 === N(r[_t3], n[_t3])) return !1;
+    for (var _t3 = 0; _t3 < r.length; _t3 += 1) {
+      if (!1 === N(r[_t3], n[_t3])) return !1;
+    }
     return !0;
   }
   if (!0 === O(r)) {
-    const _t4 = {};
-    for (const _e3 in r) if (hasOwnProperty.call(r, _e3)) {
-      if (!1 === N(r[_e3], n[_e3])) return !1;
-      _t4[_e3] = !0;
+    var _t4 = {};
+    for (var _e4 in r) {
+      if (hasOwnProperty.call(r, _e4)) {
+        if (!1 === N(r[_e4], n[_e4])) return !1;
+        _t4[_e4] = !0;
+      }
     }
-    for (const _e4 in n) if (hasOwnProperty.call(n, _e4) && !0 !== _t4[_e4]) return !1;
+    for (var _e5 in n) {
+      if (hasOwnProperty.call(n, _e5) && !0 !== _t4[_e5]) return !1;
+    }
     return !0;
   }
   return !1;
 }
-const {
-    TOK_CURRENT: P,
-    TOK_GLOBAL: m,
-    TOK_EXPREF: Y,
-    TOK_PIPE: v,
-    TOK_EQ: A,
-    TOK_GT: K,
-    TOK_LT: I,
-    TOK_GTE: S,
-    TOK_LTE: b,
-    TOK_NE: x,
-    TOK_FLATTEN: U
-  } = e,
-  {
-    TYPE_STRING: M,
-    TYPE_ARRAY_STRING: w,
-    TYPE_ARRAY: L
-  } = t;
+var P = e.TOK_CURRENT,
+  m = e.TOK_GLOBAL,
+  Y = e.TOK_EXPREF,
+  v = e.TOK_PIPE,
+  A = e.TOK_EQ,
+  K = e.TOK_GT,
+  I = e.TOK_LT,
+  S = e.TOK_GTE,
+  b = e.TOK_LTE,
+  x = e.TOK_NE,
+  U = e.TOK_FLATTEN,
+  M = t.TYPE_STRING,
+  w = t.TYPE_ARRAY_STRING,
+  L = t.TYPE_ARRAY;
 function B(t) {
   if (null === t) return !0;
-  const e = R(t);
+  var e = R(t);
   if ("" === e || !1 === e || null === e) return !0;
   if (g(e) && 0 === e.length) return !0;
   if (O(e)) {
-    for (const _t5 in e) if (Object.prototype.hasOwnProperty.call(e, _t5)) return !1;
+    for (var _t5 in e) {
+      if (Object.prototype.hasOwnProperty.call(e, _t5)) return !1;
+    }
     return !0;
   }
   return !e;
 }
-class k {
-  constructor(t, e, r, n, s, i) {
+var k = /*#__PURE__*/function () {
+  function k(t, e, r, n, s, i) {
     this.runtime = t, this.globals = e, this.toNumber = r, this.toString = n, this.debug = s, this.language = i;
   }
-  search(t, e) {
+  var _proto = k.prototype;
+  _proto.search = function search(t, e) {
     return this.visit(t, e);
-  }
-  visit(t, e) {
-    const r = t && {
-      Field: (t, e) => {
+  };
+  _proto.visit = function visit(t, e) {
+    var _this = this,
+      _Field$Subexpression$;
+    var r = t && (_Field$Subexpression$ = {
+      Field: function Field(t, e) {
         if (null !== e && (O(e) || g(e))) {
-          let r = e[t.name];
-          if ("function" == typeof r && (r = void 0), void 0 === r) {
+          var _r2 = e[t.name];
+          if ("function" == typeof _r2 && (_r2 = void 0), void 0 === _r2) {
             try {
-              this.debug.push(`Failed to find: '${t.name}'`);
-              const _r = Object.keys(e).map(t => `'${t}'`).toString();
-              _r.length && this.debug.push(`Available fields: ${_r}`);
+              _this.debug.push("Failed to find: '" + t.name + "'");
+              var _r3 = Object.keys(e).map(function (t) {
+                return "'" + t + "'";
+              }).toString();
+              _r3.length && _this.debug.push("Available fields: " + _r3);
             } catch (t) {}
             return null;
           }
-          return r;
+          return _r2;
         }
         return null;
       },
-      Subexpression: (t, e) => {
-        let r = this.visit(t.children[0], e);
-        for (let _e5 = 1; _e5 < t.children.length; _e5 += 1) if (r = this.visit(t.children[1], r), null === r) return null;
+      Subexpression: function Subexpression(t, e) {
+        var r = _this.visit(t.children[0], e);
+        for (var _e6 = 1; _e6 < t.children.length; _e6 += 1) {
+          if (r = _this.visit(t.children[1], r), null === r) return null;
+        }
         return r;
       },
-      IndexExpression: (t, e) => {
-        const r = this.visit(t.children[0], e);
-        return this.visit(t.children[1], r);
+      IndexExpression: function IndexExpression(t, e) {
+        var r = _this.visit(t.children[0], e);
+        return _this.visit(t.children[1], r);
       },
-      Index: (t, e) => {
+      Index: function Index(t, e) {
         if (g(e)) {
-          let r = this.toNumber(this.visit(t.value, e));
-          r < 0 && (r = e.length + r);
-          const n = e[r];
-          return void 0 === n ? (this.debug.push(`Index ${r} out of range`), null) : n;
+          var _r4 = _this.toNumber(_this.visit(t.value, e));
+          _r4 < 0 && (_r4 = e.length + _r4);
+          var _n2 = e[_r4];
+          return void 0 === _n2 ? (_this.debug.push("Index " + _r4 + " out of range"), null) : _n2;
         }
         if (O(e)) {
-          const r = this.toString(this.visit(t.value, e)),
-            n = e[r];
-          return void 0 === n ? (this.debug.push(`Key ${r} does not exist`), null) : n;
+          var _r5 = _this.toString(_this.visit(t.value, e)),
+            _n3 = e[_r5];
+          return void 0 === _n3 ? (_this.debug.push("Key " + _r5 + " does not exist"), null) : _n3;
         }
-        return this.debug.push(`left side of index expression ${e} is not an array or object.`), null;
+        return _this.debug.push("left side of index expression " + e + " is not an array or object."), null;
       },
-      Slice: (t, e) => {
+      Slice: function Slice(t, e) {
         if (!g(e)) return null;
-        const r = t.children.slice(0).map(t => null != t ? this.toNumber(this.visit(t, e)) : null),
-          n = this.computeSliceParams(e.length, r),
-          [s, i, u] = n,
+        var r = t.children.slice(0).map(function (t) {
+            return null != t ? _this.toNumber(_this.visit(t, e)) : null;
+          }),
+          n = _this.computeSliceParams(e.length, r),
+          s = n[0],
+          i = n[1],
+          u = n[2],
           o = [];
-        if (u > 0) for (let _t6 = s; _t6 < i; _t6 += u) o.push(e[_t6]);else for (let _t7 = s; _t7 > i; _t7 += u) o.push(e[_t7]);
+        if (u > 0) for (var _t6 = s; _t6 < i; _t6 += u) {
+          o.push(e[_t6]);
+        } else for (var _t7 = s; _t7 > i; _t7 += u) {
+          o.push(e[_t7]);
+        }
         return o;
       },
-      Projection: (t, e) => {
-        const r = this.visit(t.children[0], e);
+      Projection: function Projection(t, e) {
+        var r = _this.visit(t.children[0], e);
         if (!g(r)) return null;
-        const n = [];
-        return r.forEach(e => {
-          const r = this.visit(t.children[1], e);
+        var n = [];
+        return r.forEach(function (e) {
+          var r = _this.visit(t.children[1], e);
           null !== r && n.push(r);
         }), n;
       },
-      ValueProjection: (t, e) => {
-        const r = this.visit(t.children[0], e);
+      ValueProjection: function ValueProjection(t, e) {
+        var r = _this.visit(t.children[0], e);
         if (!O(R(r))) return null;
-        const n = [];
-        return Object.values(r).forEach(e => {
-          const r = this.visit(t.children[1], e);
+        var n = [];
+        return Object.values(r).forEach(function (e) {
+          var r = _this.visit(t.children[1], e);
           null !== r && n.push(r);
         }), n;
       },
-      FilterProjection: (t, e) => {
-        const r = this.visit(t.children[0], e);
+      FilterProjection: function FilterProjection(t, e) {
+        var r = _this.visit(t.children[0], e);
         if (!g(r)) return null;
-        const n = r.filter(e => !B(this.visit(t.children[2], e))),
+        var n = r.filter(function (e) {
+            return !B(_this.visit(t.children[2], e));
+          }),
           s = [];
-        return n.forEach(e => {
-          const r = this.visit(t.children[1], e);
+        return n.forEach(function (e) {
+          var r = _this.visit(t.children[1], e);
           null !== r && s.push(r);
         }), s;
       },
-      Comparator: (t, e) => {
-        const r = this.visit(t.children[0], e),
-          n = this.visit(t.children[1], e);
+      Comparator: function Comparator(t, e) {
+        var r = _this.visit(t.children[0], e),
+          n = _this.visit(t.children[1], e);
         if (t.name === A) return N(r, n);
         if (t.name === x) return !N(r, n);
         if (t.name === K) return r > n;
         if (t.name === S) return r >= n;
         if (t.name === I) return r < n;
         if (t.name === b) return r <= n;
-        throw new Error(`Unknown comparator: ${t.name}`);
-      },
-      [U]: (t, e) => {
-        const r = this.visit(t.children[0], e);
-        if (!g(r)) return null;
-        const n = [];
-        return r.forEach(t => {
-          g(t) ? n.push(...t) : n.push(t);
-        }), n;
-      },
-      Identity: (t, e) => e,
-      MultiSelectList: (t, e) => null === e ? null : t.children.map(t => this.visit(t, e)),
-      MultiSelectHash: (t, e) => {
-        if (null === e) return null;
-        const r = {};
-        return t.children.forEach(t => {
-          r[t.name] = this.visit(t.value, e);
-        }), r;
-      },
-      OrExpression: (t, e) => {
-        let r = this.visit(t.children[0], e);
-        return B(r) && (r = this.visit(t.children[1], e)), r;
-      },
-      AndExpression: (t, e) => {
-        const r = this.visit(t.children[0], e);
-        return !0 === B(r) ? r : this.visit(t.children[1], e);
-      },
-      AddExpression: (t, e) => {
-        const r = this.visit(t.children[0], e),
-          n = this.visit(t.children[1], e);
-        return this.applyOperator(r, n, "+");
-      },
-      ConcatenateExpression: (t, e) => {
-        let r = this.visit(t.children[0], e),
-          n = this.visit(t.children[1], e);
-        return r = y(d(r), [M, w], r, "concatenate", this.toNumber, this.toString), n = y(d(n), [M, w], n, "concatenate", this.toNumber, this.toString), this.applyOperator(r, n, "&");
-      },
-      UnionExpression: (t, e) => {
-        let r = this.visit(t.children[0], e),
-          n = this.visit(t.children[1], e);
-        return r = y(d(r), [L], r, "union", this.toNumber, this.toString), n = y(d(n), [L], n, "union", this.toNumber, this.toString), r.concat(n);
-      },
-      SubtractExpression: (t, e) => {
-        const r = this.visit(t.children[0], e),
-          n = this.visit(t.children[1], e);
-        return this.applyOperator(r, n, "-");
-      },
-      MultiplyExpression: (t, e) => {
-        const r = this.visit(t.children[0], e),
-          n = this.visit(t.children[1], e);
-        return this.applyOperator(r, n, "*");
-      },
-      DivideExpression: (t, e) => {
-        const r = this.visit(t.children[0], e),
-          n = this.visit(t.children[1], e);
-        return this.applyOperator(r, n, "/");
-      },
-      PowerExpression: (t, e) => {
-        const r = this.visit(t.children[0], e),
-          n = this.visit(t.children[1], e);
-        return this.applyOperator(r, n, "^");
-      },
-      NotExpression: (t, e) => B(this.visit(t.children[0], e)),
-      Literal: t => t.value,
-      Number: t => t.value,
-      [v]: (t, e) => {
-        const r = this.visit(t.children[0], e);
-        return this.visit(t.children[1], r);
-      },
-      [P]: (t, e) => e,
-      [m]: t => {
-        const e = this.globals[t.name];
-        return void 0 === e ? null : e;
-      },
-      Function: (t, e) => {
-        if ("if" === t.name) return this.runtime.callFunction(t.name, t.children, e, this, !1);
-        const r = t.children.map(t => this.visit(t, e));
-        return this.runtime.callFunction(t.name, r, e, this);
-      },
-      ExpressionReference: t => {
-        const [e] = t.children;
-        return e.jmespathType = Y, e;
+        throw new Error("Unknown comparator: " + t.name);
       }
-    }[t.type];
-    if (!r) throw new Error(`Unknown/missing node type ${t && t.type || ""}`);
+    }, _Field$Subexpression$[U] = function (t, e) {
+      var r = _this.visit(t.children[0], e);
+      if (!g(r)) return null;
+      var n = [];
+      return r.forEach(function (t) {
+        g(t) ? n.push.apply(n, t) : n.push(t);
+      }), n;
+    }, _Field$Subexpression$.Identity = function Identity(t, e) {
+      return e;
+    }, _Field$Subexpression$.MultiSelectList = function MultiSelectList(t, e) {
+      return null === e ? null : t.children.map(function (t) {
+        return _this.visit(t, e);
+      });
+    }, _Field$Subexpression$.MultiSelectHash = function MultiSelectHash(t, e) {
+      if (null === e) return null;
+      var r = {};
+      return t.children.forEach(function (t) {
+        r[t.name] = _this.visit(t.value, e);
+      }), r;
+    }, _Field$Subexpression$.OrExpression = function OrExpression(t, e) {
+      var r = _this.visit(t.children[0], e);
+      return B(r) && (r = _this.visit(t.children[1], e)), r;
+    }, _Field$Subexpression$.AndExpression = function AndExpression(t, e) {
+      var r = _this.visit(t.children[0], e);
+      return !0 === B(r) ? r : _this.visit(t.children[1], e);
+    }, _Field$Subexpression$.AddExpression = function AddExpression(t, e) {
+      var r = _this.visit(t.children[0], e),
+        n = _this.visit(t.children[1], e);
+      return _this.applyOperator(r, n, "+");
+    }, _Field$Subexpression$.ConcatenateExpression = function ConcatenateExpression(t, e) {
+      var r = _this.visit(t.children[0], e),
+        n = _this.visit(t.children[1], e);
+      return r = y(d(r), [M, w], r, "concatenate", _this.toNumber, _this.toString), n = y(d(n), [M, w], n, "concatenate", _this.toNumber, _this.toString), _this.applyOperator(r, n, "&");
+    }, _Field$Subexpression$.UnionExpression = function UnionExpression(t, e) {
+      var r = _this.visit(t.children[0], e),
+        n = _this.visit(t.children[1], e);
+      return r = y(d(r), [L], r, "union", _this.toNumber, _this.toString), n = y(d(n), [L], n, "union", _this.toNumber, _this.toString), r.concat(n);
+    }, _Field$Subexpression$.SubtractExpression = function SubtractExpression(t, e) {
+      var r = _this.visit(t.children[0], e),
+        n = _this.visit(t.children[1], e);
+      return _this.applyOperator(r, n, "-");
+    }, _Field$Subexpression$.MultiplyExpression = function MultiplyExpression(t, e) {
+      var r = _this.visit(t.children[0], e),
+        n = _this.visit(t.children[1], e);
+      return _this.applyOperator(r, n, "*");
+    }, _Field$Subexpression$.DivideExpression = function DivideExpression(t, e) {
+      var r = _this.visit(t.children[0], e),
+        n = _this.visit(t.children[1], e);
+      return _this.applyOperator(r, n, "/");
+    }, _Field$Subexpression$.PowerExpression = function PowerExpression(t, e) {
+      var r = _this.visit(t.children[0], e),
+        n = _this.visit(t.children[1], e);
+      return _this.applyOperator(r, n, "^");
+    }, _Field$Subexpression$.NotExpression = function NotExpression(t, e) {
+      return B(_this.visit(t.children[0], e));
+    }, _Field$Subexpression$.Literal = function Literal(t) {
+      return t.value;
+    }, _Field$Subexpression$.Number = function Number(t) {
+      return t.value;
+    }, _Field$Subexpression$[v] = function (t, e) {
+      var r = _this.visit(t.children[0], e);
+      return _this.visit(t.children[1], r);
+    }, _Field$Subexpression$[P] = function (t, e) {
+      return e;
+    }, _Field$Subexpression$[m] = function (t) {
+      var e = _this.globals[t.name];
+      return void 0 === e ? null : e;
+    }, _Field$Subexpression$.Function = function Function(t, e) {
+      if ("if" === t.name) return _this.runtime.callFunction(t.name, t.children, e, _this, !1);
+      var r = t.children.map(function (t) {
+        return _this.visit(t, e);
+      });
+      return _this.runtime.callFunction(t.name, r, e, _this);
+    }, _Field$Subexpression$.ExpressionReference = function ExpressionReference(t) {
+      var _t$children = t.children,
+        e = _t$children[0];
+      return e.jmespathType = Y, e;
+    }, _Field$Subexpression$)[t.type];
+    if (!r) throw new Error("Unknown/missing node type " + (t && t.type || ""));
     return r(t, e);
-  }
-  computeSliceParams(t, e) {
+  };
+  _proto.computeSliceParams = function computeSliceParams(t, e) {
     function r(t, e, r) {
-      let n = e;
+      var n = e;
       return n < 0 ? (n += t, n < 0 && (n = r < 0 ? -1 : 0)) : n >= t && (n = r < 0 ? t - 1 : t), n;
     }
-    let [n, s, i] = e;
+    var n = e[0],
+      s = e[1],
+      i = e[2];
     if (null === i) i = 1;else if (0 === i) {
-      const _t8 = new Error("Invalid slice, step cannot be 0");
+      var _t8 = new Error("Invalid slice, step cannot be 0");
       throw _t8.name = "RuntimeError", _t8;
     }
-    const u = i < 0;
+    var u = i < 0;
     return n = null === n ? u ? t - 1 : 0 : r(t, n, i), s = null === s ? u ? -1 : t : r(t, s, i), [n, s, i];
-  }
-  applyOperator(t, e, r) {
+  };
+  _proto.applyOperator = function applyOperator(t, e, r) {
+    var _this2 = this;
     if (g(t) && g(e)) {
-      const n = t.length < e.length ? t : e,
-        s = Math.abs(t.length - e.length);
-      n.length += s, n.fill(null, n.length - s);
-      const i = [];
-      for (let _n = 0; _n < t.length; _n += 1) i.push(this.applyOperator(t[_n], e[_n], r));
-      return i;
+      var _n4 = t.length < e.length ? t : e,
+        _s = Math.abs(t.length - e.length);
+      _n4.length += _s, _n4.fill(null, _n4.length - _s);
+      var _i = [];
+      for (var _n5 = 0; _n5 < t.length; _n5 += 1) {
+        _i.push(this.applyOperator(t[_n5], e[_n5], r));
+      }
+      return _i;
     }
-    if (g(t)) return t.map(t => this.applyOperator(t, e, r));
-    if (g(e)) return e.map(e => this.applyOperator(t, e, r));
+    if (g(t)) return t.map(function (t) {
+      return _this2.applyOperator(t, e, r);
+    });
+    if (g(e)) return e.map(function (e) {
+      return _this2.applyOperator(t, e, r);
+    });
     if ("*" === r) return this.toNumber(t) * this.toNumber(e);
     if ("&" === r) return t + e;
     if ("+" === r) return this.toNumber(t) + this.toNumber(e);
     if ("-" === r) return this.toNumber(t) - this.toNumber(e);
     if ("/" === r) {
-      const _r2 = t / e;
-      return Number.isFinite(_r2) ? _r2 : null;
+      var _r6 = t / e;
+      return Number.isFinite(_r6) ? _r6 : null;
     }
-    if ("^" === r) return t ** e;
-    throw new Error(`Unknown operator: ${r}`);
-  }
-}
-const {
-    TOK_UNQUOTEDIDENTIFIER: C,
-    TOK_QUOTEDIDENTIFIER: j,
-    TOK_RBRACKET: D,
-    TOK_RPAREN: G,
-    TOK_COMMA: F,
-    TOK_COLON: $,
-    TOK_CONCATENATE: H,
-    TOK_RBRACE: Q,
-    TOK_NUMBER: J,
-    TOK_CURRENT: q,
-    TOK_GLOBAL: z,
-    TOK_EXPREF: X,
-    TOK_PIPE: V,
-    TOK_OR: W,
-    TOK_AND: Z,
-    TOK_ADD: tt,
-    TOK_SUBTRACT: et,
-    TOK_MULTIPLY: rt,
-    TOK_POWER: nt,
-    TOK_DIVIDE: st,
-    TOK_UNION: it,
-    TOK_EQ: ut,
-    TOK_GT: ot,
-    TOK_LT: ct,
-    TOK_GTE: at,
-    TOK_LTE: lt,
-    TOK_NE: ht,
-    TOK_FLATTEN: _t,
-    TOK_STAR: pt,
-    TOK_FILTER: Tt,
-    TOK_DOT: Et,
-    TOK_NOT: ft,
-    TOK_LBRACE: dt,
-    TOK_LBRACKET: yt,
-    TOK_LPAREN: gt,
-    TOK_LITERAL: Ot
-  } = e,
+    if ("^" === r) return Math.pow(t, e);
+    throw new Error("Unknown operator: " + r);
+  };
+  return k;
+}();
+var C = e.TOK_UNQUOTEDIDENTIFIER,
+  j = e.TOK_QUOTEDIDENTIFIER,
+  D = e.TOK_RBRACKET,
+  G = e.TOK_RPAREN,
+  F = e.TOK_COMMA,
+  $ = e.TOK_COLON,
+  H = e.TOK_CONCATENATE,
+  Q = e.TOK_RBRACE,
+  J = e.TOK_NUMBER,
+  q = e.TOK_CURRENT,
+  z = e.TOK_GLOBAL,
+  X = e.TOK_EXPREF,
+  V = e.TOK_PIPE,
+  W = e.TOK_OR,
+  Z = e.TOK_AND,
+  tt = e.TOK_ADD,
+  et = e.TOK_SUBTRACT,
+  rt = e.TOK_MULTIPLY,
+  nt = e.TOK_POWER,
+  st = e.TOK_DIVIDE,
+  it = e.TOK_UNION,
+  ut = e.TOK_EQ,
+  ot = e.TOK_GT,
+  ct = e.TOK_LT,
+  at = e.TOK_GTE,
+  lt = e.TOK_LTE,
+  ht = e.TOK_NE,
+  _t = e.TOK_FLATTEN,
+  pt = e.TOK_STAR,
+  Tt = e.TOK_FILTER,
+  Et = e.TOK_DOT,
+  ft = e.TOK_NOT,
+  dt = e.TOK_LBRACE,
+  yt = e.TOK_LBRACKET,
+  gt = e.TOK_LPAREN,
+  Ot = e.TOK_LITERAL,
   Rt = {
     ".": Et,
     ",": F,
@@ -2025,19 +2399,26 @@ function Yt(t) {
   return t >= "a" && t <= "z" || t >= "A" && t <= "Z" || t >= "0" && t <= "9" || "_" === t;
 }
 function vt(t, e) {
-  const r = t[e];
+  var r = t[e];
   return "$" === r ? t.length > e && Yt(t[e + 1]) : r >= "a" && r <= "z" || r >= "A" && r <= "Z" || "_" === r;
 }
-class At {
-  constructor(t = [], e = []) {
+var At = /*#__PURE__*/function () {
+  function At(t, e) {
+    if (t === void 0) {
+      t = [];
+    }
+    if (e === void 0) {
+      e = [];
+    }
     this._allowedGlobalNames = t, this.debug = e;
   }
-  tokenize(t) {
-    const e = [];
-    let r, n, s;
+  var _proto2 = At.prototype;
+  _proto2.tokenize = function tokenize(t) {
+    var e = [];
+    var r, n, s;
     for (this._current = 0; this._current < t.length;) {
-      const i = e.length ? e.slice(-1)[0].type : null;
-      if (this._isGlobal(i, t, this._current)) e.push(this._consumeGlobal(t));else if (vt(t, this._current)) r = this._current, n = this._consumeUnquotedIdentifier(t), e.push({
+      var _i2 = e.length ? e.slice(-1)[0].type : null;
+      if (this._isGlobal(_i2, t, this._current)) e.push(this._consumeGlobal(t));else if (vt(t, this._current)) r = this._current, n = this._consumeUnquotedIdentifier(t), e.push({
         type: C,
         value: n,
         start: r
@@ -2045,7 +2426,7 @@ class At {
         type: Rt[t[this._current]],
         value: t[this._current],
         start: this._current
-      }), this._current += 1;else if ("-" === t[this._current] && ![q, J, G, C, j, D].includes(i) || mt(t[this._current], !1)) s = this._consumeNumber(t), e.push(s);else if ("[" === t[this._current]) s = this._consumeLBracket(t), e.push(s);else if ('"' === t[this._current]) r = this._current, n = this._consumeQuotedIdentifier(t), e.push({
+      }), this._current += 1;else if ("-" === t[this._current] && ![q, J, G, C, j, D].includes(_i2) || mt(t[this._current], !1)) s = this._consumeNumber(t), e.push(s);else if ("[" === t[this._current]) s = this._consumeLBracket(t), e.push(s);else if ('"' === t[this._current]) r = this._current, n = this._consumeQuotedIdentifier(t), e.push({
         type: j,
         value: n,
         start: r
@@ -2055,17 +2436,17 @@ class At {
         start: r
       });else if ("`" === t[this._current]) {
         r = this._current;
-        const _n2 = this._consumeLiteral(t);
+        var _n6 = this._consumeLiteral(t);
         e.push({
           type: Ot,
-          value: _n2,
+          value: _n6,
           start: r
         });
       } else if (void 0 !== Nt[t[this._current]]) e.push(this._consumeOperator(t));else if (void 0 !== Pt[t[this._current]]) this._current += 1;else if ("&" === t[this._current]) r = this._current, this._current += 1, "&" === t[this._current] ? (this._current += 1, e.push({
         type: Z,
         value: "&&",
         start: r
-      })) : e.push(i === F || i === gt ? {
+      })) : e.push(_i2 === F || _i2 === gt ? {
         type: X,
         value: "&",
         start: r
@@ -2087,7 +2468,7 @@ class At {
         start: r
       });else if ("*" === t[this._current]) {
         r = this._current, this._current += 1;
-        const _t9 = e.length && e.slice(-1)[0].type;
+        var _t9 = e.length && e.slice(-1)[0].type;
         0 === e.length || [yt, Et, V, Z, W, F, $].includes(_t9) ? e.push({
           type: pt,
           value: "*",
@@ -2107,8 +2488,8 @@ class At {
         start: r
       });else {
         if ("|" !== t[this._current]) {
-          const _e6 = new Error(`Unknown character:${t[this._current]}`);
-          throw _e6.name = "LexerError", _e6;
+          var _e7 = new Error("Unknown character:" + t[this._current]);
+          throw _e7.name = "LexerError", _e7;
         }
         r = this._current, this._current += 1, "|" === t[this._current] ? (this._current += 1, e.push({
           type: W,
@@ -2122,53 +2503,57 @@ class At {
       }
     }
     return e;
-  }
-  _consumeUnquotedIdentifier(t) {
-    const e = this._current;
-    for (this._current += 1; this._current < t.length && Yt(t[this._current]);) this._current += 1;
+  };
+  _proto2._consumeUnquotedIdentifier = function _consumeUnquotedIdentifier(t) {
+    var e = this._current;
+    for (this._current += 1; this._current < t.length && Yt(t[this._current]);) {
+      this._current += 1;
+    }
     return t.slice(e, this._current);
-  }
-  _consumeQuotedIdentifier(t) {
-    const e = this._current;
+  };
+  _proto2._consumeQuotedIdentifier = function _consumeQuotedIdentifier(t) {
+    var e = this._current;
     this._current += 1;
-    const r = t.length;
-    let n = !vt(t, e + 1);
+    var r = t.length;
+    var n = !vt(t, e + 1);
     for (; '"' !== t[this._current] && this._current < r;) {
-      let _e7 = this._current;
-      Yt(t[_e7]) || (n = !0), _e7 += "\\" !== t[_e7] || "\\" !== t[_e7 + 1] && '"' !== t[_e7 + 1] ? 1 : 2, this._current = _e7;
+      var _e8 = this._current;
+      Yt(t[_e8]) || (n = !0), _e8 += "\\" !== t[_e8] || "\\" !== t[_e8 + 1] && '"' !== t[_e8 + 1] ? 1 : 2, this._current = _e8;
     }
     this._current += 1;
-    const s = t.slice(e, this._current);
+    var s = t.slice(e, this._current);
     try {
-      n && !s.includes(" ") || (this.debug.push(`Suspicious quotes: ${s}`), this.debug.push(`Did you intend a literal? '${s.replace(/"/g, "")}'?`));
+      n && !s.includes(" ") || (this.debug.push("Suspicious quotes: " + s), this.debug.push("Did you intend a literal? '" + s.replace(/"/g, "") + "'?"));
     } catch (t) {}
     return JSON.parse(s);
-  }
-  _consumeRawStringLiteral(t) {
-    const e = this._current;
+  };
+  _proto2._consumeRawStringLiteral = function _consumeRawStringLiteral(t) {
+    var e = this._current;
     this._current += 1;
-    const r = t.length;
+    var r = t.length;
     for (; "'" !== t[this._current] && this._current < r;) {
-      let _e8 = this._current;
-      _e8 += "\\" !== t[_e8] || "\\" !== t[_e8 + 1] && "'" !== t[_e8 + 1] ? 1 : 2, this._current = _e8;
+      var _e9 = this._current;
+      _e9 += "\\" !== t[_e9] || "\\" !== t[_e9 + 1] && "'" !== t[_e9 + 1] ? 1 : 2, this._current = _e9;
     }
     return this._current += 1, t.slice(e + 1, this._current - 1).replaceAll("\\'", "'");
-  }
-  _consumeNumber(t) {
-    const e = this._current;
+  };
+  _proto2._consumeNumber = function _consumeNumber(t) {
+    var e = this._current;
     this._current += 1;
-    const r = t.length;
-    for (; mt(t[this._current], !1) && this._current < r;) this._current += 1;
-    const n = t.slice(e, this._current);
-    let s;
+    var r = t.length;
+    for (; mt(t[this._current], !1) && this._current < r;) {
+      this._current += 1;
+    }
+    var n = t.slice(e, this._current);
+    var s;
     return s = n.includes(".") ? parseFloat(n) : parseInt(n, 10), {
       type: J,
       value: s,
       start: e
     };
-  }
-  _consumeLBracket(t) {
-    const e = this._current;
+  };
+  _proto2._consumeLBracket = function _consumeLBracket(t) {
+    var e = this._current;
     return this._current += 1, "?" === t[this._current] ? (this._current += 1, {
       type: Tt,
       value: "[?",
@@ -2182,27 +2567,31 @@ class At {
       value: "[",
       start: e
     };
-  }
-  _isGlobal(t, e, r) {
+  };
+  _proto2._isGlobal = function _isGlobal(t, e, r) {
     if (null !== t && t === Et) return !1;
     if ("$" !== e[r]) return !1;
-    let n = r + 1;
-    for (; n < e.length && Yt(e[n]);) n += 1;
-    const s = e.slice(r, n);
+    var n = r + 1;
+    for (; n < e.length && Yt(e[n]);) {
+      n += 1;
+    }
+    var s = e.slice(r, n);
     return this._allowedGlobalNames.includes(s);
-  }
-  _consumeGlobal(t) {
-    const e = this._current;
-    for (this._current += 1; this._current < t.length && Yt(t[this._current]);) this._current += 1;
-    const r = t.slice(e, this._current);
+  };
+  _proto2._consumeGlobal = function _consumeGlobal(t) {
+    var e = this._current;
+    for (this._current += 1; this._current < t.length && Yt(t[this._current]);) {
+      this._current += 1;
+    }
+    var r = t.slice(e, this._current);
     return {
       type: z,
       name: r,
       start: e
     };
-  }
-  _consumeOperator(t) {
-    const e = this._current,
+  };
+  _proto2._consumeOperator = function _consumeOperator(t) {
+    var e = this._current,
       r = t[e];
     return this._current += 1, "!" === r ? "=" === t[this._current] ? (this._current += 1, {
       type: ht,
@@ -2237,18 +2626,18 @@ class At {
       value: "=",
       start: e
     };
-  }
-  _consumeLiteral(t) {
+  };
+  _proto2._consumeLiteral = function _consumeLiteral(t) {
     this._current += 1;
-    const e = this._current,
+    var e = this._current,
       r = t.length;
-    let n,
+    var n,
       s = !1;
     for (; (s || "`" !== t[this._current]) && this._current < r;) {
-      let _e9 = this._current;
-      s && "\\" === t[_e9] && '"' === t[_e9 + 1] ? _e9 += 2 : ('"' === t[_e9] && (s = !s), _e9 += s && "`" === t[_e9 + 1] ? 2 : "\\" !== t[_e9] || "\\" !== t[_e9 + 1] && "`" !== t[_e9 + 1] ? 1 : 2), this._current = _e9;
+      var _e10 = this._current;
+      s && "\\" === t[_e10] && '"' === t[_e10 + 1] ? _e10 += 2 : ('"' === t[_e10] && (s = !s), _e10 += s && "`" === t[_e10 + 1] ? 2 : "\\" !== t[_e10] || "\\" !== t[_e10 + 1] && "`" !== t[_e10 + 1] ? 1 : 2), this._current = _e10;
     }
-    let i = t.slice(e, this._current).trimStart();
+    var i = t.slice(e, this._current).trimStart();
     return i = i.replaceAll("\\`", "`"), n = function (t) {
       if ("" === t) return !1;
       if ('[{"'.includes(t[0])) return !0;
@@ -2259,134 +2648,102 @@ class At {
       } catch (t) {
         return !1;
       }
-    }(i) ? JSON.parse(i) : JSON.parse(`"${i}"`), this._current += 1, n;
-  }
-}
-const {
-    TOK_LITERAL: Kt,
-    TOK_COLON: It,
-    TOK_EOF: St,
-    TOK_UNQUOTEDIDENTIFIER: bt,
-    TOK_QUOTEDIDENTIFIER: xt,
-    TOK_RBRACKET: Ut,
-    TOK_RPAREN: Mt,
-    TOK_COMMA: wt,
-    TOK_CONCATENATE: Lt,
-    TOK_RBRACE: Bt,
-    TOK_NUMBER: kt,
-    TOK_CURRENT: Ct,
-    TOK_GLOBAL: jt,
-    TOK_FIELD: Dt,
-    TOK_EXPREF: Gt,
-    TOK_PIPE: Ft,
-    TOK_OR: $t,
-    TOK_AND: Ht,
-    TOK_ADD: Qt,
-    TOK_SUBTRACT: Jt,
-    TOK_MULTIPLY: qt,
-    TOK_POWER: zt,
-    TOK_DIVIDE: Xt,
-    TOK_UNION: Vt,
-    TOK_EQ: Wt,
-    TOK_GT: Zt,
-    TOK_LT: te,
-    TOK_GTE: ee,
-    TOK_LTE: re,
-    TOK_NE: ne,
-    TOK_FLATTEN: se,
-    TOK_STAR: ie,
-    TOK_FILTER: ue,
-    TOK_DOT: oe,
-    TOK_NOT: ce,
-    TOK_LBRACE: ae,
-    TOK_LBRACKET: le,
-    TOK_LPAREN: he
-  } = e,
-  _e = {
-    [St]: 0,
-    [bt]: 0,
-    [xt]: 0,
-    [Ut]: 0,
-    [Mt]: 0,
-    [wt]: 0,
-    [Bt]: 0,
-    [kt]: 0,
-    [Ct]: 0,
-    [jt]: 0,
-    [Dt]: 0,
-    [Gt]: 0,
-    [Ft]: 1,
-    [$t]: 2,
-    [Ht]: 3,
-    [Qt]: 6,
-    [Jt]: 6,
-    [Lt]: 7,
-    [qt]: 7,
-    [Xt]: 7,
-    [zt]: 7,
-    [Vt]: 7,
-    [Wt]: 5,
-    [Zt]: 5,
-    [te]: 5,
-    [ee]: 5,
-    [re]: 5,
-    [ne]: 5,
-    [se]: 9,
-    [ie]: 20,
-    [ue]: 21,
-    [oe]: 40,
-    [ce]: 45,
-    [ae]: 50,
-    [le]: 55,
-    [he]: 60
+    }(i) ? JSON.parse(i) : JSON.parse("\"" + i + "\""), this._current += 1, n;
   };
-class pe {
-  constructor(t = []) {
+  return At;
+}();
+var Kt = e.TOK_LITERAL,
+  It = e.TOK_COLON,
+  St = e.TOK_EOF,
+  bt = e.TOK_UNQUOTEDIDENTIFIER,
+  xt = e.TOK_QUOTEDIDENTIFIER,
+  Ut = e.TOK_RBRACKET,
+  Mt = e.TOK_RPAREN,
+  wt = e.TOK_COMMA,
+  Lt = e.TOK_CONCATENATE,
+  Bt = e.TOK_RBRACE,
+  kt = e.TOK_NUMBER,
+  Ct = e.TOK_CURRENT,
+  jt = e.TOK_GLOBAL,
+  Dt = e.TOK_FIELD,
+  Gt = e.TOK_EXPREF,
+  Ft = e.TOK_PIPE,
+  $t = e.TOK_OR,
+  Ht = e.TOK_AND,
+  Qt = e.TOK_ADD,
+  Jt = e.TOK_SUBTRACT,
+  qt = e.TOK_MULTIPLY,
+  zt = e.TOK_POWER,
+  Xt = e.TOK_DIVIDE,
+  Vt = e.TOK_UNION,
+  Wt = e.TOK_EQ,
+  Zt = e.TOK_GT,
+  te = e.TOK_LT,
+  ee = e.TOK_GTE,
+  re = e.TOK_LTE,
+  ne = e.TOK_NE,
+  se = e.TOK_FLATTEN,
+  ie = e.TOK_STAR,
+  ue = e.TOK_FILTER,
+  oe = e.TOK_DOT,
+  ce = e.TOK_NOT,
+  ae = e.TOK_LBRACE,
+  le = e.TOK_LBRACKET,
+  he = e.TOK_LPAREN,
+  _e = (_e11 = {}, _e11[St] = 0, _e11[bt] = 0, _e11[xt] = 0, _e11[Ut] = 0, _e11[Mt] = 0, _e11[wt] = 0, _e11[Bt] = 0, _e11[kt] = 0, _e11[Ct] = 0, _e11[jt] = 0, _e11[Dt] = 0, _e11[Gt] = 0, _e11[Ft] = 1, _e11[$t] = 2, _e11[Ht] = 3, _e11[Qt] = 6, _e11[Jt] = 6, _e11[Lt] = 7, _e11[qt] = 7, _e11[Xt] = 7, _e11[zt] = 7, _e11[Vt] = 7, _e11[Wt] = 5, _e11[Zt] = 5, _e11[te] = 5, _e11[ee] = 5, _e11[re] = 5, _e11[ne] = 5, _e11[se] = 9, _e11[ie] = 20, _e11[ue] = 21, _e11[oe] = 40, _e11[ce] = 45, _e11[ae] = 50, _e11[le] = 55, _e11[he] = 60, _e11);
+var pe = /*#__PURE__*/function () {
+  function pe(t) {
+    if (t === void 0) {
+      t = [];
+    }
     this._allowedGlobalNames = t;
   }
-  parse(t, e) {
+  var _proto3 = pe.prototype;
+  _proto3.parse = function parse(t, e) {
     this._loadTokens(t, e), this.index = 0;
-    const r = this.expression(0);
+    var r = this.expression(0);
     if (this._lookahead(0) !== St) {
-      const _t10 = this._lookaheadToken(0),
-        _e10 = new Error(`Unexpected token type: ${_t10.type}, value: ${_t10.value}`);
-      throw _e10.name = "ParserError", _e10;
+      var _t10 = this._lookaheadToken(0),
+        _e12 = new Error("Unexpected token type: " + _t10.type + ", value: " + _t10.value);
+      throw _e12.name = "ParserError", _e12;
     }
     return r;
-  }
-  _loadTokens(t, e) {
-    const r = new At(this._allowedGlobalNames, e).tokenize(t);
+  };
+  _proto3._loadTokens = function _loadTokens(t, e) {
+    var r = new At(this._allowedGlobalNames, e).tokenize(t);
     r.push({
       type: St,
       value: "",
       start: t.length
     }), this.tokens = r;
-  }
-  expression(t) {
-    const e = this._lookaheadToken(0);
+  };
+  _proto3.expression = function expression(t) {
+    var e = this._lookaheadToken(0);
     this._advance();
-    let r = this.nud(e),
+    var r = this.nud(e),
       n = this._lookahead(0);
-    for (; t < _e[n];) this._advance(), r = this.led(n, r), n = this._lookahead(0);
+    for (; t < _e[n];) {
+      this._advance(), r = this.led(n, r), n = this._lookahead(0);
+    }
     return r;
-  }
-  _lookahead(t) {
+  };
+  _proto3._lookahead = function _lookahead(t) {
     return this.tokens[this.index + t].type;
-  }
-  _lookaheadToken(t) {
+  };
+  _proto3._lookaheadToken = function _lookaheadToken(t) {
     return this.tokens[this.index + t];
-  }
-  _advance() {
+  };
+  _proto3._advance = function _advance() {
     this.index += 1;
-  }
-  _getIndex() {
+  };
+  _proto3._getIndex = function _getIndex() {
     return this.index;
-  }
-  _setIndex(t) {
+  };
+  _proto3._setIndex = function _setIndex(t) {
     this.index = t;
-  }
-  nud(t) {
-    let e, r, n, s, i;
+  };
+  _proto3.nud = function nud(t) {
+    var e, r, n, s, i;
     switch (t.type) {
       case Kt:
         return {
@@ -2465,14 +2822,16 @@ class pe {
           children: [n]
         };
       case he:
-        for (i = []; this._lookahead(0) !== Mt;) n = this.expression(0), i.push(n);
+        for (i = []; this._lookahead(0) !== Mt;) {
+          n = this.expression(0), i.push(n);
+        }
         return this._match(Mt), i[0];
       default:
         this._errorToken(t);
     }
-  }
-  led(t, e) {
-    let r, n, s, i, u, o, c, a, l;
+  };
+  _proto3.led = function led(t, e) {
+    var r, n, s, i, u, o, c, a, l;
     switch (t) {
       case Lt:
         return n = this.expression(_e.Concatenate), {
@@ -2533,7 +2892,9 @@ class pe {
           children: [e, n]
         };
       case he:
-        for (s = e.name, i = []; this._lookahead(0) !== Mt;) u = this.expression(0), this._lookahead(0) === wt && this._match(wt), i.push(u);
+        for (s = e.name, i = []; this._lookahead(0) !== Mt;) {
+          u = this.expression(0), this._lookahead(0) === wt && this._match(wt), i.push(u);
+        }
         return this._match(Mt), o = {
           type: "Function",
           name: s,
@@ -2569,54 +2930,54 @@ class pe {
       default:
         this._errorToken(this._lookaheadToken(0));
     }
-  }
-  _match(t) {
+  };
+  _proto3._match = function _match(t) {
     if (this._lookahead(0) !== t) {
-      const e = this._lookaheadToken(0),
-        r = new Error(`Expected ${t}, got: ${e.type}`);
-      throw r.name = "ParserError", r;
+      var _e13 = this._lookaheadToken(0),
+        _r7 = new Error("Expected " + t + ", got: " + _e13.type);
+      throw _r7.name = "ParserError", _r7;
     }
     this._advance();
-  }
-  _errorToken(t) {
-    const e = new Error(`Invalid token (${t.type}): "${t.value}"`);
+  };
+  _proto3._errorToken = function _errorToken(t) {
+    var e = new Error("Invalid token (" + t.type + "): \"" + t.value + "\"");
     throw e.name = "ParserError", e;
-  }
-  _parseChainedIndexExpression() {
-    const t = this._getIndex();
+  };
+  _proto3._parseChainedIndexExpression = function _parseChainedIndexExpression() {
+    var t = this._getIndex();
     if (this._lookahead(0) === It) return this._parseSliceExpression();
-    const e = this.expression(0);
+    var e = this.expression(0);
     return this._lookahead(0) === It ? (this._setIndex(t), this._parseSliceExpression()) : (this._match(Ut), {
       type: "Index",
       value: e
     });
-  }
-  _parseUnchainedIndexExpression() {
-    const t = this._getIndex(),
+  };
+  _proto3._parseUnchainedIndexExpression = function _parseUnchainedIndexExpression() {
+    var t = this._getIndex(),
       e = this._lookahead(0);
     if (e === It) {
-      const _t11 = this._parseSliceExpression();
+      var _t11 = this._parseSliceExpression();
       return this._projectIfSlice({
         type: "Identity"
       }, _t11);
     }
-    const r = this.expression(0),
+    var r = this.expression(0),
       n = this._lookahead(0);
     if (n === wt) return this._setIndex(t), this._parseMultiselectList();
     if (n === It) {
       this._setIndex(t);
-      const _e11 = this._parseSliceExpression();
+      var _e14 = this._parseSliceExpression();
       return this._projectIfSlice({
         type: "Identity"
-      }, _e11);
+      }, _e14);
     }
     return e === kt ? (this._match(Ut), {
       type: "Index",
       value: r
     }) : (this._setIndex(t), this._parseMultiselectList());
-  }
-  _projectIfSlice(t, e) {
-    const r = {
+  };
+  _proto3._projectIfSlice = function _projectIfSlice(t, e) {
+    var r = {
       type: "IndexExpression",
       children: [t, e]
     };
@@ -2624,17 +2985,17 @@ class pe {
       type: "Projection",
       children: [r, this._parseProjectionRHS(_e.Star)]
     } : r;
-  }
-  _parseSliceExpression() {
-    const t = [null, null, null];
-    let e = 0,
+  };
+  _proto3._parseSliceExpression = function _parseSliceExpression() {
+    var t = [null, null, null];
+    var e = 0,
       r = this._lookahead(0);
     for (; r !== Ut && e < 3;) {
       if (r === It && e < 2) e += 1, this._advance();else {
         t[e] = this.expression(0);
-        const _r3 = this._lookahead(0);
-        if (_r3 !== It && _r3 !== Ut) {
-          const _t12 = new Error(`Syntax error, unexpected token: ${_r3.value}(${_r3.type})`);
+        var _r8 = this._lookahead(0);
+        if (_r8 !== It && _r8 !== Ut) {
+          var _t12 = new Error("Syntax error, unexpected token: " + _r8.value + "(" + _r8.type + ")");
           throw _t12.name = "Parsererror", _t12;
         }
       }
@@ -2644,53 +3005,53 @@ class pe {
       type: "Slice",
       children: t
     };
-  }
-  _parseComparator(t, e) {
+  };
+  _proto3._parseComparator = function _parseComparator(t, e) {
     return {
       type: "Comparator",
       name: e,
       children: [t, this.expression(_e[e])]
     };
-  }
-  _parseDotRHS(t) {
-    const e = this._lookahead(0);
+  };
+  _proto3._parseDotRHS = function _parseDotRHS(t) {
+    var e = this._lookahead(0);
     return [bt, xt, ie].indexOf(e) >= 0 ? this.expression(t) : e === le ? (this._match(le), this._parseMultiselectList()) : e === ae ? (this._match(ae), this._parseMultiselectHash()) : void 0;
-  }
-  _parseProjectionRHS(t) {
-    let e;
+  };
+  _proto3._parseProjectionRHS = function _parseProjectionRHS(t) {
+    var e;
     if (_e[this._lookahead(0)] < 10) e = {
       type: "Identity"
     };else if (this._lookahead(0) === le) e = this.expression(t);else if (this._lookahead(0) === ue) e = this.expression(t);else {
       if (this._lookahead(0) !== oe) {
-        const _t13 = this._lookaheadToken(0),
-          _e12 = new Error(`Sytanx error, unexpected token: ${_t13.value}(${_t13.type})`);
-        throw _e12.name = "ParserError", _e12;
+        var _t13 = this._lookaheadToken(0),
+          _e15 = new Error("Sytanx error, unexpected token: " + _t13.value + "(" + _t13.type + ")");
+        throw _e15.name = "ParserError", _e15;
       }
       this._match(oe), e = this._parseDotRHS(t);
     }
     return e;
-  }
-  _parseMultiselectList() {
-    const t = [];
+  };
+  _proto3._parseMultiselectList = function _parseMultiselectList() {
+    var t = [];
     for (; this._lookahead(0) !== Ut;) {
-      const e = this.expression(0);
-      if (t.push(e), this._lookahead(0) === wt && (this._match(wt), this._lookahead(0) === Ut)) throw new Error("Unexpected token Rbracket");
+      var _e16 = this.expression(0);
+      if (t.push(_e16), this._lookahead(0) === wt && (this._match(wt), this._lookahead(0) === Ut)) throw new Error("Unexpected token Rbracket");
     }
     return this._match(Ut), {
       type: "MultiSelectList",
       children: t
     };
-  }
-  _parseMultiselectHash() {
-    const t = [],
+  };
+  _proto3._parseMultiselectHash = function _parseMultiselectHash() {
+    var t = [],
       e = [bt, xt];
-    let r, n, s, i;
+    var r, n, s, i;
     if (this._lookahead(0) === Bt) return this._advance(), {
       type: "MultiSelectHash",
       children: []
     };
     for (;;) {
-      if (r = this._lookaheadToken(0), e.indexOf(r.type) < 0) throw new Error(`Expecting an identifier token, got: ${r.type}`);
+      if (r = this._lookaheadToken(0), e.indexOf(r.type) < 0) throw new Error("Expecting an identifier token, got: " + r.type);
       if (n = r.value, this._advance(), this._match(It), s = this.expression(0), i = {
         type: "KeyValuePair",
         name: n,
@@ -2704,24 +3065,30 @@ class pe {
       type: "MultiSelectHash",
       children: t
     };
-  }
-}
+  };
+  return pe;
+}();
 function Te(t, e) {
-  const r = 10 ** e;
+  var r = Math.pow(10, e);
   return Math.round(t * r) / r;
 }
-function Ee(e, r, n, s = []) {
+function Ee(e, r, n, s) {
+  if (s === void 0) {
+    s = [];
+  }
   return {
     casefold: {
-      _func: (t, e, n) => r(t[0]).toLocaleUpperCase(n.language).toLocaleLowerCase(n.language),
+      _func: function _func(t, e, n) {
+        return r(t[0]).toLocaleUpperCase(n.language).toLocaleLowerCase(n.language);
+      },
       _signature: [{
         types: [t.TYPE_STRING]
       }]
     },
     and: {
-      _func: t => {
-        let r = !!e(t[0]);
-        return t.slice(1).forEach(t => {
+      _func: function _func(t) {
+        var r = !!e(t[0]);
+        return t.slice(1).forEach(function (t) {
           r = r && !!e(t);
         }), r;
       },
@@ -2731,12 +3098,15 @@ function Ee(e, r, n, s = []) {
       }]
     },
     deepScan: {
-      _func: t => {
-        const [e, r] = t,
+      _func: function _func(t) {
+        var e = t[0],
+          r = t[1],
           n = r.toString(),
           s = [];
         return null === e || function t(e) {
-          Object.entries(e).forEach(([e, r]) => {
+          Object.entries(e).forEach(function (_ref) {
+            var e = _ref[0],
+              r = _ref[1];
             e === n && s.push(r), "object" == typeof r && t(r);
           });
         }(e), s;
@@ -2748,9 +3118,9 @@ function Ee(e, r, n, s = []) {
       }]
     },
     or: {
-      _func: t => {
-        let r = !!e(t[0]);
-        return t.slice(1).forEach(t => {
+      _func: function _func(t) {
+        var r = !!e(t[0]);
+        return t.slice(1).forEach(function (t) {
           r = r || !!e(t);
         }), r;
       },
@@ -2760,26 +3130,34 @@ function Ee(e, r, n, s = []) {
       }]
     },
     not: {
-      _func: t => !e(t[0]),
+      _func: function _func(t) {
+        return !e(t[0]);
+      },
       _signature: [{
         types: [t.TYPE_ANY]
       }]
     },
-    null: {
-      _func: () => null,
+    "null": {
+      _func: function _func() {
+        return null;
+      },
       _signature: []
     },
-    true: {
-      _func: () => !0,
+    "true": {
+      _func: function _func() {
+        return !0;
+      },
       _signature: []
     },
-    false: {
-      _func: () => !1,
+    "false": {
+      _func: function _func() {
+        return !1;
+      },
       _signature: []
     },
-    if: {
-      _func: (t, r, n) => {
-        const s = t[1],
+    "if": {
+      _func: function _func(t, r, n) {
+        var s = t[1],
           i = t[2],
           u = n.visit(t[0], r);
         return e(u) ? n.visit(s, r) : n.visit(i, r);
@@ -2793,17 +3171,17 @@ function Ee(e, r, n, s = []) {
       }]
     },
     substitute: {
-      _func: t => {
-        const e = r(t[0]),
+      _func: function _func(t) {
+        var e = r(t[0]),
           s = r(t[1]),
           i = r(t[2]);
         if (t.length <= 3) return e.replaceAll(s, i);
-        const u = n(t[3]);
+        var u = n(t[3]);
         if (u < 1) return e;
-        let o = -1;
-        for (let _t14 = 0; _t14 < u; _t14 += 1) {
+        var o = -1;
+        for (var _t14 = 0; _t14 < u; _t14 += 1) {
           o += 1;
-          const _t15 = e.slice(o).indexOf(s);
+          var _t15 = e.slice(o).indexOf(s);
           if (-1 === _t15) return e;
           o += _t15;
         }
@@ -2821,14 +3199,16 @@ function Ee(e, r, n, s = []) {
       }]
     },
     value: {
-      _func: t => {
-        const e = t[0] || {},
+      _func: function _func(t) {
+        var e = t[0] || {},
           r = t[1],
           n = e[r];
         if (void 0 === n) {
-          s.push(`Failed to find: '${r}'`);
-          const _t16 = Object.keys(e).map(t => `'${t}'`).toString();
-          return _t16.length && s.push(`Available fields: ${_t16}`), null;
+          s.push("Failed to find: '" + r + "'");
+          var _t16 = Object.keys(e).map(function (t) {
+            return "'" + t + "'";
+          }).toString();
+          return _t16.length && s.push("Available fields: " + _t16), null;
         }
         return n;
       },
@@ -2839,20 +3219,24 @@ function Ee(e, r, n, s = []) {
       }]
     },
     lower: {
-      _func: t => r(t[0]).toLowerCase(),
+      _func: function _func(t) {
+        return r(t[0]).toLowerCase();
+      },
       _signature: [{
         types: [t.TYPE_STRING]
       }]
     },
     upper: {
-      _func: t => r(t[0]).toUpperCase(),
+      _func: function _func(t) {
+        return r(t[0]).toUpperCase();
+      },
       _signature: [{
         types: [t.TYPE_STRING]
       }]
     },
     exp: {
-      _func: t => {
-        const e = n(t[0]);
+      _func: function _func(t) {
+        var e = n(t[0]);
         return Math.exp(e);
       },
       _signature: [{
@@ -2860,7 +3244,9 @@ function Ee(e, r, n, s = []) {
       }]
     },
     power: {
-      _func: t => n(t[0]) ** n(t[1]),
+      _func: function _func(t) {
+        return Math.pow(n(t[0]), n(t[1]));
+      },
       _signature: [{
         types: [t.TYPE_NUMBER]
       }, {
@@ -2868,8 +3254,8 @@ function Ee(e, r, n, s = []) {
       }]
     },
     find: {
-      _func: t => {
-        const e = r(t[0]),
+      _func: function _func(t) {
+        var e = r(t[0]),
           s = r(t[1]),
           i = t.length > 2 ? n(t[2]) : 0,
           u = s.indexOf(e, i);
@@ -2885,8 +3271,8 @@ function Ee(e, r, n, s = []) {
       }]
     },
     left: {
-      _func: t => {
-        const e = t.length > 1 ? n(t[1]) : 1;
+      _func: function _func(t) {
+        var e = t.length > 1 ? n(t[1]) : 1;
         return e < 0 ? null : t[0] instanceof Array ? t[0].slice(0, e) : r(t[0]).substr(0, e);
       },
       _signature: [{
@@ -2897,11 +3283,11 @@ function Ee(e, r, n, s = []) {
       }]
     },
     right: {
-      _func: t => {
-        const e = t.length > 1 ? n(t[1]) : 1;
+      _func: function _func(t) {
+        var e = t.length > 1 ? n(t[1]) : 1;
         if (e < 0) return null;
         if (t[0] instanceof Array) return 0 === e ? [] : t[0].slice(-1 * e);
-        const s = r(t[0]);
+        var s = r(t[0]);
         return s.substr(s.length - e, e);
       },
       _signature: [{
@@ -2912,8 +3298,8 @@ function Ee(e, r, n, s = []) {
       }]
     },
     mid: {
-      _func: t => {
-        const e = n(t[1]),
+      _func: function _func(t) {
+        var e = n(t[1]),
           s = n(t[2]);
         return e < 0 ? null : t[0] instanceof Array ? t[0].slice(e, e + s) : r(t[0]).substr(e, s);
       },
@@ -2926,7 +3312,9 @@ function Ee(e, r, n, s = []) {
       }]
     },
     mod: {
-      _func: t => n(t[0]) % n(t[1]),
+      _func: function _func(t) {
+        return n(t[0]) % n(t[1]);
+      },
       _signature: [{
         types: [t.TYPE_NUMBER]
       }, {
@@ -2934,14 +3322,18 @@ function Ee(e, r, n, s = []) {
       }]
     },
     proper: {
-      _func: t => r(t[0]).split(" ").map(t => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase()).join(" "),
+      _func: function _func(t) {
+        return r(t[0]).split(" ").map(function (t) {
+          return t.charAt(0).toUpperCase() + t.slice(1).toLowerCase();
+        }).join(" ");
+      },
       _signature: [{
         types: [t.TYPE_STRING]
       }]
     },
     rept: {
-      _func: t => {
-        const e = r(t[0]),
+      _func: function _func(t) {
+        var e = r(t[0]),
           s = n(t[1]);
         return s < 0 ? null : e.repeat(s);
       },
@@ -2952,8 +3344,8 @@ function Ee(e, r, n, s = []) {
       }]
     },
     replace: {
-      _func: t => {
-        const e = r(t[0]),
+      _func: function _func(t) {
+        var e = r(t[0]),
           s = n(t[1]),
           i = n(t[2]),
           u = r(t[3]);
@@ -2970,7 +3362,9 @@ function Ee(e, r, n, s = []) {
       }]
     },
     round: {
-      _func: t => Te(n(t[0]), n(t[1])),
+      _func: function _func(t) {
+        return Te(n(t[0]), n(t[1]));
+      },
       _signature: [{
         types: [t.TYPE_NUMBER]
       }, {
@@ -2978,8 +3372,8 @@ function Ee(e, r, n, s = []) {
       }]
     },
     sqrt: {
-      _func: t => {
-        const e = Math.sqrt(n(t[0]));
+      _func: function _func(t) {
+        var e = Math.sqrt(n(t[0]));
         return Number.isNaN(e) ? null : e;
       },
       _signature: [{
@@ -2987,12 +3381,18 @@ function Ee(e, r, n, s = []) {
       }]
     },
     stdevp: {
-      _func: t => {
-        const e = t[0] || [];
+      _func: function _func(t) {
+        var e = t[0] || [];
         if (0 === e.length) return null;
-        const r = e.map(t => n(t)),
-          s = r.reduce((t, e) => t + e, 0) / e.length,
-          i = r.reduce((t, e) => t + e * e, 0) / e.length,
+        var r = e.map(function (t) {
+            return n(t);
+          }),
+          s = r.reduce(function (t, e) {
+            return t + e;
+          }, 0) / e.length,
+          i = r.reduce(function (t, e) {
+            return t + e * e;
+          }, 0) / e.length,
           u = Math.sqrt(i - s * s);
         return Number.isNaN(u) ? null : u;
       },
@@ -3001,12 +3401,18 @@ function Ee(e, r, n, s = []) {
       }]
     },
     stdev: {
-      _func: t => {
-        const e = t[0] || [];
+      _func: function _func(t) {
+        var e = t[0] || [];
         if (e.length <= 1) return null;
-        const r = e.map(t => n(t)),
-          s = r.reduce((t, e) => t + e, 0) / e.length,
-          i = r.reduce((t, e) => t + e * e, 0),
+        var r = e.map(function (t) {
+            return n(t);
+          }),
+          s = r.reduce(function (t, e) {
+            return t + e;
+          }, 0) / e.length,
+          i = r.reduce(function (t, e) {
+            return t + e * e;
+          }, 0),
           u = Math.sqrt((i - e.length * s * s) / (e.length - 1));
         return Number.isNaN(u) ? null : u;
       },
@@ -3015,16 +3421,20 @@ function Ee(e, r, n, s = []) {
       }]
     },
     trim: {
-      _func: t => r(t[0]).split(" ").filter(t => t).join(" "),
+      _func: function _func(t) {
+        return r(t[0]).split(" ").filter(function (t) {
+          return t;
+        }).join(" ");
+      },
       _signature: [{
         types: [t.TYPE_STRING]
       }]
     },
     trunc: {
-      _func: t => {
-        const e = n(t[0]),
+      _func: function _func(t) {
+        var e = n(t[0]),
           r = t.length > 1 ? n(t[1]) : 0;
-        return (e >= 0 ? Math.floor : Math.ceil)(e * 10 ** r) / 10 ** r;
+        return (e >= 0 ? Math.floor : Math.ceil)(e * Math.pow(10, r)) / Math.pow(10, r);
       },
       _signature: [{
         types: [t.TYPE_NUMBER]
@@ -3034,8 +3444,8 @@ function Ee(e, r, n, s = []) {
       }]
     },
     charCode: {
-      _func: t => {
-        const e = n(t[0]);
+      _func: function _func(t) {
+        var e = n(t[0]);
         return Number.isInteger(e) ? String.fromCharCode(e) : null;
       },
       _signature: [{
@@ -3043,8 +3453,8 @@ function Ee(e, r, n, s = []) {
       }]
     },
     codePoint: {
-      _func: t => {
-        const e = r(t[0]);
+      _func: function _func(t) {
+        var e = r(t[0]);
         return 0 === e.length ? null : e.codePointAt(0);
       },
       _signature: [{
@@ -3052,8 +3462,8 @@ function Ee(e, r, n, s = []) {
       }]
     },
     datetime: {
-      _func: t => {
-        const e = n(t[0]),
+      _func: function _func(t) {
+        var e = n(t[0]),
           s = n(t[1]),
           i = n(t[2]),
           u = t.length > 3 ? n(t[3]) : 0,
@@ -3061,18 +3471,21 @@ function Ee(e, r, n, s = []) {
           c = t.length > 5 ? n(t[5]) : 0,
           a = t.length > 6 ? n(t[6]) : 0,
           l = t.length > 7 ? r(t[7]) : null;
-        let h = new Date(e, s - 1, i, u, o, c, a);
+        var h = new Date(e, s - 1, i, u, o, c, a);
         return l && (h = function (t, e) {
           if (null === t) return null;
-          let r = Date.UTC(t.getFullYear(), t.getMonth(), t.getDate(), t.getHours(), t.getMinutes(), t.getSeconds(), t.getMilliseconds());
+          var r = Date.UTC(t.getFullYear(), t.getMonth(), t.getDate(), t.getHours(), t.getMinutes(), t.getSeconds(), t.getMilliseconds());
           return r += function (t, e) {
-            const r = new Intl.DateTimeFormat("en-US", {
+            var r = new Intl.DateTimeFormat("en-US", {
                 timeZone: e,
                 timeZoneName: "longOffset"
               }).format(t),
               n = /GMT([+\-−])?(\d{1,2}):?(\d{0,2})?/.exec(r);
             if (!n) return 0;
-            const [s, i, u] = n.slice(1),
+            var _n$slice = n.slice(1),
+              s = _n$slice[0],
+              i = _n$slice[1],
+              u = _n$slice[2],
               o = 60 * (60 * (i || 0) + 1 * (u || 0)) * 1e3;
             return "-" === s ? -1 * o : o;
           }(t, e), new Date(r);
@@ -3102,26 +3515,26 @@ function Ee(e, r, n, s = []) {
       }]
     },
     datedif: {
-      _func: t => {
-        const e = n(t[0]),
+      _func: function _func(t) {
+        var e = n(t[0]),
           s = n(t[1]),
           i = r(t[2]).toLowerCase();
         if (s === e) return 0;
         if (s < e) return null;
         if ("d" === i) return Math.floor(s - e);
-        const u = new Date(864e5 * e),
+        var u = new Date(864e5 * e),
           o = new Date(864e5 * s),
           c = o.getFullYear() - u.getFullYear();
-        let a = o.getMonth() - u.getMonth();
-        const l = o.getDate() - u.getDate();
+        var a = o.getMonth() - u.getMonth();
+        var l = o.getDate() - u.getDate();
         if ("y" === i) {
-          let _t17 = c;
+          var _t17 = c;
           return a < 0 && (_t17 -= 1), 0 === a && l < 0 && (_t17 -= 1), _t17;
         }
         if ("m" === i) return 12 * c + a + (l < 0 ? -1 : 0);
         if ("ym" === i) return l < 0 && (a -= 1), a <= 0 && c > 0 ? 12 + a : a;
         if ("yd" === i) return l < 0 && (a -= 1), o.setFullYear(a < 0 ? u.getFullYear() + 1 : u.getFullYear()), Math.floor((o.getTime() - u.getTime()) / 864e5);
-        throw new TypeError(`Unrecognized unit parameter "${i}" for datedif()`);
+        throw new TypeError("Unrecognized unit parameter \"" + i + "\" for datedif()");
       },
       _signature: [{
         types: [t.TYPE_NUMBER]
@@ -3132,8 +3545,8 @@ function Ee(e, r, n, s = []) {
       }]
     },
     eomonth: {
-      _func: t => {
-        const e = n(t[0]),
+      _func: function _func(t) {
+        var e = n(t[0]),
           r = n(t[1]),
           s = new Date(864e5 * e);
         return new Date(s.getFullYear(), s.getMonth() + r + 1, 0).getTime() / 864e5;
@@ -3145,8 +3558,8 @@ function Ee(e, r, n, s = []) {
       }]
     },
     day: {
-      _func: t => {
-        const e = n(t[0]);
+      _func: function _func(t) {
+        var e = n(t[0]);
         return new Date(864e5 * e).getDate();
       },
       _signature: [{
@@ -3154,8 +3567,8 @@ function Ee(e, r, n, s = []) {
       }]
     },
     month: {
-      _func: t => {
-        const e = n(t[0]);
+      _func: function _func(t) {
+        var e = n(t[0]);
         return new Date(864e5 * e).getMonth() + 1;
       },
       _signature: [{
@@ -3163,8 +3576,8 @@ function Ee(e, r, n, s = []) {
       }]
     },
     year: {
-      _func: t => {
-        const e = n(t[0]);
+      _func: function _func(t) {
+        var e = n(t[0]);
         return new Date(864e5 * e).getFullYear();
       },
       _signature: [{
@@ -3172,8 +3585,8 @@ function Ee(e, r, n, s = []) {
       }]
     },
     time: {
-      _func: t => {
-        const e = (3600 * n(t[0]) + 60 * n(t[1]) + n(t[2])) / 86400;
+      _func: function _func(t) {
+        var e = (3600 * n(t[0]) + 60 * n(t[1]) + n(t[2])) / 86400;
         return e < 0 ? null : e - Math.floor(e);
       },
       _signature: [{
@@ -3185,10 +3598,10 @@ function Ee(e, r, n, s = []) {
       }]
     },
     hour: {
-      _func: t => {
-        const e = n(t[0]) % 1;
+      _func: function _func(t) {
+        var e = n(t[0]) % 1;
         if (e < 0) return null;
-        const r = Te(24 * e, 14);
+        var r = Te(24 * e, 14);
         return Math.floor(r % 24);
       },
       _signature: [{
@@ -3196,10 +3609,10 @@ function Ee(e, r, n, s = []) {
       }]
     },
     minute: {
-      _func: t => {
-        const e = n(t[0]) % 1;
+      _func: function _func(t) {
+        var e = n(t[0]) % 1;
         if (e < 0) return null;
-        const r = Math.round(1440 * e, 10);
+        var r = Math.round(1440 * e, 10);
         return Math.floor(r % 60);
       },
       _signature: [{
@@ -3207,10 +3620,10 @@ function Ee(e, r, n, s = []) {
       }]
     },
     second: {
-      _func: t => {
-        const e = n(t[0]) % 1;
+      _func: function _func(t) {
+        var e = n(t[0]) % 1;
         if (e < 0) return null;
-        const r = Te(86400 * e, 10);
+        var r = Te(86400 * e, 10);
         return Math.floor(r % 60);
       },
       _signature: [{
@@ -3218,16 +3631,20 @@ function Ee(e, r, n, s = []) {
       }]
     },
     now: {
-      _func: () => Date.now() / 864e5,
+      _func: function _func() {
+        return Date.now() / 864e5;
+      },
       _signature: []
     },
     today: {
-      _func: () => Math.floor(Date.now() / 864e5),
+      _func: function _func() {
+        return Math.floor(Date.now() / 864e5);
+      },
       _signature: []
     },
     weekday: {
-      _func: t => {
-        const e = n(t[0]),
+      _func: function _func(t) {
+        var e = n(t[0]),
           r = t.length > 1 ? n(t[1]) : 1,
           s = new Date(864e5 * e).getDay();
         switch (r) {
@@ -3249,8 +3666,8 @@ function Ee(e, r, n, s = []) {
       }]
     },
     entries: {
-      _func: t => {
-        const r = e(t[0]);
+      _func: function _func(t) {
+        var r = e(t[0]);
         return Object.entries(r);
       },
       _signature: [{
@@ -3258,14 +3675,16 @@ function Ee(e, r, n, s = []) {
       }]
     },
     fromEntries: {
-      _func: t => Object.fromEntries(t[0]),
+      _func: function _func(t) {
+        return Object.fromEntries(t[0]);
+      },
       _signature: [{
         types: [t.TYPE_ARRAY_ARRAY]
       }]
     },
     split: {
-      _func: t => {
-        const e = r(t[0]),
+      _func: function _func(t) {
+        var e = r(t[0]),
           n = r(t[1]);
         return e.split(n);
       },
@@ -3276,34 +3695,46 @@ function Ee(e, r, n, s = []) {
       }]
     },
     unique: {
-      _func: t => {
-        const r = t[0].map(t => e(t));
-        return t[0].filter((t, n) => r.indexOf(e(t)) === n);
+      _func: function _func(t) {
+        var r = t[0].map(function (t) {
+          return e(t);
+        });
+        return t[0].filter(function (t, n) {
+          return r.indexOf(e(t)) === n;
+        });
       },
       _signature: [{
         types: [t.TYPE_ARRAY]
       }]
     },
     encodeUrlComponent: {
-      _func: t => encodeURIComponent(t[0]),
+      _func: function _func(t) {
+        return encodeURIComponent(t[0]);
+      },
       _signature: [{
         types: [t.TYPE_STRING]
       }]
     },
     encodeUrl: {
-      _func: t => encodeURI(t[0]),
+      _func: function _func(t) {
+        return encodeURI(t[0]);
+      },
       _signature: [{
         types: [t.TYPE_STRING]
       }]
     },
     decodeUrlComponent: {
-      _func: t => decodeURIComponent(t[0]),
+      _func: function _func(t) {
+        return decodeURIComponent(t[0]);
+      },
       _signature: [{
         types: [t.TYPE_STRING]
       }]
     },
     decodeUrl: {
-      _func: t => decodeURI(t[0]),
+      _func: function _func(t) {
+        return decodeURI(t[0]);
+      },
       _signature: [{
         types: [t.TYPE_STRING]
       }]
@@ -3311,40 +3742,40 @@ function Ee(e, r, n, s = []) {
   };
 }
 function fe(e, r, n, s, i, u, o) {
-  const {
-    TYPE_NUMBER: c,
-    TYPE_ANY: a,
-    TYPE_STRING: l,
-    TYPE_ARRAY: h,
-    TYPE_OBJECT: _,
-    TYPE_BOOLEAN: p,
-    TYPE_EXPREF: T,
-    TYPE_NULL: E,
-    TYPE_ARRAY_NUMBER: f,
-    TYPE_ARRAY_STRING: d
-  } = t;
+  var c = t.TYPE_NUMBER,
+    a = t.TYPE_ANY,
+    l = t.TYPE_STRING,
+    h = t.TYPE_ARRAY,
+    _ = t.TYPE_OBJECT,
+    p = t.TYPE_BOOLEAN,
+    T = t.TYPE_EXPREF,
+    E = t.TYPE_NULL,
+    f = t.TYPE_ARRAY_NUMBER,
+    d = t.TYPE_ARRAY_STRING;
   function y(t, r) {
-    return n => {
-      const s = e.visit(t, n);
+    return function (n) {
+      var s = e.visit(t, n);
       if (r.indexOf(i(s)) < 0) {
-        const t = `TypeError: expected one of ${r}, received ${i(s)}`;
-        throw new Error(t);
+        var _t18 = "TypeError: expected one of " + r + ", received " + i(s);
+        throw new Error(_t18);
       }
       return s;
     };
   }
   return {
     abs: {
-      _func: t => Math.abs(t[0]),
+      _func: function _func(t) {
+        return Math.abs(t[0]);
+      },
       _signature: [{
         types: [c]
       }]
     },
     avg: {
-      _func: t => {
-        let e = 0;
-        const r = t[0];
-        return r.forEach(t => {
+      _func: function _func(t) {
+        var e = 0;
+        var r = t[0];
+        return r.forEach(function (t) {
           e += t;
         }), e / r.length;
       },
@@ -3353,13 +3784,17 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     ceil: {
-      _func: t => Math.ceil(t[0]),
+      _func: function _func(t) {
+        return Math.ceil(t[0]);
+      },
       _signature: [{
         types: [c]
       }]
     },
     contains: {
-      _func: t => u(t[0]).indexOf(u(t[1])) >= 0,
+      _func: function _func(t) {
+        return u(t[0]).indexOf(u(t[1])) >= 0;
+      },
       _signature: [{
         types: [l, h]
       }, {
@@ -3367,8 +3802,8 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     endsWith: {
-      _func: t => {
-        const e = u(t[0]),
+      _func: function _func(t) {
+        var e = u(t[0]),
           r = u(t[1]);
         return -1 !== e.indexOf(r, e.length - r.length);
       },
@@ -3379,14 +3814,16 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     floor: {
-      _func: t => Math.floor(t[0]),
+      _func: function _func(t) {
+        return Math.floor(t[0]);
+      },
       _signature: [{
         types: [c]
       }]
     },
     length: {
-      _func: t => {
-        const e = u(t[0]);
+      _func: function _func(t) {
+        var e = u(t[0]);
         return r(e) ? Object.keys(e).length : n(e) ? e.length : o(e).length;
       },
       _signature: [{
@@ -3394,9 +3831,11 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     map: {
-      _func: t => {
-        const r = t[0];
-        return t[1].map(t => e.visit(r, t));
+      _func: function _func(t) {
+        var r = t[0];
+        return t[1].map(function (t) {
+          return e.visit(r, t);
+        });
       },
       _signature: [{
         types: [T]
@@ -3405,14 +3844,16 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     reduce: {
-      _func: t => {
-        const r = t[0];
-        return t[1].reduce((t, n, s, i) => e.visit(r, {
-          accumulated: t,
-          current: n,
-          index: s,
-          array: i
-        }), 3 === t.length ? t[2] : null);
+      _func: function _func(t) {
+        var r = t[0];
+        return t[1].reduce(function (t, n, s, i) {
+          return e.visit(r, {
+            accumulated: t,
+            current: n,
+            index: s,
+            array: i
+          });
+        }, 3 === t.length ? t[2] : null);
       },
       _signature: [{
         types: [T]
@@ -3424,10 +3865,14 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     max: {
-      _func: t => {
+      _func: function _func(t) {
         if (t[0].length > 0) {
-          const e = i(t[0][0]);
-          return t[0].reduce(e === c ? (t, e) => s(t) >= s(e) ? t : e : (t, e) => o(e).localeCompare(o(t)) < 0 ? t : e, t[0][0]);
+          var _e17 = i(t[0][0]);
+          return t[0].reduce(_e17 === c ? function (t, e) {
+            return s(t) >= s(e) ? t : e;
+          } : function (t, e) {
+            return o(e).localeCompare(o(t)) < 0 ? t : e;
+          }, t[0][0]);
         }
         return null;
       },
@@ -3436,10 +3881,12 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     merge: {
-      _func: t => {
-        const e = {};
-        return t.forEach(t => {
-          Object.entries(t).forEach(([t, r]) => {
+      _func: function _func(t) {
+        var e = {};
+        return t.forEach(function (t) {
+          Object.entries(t).forEach(function (_ref2) {
+            var t = _ref2[0],
+              r = _ref2[1];
             e[t] = r;
           });
         }), e;
@@ -3450,13 +3897,13 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     maxBy: {
-      _func: t => {
-        const e = t[0],
+      _func: function _func(t) {
+        var e = t[0],
           r = y(t[1], [c, l]);
-        let n,
+        var n,
           s,
           i = -Infinity;
-        return e.forEach(t => {
+        return e.forEach(function (t) {
           s = r(t), s > i && (i = s, n = t);
         }), n;
       },
@@ -3467,9 +3914,9 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     sum: {
-      _func: t => {
-        let e = 0;
-        return t[0].forEach(t => {
+      _func: function _func(t) {
+        var e = 0;
+        return t[0].forEach(function (t) {
           e += 1 * t;
         }), e;
       },
@@ -3478,7 +3925,9 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     startsWith: {
-      _func: t => u(t[0]).startsWith(u(t[1])),
+      _func: function _func(t) {
+        return u(t[0]).startsWith(u(t[1]));
+      },
       _signature: [{
         types: [l]
       }, {
@@ -3486,13 +3935,17 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     min: {
-      _func: t => {
+      _func: function _func(t) {
         if (t[0].length > 0) {
-          if (i(t[0][0]) === c) return t[0].reduce((t, e) => s(t) <= s(e) ? t : e, t[0][0]);
-          const e = t[0];
-          let r = e[0];
-          for (let _t18 = 1; _t18 < e.length; _t18 += 1) o(e[_t18]).localeCompare(o(r)) < 0 && (r = e[_t18]);
-          return r;
+          if (i(t[0][0]) === c) return t[0].reduce(function (t, e) {
+            return s(t) <= s(e) ? t : e;
+          }, t[0][0]);
+          var _e18 = t[0];
+          var _r9 = _e18[0];
+          for (var _t19 = 1; _t19 < _e18.length; _t19 += 1) {
+            o(_e18[_t19]).localeCompare(o(_r9)) < 0 && (_r9 = _e18[_t19]);
+          }
+          return _r9;
         }
         return null;
       },
@@ -3501,13 +3954,13 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     minBy: {
-      _func: t => {
-        const e = t[0],
+      _func: function _func(t) {
+        var e = t[0],
           r = y(t[1], [c, l]);
-        let n,
+        var n,
           s,
           i = Infinity;
-        return e.forEach(t => {
+        return e.forEach(function (t) {
           s = r(t), s < i && (i = s, n = t);
         }), n;
       },
@@ -3518,28 +3971,25 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     type: {
-      _func: t => ({
-        [c]: "number",
-        [l]: "string",
-        [h]: "array",
-        [_]: "object",
-        [p]: "boolean",
-        [T]: "expref",
-        [E]: "null"
-      })[i(t[0])],
+      _func: function _func(t) {
+        var _c$l$h$_$p$T$E$i;
+        return (_c$l$h$_$p$T$E$i = {}, _c$l$h$_$p$T$E$i[c] = "number", _c$l$h$_$p$T$E$i[l] = "string", _c$l$h$_$p$T$E$i[h] = "array", _c$l$h$_$p$T$E$i[_] = "object", _c$l$h$_$p$T$E$i[p] = "boolean", _c$l$h$_$p$T$E$i[T] = "expref", _c$l$h$_$p$T$E$i[E] = "null", _c$l$h$_$p$T$E$i)[i(t[0])];
+      },
       _signature: [{
         types: [a]
       }]
     },
     keys: {
-      _func: t => null === t[0] ? [] : Object.keys(t[0]),
+      _func: function _func(t) {
+        return null === t[0] ? [] : Object.keys(t[0]);
+      },
       _signature: [{
         types: [a]
       }]
     },
     values: {
-      _func: t => {
-        const e = u(t[0]);
+      _func: function _func(t) {
+        var e = u(t[0]);
         return null === e ? [] : Object.values(e);
       },
       _signature: [{
@@ -3547,13 +3997,13 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     sort: {
-      _func: t => {
-        const e = t[0].slice(0);
+      _func: function _func(t) {
+        var e = t[0].slice(0);
         if (e.length > 0) {
-          const r = i(t[0][0]) === c ? s : o;
-          e.sort((t, e) => {
-            const n = r(t),
-              s = r(e);
+          var _r10 = i(t[0][0]) === c ? s : o;
+          e.sort(function (t, e) {
+            var n = _r10(t),
+              s = _r10(e);
             return n < s ? -1 : n > s ? 1 : 0;
           });
         }
@@ -3564,22 +4014,27 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     sortBy: {
-      _func: t => {
-        const r = t[0].slice(0);
+      _func: function _func(t) {
+        var r = t[0].slice(0);
         if (0 === r.length) return r;
-        const n = t[1],
+        var n = t[1],
           s = i(e.visit(n, r[0]));
         if ([c, l].indexOf(s) < 0) throw new Error("TypeError");
-        const u = [];
-        for (let _t19 = 0; _t19 < r.length; _t19 += 1) u.push([_t19, r[_t19]]);
-        u.sort((t, r) => {
-          const u = e.visit(n, t[1]),
+        var u = [];
+        for (var _t20 = 0; _t20 < r.length; _t20 += 1) {
+          u.push([_t20, r[_t20]]);
+        }
+        u.sort(function (t, r) {
+          var u = e.visit(n, t[1]),
             o = e.visit(n, r[1]);
-          if (i(u) !== s) throw new Error(`TypeError: expected ${s}, received ${i(u)}`);
-          if (i(o) !== s) throw new Error(`TypeError: expected ${s}, received ${i(o)}`);
+          if (i(u) !== s) throw new Error("TypeError: expected " + s + ", received " + i(u));
+          if (i(o) !== s) throw new Error("TypeError: expected " + s + ", received " + i(o));
           return u > o ? 1 : u < o ? -1 : t[0] - r[0];
         });
-        for (let _t20 = 0; _t20 < u.length; _t20 += 1) [, r[_t20]] = u[_t20];
+        for (var _t21 = 0; _t21 < u.length; _t21 += 1) {
+          var _u$_t = u[_t21];
+          r[_t21] = _u$_t[1];
+        }
         return r;
       },
       _signature: [{
@@ -3589,7 +4044,9 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     join: {
-      _func: t => t[1].join(t[0]),
+      _func: function _func(t) {
+        return t[1].join(t[0]);
+      },
       _signature: [{
         types: [l]
       }, {
@@ -3597,14 +4054,16 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     reverse: {
-      _func: t => {
-        const e = u(t[0]);
+      _func: function _func(t) {
+        var e = u(t[0]);
         if (i(e) === l) {
-          let _t21 = "";
-          for (let _r4 = e.length - 1; _r4 >= 0; _r4 -= 1) _t21 += e[_r4];
-          return _t21;
+          var _t22 = "";
+          for (var _r11 = e.length - 1; _r11 >= 0; _r11 -= 1) {
+            _t22 += e[_r11];
+          }
+          return _t22;
         }
-        const r = t[0].slice(0);
+        var r = t[0].slice(0);
         return r.reverse(), r;
       },
       _signature: [{
@@ -3612,20 +4071,24 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     toArray: {
-      _func: t => i(t[0]) === h ? t[0] : [t[0]],
+      _func: function _func(t) {
+        return i(t[0]) === h ? t[0] : [t[0]];
+      },
       _signature: [{
         types: [a]
       }]
     },
     toString: {
-      _func: t => i(t[0]) === l ? t[0] : JSON.stringify(t[0]),
+      _func: function _func(t) {
+        return i(t[0]) === l ? t[0] : JSON.stringify(t[0]);
+      },
       _signature: [{
         types: [a]
       }]
     },
     toNumber: {
-      _func: t => {
-        const e = i(t[0]);
+      _func: function _func(t) {
+        var e = i(t[0]);
         return e === c ? t[0] : e === l ? s(t[0]) : null;
       },
       _signature: [{
@@ -3633,19 +4096,30 @@ function fe(e, r, n, s, i, u, o) {
       }]
     },
     notNull: {
-      _func: t => t.find(t => i(t) !== E) || null,
+      _func: function _func(t) {
+        return t.find(function (t) {
+          return i(t) !== E;
+        }) || null;
+      },
       _signature: [{
         types: [a],
         variadic: !0
       }]
     },
     zip: {
-      _func: t => {
-        const e = t.reduce((t, e) => Math.min(t, e.length), t[0].length),
+      _func: function _func(t) {
+        var e = t.reduce(function (t, e) {
+            return Math.min(t, e.length);
+          }, t[0].length),
           r = new Array(e);
-        for (let n = 0; n < e; n += 1) r[n] = [], t.forEach(t => {
-          r[n].push(t[n]);
-        });
+        var _loop = function _loop(_n7) {
+          r[_n7] = [], t.forEach(function (t) {
+            r[_n7].push(t[_n7]);
+          });
+        };
+        for (var _n7 = 0; _n7 < e; _n7 += 1) {
+          _loop(_n7);
+        }
         return r;
       },
       _signature: [{
@@ -3655,61 +4129,87 @@ function fe(e, r, n, s, i, u, o) {
     }
   };
 }
-const {
-  TYPE_CLASS: de,
-  TYPE_ANY: ye
-} = t;
+var de = t.TYPE_CLASS,
+  ye = t.TYPE_ANY;
 var ge = new function () {
-  let t;
+  var t;
   function e(t) {
     return null == t ? "" : t.toString();
   }
-  class r {
-    addFunctions(r, n = {}) {
-      this.functionTable = _extends$1({}, fe(this._interpreter, O, g, t, f, R, e), Ee(R, e, t, r), n);
-    }
-    _validateArgs(r, n, s, i) {
+  var r = /*#__PURE__*/function () {
+    function r() {}
+    var _proto4 = r.prototype;
+    _proto4.addFunctions = function addFunctions(_r12, n) {
+      if (n === void 0) {
+        n = {};
+      }
+      this.functionTable = _extends$1({}, fe(this._interpreter, O, g, t, f, R, e), Ee(R, e, t, _r12), n);
+    };
+    _proto4._validateArgs = function _validateArgs(_r13, n, s, i) {
       if (0 === s.length) return;
-      let u;
-      const o = s.filter(t => !t.optional).length;
+      var u;
+      var o = s.filter(function (t) {
+        return !t.optional;
+      }).length;
       if (s[s.length - 1].variadic) {
-        if (n.length < s.length) throw u = 1 === s.length ? " argument" : " arguments", new Error(`ArgumentError: ${r}() takes at least${s.length}${u} but received ${n.length}`);
-      } else if (n.length < o || n.length > s.length) throw u = 1 === s.length ? " argument" : " arguments", new Error(`ArgumentError: ${r}() takes ${s.length}${u} but received ${n.length}`);
+        if (n.length < s.length) throw u = 1 === s.length ? " argument" : " arguments", new Error("ArgumentError: " + _r13 + "() takes at least" + s.length + u + " but received " + n.length);
+      } else if (n.length < o || n.length > s.length) throw u = 1 === s.length ? " argument" : " arguments", new Error("ArgumentError: " + _r13 + "() takes " + s.length + u + " but received " + n.length);
       if (!i) return;
-      let c, a;
-      const l = Math.min(s.length, n.length);
-      for (let _i = 0; _i < l; _i += 1) c = s[_i].types, h = n[_i], _ = void 0, c.includes(de) && null !== (_ = h) && !Array.isArray(_) && "Object" !== _.constructor.name || c.includes(ye) || (a = d(n[_i]), n[_i] = y(a, c, n[_i], r, t, e));
+      var c, a;
+      var l = Math.min(s.length, n.length);
+      for (var _i3 = 0; _i3 < l; _i3 += 1) {
+        c = s[_i3].types, h = n[_i3], _ = void 0, c.includes(de) && null !== (_ = h) && !Array.isArray(_) && "Object" !== _.constructor.name || c.includes(ye) || (a = d(n[_i3]), n[_i3] = y(a, c, n[_i3], _r13, t, e));
+      }
       var h, _;
+    };
+    _proto4.callFunction = function callFunction(t, e, _r14, n, s) {
+      if (s === void 0) {
+        s = !0;
+      }
+      if (!Object.prototype.hasOwnProperty.call(this.functionTable, t)) throw new Error("Unknown function: " + t + "()");
+      var i = this.functionTable[t];
+      return this._validateArgs(t, e, i._signature, s), i._func.call(this, e, _r14, n);
+    };
+    return r;
+  }();
+  this.compile = function (t, e, r) {
+    if (e === void 0) {
+      e = [];
     }
-    callFunction(t, e, r, n, s = !0) {
-      if (!Object.prototype.hasOwnProperty.call(this.functionTable, t)) throw new Error(`Unknown function: ${t}()`);
-      const i = this.functionTable[t];
-      return this._validateArgs(t, e, i._signature, s), i._func.call(this, e, r, n);
+    if (r === void 0) {
+      r = [];
     }
-  }
-  this.compile = function (t, e = [], r = []) {
-    let n;
+    var n;
     try {
       n = new pe(e).parse(t, r);
     } catch (t) {
       throw r.push(t.toString()), t;
     }
     return n;
-  }, this.search = function (n, s, i, u, o, c = [], a = "en-US") {
-    const l = new r(u);
-    l.debug = c, t = function (t, e = []) {
-      return r => {
-        const n = R(r);
+  }, this.search = function (n, s, i, u, o, c, a) {
+    if (c === void 0) {
+      c = [];
+    }
+    if (a === void 0) {
+      a = "en-US";
+    }
+    var l = new r(u);
+    l.debug = c, t = function (t, e) {
+      if (e === void 0) {
+        e = [];
+      }
+      return function (r) {
+        var n = R(r);
         if (null === n) return null;
         if (n instanceof Array) return e.push("Converted array to zero"), 0;
-        const s = typeof n;
+        var s = typeof n;
         return "number" === s ? n : "string" === s ? t(n, e) : "boolean" === s ? n ? 1 : 0 : (e.push("Converted object to zero"), 0);
       };
-    }(o || (t => {
-      const e = +t;
+    }(o || function (t) {
+      var e = +t;
       return Number.isNaN(e) ? 0 : e;
-    }), c);
-    const h = new k(l, i, t, e, c, a);
+    }, c);
+    var h = new k(l, i, t, e, c, a);
     l._interpreter = h, l.addFunctions(c, u);
     try {
       return h.search(n, s);
@@ -3718,15 +4218,50 @@ var ge = new function () {
     }
   }, this.strictDeepEqual = N;
 }();
-class Oe {
-  constructor(t, e = {}, r = null, n = [], s = [], i = "en-US") {
+var Oe = /*#__PURE__*/function () {
+  function Oe(t, e, r, n, s, i) {
+    if (e === void 0) {
+      e = {};
+    }
+    if (r === void 0) {
+      r = null;
+    }
+    if (n === void 0) {
+      n = [];
+    }
+    if (s === void 0) {
+      s = [];
+    }
+    if (i === void 0) {
+      i = "en-US";
+    }
     this.expression = t, this.customFunctions = e, this.stringToNumber = r, this.node = ge.compile(t, n, s), this.debug = s, this.language = i;
   }
-  search(t, e) {
+  var _proto5 = Oe.prototype;
+  _proto5.search = function search(t, e) {
     return ge.search(this.node, t, e, _extends$1({}, this.customFunctions), this.stringToNumber, this.debug, this.language);
-  }
-}
+  };
+  return Oe;
+}();
 
+function _catch(body, recover) {
+  try {
+    var result = body();
+  } catch (e) {
+    return recover(e);
+  }
+  if (result && result.then) {
+    return result.then(void 0, recover);
+  }
+  return result;
+} /*
+   * Copyright 2022 Adobe, Inc.
+   *
+   * Your access and use of this software is governed by the Adobe Customer Feedback Program Terms and Conditions or other Beta License Agreement signed by your employer and Adobe, Inc.. This software is NOT open source and may not be used without one of the foregoing licenses. Even with a foregoing license, your access and use of this file is limited to the earlier of (a) 180 days, (b) general availability of the product(s) which utilize this software (i.e. AEM Forms), (c) January 1, 2023, (d) Adobe providing notice to you that you may no longer use the software or that your beta trial has otherwise ended.
+   *
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+   */
+/** Constant for all properties which can be translated based on `adaptive form specification` */
 function _extends() {
   _extends = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -3741,6 +4276,29 @@ function _extends() {
   };
   return _extends.apply(this, arguments);
 }
+var processFile = function processFile(file) {
+  try {
+    var name = file.name,
+      size = file.size,
+      type = file.type;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    return Promise.resolve(new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function (event) {
+        resolve(new FileObject({
+          // @ts-ignore
+          data: addNameToDataURL(event.target.result, name),
+          type: type,
+          name: name,
+          size: size
+        }));
+      };
+      reader.readAsDataURL(file.data);
+    }));
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
 
 /*
  * Copyright 2022 Adobe, Inc.
@@ -3752,13 +4310,16 @@ function _extends() {
 /**
  * Implementation of {@link IValidationError | Validation Error} interface
  */
-class ValidationError {
-  constructor(fieldName = '', errorMessages = []) {
-    this.errorMessages = errorMessages;
-    this.fieldName = fieldName;
+var ValidationError = function ValidationError(fieldName, errorMessages) {
+  if (fieldName === void 0) {
+    fieldName = '';
   }
-}
-
+  if (errorMessages === void 0) {
+    errorMessages = [];
+  }
+  this.errorMessages = errorMessages;
+  this.fieldName = fieldName;
+};
 /*
  * Copyright 2022 Adobe, Inc.
  *
@@ -3768,13 +4329,15 @@ class ValidationError {
  */
 // const primitives = ['string', 'boolean', 'number'];
 // const containers = ['object', 'array', 'number'];
-const objToMap = o => new Map(Object.entries(o));
-const stringViewTypes = objToMap({
+var objToMap = function objToMap(o) {
+  return new Map(Object.entries(o));
+};
+var stringViewTypes = objToMap({
   'date': 'date-input',
   'data-url': 'file-input',
   'binary': 'file-input'
 });
-const typeToViewTypes = objToMap({
+var typeToViewTypes = objToMap({
   'number': 'number-input',
   'boolean': 'checkbox',
   'object': 'panel',
@@ -3782,16 +4345,16 @@ const typeToViewTypes = objToMap({
   'file': 'file-input',
   'file[]': 'file-input'
 });
-const arrayTypes = ['string[]', 'boolean[]', 'number[]', 'array'];
+var arrayTypes = ['string[]', 'boolean[]', 'number[]', 'array'];
 /**
  * Returns the default view type for a given form field object based on `adaptive form specification`
  * @param schema    schema item for which default view type is to found
  * @returns default view type
  */
-const defaultFieldTypes = schema => {
-  const type = schema.type || 'string';
+var defaultFieldTypes = function defaultFieldTypes(schema) {
+  var type = schema.type || 'string';
   if ('enum' in schema) {
-    const enums = schema.enum;
+    var enums = schema["enum"];
     if (enums.length > 2 || arrayTypes.indexOf(type) > -1) {
       return 'drop-down';
     } else {
@@ -3811,11 +4374,11 @@ const defaultFieldTypes = schema => {
  * @param def       default value
  * @typeParam P     type for the default value
  */
-const getProperty = (data, key, def) => {
+var getProperty = function getProperty(data, key, def) {
   if (key in data) {
     return data[key];
   } else if (!key.startsWith(':')) {
-    const prefixedKey = `:${key}`;
+    var prefixedKey = ":" + key;
     if (prefixedKey in data) {
       return data[prefixedKey];
     }
@@ -3827,7 +4390,7 @@ const getProperty = (data, key, def) => {
  * @param item  input item it could be {@link FieldsetJson | Fieldset} or {@link FieldJson | Field}
  * @returns `true` if `item` is a form file attachment, `false` otherwise
  */
-const isFile = function isFile(item) {
+var isFile = function isFile(item) {
   return (item == null ? void 0 : item.type) === 'file' || (item == null ? void 0 : item.type) === 'file[]' || ((item == null ? void 0 : item.type) === 'string' || (item == null ? void 0 : item.type) === 'string[]') && ((item == null ? void 0 : item.format) === 'binary' || (item == null ? void 0 : item.format) === 'data-url');
 };
 /**
@@ -3835,8 +4398,8 @@ const isFile = function isFile(item) {
  * @param item  input item it could be {@link FieldsetJson | Fieldset} or {@link FieldJson | Field}
  * @returns `true` if `item` is a form check box, `false` otherwise
  */
-const isCheckbox = function isCheckbox(item) {
-  const fieldType = (item == null ? void 0 : item.fieldType) || defaultFieldTypes(item);
+var isCheckbox = function isCheckbox(item) {
+  var fieldType = (item == null ? void 0 : item.fieldType) || defaultFieldTypes(item);
   return fieldType === 'checkbox';
 };
 /**
@@ -3844,8 +4407,8 @@ const isCheckbox = function isCheckbox(item) {
  * @param item  input item it could be {@link FieldsetJson | Fieldset} or {@link FieldJson | Field}
  * @returns `true` if `item` is a form check box group, `false` otherwise
  */
-const isCheckboxGroup = function isCheckboxGroup(item) {
-  const fieldType = (item == null ? void 0 : item.fieldType) || defaultFieldTypes(item);
+var isCheckboxGroup = function isCheckboxGroup(item) {
+  var fieldType = (item == null ? void 0 : item.fieldType) || defaultFieldTypes(item);
   return fieldType === 'checkbox-group';
 };
 /**
@@ -3853,8 +4416,8 @@ const isCheckboxGroup = function isCheckboxGroup(item) {
  * @param item  input item it could be {@link FieldsetJson | Fieldset} or {@link FieldJson | Field}
  * @returns `true` if `item` is a form check box group, `false` otherwise
  */
-const isDateField = function isDateField(item) {
-  const fieldType = (item == null ? void 0 : item.fieldType) || defaultFieldTypes(item);
+var isDateField = function isDateField(item) {
+  var fieldType = (item == null ? void 0 : item.fieldType) || defaultFieldTypes(item);
   return fieldType === 'text-input' && (item == null ? void 0 : item.format) === 'date' || fieldType === 'date-input';
 };
 /**
@@ -3864,13 +4427,17 @@ const isDateField = function isDateField(item) {
  * @private
  */
 function deepClone(obj, idGenerator) {
-  let result;
+  var result;
   if (obj instanceof Array) {
     result = [];
-    result = obj.map(x => deepClone(x, idGenerator));
+    result = obj.map(function (x) {
+      return deepClone(x, idGenerator);
+    });
   } else if (typeof obj === 'object' && obj !== null) {
     result = {};
-    Object.entries(obj).forEach(([key, value]) => {
+    Object.entries(obj).forEach(function (_ref) {
+      var key = _ref[0],
+        value = _ref[1];
       result[key] = deepClone(value, idGenerator);
     });
   } else {
@@ -3887,7 +4454,7 @@ function deepClone(obj, idGenerator) {
  * @param obj object to prettify
  * @return json string
  */
-const jsonString = obj => {
+var jsonString = function jsonString(obj) {
   return JSON.stringify(obj, null, 2);
 };
 
@@ -3902,101 +4469,138 @@ const jsonString = obj => {
  * Implementation of generic event
  * @private
  */
-class ActionImpl {
+var ActionImpl = /*#__PURE__*/function () {
   //@ts-ignore
 
-  constructor(payload, type, _metadata) {
+  function ActionImpl(payload, type, _metadata) {
     this._metadata = _metadata;
     this._payload = payload;
     this._type = type;
   }
-  get type() {
-    return this._type;
-  }
-  get payload() {
-    return this._payload;
-  }
-  get metadata() {
-    return this._metadata;
-  }
-  get target() {
-    return this._target;
-  }
-  get isCustomEvent() {
-    return false;
-  }
-  payloadToJson() {
+  var _proto = ActionImpl.prototype;
+  _proto.payloadToJson = function payloadToJson() {
     return this.payload;
-  }
-  toJson() {
+  };
+  _proto.toJson = function toJson() {
     return {
       payload: this.payloadToJson(),
       type: this.type,
       isCustomEvent: this.isCustomEvent
     };
-  }
-  toString() {
+  };
+  _proto.toString = function toString() {
     return JSON.stringify(this.toJson());
-  }
-}
+  };
+  _createClass(ActionImpl, [{
+    key: "type",
+    get: function get() {
+      return this._type;
+    }
+  }, {
+    key: "payload",
+    get: function get() {
+      return this._payload;
+    }
+  }, {
+    key: "metadata",
+    get: function get() {
+      return this._metadata;
+    }
+  }, {
+    key: "target",
+    get: function get() {
+      return this._target;
+    }
+  }, {
+    key: "isCustomEvent",
+    get: function get() {
+      return false;
+    }
+  }]);
+  return ActionImpl;
+}();
 /**
  * Implementation of `change` event. The change event is triggered on the field whenever the value of the field is changed
  */
-class Change extends ActionImpl {
+var Change = /*#__PURE__*/function (_ActionImpl) {
+  _inheritsLoose(Change, _ActionImpl);
   /**
    * @constructor
    * @param [payload] event payload
    * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
    */
-  constructor(payload, dispatch = false) {
-    super(payload, 'change', {
-      dispatch
-    });
+  function Change(payload, dispatch) {
+    if (dispatch === void 0) {
+      dispatch = false;
+    }
+    return _ActionImpl.call(this, payload, 'change', {
+      dispatch: dispatch
+    }) || this;
   }
-  withAdditionalChange(change) {
+  var _proto2 = Change.prototype;
+  _proto2.withAdditionalChange = function withAdditionalChange(change) {
     return new Change(this.payload.changes.concat(change.payload.changes), this.metadata);
-  }
-}
+  };
+  return Change;
+}(ActionImpl);
 /**
  * Implementation of `invalid` event. The invalid event is triggered when a Field’s value becomes invalid after a change event or whenever its value property change
  */
-class Invalid extends ActionImpl {
+var Invalid = /*#__PURE__*/function (_ActionImpl2) {
+  _inheritsLoose(Invalid, _ActionImpl2);
   /**
    * @constructor
    * @param [payload] event payload
    */
-  constructor(payload = {}) {
-    super(payload, 'invalid', {});
+  function Invalid(payload) {
+    if (payload === void 0) {
+      payload = {};
+    }
+    return _ActionImpl2.call(this, payload, 'invalid', {}) || this;
   }
-}
+  return Invalid;
+}(ActionImpl);
 /**
  * Implementation of `valid` event. The valid event is triggered whenever the field’s valid state is changed from invalid to valid.
  */
-class Valid extends ActionImpl {
+var Valid = /*#__PURE__*/function (_ActionImpl3) {
+  _inheritsLoose(Valid, _ActionImpl3);
   /**
    * @constructor
    * @param [payload] event payload
    */
-  constructor(payload = {}) {
-    super(payload, 'valid', {});
+  function Valid(payload) {
+    if (payload === void 0) {
+      payload = {};
+    }
+    return _ActionImpl3.call(this, payload, 'valid', {}) || this;
   }
-}
+  return Valid;
+}(ActionImpl);
 /**
  * Implementation of an ExecuteRule event.
  * @private
  */
-class ExecuteRule extends ActionImpl {
+var ExecuteRule = /*#__PURE__*/function (_ActionImpl4) {
+  _inheritsLoose(ExecuteRule, _ActionImpl4);
   /**
    * @constructor
    * @param [payload] event payload
    * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
    */
-  constructor(payload = {}, dispatch = false) {
-    super(payload, 'executeRule', {
-      dispatch
-    });
+  function ExecuteRule(payload, dispatch) {
+    if (payload === void 0) {
+      payload = {};
+    }
+    if (dispatch === void 0) {
+      dispatch = false;
+    }
+    return _ActionImpl4.call(this, payload, 'executeRule', {
+      dispatch: dispatch
+    }) || this;
   }
-}
+  return ExecuteRule;
+}(ActionImpl);
 /**
  * Creates a change event
  * @param propertyName  name of the form field property
@@ -4004,73 +4608,90 @@ class ExecuteRule extends ActionImpl {
  * @param prevValue     previous value
  * @returns {@link Change} change event
  */
-const propertyChange = (propertyName, currentValue, prevValue) => {
+var propertyChange = function propertyChange(propertyName, currentValue, prevValue) {
   return new Change({
     changes: [{
-      propertyName,
-      currentValue,
-      prevValue
+      propertyName: propertyName,
+      currentValue: currentValue,
+      prevValue: prevValue
     }]
   });
 };
 /**
  * Implementation of `initialize` event. The event is triggered on all the fields when the form initialisation is complete
  */
-class Initialize extends ActionImpl {
+var Initialize = /*#__PURE__*/function (_ActionImpl5) {
+  _inheritsLoose(Initialize, _ActionImpl5);
   /**
    * @constructor
    * @param [payload] event payload
    * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
    */
-  constructor(payload, dispatch = false) {
-    super(payload, 'initialize', {
-      dispatch
-    });
+  function Initialize(payload, dispatch) {
+    if (dispatch === void 0) {
+      dispatch = false;
+    }
+    return _ActionImpl5.call(this, payload, 'initialize', {
+      dispatch: dispatch
+    }) || this;
   }
-}
+  return Initialize;
+}(ActionImpl);
 /**
  * Implementation of `load` event. The event is when the form initialization is complete
  */
-class FormLoad extends ActionImpl {
+var FormLoad = /*#__PURE__*/function (_ActionImpl6) {
+  _inheritsLoose(FormLoad, _ActionImpl6);
   /**
    * @constructor
    */
-  constructor() {
-    super({}, 'load', {
+  function FormLoad() {
+    return _ActionImpl6.call(this, {}, 'load', {
       dispatch: false
-    });
+    }) || this;
   }
-}
+  return FormLoad;
+}(ActionImpl);
 /**
  * Implementation of `click` event. The event is triggered when user clicks on an element.
  */
-class Click extends ActionImpl {
+var Click = /*#__PURE__*/function (_ActionImpl7) {
+  _inheritsLoose(Click, _ActionImpl7);
   /**
    * @constructor
    * @param [payload] event payload
    * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
    */
-  constructor(payload, dispatch = false) {
-    super(payload, 'click', {
-      dispatch
-    });
+  function Click(payload, dispatch) {
+    if (dispatch === void 0) {
+      dispatch = false;
+    }
+    return _ActionImpl7.call(this, payload, 'click', {
+      dispatch: dispatch
+    }) || this;
   }
-}
+  return Click;
+}(ActionImpl);
 /**
  * Implementation of `blur` event. The event is triggered when the element loses focus.
  */
-class Blur extends ActionImpl {
+var Blur = /*#__PURE__*/function (_ActionImpl8) {
+  _inheritsLoose(Blur, _ActionImpl8);
   /**
    * @constructor
    * @param [payload] event payload
    * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
    */
-  constructor(payload, dispatch = false) {
-    super(payload, 'blur', {
-      dispatch
-    });
+  function Blur(payload, dispatch) {
+    if (dispatch === void 0) {
+      dispatch = false;
+    }
+    return _ActionImpl8.call(this, payload, 'blur', {
+      dispatch: dispatch
+    }) || this;
   }
-}
+  return Blur;
+}(ActionImpl);
 /**
  * Implementation of `ValidationComplete` event. The ValidationComplete event is triggered once validation is completed
  * on the form.
@@ -4083,92 +4704,118 @@ class Blur extends ActionImpl {
  * }
  * ```
  */
-class ValidationComplete extends ActionImpl {
+var ValidationComplete = /*#__PURE__*/function (_ActionImpl9) {
+  _inheritsLoose(ValidationComplete, _ActionImpl9);
   /**
    * @constructor
    * @param [payload] event payload (ie) list of {@link ValidationError | validation errors}
    * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
    */
-  constructor(payload, dispatch = false) {
-    super(payload, 'validationComplete', {
-      dispatch
-    });
+  function ValidationComplete(payload, dispatch) {
+    if (dispatch === void 0) {
+      dispatch = false;
+    }
+    return _ActionImpl9.call(this, payload, 'validationComplete', {
+      dispatch: dispatch
+    }) || this;
   }
-}
+  return ValidationComplete;
+}(ActionImpl);
 /**
  * Implementation of `submit` event. The submit event is triggered on the Form.
  * To trigger the submit event, submit function needs to be invoked or one can invoke dispatchEvent API.
  */
-class Submit extends ActionImpl {
+var Submit = /*#__PURE__*/function (_ActionImpl11) {
+  _inheritsLoose(Submit, _ActionImpl11);
   /**
    * @constructor
    * @param [payload] event payload
    * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
    */
-  constructor(payload, dispatch = false) {
-    super(payload, 'submit', {
-      dispatch
-    });
+  function Submit(payload, dispatch) {
+    if (dispatch === void 0) {
+      dispatch = false;
+    }
+    return _ActionImpl11.call(this, payload, 'submit', {
+      dispatch: dispatch
+    }) || this;
   }
-}
+  return Submit;
+}(ActionImpl);
 /**
  * Implementation of `fieldChanged` event. The field changed event is triggered on the field which it has changed.
  */
-class FieldChanged extends ActionImpl {
-  constructor(changes, field) {
-    super({
-      field,
-      changes
-    }, 'fieldChanged');
+var FieldChanged = /*#__PURE__*/function (_ActionImpl12) {
+  _inheritsLoose(FieldChanged, _ActionImpl12);
+  function FieldChanged(changes, field) {
+    return _ActionImpl12.call(this, {
+      field: field,
+      changes: changes
+    }, 'fieldChanged') || this;
   }
-}
+  return FieldChanged;
+}(ActionImpl);
 /**
  * Implementation of `custom event`.
  */
-class CustomEvent$1 extends ActionImpl {
+var CustomEvent$1 = /*#__PURE__*/function (_ActionImpl13) {
+  _inheritsLoose(CustomEvent, _ActionImpl13);
   /**
    * @constructor
    * @param [eventName] name of the event
    * @param [payload] event payload
    * @param [dispatch] true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
    */
-  constructor(eventName, payload = {}, dispatch = false) {
-    super(payload, eventName, {
-      dispatch
-    });
+  function CustomEvent(eventName, payload, dispatch) {
+    if (payload === void 0) {
+      payload = {};
+    }
+    if (dispatch === void 0) {
+      dispatch = false;
+    }
+    return _ActionImpl13.call(this, payload, eventName, {
+      dispatch: dispatch
+    }) || this;
   }
   /**
    * Defines if the event is custom
    */
-  get isCustomEvent() {
-    return true;
-  }
-}
+  _createClass(CustomEvent, [{
+    key: "isCustomEvent",
+    get: function get() {
+      return true;
+    }
+  }]);
+  return CustomEvent;
+}(ActionImpl);
 /**
  * Implementation of `addItem` event. The event is triggered on a panel to add a new instance of items inside it.
  */
-class AddItem extends ActionImpl {
+var AddItem = /*#__PURE__*/function (_ActionImpl14) {
+  _inheritsLoose(AddItem, _ActionImpl14);
   /**
    * @constructor
    * @param [payload] event payload
    */
-  constructor(payload) {
-    super(payload, 'addItem');
+  function AddItem(payload) {
+    return _ActionImpl14.call(this, payload, 'addItem') || this;
   }
-}
+  return AddItem;
+}(ActionImpl);
 /**
  * Implementation of `removeItem` event. The event is triggered on a panel to remove an instance of items inside it.
  */
-class RemoveItem extends ActionImpl {
+var RemoveItem = /*#__PURE__*/function (_ActionImpl15) {
+  _inheritsLoose(RemoveItem, _ActionImpl15);
   /**
    * @constructor
    * @param [payload] event payload
    */
-  constructor(payload) {
-    super(payload, 'removeItem');
+  function RemoveItem(payload) {
+    return _ActionImpl15.call(this, payload, 'removeItem') || this;
   }
-}
-
+  return RemoveItem;
+}(ActionImpl);
 /*
  * Copyright 2022 Adobe, Inc.
  *
@@ -4179,46 +4826,59 @@ class RemoveItem extends ActionImpl {
 /**
  * @private
  */
-class DataValue {
-  constructor($_name, $_value, $_type = typeof $_value) {
+var DataValue = /*#__PURE__*/function () {
+  function DataValue($_name, $_value, $_type) {
+    if ($_type === void 0) {
+      $_type = typeof $_value;
+    }
     this.$_fields = [];
     this.$_name = $_name;
     this.$_value = $_value;
     this.$_type = $_type;
   }
-  valueOf() {
+  var _proto3 = DataValue.prototype;
+  _proto3.valueOf = function valueOf() {
     return this.$_value;
-  }
-  get $name() {
-    return this.$_name;
-  }
-  get $value() {
-    return this.$_value;
-  }
-  setValue(typedValue, originalValue, fromField) {
+  };
+  _proto3.setValue = function setValue(typedValue, originalValue, fromField) {
     this.$_value = typedValue;
-    this.$_fields.forEach(x => {
+    this.$_fields.forEach(function (x) {
       if (fromField !== x) {
         x.value = originalValue;
       }
     });
-  }
-  get $type() {
-    return this.$_type;
-  }
-  $bindToField(field) {
+  };
+  _proto3.$bindToField = function $bindToField(field) {
     if (this.$_fields.indexOf(field) === -1) {
       this.$_fields.push(field);
     }
-  }
-  $convertToDataValue() {
+  };
+  _proto3.$convertToDataValue = function $convertToDataValue() {
     return this;
-  }
-  get $isDataGroup() {
-    return false;
-  }
-}
-
+  };
+  _createClass(DataValue, [{
+    key: "$name",
+    get: function get() {
+      return this.$_name;
+    }
+  }, {
+    key: "$value",
+    get: function get() {
+      return this.$_value;
+    }
+  }, {
+    key: "$type",
+    get: function get() {
+      return this.$_type;
+    }
+  }, {
+    key: "$isDataGroup",
+    get: function get() {
+      return false;
+    }
+  }]);
+  return DataValue;
+}();
 /*
  * Copyright 2022 Adobe, Inc.
  *
@@ -4226,34 +4886,39 @@ class DataValue {
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-const value = Symbol('NullValue');
-class NullDataValueClass extends DataValue {
-  constructor() {
-    super('', value, 'null');
+var value = Symbol('NullValue');
+var NullDataValueClass = /*#__PURE__*/function (_DataValue) {
+  _inheritsLoose(NullDataValueClass, _DataValue);
+  function NullDataValueClass() {
+    return _DataValue.call(this, '', value, 'null') || this;
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setValue() {}
+  var _proto4 = NullDataValueClass.prototype;
+  _proto4.setValue = function setValue() {}
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  $bindToField() {}
-  $length() {
+  ;
+  _proto4.$bindToField = function $bindToField() {};
+  _proto4.$length = function $length() {
     return 0;
-  }
-  $convertToDataValue() {
+  };
+  _proto4.$convertToDataValue = function $convertToDataValue() {
     return this;
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  $addDataNode() {}
+  ;
+  _proto4.$addDataNode = function $addDataNode() {}
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  $removeDataNode() {}
-  $getDataNode() {
+  ;
+  _proto4.$removeDataNode = function $removeDataNode() {};
+  _proto4.$getDataNode = function $getDataNode() {
     return this;
-  }
-  $containsDataNode() {
+  };
+  _proto4.$containsDataNode = function $containsDataNode() {
     return false;
-  }
-}
-//@ts-ignore
-const NullDataValue = new NullDataValueClass();
+  };
+  return NullDataValueClass;
+}(DataValue); //@ts-ignore
+var NullDataValue = new NullDataValueClass();
 
 /*
  * Copyright 2022 Adobe, Inc.
@@ -4265,46 +4930,46 @@ const NullDataValue = new NullDataValueClass();
 /**
  * @private
  */
-class DataGroup extends DataValue {
-  createEntry(key, value) {
-    const t = value instanceof Array ? 'array' : typeof value;
+var DataGroup = /*#__PURE__*/function (_DataValue2) {
+  _inheritsLoose(DataGroup, _DataValue2);
+  var _proto5 = DataGroup.prototype;
+  _proto5.createEntry = function createEntry(key, value) {
+    var t = value instanceof Array ? 'array' : typeof value;
     if (typeof value === 'object' && value != null) {
       return new DataGroup(key, value, t);
     } else {
       return new DataValue(key, value, t);
     }
-  }
-  constructor(_name, _value, _type = typeof _value) {
-    super(_name, _value, _type);
+  };
+  function DataGroup(_name, _value, _type) {
+    var _this;
+    if (_type === void 0) {
+      _type = typeof _value;
+    }
+    _this = _DataValue2.call(this, _name, _value, _type) || this;
     if (_value instanceof Array) {
-      this.$_items = _value.map((value, index) => {
-        return this.createEntry(index, value);
+      _this.$_items = _value.map(function (value, index) {
+        return _this.createEntry(index, value);
       });
     } else {
-      this.$_items = Object.fromEntries(Object.entries(_value).map(([key, value]) => {
-        return [key, this.createEntry(key, value)];
+      _this.$_items = Object.fromEntries(Object.entries(_value).map(function (_ref2) {
+        var key = _ref2[0],
+          value = _ref2[1];
+        return [key, _this.createEntry(key, value)];
       }));
     }
+    return _this;
   }
-  get $value() {
-    if (this.$type === 'array') {
-      return Object.values(this.$_items).filter(x => typeof x !== 'undefined').map(x => x.$value);
-    } else {
-      return Object.fromEntries(Object.values(this.$_items).filter(x => typeof x !== 'undefined').map(x => {
-        return [x.$name, x.$value];
-      }));
-    }
-  }
-  get $length() {
-    return Object.entries(this.$_items).length;
-  }
-  $convertToDataValue() {
+  _proto5.$convertToDataValue = function $convertToDataValue() {
     return new DataValue(this.$name, this.$value, this.$type);
-  }
-  $addDataNode(name, value, override = false) {
+  };
+  _proto5.$addDataNode = function $addDataNode(name, value, override) {
+    if (override === void 0) {
+      override = false;
+    }
     if (value !== NullDataValue) {
       if (this.$type === 'array') {
-        const index = name;
+        var index = name;
         if (!override) {
           this.$_items.splice(index, 0, value);
         } else {
@@ -4314,24 +4979,49 @@ class DataGroup extends DataValue {
         this.$_items[name] = value;
       }
     }
-  }
-  $removeDataNode(name) {
+  };
+  _proto5.$removeDataNode = function $removeDataNode(name) {
     //@ts-ignore not calling delete
     this.$_items[name] = undefined;
-  }
-  $getDataNode(name) {
+  };
+  _proto5.$getDataNode = function $getDataNode(name) {
     if (this.$_items.hasOwnProperty(name)) {
       return this.$_items[name];
     }
-  }
-  $containsDataNode(name) {
+  };
+  _proto5.$containsDataNode = function $containsDataNode(name) {
     return this.$_items.hasOwnProperty(name) && typeof this.$_items[name] !== 'undefined';
-  }
-  get $isDataGroup() {
-    return true;
-  }
-}
-
+  };
+  _createClass(DataGroup, [{
+    key: "$value",
+    get: function get() {
+      if (this.$type === 'array') {
+        return Object.values(this.$_items).filter(function (x) {
+          return typeof x !== 'undefined';
+        }).map(function (x) {
+          return x.$value;
+        });
+      } else {
+        return Object.fromEntries(Object.values(this.$_items).filter(function (x) {
+          return typeof x !== 'undefined';
+        }).map(function (x) {
+          return [x.$name, x.$value];
+        }));
+      }
+    }
+  }, {
+    key: "$length",
+    get: function get() {
+      return Object.entries(this.$_items).length;
+    }
+  }, {
+    key: "$isDataGroup",
+    get: function get() {
+      return true;
+    }
+  }]);
+  return DataGroup;
+}(DataValue);
 /*
  * Copyright 2022 Adobe, Inc.
  *
@@ -4339,42 +5029,42 @@ class DataGroup extends DataValue {
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-const TOK_DOT = 'DOT';
-const TOK_IDENTIFIER = 'Identifier';
-const TOK_GLOBAL = 'Global';
-const TOK_BRACKET = 'bracket';
-const TOK_NUMBER = 'Number';
-const globalStartToken = '$';
-const identifier = (value, start) => {
+var TOK_DOT = 'DOT';
+var TOK_IDENTIFIER = 'Identifier';
+var TOK_GLOBAL = 'Global';
+var TOK_BRACKET = 'bracket';
+var TOK_NUMBER = 'Number';
+var globalStartToken = '$';
+var identifier = function identifier(value, start) {
   return {
     type: TOK_IDENTIFIER,
-    value,
-    start
+    value: value,
+    start: start
   };
 };
-const bracket = (value, start) => {
+var bracket = function bracket(value, start) {
   return {
     type: TOK_BRACKET,
-    value,
-    start
+    value: value,
+    start: start
   };
 };
-const global$ = () => {
+var global$ = function global$() {
   return {
     type: TOK_GLOBAL,
     start: 0,
     value: globalStartToken
   };
 };
-const isAlphaNum = function isAlphaNum(ch) {
+var isAlphaNum = function isAlphaNum(ch) {
   return ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch >= '0' && ch <= '9' || ch === '_';
 };
-const isGlobal = (prev, stream, pos) => {
+var isGlobal = function isGlobal(prev, stream, pos) {
   // global tokens occur only at the start of an expression
   return prev === null && stream[pos] === globalStartToken;
 };
-const isIdentifier = (stream, pos) => {
-  const ch = stream[pos];
+var isIdentifier = function isIdentifier(stream, pos) {
+  var ch = stream[pos];
   // $ is special -- it's allowed to be part of an identifier if it's the first character
   if (ch === '$') {
     return stream.length > pos && isAlphaNum(stream[pos + 1]);
@@ -4382,35 +5072,36 @@ const isIdentifier = (stream, pos) => {
   // return whether character 'isAlpha'
   return ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch === '_';
 };
-const isNum = ch => {
+var isNum = function isNum(ch) {
   return ch >= '0' && ch <= '9';
 };
-class Tokenizer {
-  constructor(stream) {
+var Tokenizer = /*#__PURE__*/function () {
+  function Tokenizer(stream) {
     this._tokens = [];
     this._result_tokens = [];
     this.stream = stream;
     this._current = 0;
   }
-  _consumeGlobal() {
+  var _proto6 = Tokenizer.prototype;
+  _proto6._consumeGlobal = function _consumeGlobal() {
     this._current += 1;
     return global$();
-  }
-  _consumeUnquotedIdentifier(stream) {
-    const start = this._current;
+  };
+  _proto6._consumeUnquotedIdentifier = function _consumeUnquotedIdentifier(stream) {
+    var start = this._current;
     this._current += 1;
     while (this._current < stream.length && isAlphaNum(stream[this._current])) {
       this._current += 1;
     }
     return identifier(stream.slice(start, this._current), start);
-  }
-  _consumeQuotedIdentifier(stream) {
-    const start = this._current;
+  };
+  _proto6._consumeQuotedIdentifier = function _consumeQuotedIdentifier(stream) {
+    var start = this._current;
     this._current += 1;
-    const maxLength = stream.length;
+    var maxLength = stream.length;
     while (stream[this._current] !== '"' && this._current < maxLength) {
       // You can escape a double quote and you can escape an escape.
-      let current = this._current;
+      var current = this._current;
       if (stream[current] === '\\' && (stream[current + 1] === '\\' || stream[current + 1] === '"')) {
         current += 2;
       } else {
@@ -4420,49 +5111,49 @@ class Tokenizer {
     }
     this._current += 1;
     return identifier(JSON.parse(stream.slice(start, this._current)), start);
-  }
-  _consumeNumber(stream) {
-    const start = this._current;
+  };
+  _proto6._consumeNumber = function _consumeNumber(stream) {
+    var start = this._current;
     this._current += 1;
-    const maxLength = stream.length;
+    var maxLength = stream.length;
     while (isNum(stream[this._current]) && this._current < maxLength) {
       this._current += 1;
     }
-    const n = stream.slice(start, this._current);
-    const value = parseInt(n, 10);
+    var n = stream.slice(start, this._current);
+    var value = parseInt(n, 10);
     return {
       type: TOK_NUMBER,
-      value,
-      start
+      value: value,
+      start: start
     };
-  }
-  _consumeBracket(stream) {
-    const start = this._current;
+  };
+  _proto6._consumeBracket = function _consumeBracket(stream) {
+    var start = this._current;
     this._current += 1;
-    let value;
+    var value;
     if (isNum(stream[this._current])) {
       value = this._consumeNumber(stream).value;
     } else {
-      throw new Error(`unexpected exception at position ${this._current}. Must be a character`);
+      throw new Error("unexpected exception at position " + this._current + ". Must be a character");
     }
     if (this._current < this.stream.length && stream[this._current] !== ']') {
-      throw new Error(`unexpected exception at position ${this._current}. Must be a character`);
+      throw new Error("unexpected exception at position " + this._current + ". Must be a character");
     }
     this._current++;
     return bracket(value, start);
-  }
-  tokenize() {
-    const stream = this.stream;
+  };
+  _proto6.tokenize = function tokenize() {
+    var stream = this.stream;
     while (this._current < stream.length) {
-      const prev = this._tokens.length ? this._tokens.slice(-1)[0] : null;
+      var prev = this._tokens.length ? this._tokens.slice(-1)[0] : null;
       if (isGlobal(prev, stream, this._current)) {
-        const token = this._consumeGlobal();
+        var token = this._consumeGlobal();
         this._tokens.push(token);
         this._result_tokens.push(token);
       } else if (isIdentifier(stream, this._current)) {
-        const token = this._consumeUnquotedIdentifier(stream);
-        this._tokens.push(token);
-        this._result_tokens.push(token);
+        var _token = this._consumeUnquotedIdentifier(stream);
+        this._tokens.push(_token);
+        this._result_tokens.push(_token);
       } else if (stream[this._current] === '.' && prev != null && prev.type !== TOK_DOT) {
         this._tokens.push({
           type: TOK_DOT,
@@ -4473,39 +5164,40 @@ class Tokenizer {
       } else if (stream[this._current] === '[') {
         // No need to increment this._current.  This happens
         // in _consumeLBracket
-        const token = this._consumeBracket(stream);
-        this._tokens.push(token);
-        this._result_tokens.push(token);
+        var _token2 = this._consumeBracket(stream);
+        this._tokens.push(_token2);
+        this._result_tokens.push(_token2);
       } else if (stream[this._current] === '"') {
-        const token = this._consumeQuotedIdentifier(stream);
-        this._tokens.push(token);
-        this._result_tokens.push(token);
+        var _token3 = this._consumeQuotedIdentifier(stream);
+        this._tokens.push(_token3);
+        this._result_tokens.push(_token3);
       } else {
-        const p = Math.max(0, this._current - 2);
-        const s = Math.min(this.stream.length, this._current + 2);
-        throw new Error(`Exception at parsing stream ${this.stream.slice(p, s)}`);
+        var p = Math.max(0, this._current - 2);
+        var s = Math.min(this.stream.length, this._current + 2);
+        throw new Error("Exception at parsing stream " + this.stream.slice(p, s));
       }
     }
     return this._result_tokens;
-  }
-}
-const tokenize = stream => {
+  };
+  return Tokenizer;
+}();
+var tokenize = function tokenize(stream) {
   return new Tokenizer(stream).tokenize();
 };
-const resolveData = (data, input, create) => {
-  let tokens;
+var resolveData = function resolveData(data, input, create) {
+  var tokens;
   if (typeof input === 'string') {
     tokens = tokenize(input);
   } else {
     tokens = input;
   }
-  let result = data;
-  let i = 0;
-  const createIntermediateNode = (token, nextToken, create) => {
+  var result = data;
+  var i = 0;
+  var createIntermediateNode = function createIntermediateNode(token, nextToken, create) {
     return nextToken === null ? create : nextToken.type === TOK_BRACKET ? new DataGroup(token.value, [], 'array') : new DataGroup(token.value, {});
   };
   while (i < tokens.length && result != null) {
-    const token = tokens[i];
+    var token = tokens[i];
     if (token.type === TOK_GLOBAL) {
       result = data;
     } else if (token.type === TOK_IDENTIFIER) {
@@ -4514,32 +5206,32 @@ const resolveData = (data, input, create) => {
         if (result.$containsDataNode(token.value) && result.$getDataNode(token.value).$value !== null) {
           result = result.$getDataNode(token.value);
         } else if (create) {
-          const nextToken = i < tokens.length - 1 ? tokens[i + 1] : null;
-          const toCreate = createIntermediateNode(token, nextToken, create);
+          var nextToken = i < tokens.length - 1 ? tokens[i + 1] : null;
+          var toCreate = createIntermediateNode(token, nextToken, create);
           result.$addDataNode(token.value, toCreate);
           result = toCreate;
         } else {
           result = undefined;
         }
       } else {
-        throw new Error(`Looking for ${token.value} in ${result.$value}`);
+        throw new Error("Looking for " + token.value + " in " + result.$value);
       }
     } else if (token.type === TOK_BRACKET) {
       if (result instanceof DataGroup && result.$type === 'array') {
-        const index = token.value;
+        var index = token.value;
         if (index < result.$length) {
           //@ts-ignore
           result = result.$getDataNode(index);
         } else if (create) {
-          const nextToken = i < tokens.length - 1 ? tokens[i + 1] : null;
-          const toCreate = createIntermediateNode(token, nextToken, create);
-          result.$addDataNode(index, toCreate);
-          result = toCreate;
+          var _nextToken = i < tokens.length - 1 ? tokens[i + 1] : null;
+          var _toCreate = createIntermediateNode(token, _nextToken, create);
+          result.$addDataNode(index, _toCreate);
+          result = _toCreate;
         } else {
           result = undefined;
         }
       } else {
-        throw new Error(`Looking for index ${token.value} in non array${result.$value}`);
+        throw new Error("Looking for index " + token.value + " in non array" + result.$value);
       }
     }
     i += 1;
@@ -4558,13 +5250,15 @@ var __decorate$2 = function (decorators, target, key, desc) {
   var c = arguments.length,
     r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
     d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+    if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  }
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 /**
  * Defines the properties that are editable. These properties can be modified during rule execution.
  */
-const editableProperties = ['value', 'label', 'description', 'visible', 'enabled', 'readOnly', 'enum', 'enumNames', 'required', 'properties',
+var editableProperties = ['value', 'label', 'description', 'visible', 'enabled', 'readOnly', 'enum', 'enumNames', 'required', 'properties',
 // 'enforceEnum', // not exposed for now
 'exclusiveMinimum', 'exclusiveMaximum', 'maxLength', 'maximum', 'maxItems', 'minLength', 'minimum', 'minItems', 'step'
 // 'placeholder' // not exposed for now.
@@ -4572,49 +5266,64 @@ const editableProperties = ['value', 'label', 'description', 'visible', 'enabled
 /**
  * Defines props that are dynamic and can be changed at runtime.
  */
-const dynamicProps = [...editableProperties, 'valid', 'index', 'activeChild'];
+var dynamicProps = [].concat(editableProperties, ['valid', 'index', 'activeChild']);
 /**
  * Implementation of action with target
  * @private
  */
-class ActionImplWithTarget {
+var ActionImplWithTarget = /*#__PURE__*/function () {
   /**
    * @constructor
    * @param _action
    * @param _target
    * @private
    */
-  constructor(_action, _target) {
+  function ActionImplWithTarget(_action, _target) {
     this._action = _action;
     this._target = _target;
   }
-  get type() {
-    return this._action.type;
-  }
-  get payload() {
-    return this._action.payload;
-  }
-  get metadata() {
-    return this._action.metadata;
-  }
-  get target() {
-    return this._target;
-  }
-  get isCustomEvent() {
-    return this._action.isCustomEvent;
-  }
-  get originalAction() {
-    return this._action.originalAction;
-  }
-  toString() {
+  var _proto7 = ActionImplWithTarget.prototype;
+  _proto7.toString = function toString() {
     return this._action.toString();
-  }
-}
-const target = Symbol('target');
-const qualifiedName = Symbol('qualifiedName');
+  };
+  _createClass(ActionImplWithTarget, [{
+    key: "type",
+    get: function get() {
+      return this._action.type;
+    }
+  }, {
+    key: "payload",
+    get: function get() {
+      return this._action.payload;
+    }
+  }, {
+    key: "metadata",
+    get: function get() {
+      return this._action.metadata;
+    }
+  }, {
+    key: "target",
+    get: function get() {
+      return this._target;
+    }
+  }, {
+    key: "isCustomEvent",
+    get: function get() {
+      return this._action.isCustomEvent;
+    }
+  }, {
+    key: "originalAction",
+    get: function get() {
+      return this._action.originalAction;
+    }
+  }]);
+  return ActionImplWithTarget;
+}();
+var target = Symbol('target');
+var qualifiedName = Symbol('qualifiedName');
 function dependencyTracked() {
   return function (target, propertyKey, descriptor) {
-    const get = descriptor.get;
+    var get = descriptor.get;
     if (get != undefined) {
       descriptor.get = function () {
         // @ts-ignore
@@ -4628,19 +5337,14 @@ function dependencyTracked() {
  * Defines a generic base class which all objects of form runtime model should extend from.
  * @typeparam T type of the form object which extends from {@link BaseJson | base type}
  */
-class BaseNode {
-  //@ts-ignore
-
-  get isContainer() {
-    return false;
-  }
+var BaseNode = /*#__PURE__*/function () {
   /**
    * @constructor
    * @param params
    * @param _options
    * @private
    */
-  constructor(params,
+  function BaseNode(params,
   //@ts_ignore
   _options) {
     this._callbacks = {};
@@ -4654,28 +5358,29 @@ class BaseNode {
       id: 'id' in params ? params.id : this.form.getUniqueId()
     });
   }
-  setupRuleNode() {
+  var _proto8 = BaseNode.prototype;
+  _proto8.setupRuleNode = function setupRuleNode() {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const self = this;
+    var self = this;
     this._ruleNode = new Proxy(this.ruleNodeReference(), {
-      get: (ruleNodeReference, prop) => {
+      get: function get(ruleNodeReference, prop) {
         return self.getFromRule(ruleNodeReference, prop);
       }
     });
   }
   /**
    * @private
-   */
-  ruleNodeReference() {
+   */;
+  _proto8.ruleNodeReference = function ruleNodeReference() {
     return this;
   }
   /**
    * @private
-   */
-  getRuleNode() {
+   */;
+  _proto8.getRuleNode = function getRuleNode() {
     return this._ruleNode;
-  }
-  getFromRule(ruleNodeReference, prop) {
+  };
+  _proto8.getFromRule = function getFromRule(ruleNodeReference, prop) {
     if (prop === Symbol.toPrimitive || prop === 'valueOf' && !ruleNodeReference.hasOwnProperty('valueOf')) {
       return this.valueOf;
     } else if (prop === target) {
@@ -4690,13 +5395,15 @@ class BaseNode {
         // return only non functional properties in this object
         if (typeof this[prop] !== 'function') {
           //@ts-ignore
-          const retValue = this[prop];
+          var retValue = this[prop];
           if (retValue instanceof BaseNode) {
             //$parent
             return retValue.getRuleNode();
           } else if (retValue instanceof Array) {
             //$items
-            return retValue.map(r => r instanceof BaseNode ? r.getRuleNode() : r);
+            return retValue.map(function (r) {
+              return r instanceof BaseNode ? r.getRuleNode() : r;
+            });
           } else {
             return retValue;
           }
@@ -4712,110 +5419,56 @@ class BaseNode {
         }
       }
     }
-  }
-  get id() {
-    return this._jsonModel.id;
-  }
-  get index() {
-    return this.parent.indexOf(this);
-  }
-  get parent() {
-    return this._options.parent;
-  }
-  get type() {
-    return this._jsonModel.type;
-  }
-  get fieldType() {
-    return this._jsonModel.fieldType || 'text-input';
-  }
-  get ':type'() {
-    return this._jsonModel[':type'] || this.fieldType;
-  }
-  get name() {
-    return this._jsonModel.name;
-  }
-  get description() {
-    return this._jsonModel.description;
-  }
-  set description(d) {
-    this._setProperty('description', d);
-  }
-  get dataRef() {
-    return this._jsonModel.dataRef;
-  }
-  get visible() {
-    return this._jsonModel.visible;
-  }
-  set visible(v) {
-    if (v !== this._jsonModel.visible) {
-      const changeAction = propertyChange('visible', v, this._jsonModel.visible);
-      this._jsonModel.visible = v;
-      this.notifyDependents(changeAction);
-    }
-  }
-  get form() {
-    return this._options.form;
-  }
-  get ruleEngine() {
-    return this.form.ruleEngine;
-  }
-  get label() {
-    return this._jsonModel.label;
-  }
-  set label(l) {
-    if (l !== this._jsonModel.label) {
-      const changeAction = propertyChange('label', l, this._jsonModel.label);
-      this._jsonModel = _extends({}, this._jsonModel, {
-        label: l
-      });
-      this.notifyDependents(changeAction);
-    }
-  }
-  get uniqueItems() {
-    return this._jsonModel.uniqueItems;
-  }
+  };
   /**
    * Transparent form fields are meant only for creation of view. They are also not part of data
    */
-  isTransparent() {
+  _proto8.isTransparent = function isTransparent() {
     var _this$parent;
     // named form fields are not transparent
     // @ts-ignore
     // handling array use-case as items of array can be unnamed
-    const isNonTransparent = ((_this$parent = this.parent) == null ? void 0 : _this$parent._jsonModel.type) === 'array';
+    var isNonTransparent = ((_this$parent = this.parent) == null ? void 0 : _this$parent._jsonModel.type) === 'array';
     return !this._jsonModel.name && !isNonTransparent;
-  }
-  getState() {
+  };
+  _proto8.getState = function getState() {
     return _extends({}, this._jsonModel, {
       ':type': this[':type']
     });
   }
   /**
    * @private
-   */
-  subscribe(callback, eventName = 'change') {
+   */;
+  _proto8.subscribe = function subscribe(callback, eventName) {
+    var _this2 = this;
+    if (eventName === void 0) {
+      eventName = 'change';
+    }
     this._callbacks[eventName] = this._callbacks[eventName] || [];
     this._callbacks[eventName].push(callback);
     //console.log(`subscription added : ${this._elem.id}, count : ${this._callbacks[eventName].length}`);
     return {
-      unsubscribe: () => {
-        this._callbacks[eventName] = this._callbacks[eventName].filter(x => x !== callback);
+      unsubscribe: function unsubscribe() {
+        _this2._callbacks[eventName] = _this2._callbacks[eventName].filter(function (x) {
+          return x !== callback;
+        });
         //console.log(`subscription removed : ${this._elem.id}, count : ${this._callbacks[eventName].length}`);
       }
     };
   }
   /**
    * @private
-   */
-  _addDependent(dependent) {
-    if (this._dependents.find(({
-      node
-    }) => node === dependent) === undefined) {
-      const subscription = this.subscribe(change => {
-        const changes = change.payload.changes;
-        const propsToLook = [...dynamicProps, 'items'];
+   */;
+  _proto8._addDependent = function _addDependent(dependent) {
+    if (this._dependents.find(function (_ref3) {
+      var node = _ref3.node;
+      return node === dependent;
+    }) === undefined) {
+      var subscription = this.subscribe(function (change) {
+        var changes = change.payload.changes;
+        var propsToLook = [].concat(dynamicProps, ['items']);
         // @ts-ignore
-        const isPropChanged = changes.findIndex(x => {
+        var isPropChanged = changes.findIndex(function (x) {
           return propsToLook.indexOf(x.propertyName) > -1;
         }) > -1;
         if (isPropChanged) {
@@ -4824,17 +5477,18 @@ class BaseNode {
       });
       this._dependents.push({
         node: dependent,
-        subscription
+        subscription: subscription
       });
     }
   }
   /**
    * @private
-   */
-  removeDependent(dependent) {
-    const index = this._dependents.findIndex(({
-      node
-    }) => node === dependent);
+   */;
+  _proto8.removeDependent = function removeDependent(dependent) {
+    var index = this._dependents.findIndex(function (_ref4) {
+      var node = _ref4.node;
+      return node === dependent;
+    });
     if (index > -1) {
       this._dependents[index].subscription.unsubscribe();
       this._dependents.splice(index, 1);
@@ -4842,33 +5496,37 @@ class BaseNode {
   }
   /**
    * @private
-   */
-  queueEvent(action) {
-    const actionWithTarget = new ActionImplWithTarget(action, this);
+   */;
+  _proto8.queueEvent = function queueEvent(action) {
+    var actionWithTarget = new ActionImplWithTarget(action, this);
     this.form.getEventQueue().queue(this, actionWithTarget, ['valid', 'invalid'].indexOf(actionWithTarget.type) > -1);
-  }
-  dispatch(action) {
+  };
+  _proto8.dispatch = function dispatch(action) {
     this.queueEvent(action);
     this.form.getEventQueue().runPendingQueue();
   }
   /**
    * @private
-   */
-  notifyDependents(action) {
-    const handlers = this._callbacks[action.type] || [];
-    handlers.forEach(x => {
-      x(new ActionImplWithTarget(action, this));
+   */;
+  _proto8.notifyDependents = function notifyDependents(action) {
+    var _this3 = this;
+    var handlers = this._callbacks[action.type] || [];
+    handlers.forEach(function (x) {
+      x(new ActionImplWithTarget(action, _this3));
     });
   }
   /**
    * @param prop
    * @param newValue
    * @private
-   */
-  _setProperty(prop, newValue, notify = true) {
+   */;
+  _proto8._setProperty = function _setProperty(prop, newValue, notify) {
+    if (notify === void 0) {
+      notify = true;
+    }
     //@ts-ignore
-    const oldValue = this._jsonModel[prop];
-    let isValueSame = false;
+    var oldValue = this._jsonModel[prop];
+    var isValueSame = false;
     if (newValue !== null && oldValue !== null && typeof newValue === 'object' && typeof oldValue === 'object') {
       isValueSame = JSON.stringify(newValue) === JSON.stringify(oldValue);
     } else {
@@ -4878,7 +5536,7 @@ class BaseNode {
     if (!isValueSame) {
       //@ts-ignore
       this._jsonModel[prop] = newValue;
-      const changeAction = propertyChange(prop, newValue, oldValue);
+      var changeAction = propertyChange(prop, newValue, oldValue);
       if (notify) {
         this.notifyDependents(changeAction);
       }
@@ -4888,14 +5546,14 @@ class BaseNode {
   }
   /**
    * @private
-   */
-  _bindToDataModel(contextualDataModel) {
+   */;
+  _proto8._bindToDataModel = function _bindToDataModel(contextualDataModel) {
     if (this.id === '$form') {
       this._data = contextualDataModel;
       return;
     }
-    const dataRef = this._jsonModel.dataRef;
-    let _data,
+    var dataRef = this._jsonModel.dataRef;
+    var _data,
       _parent = contextualDataModel,
       _key = '';
     if (dataRef === null) {
@@ -4906,13 +5564,13 @@ class BaseNode {
       if (this._tokens.length === 0) {
         this._tokens = tokenize(dataRef);
       }
-      let searchData = contextualDataModel;
+      var searchData = contextualDataModel;
       if (this._tokens[0].type === TOK_GLOBAL) {
         searchData = this.form.getDataNode();
       }
       if (typeof searchData !== 'undefined') {
-        const name = this._tokens[this._tokens.length - 1].value;
-        const create = this.defaultDataModel(name);
+        var name = this._tokens[this._tokens.length - 1].value;
+        var create = this.defaultDataModel(name);
         _data = resolveData(searchData, this._tokens, create);
         // @ts-ignore
         _parent = resolveData(searchData, this._tokens.slice(0, -1));
@@ -4924,15 +5582,15 @@ class BaseNode {
       //@ts-ignore
       contextualDataModel !== NullDataValue) {
         _parent = contextualDataModel;
-        const name = this._jsonModel.name || '';
-        const key = contextualDataModel.$type === 'array' ? this.index : name;
+        var _name2 = this._jsonModel.name || '';
+        var key = contextualDataModel.$type === 'array' ? this.index : _name2;
         _key = key;
         if (key !== '') {
-          const create = this.defaultDataModel(key);
-          if (create !== undefined) {
+          var _create = this.defaultDataModel(key);
+          if (_create !== undefined) {
             _data = contextualDataModel.$getDataNode(key);
             if (_data === undefined) {
-              _data = create;
+              _data = _create;
               contextualDataModel.$addDataNode(key, _data);
             }
           }
@@ -4955,18 +5613,12 @@ class BaseNode {
   }
   /**
    * @private
-   */
-  getDataNode() {
+   */;
+  _proto8.getDataNode = function getDataNode() {
     return this._data;
-  }
-  get properties() {
-    return this._jsonModel.properties || {};
-  }
-  set properties(p) {
-    this._setProperty('properties', _extends({}, p));
-  }
-  getNonTransparentParent() {
-    let nonTransparentParent = this.parent;
+  };
+  _proto8.getNonTransparentParent = function getNonTransparentParent() {
+    var nonTransparentParent = this.parent;
     while (nonTransparentParent != null && nonTransparentParent.isTransparent()) {
       nonTransparentParent = nonTransparentParent.parent;
     }
@@ -4975,10 +5627,10 @@ class BaseNode {
   /**
    * called after the node is inserted in the parent
    * @private
-   */
-  _initialize() {
+   */;
+  _proto8._initialize = function _initialize() {
     if (typeof this._data === 'undefined') {
-      let dataNode,
+      var dataNode,
         parent = this.parent;
       do {
         //@ts-ignore
@@ -4994,45 +5646,155 @@ class BaseNode {
    * @param propNames
    * @param updates
    * @private
-   */
-  _applyUpdates(propNames, updates) {
-    return propNames.reduce((acc, propertyName) => {
+   */;
+  _proto8._applyUpdates = function _applyUpdates(propNames, updates) {
+    var _this4 = this;
+    return propNames.reduce(function (acc, propertyName) {
       //@ts-ignore
-      const currentValue = updates[propertyName];
-      const changes = this._setProperty(propertyName, currentValue, false);
+      var currentValue = updates[propertyName];
+      var changes = _this4._setProperty(propertyName, currentValue, false);
       if (changes.length > 0) {
         acc[propertyName] = changes[0];
       }
       return acc;
     }, {});
-  }
-  get qualifiedName() {
-    if (this.isTransparent()) {
-      return null;
-    }
-    // @ts-ignore
-    if (this[qualifiedName] !== null) {
-      // @ts-ignore
-      return this[qualifiedName];
-    }
-    // use qualified name
-    const parent = this.getNonTransparentParent();
-    if (parent && parent.type === 'array') {
-      //@ts-ignore
-      this[qualifiedName] = `${parent.qualifiedName}[${this.index}]`;
-    } else {
-      //@ts-ignore
-      this[qualifiedName] = `${parent.qualifiedName}.${this.name}`;
-    }
-    //@ts-ignore
-    return this[qualifiedName];
-  }
-  focus() {
+  };
+  _proto8.focus = function focus() {
     if (this.parent) {
       this.parent.activeChild = this;
     }
-  }
-}
+  };
+  _createClass(BaseNode, [{
+    key: "isContainer",
+    get:
+    //@ts-ignore
+
+    function get() {
+      return false;
+    }
+  }, {
+    key: "id",
+    get: function get() {
+      return this._jsonModel.id;
+    }
+  }, {
+    key: "index",
+    get: function get() {
+      return this.parent.indexOf(this);
+    }
+  }, {
+    key: "parent",
+    get: function get() {
+      return this._options.parent;
+    }
+  }, {
+    key: "type",
+    get: function get() {
+      return this._jsonModel.type;
+    }
+  }, {
+    key: "fieldType",
+    get: function get() {
+      return this._jsonModel.fieldType || 'text-input';
+    }
+  }, {
+    key: ':type',
+    get: function get() {
+      return this._jsonModel[':type'] || this.fieldType;
+    }
+  }, {
+    key: "name",
+    get: function get() {
+      return this._jsonModel.name;
+    }
+  }, {
+    key: "description",
+    get: function get() {
+      return this._jsonModel.description;
+    },
+    set: function set(d) {
+      this._setProperty('description', d);
+    }
+  }, {
+    key: "dataRef",
+    get: function get() {
+      return this._jsonModel.dataRef;
+    }
+  }, {
+    key: "visible",
+    get: function get() {
+      return this._jsonModel.visible;
+    },
+    set: function set(v) {
+      if (v !== this._jsonModel.visible) {
+        var changeAction = propertyChange('visible', v, this._jsonModel.visible);
+        this._jsonModel.visible = v;
+        this.notifyDependents(changeAction);
+      }
+    }
+  }, {
+    key: "form",
+    get: function get() {
+      return this._options.form;
+    }
+  }, {
+    key: "ruleEngine",
+    get: function get() {
+      return this.form.ruleEngine;
+    }
+  }, {
+    key: "label",
+    get: function get() {
+      return this._jsonModel.label;
+    },
+    set: function set(l) {
+      if (l !== this._jsonModel.label) {
+        var changeAction = propertyChange('label', l, this._jsonModel.label);
+        this._jsonModel = _extends({}, this._jsonModel, {
+          label: l
+        });
+        this.notifyDependents(changeAction);
+      }
+    }
+  }, {
+    key: "uniqueItems",
+    get: function get() {
+      return this._jsonModel.uniqueItems;
+    }
+  }, {
+    key: "properties",
+    get: function get() {
+      return this._jsonModel.properties || {};
+    },
+    set: function set(p) {
+      this._setProperty('properties', _extends({}, p));
+    }
+  }, {
+    key: "qualifiedName",
+    get: function get() {
+      if (this.isTransparent()) {
+        return null;
+      }
+      // @ts-ignore
+      if (this[qualifiedName] !== null) {
+        // @ts-ignore
+        return this[qualifiedName];
+      }
+      // use qualified name
+      var parent = this.getNonTransparentParent();
+      if (parent && parent.type === 'array') {
+        //@ts-ignore
+        this[qualifiedName] = parent.qualifiedName + "[" + this.index + "]";
+      } else {
+        //@ts-ignore
+        this[qualifiedName] = parent.qualifiedName + "." + this.name;
+      }
+      //@ts-ignore
+      return this[qualifiedName];
+    }
+  }]);
+  return BaseNode;
+}();
 __decorate$2([dependencyTracked()], BaseNode.prototype, "index", null);
 __decorate$2([dependencyTracked()], BaseNode.prototype, "description", null);
 __decorate$2([dependencyTracked()], BaseNode.prototype, "visible", null);
@@ -5050,91 +5812,101 @@ __decorate$2([dependencyTracked()], BaseNode.prototype, "properties", null);
  * Defines scriptable aspects (ie rules, events) of form runtime model. Any form runtime object which requires
  * execution of rules/events should extend from this class.
  */
-class Scriptable extends BaseNode {
-  constructor(...args) {
-    super(...args);
-    this._events = {};
-    this._rules = {};
+var Scriptable = /*#__PURE__*/function (_BaseNode) {
+  _inheritsLoose(Scriptable, _BaseNode);
+  function Scriptable() {
+    var _this5;
+    _this5 = _BaseNode.call.apply(_BaseNode, [this].concat([].slice.call(arguments))) || this;
+    _this5._events = {};
+    _this5._rules = {};
+    return _this5;
   }
-  get rules() {
-    return this._jsonModel.rules || {};
-  }
-  getCompiledRule(eName, rule) {
+  var _proto9 = Scriptable.prototype;
+  _proto9.getCompiledRule = function getCompiledRule(eName, rule) {
     if (!(eName in this._rules)) {
-      const eString = rule || this.rules[eName];
+      var eString = rule || this.rules[eName];
       if (typeof eString === 'string' && eString.length > 0) {
         try {
           this._rules[eName] = this.ruleEngine.compileRule(eString);
         } catch (e) {
-          this.form.logger.error(`Unable to compile rule \`"${eName}" : "${eString}"\` Exception : ${e}`);
+          this.form.logger.error("Unable to compile rule `\"" + eName + "\" : \"" + eString + "\"` Exception : " + e);
         }
       } else {
-        throw new Error(`only expression strings are supported. ${typeof eString} types are not supported`);
+        throw new Error("only expression strings are supported. " + typeof eString + " types are not supported");
       }
     }
     return this._rules[eName];
-  }
-  getCompiledEvent(eName) {
+  };
+  _proto9.getCompiledEvent = function getCompiledEvent(eName) {
+    var _this6 = this;
     if (!(eName in this._events)) {
       var _this$_jsonModel$even;
-      let eString = (_this$_jsonModel$even = this._jsonModel.events) == null ? void 0 : _this$_jsonModel$even[eName];
+      var eString = (_this$_jsonModel$even = this._jsonModel.events) == null ? void 0 : _this$_jsonModel$even[eName];
       if (typeof eString === 'string' && eString.length > 0) {
         eString = [eString];
       }
       if (typeof eString !== 'undefined' && eString.length > 0) {
-        this._events[eName] = eString.map(x => {
+        this._events[eName] = eString.map(function (x) {
           try {
-            return this.ruleEngine.compileRule(x);
+            return _this6.ruleEngine.compileRule(x);
           } catch (e) {
-            this.form.logger.error(`Unable to compile expression \`"${eName}" : "${eString}"\` Exception : ${e}`);
+            _this6.form.logger.error("Unable to compile expression `\"" + eName + "\" : \"" + eString + "\"` Exception : " + e);
           }
           return null;
-        }).filter(x => x !== null);
+        }).filter(function (x) {
+          return x !== null;
+        });
       }
     }
     return this._events[eName] || [];
-  }
-  applyUpdates(updates) {
-    Object.entries(updates).forEach(([key, value]) => {
+  };
+  _proto9.applyUpdates = function applyUpdates(updates) {
+    var _this7 = this;
+    Object.entries(updates).forEach(function (_ref5) {
+      var key = _ref5[0],
+        value = _ref5[1];
       // @ts-ignore
       // the first check is to disable accessing this.value & this.items property
       // otherwise that will trigger dependency tracking
-      if (key in editableProperties || key in this && typeof this[key] !== 'function') {
+      if (key in editableProperties || key in _this7 && typeof _this7[key] !== 'function') {
         try {
           // @ts-ignore
-          this[key] = value;
+          _this7[key] = value;
         } catch (e) {
           console.error(e);
         }
       }
     });
-  }
-  executeAllRules(context) {
-    const entries = Object.entries(this.rules);
+  };
+  _proto9.executeAllRules = function executeAllRules(context) {
+    var _this8 = this;
+    var entries = Object.entries(this.rules);
     if (entries.length > 0) {
-      const scope = this.getExpressionScope();
-      entries.forEach(([prop, rule]) => {
-        const node = this.getCompiledRule(prop, rule);
+      var scope = this.getExpressionScope();
+      entries.forEach(function (_ref6) {
+        var prop = _ref6[0],
+          rule = _ref6[1];
+        var node = _this8.getCompiledRule(prop, rule);
         if (node) {
-          const newVal = this.ruleEngine.execute(node, scope, context, true);
+          var newVal = _this8.ruleEngine.execute(node, scope, context, true);
           if (editableProperties.indexOf(prop) > -1) {
             //@ts-ignore
-            this[prop] = newVal;
+            _this8[prop] = newVal;
           } else {
-            this.form.logger.warn(`${prop} is not a valid editable property.`);
+            _this8.form.logger.warn(prop + " is not a valid editable property.");
           }
         }
       });
     }
-  }
-  getExpressionScope() {
-    const parent = this.getNonTransparentParent();
-    const target = {
+  };
+  _proto9.getExpressionScope = function getExpressionScope() {
+    var parent = this.getNonTransparentParent();
+    var target = {
       self: this.getRuleNode(),
       siblings: (parent == null ? void 0 : parent.ruleNodeReference()) || {}
     };
-    const scope = new Proxy(target, {
-      get: (target, prop) => {
+    var scope = new Proxy(target, {
+      get: function get(target, prop) {
         if (prop === Symbol.toStringTag) {
           return 'Object';
         }
@@ -5145,13 +5917,15 @@ class Scriptable extends BaseNode {
         // 3. child
         if (prop.startsWith('$')) {
           //this returns children as well, so adding an explicit check for property name
-          const retValue = target.self[prop];
+          var retValue = target.self[prop];
           if (retValue instanceof BaseNode) {
             //$parent
             return retValue.getRuleNode();
           } else if (retValue instanceof Array) {
             //$items
-            return retValue.map(r => r instanceof BaseNode ? r.getRuleNode() : r);
+            return retValue.map(function (r) {
+              return r instanceof BaseNode ? r.getRuleNode() : r;
+            });
           } else {
             return retValue;
           }
@@ -5163,17 +5937,17 @@ class Scriptable extends BaseNode {
           }
         }
       },
-      has: (target, prop) => {
+      has: function has(target, prop) {
         prop = prop;
-        const selfPropertyOrChild = target.self[prop];
-        const sibling = target.siblings[prop];
+        var selfPropertyOrChild = target.self[prop];
+        var sibling = target.siblings[prop];
         return typeof selfPropertyOrChild != 'undefined' || typeof sibling != 'undefined';
       }
     });
     return scope;
-  }
-  executeEvent(context, node) {
-    let updates;
+  };
+  _proto9.executeEvent = function executeEvent(context, node) {
+    var updates;
     if (node) {
       updates = this.ruleEngine.execute(node, this.getExpressionScope(), context);
     }
@@ -5186,28 +5960,29 @@ class Scriptable extends BaseNode {
    * @param event
    * @param context
    * @private
-   */
-  executeRule(event, context) {
+   */;
+  _proto9.executeRule = function executeRule(event, context) {
     if (typeof event.payload.ruleName === 'undefined') {
       this.executeAllRules(context);
     }
-  }
-  executeExpression(expr) {
-    const ruleContext = {
+  };
+  _proto9.executeExpression = function executeExpression(expr) {
+    var ruleContext = {
       'form': this.form,
       '$form': this.form.getRuleNode(),
       '$field': this.getRuleNode(),
       'field': this
     };
-    const node = this.ruleEngine.compileRule(expr);
+    var node = this.ruleEngine.compileRule(expr);
     return this.ruleEngine.execute(node, this.getExpressionScope(), ruleContext);
   }
   /**
    * Executes the given action
    * @param action    {@link Action | event object}
-   */
-  executeAction(action) {
-    const context = {
+   */;
+  _proto9.executeAction = function executeAction(action) {
+    var _this9 = this;
+    var context = {
       'form': this.form,
       '$form': this.form.getRuleNode(),
       '$field': this.getRuleNode(),
@@ -5218,21 +5993,29 @@ class Scriptable extends BaseNode {
         target: this.getRuleNode()
       }
     };
-    const eventName = action.isCustomEvent ? `custom:${action.type}` : action.type;
-    const funcName = action.isCustomEvent ? `custom_${action.type}` : action.type;
-    const node = this.getCompiledEvent(eventName);
+    var eventName = action.isCustomEvent ? "custom:" + action.type : action.type;
+    var funcName = action.isCustomEvent ? "custom_" + action.type : action.type;
+    var node = this.getCompiledEvent(eventName);
     //todo: apply all the updates at the end  or
     // not trigger the change event until the execution is finished
-    node.forEach(n => this.executeEvent(context, n));
+    node.forEach(function (n) {
+      return _this9.executeEvent(context, n);
+    });
     // @ts-ignore
     if (funcName in this && typeof this[funcName] === 'function') {
       //@ts-ignore
       this[funcName](action, context);
     }
     this.notifyDependents(action);
-  }
-}
-
+  };
+  _createClass(Scriptable, [{
+    key: "rules",
+    get: function get() {
+      return this._jsonModel.rules || {};
+    }
+  }]);
+  return Scriptable;
+}(BaseNode);
 /*
  * Copyright 2022 Adobe, Inc.
  *
@@ -5244,92 +6027,73 @@ var __decorate$1 = function (decorators, target, key, desc) {
   var c = arguments.length,
     r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
     d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+    if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  }
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 /**
  * Defines a generic container class which any form container should extend from.
  * @typeparam T type of the node which extends {@link ContainerJson} and {@link RulesJson}
  */
-class Container extends Scriptable {
-  constructor(...args) {
-    super(...args);
-    this._children = [];
-    this._itemTemplate = null;
-    this._activeChild = null;
+var Container = /*#__PURE__*/function (_Scriptable) {
+  _inheritsLoose(Container, _Scriptable);
+  function Container() {
+    var _this10;
+    _this10 = _Scriptable.call.apply(_Scriptable, [this].concat([].slice.call(arguments))) || this;
+    _this10._children = [];
+    _this10._itemTemplate = null;
+    _this10._activeChild = null;
+    return _this10;
   }
   /**
    * @private
    */
-  ruleNodeReference() {
+  var _proto10 = Container.prototype;
+  _proto10.ruleNodeReference = function ruleNodeReference() {
     return this._childrenReference;
   }
   //todo : this should not be public
-  get items() {
-    return this._children;
-  }
-  get maxItems() {
-    return this._jsonModel.maxItems;
-  }
-  set maxItems(m) {
-    this._jsonModel.maxItems = m;
-    const minItems = this._jsonModel.minItems || 1;
-    const itemsLength = this._children.length;
-    const items2Remove = Math.min(itemsLength - m, itemsLength - minItems);
-    if (items2Remove > 0) {
-      for (let i = 0; i < items2Remove; i++) {
-        this.getDataNode().$removeDataNode(m + i);
-        this._childrenReference.pop();
-      }
-      const elems = this._children.splice(m, items2Remove);
-      this.notifyDependents(propertyChange('items', elems, null));
-    }
-  }
-  get minItems() {
-    return this._jsonModel.minItems;
-  }
+  ;
   /**
    * returns whether the items in the Panel can repeat or not
    */
-  hasDynamicItems() {
+  _proto10.hasDynamicItems = function hasDynamicItems() {
     return this._itemTemplate != null;
-  }
-  get isContainer() {
-    return true;
-  }
+  };
   /**
    * Returns the current container state
    */
-  getState() {
+  _proto10.getState = function getState() {
     return _extends({}, this._jsonModel, {
       ':type': this[':type'],
-      items: this._children.map(x => {
+      items: this._children.map(function (x) {
         return _extends({}, x.getState());
       })
     });
-  }
-  _addChildToRuleNode(child, options) {
+  };
+  _proto10._addChildToRuleNode = function _addChildToRuleNode(child, options) {
+    var _this11 = this;
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const self = this;
-    const {
-      parent = this
-    } = options;
+    var self = this;
+    var _options$parent = options.parent,
+      parent = _options$parent === void 0 ? this : _options$parent;
     //the child has not been added to the array, hence using the length as new index
     // this means unnamed panel inside repeatable named parent // this is an edge case, handling it gracefully
     // todo: rules don't work inside repeatable array
-    const name = parent.type == 'array' ? parent._children.length + '' : child.name || '';
+    var name = parent.type == 'array' ? parent._children.length + '' : child.name || '';
     if (name.length > 0) {
       Object.defineProperty(parent._childrenReference, name, {
-        get: () => {
+        get: function get() {
           if (child.isContainer && child.hasDynamicItems()) {
             self.ruleEngine.trackDependency(child); //accessing dynamic panel directly
           }
 
           if (self.hasDynamicItems()) {
             self.ruleEngine.trackDependency(self); //accessing a child of dynamic panel
-            if (this._children[name] !== undefined) {
+            if (_this11._children[name] !== undefined) {
               // pop function calls this getter in order to return the item
-              return this._children[name].getRuleNode();
+              return _this11._children[name].getRuleNode();
             }
           } else {
             return child.getRuleNode();
@@ -5339,11 +6103,14 @@ class Container extends Scriptable {
         enumerable: true
       });
     }
-  }
-  _addChild(itemJson, index, cloneIds = false) {
+  };
+  _proto10._addChild = function _addChild(itemJson, index, cloneIds) {
+    if (cloneIds === void 0) {
+      cloneIds = false;
+    }
     // get first non transparent parent
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    let nonTransparentParent = this;
+    var nonTransparentParent = this;
     while (nonTransparentParent != null && nonTransparentParent.isTransparent()) {
       // @ts-ignore
       nonTransparentParent = nonTransparentParent.parent;
@@ -5351,16 +6118,16 @@ class Container extends Scriptable {
     if (typeof index !== 'number' || index > nonTransparentParent._children.length) {
       index = this._children.length;
     }
-    const form = this.form;
-    const itemTemplate = _extends({
-      index
-    }, deepClone(itemJson, cloneIds ? () => {
+    var form = this.form;
+    var itemTemplate = _extends({
+      index: index
+    }, deepClone(itemJson, cloneIds ? function () {
       return form.getUniqueId();
     } : undefined));
     //@ts-ignore
-    const retVal = this._createChild(itemTemplate, {
+    var retVal = this._createChild(itemTemplate, {
       parent: this,
-      index
+      index: index
     });
     this._addChildToRuleNode(retVal, {
       parent: nonTransparentParent
@@ -5372,28 +6139,29 @@ class Container extends Scriptable {
       this._children.splice(index, 0, retVal);
     }
     return retVal;
-  }
-  indexOf(f) {
+  };
+  _proto10.indexOf = function indexOf(f) {
     return this._children.indexOf(f);
   }
   /**
    * @private
-   */
-  defaultDataModel(name) {
-    const type = this._jsonModel.type || undefined;
+   */;
+  _proto10.defaultDataModel = function defaultDataModel(name) {
+    var type = this._jsonModel.type || undefined;
     if (type === undefined) {
       return undefined;
     } else {
-      const instance = type === 'array' ? [] : {};
+      var instance = type === 'array' ? [] : {};
       return new DataGroup(name, instance, type);
     }
   }
   /**
    * @private
-   */
-  _initialize() {
-    super._initialize();
-    const items = this._jsonModel.items;
+   */;
+  _proto10._initialize = function _initialize() {
+    var _this12 = this;
+    _Scriptable.prototype._initialize.call(this);
+    var items = this._jsonModel.items;
     this._jsonModel.items = [];
     this._childrenReference = this._jsonModel.type == 'array' ? [] : {};
     if (this._jsonModel.type == 'array' && items.length === 1 && this.getDataNode() != null) {
@@ -5407,14 +6175,14 @@ class Container extends Scriptable {
       if (typeof this._jsonModel.initialItems !== 'number') {
         this._jsonModel.initialItems = Math.max(1, this._jsonModel.minItems);
       }
-      for (let i = 0; i < this._jsonModel.initialItems; i++) {
+      for (var i = 0; i < this._jsonModel.initialItems; i++) {
         //@ts-ignore
-        const child = this._addChild(this._itemTemplate);
+        var child = this._addChild(this._itemTemplate);
         child._initialize();
       }
     } else if (items.length > 0) {
-      items.forEach(item => {
-        const child = this._addChild(item);
+      items.forEach(function (item) {
+        var child = _this12._addChild(item);
         child._initialize();
       });
       this._jsonModel.minItems = this._children.length;
@@ -5425,18 +6193,18 @@ class Container extends Scriptable {
   }
   /**
    * @private
-   */
-  addItem(action) {
+   */;
+  _proto10.addItem = function addItem(action) {
     if (action.type === 'addItem' && this._itemTemplate != null) {
       //@ts-ignore
       if (this._jsonModel.maxItems === -1 || this._children.length < this._jsonModel.maxItems) {
-        const dataNode = this.getDataNode();
-        let index = action.payload;
+        var dataNode = this.getDataNode();
+        var index = action.payload;
         if (typeof index !== 'number' || index > this._children.length) {
           index = this._children.length;
         }
-        const retVal = this._addChild(this._itemTemplate, action.payload, true);
-        const _data = retVal.defaultDataModel(index);
+        var retVal = this._addChild(this._itemTemplate, action.payload, true);
+        var _data = retVal.defaultDataModel(index);
         if (_data) {
           dataNode.$addDataNode(index, _data);
         }
@@ -5444,7 +6212,7 @@ class Container extends Scriptable {
         this.notifyDependents(propertyChange('items', retVal.getState, null));
         retVal.dispatch(new Initialize());
         retVal.dispatch(new ExecuteRule());
-        for (let i = index + 1; i < this._children.length; i++) {
+        for (var i = index + 1; i < this._children.length; i++) {
           this._children[i].dispatch(new ExecuteRule());
         }
       }
@@ -5452,15 +6220,15 @@ class Container extends Scriptable {
   }
   /**
    * @private
-   */
-  removeItem(action) {
+   */;
+  _proto10.removeItem = function removeItem(action) {
     if (action.type === 'removeItem' && this._itemTemplate != null) {
       if (this._children.length == 0) {
         //can't remove item if there isn't any
         return;
       }
-      const index = typeof action.payload === 'number' ? action.payload : this._children.length - 1;
-      const state = this._children[index].getState();
+      var index = typeof action.payload === 'number' ? action.payload : this._children.length - 1;
+      var state = this._children[index].getState();
       //@ts-ignore
       if (this._children.length > this._jsonModel.minItems) {
         // clear child
@@ -5468,7 +6236,7 @@ class Container extends Scriptable {
         this._childrenReference.pop();
         this._children.splice(index, 1);
         this.getDataNode().$removeDataNode(index);
-        for (let i = index; i < this._children.length; i++) {
+        for (var i = index; i < this._children.length; i++) {
           this._children[i].dispatch(new ExecuteRule());
         }
         this.notifyDependents(propertyChange('items', null, state));
@@ -5477,34 +6245,36 @@ class Container extends Scriptable {
   }
   /**
    * @private
-   */
-  queueEvent(action) {
+   */;
+  _proto10.queueEvent = function queueEvent(action) {
     var _action$metadata;
-    super.queueEvent(action);
+    _Scriptable.prototype.queueEvent.call(this, action);
     if ((_action$metadata = action.metadata) != null && _action$metadata.dispatch) {
-      this.items.forEach(x => {
+      this.items.forEach(function (x) {
         //@ts-ignore
         x.queueEvent(action);
       });
     }
-  }
-  validate() {
-    return this.items.flatMap(x => {
+  };
+  _proto10.validate = function validate() {
+    return this.items.flatMap(function (x) {
       return x.validate();
-    }).filter(x => x.fieldName !== '');
+    }).filter(function (x) {
+      return x.fieldName !== '';
+    });
   }
   /**
    * @private
-   */
-  dispatch(action) {
-    super.dispatch(action);
+   */;
+  _proto10.dispatch = function dispatch(action) {
+    _Scriptable.prototype.dispatch.call(this, action);
   }
   /**
    * @private
-   */
-  importData(contextualDataModel) {
+   */;
+  _proto10.importData = function importData(contextualDataModel) {
     this._bindToDataModel(contextualDataModel);
-    const dataNode = this.getDataNode() || contextualDataModel;
+    var dataNode = this.getDataNode() || contextualDataModel;
     this.syncDataAndFormModel(dataNode);
   }
   /**
@@ -5513,54 +6283,92 @@ class Container extends Scriptable {
    * @param contextualDataModel
    * @param operation
    * @private
-   */
-  syncDataAndFormModel(contextualDataModel) {
+   */;
+  _proto10.syncDataAndFormModel = function syncDataAndFormModel(contextualDataModel) {
     if ((contextualDataModel == null ? void 0 : contextualDataModel.$type) === 'array' && this._itemTemplate != null) {
-      const dataLength = contextualDataModel == null ? void 0 : contextualDataModel.$value.length;
-      const itemsLength = this._children.length;
-      const maxItems = this._jsonModel.maxItems === -1 ? dataLength : this._jsonModel.maxItems;
-      const minItems = this._jsonModel.minItems;
+      var dataLength = contextualDataModel == null ? void 0 : contextualDataModel.$value.length;
+      var itemsLength = this._children.length;
+      var maxItems = this._jsonModel.maxItems === -1 ? dataLength : this._jsonModel.maxItems;
+      var minItems = this._jsonModel.minItems;
       //@ts-ignore
-      let items2Add = Math.min(dataLength - itemsLength, maxItems - itemsLength);
+      var items2Add = Math.min(dataLength - itemsLength, maxItems - itemsLength);
       //@ts-ignore
-      const items2Remove = Math.min(itemsLength - dataLength, itemsLength - minItems);
+      var items2Remove = Math.min(itemsLength - dataLength, itemsLength - minItems);
       while (items2Add > 0) {
         items2Add--;
-        const child = this._addChild(this._itemTemplate);
+        var child = this._addChild(this._itemTemplate);
         child._initialize();
       }
       if (items2Remove > 0) {
         this._children.splice(dataLength, items2Remove);
-        for (let i = 0; i < items2Remove; i++) {
+        for (var i = 0; i < items2Remove; i++) {
           this._childrenReference.pop();
         }
       }
     }
-    this._children.forEach(x => {
+    this._children.forEach(function (x) {
       x.importData(contextualDataModel);
     });
-  }
-  get activeChild() {
-    return this._activeChild;
-  }
-  set activeChild(c) {
-    if (c !== this._activeChild) {
-      let activeChild = this._activeChild;
-      while (activeChild instanceof Container) {
-        const temp = activeChild.activeChild;
-        activeChild.activeChild = null;
-        activeChild = temp;
-      }
-      const change = propertyChange('activeChild', c, this._activeChild);
-      this._activeChild = c;
-      if (this.parent && c !== null) {
-        this.parent.activeChild = this;
-      }
-      this._jsonModel.activeChild = c == null ? void 0 : c.id;
-      this.notifyDependents(change);
+  };
+  _createClass(Container, [{
+    key: "items",
+    get: function get() {
+      return this._children;
     }
-  }
-}
+  }, {
+    key: "maxItems",
+    get: function get() {
+      return this._jsonModel.maxItems;
+    },
+    set: function set(m) {
+      this._jsonModel.maxItems = m;
+      var minItems = this._jsonModel.minItems || 1;
+      var itemsLength = this._children.length;
+      var items2Remove = Math.min(itemsLength - m, itemsLength - minItems);
+      if (items2Remove > 0) {
+        for (var i = 0; i < items2Remove; i++) {
+          this.getDataNode().$removeDataNode(m + i);
+          this._childrenReference.pop();
+        }
+        var elems = this._children.splice(m, items2Remove);
+        this.notifyDependents(propertyChange('items', elems, null));
+      }
+    }
+  }, {
+    key: "minItems",
+    get: function get() {
+      return this._jsonModel.minItems;
+    }
+  }, {
+    key: "isContainer",
+    get: function get() {
+      return true;
+    }
+  }, {
+    key: "activeChild",
+    get: function get() {
+      return this._activeChild;
+    },
+    set: function set(c) {
+      if (c !== this._activeChild) {
+        var activeChild = this._activeChild;
+        while (activeChild instanceof Container) {
+          var temp = activeChild.activeChild;
+          activeChild.activeChild = null;
+          activeChild = temp;
+        }
+        var change = propertyChange('activeChild', c, this._activeChild);
+        this._activeChild = c;
+        if (this.parent && c !== null) {
+          this.parent.activeChild = this;
+        }
+        this._jsonModel.activeChild = c == null ? void 0 : c.id;
+        this.notifyDependents(change);
+      }
+    }
+  }]);
+  return Container;
+}(Scriptable);
 __decorate$1([dependencyTracked()], Container.prototype, "maxItems", null);
 __decorate$1([dependencyTracked()], Container.prototype, "minItems", null);
 __decorate$1([dependencyTracked()], Container.prototype, "activeChild", null);
@@ -5570,18 +6378,22 @@ __decorate$1([dependencyTracked()], Container.prototype, "activeChild", null);
  * should extend from.
  * @typeparam T type of the node (for example, {@link MetaDataJson | form meta data}
  */
-class Node {
-  constructor(inputModel) {
+var Node = /*#__PURE__*/function () {
+  function Node(inputModel) {
     this._jsonModel = _extends({}, inputModel);
   }
-  getP(key, def) {
+  var _proto11 = Node.prototype;
+  _proto11.getP = function getP(key, def) {
     return getProperty(this._jsonModel, key, def);
-  }
-  get isContainer() {
-    return false;
-  }
-}
-
+  };
+  _createClass(Node, [{
+    key: "isContainer",
+    get: function get() {
+      return false;
+    }
+  }]);
+  return Node;
+}();
 /*
  * Copyright 2022 Adobe, Inc.
  *
@@ -5592,18 +6404,29 @@ class Node {
 /**
  * Defines form metadata which implements {@link FormMetaDataModel | Form MetaData Model}
  */
-class FormMetaData extends Node {
-  get version() {
-    return this.getP('version', '');
+var FormMetaData = /*#__PURE__*/function (_Node) {
+  _inheritsLoose(FormMetaData, _Node);
+  function FormMetaData() {
+    return _Node.apply(this, arguments) || this;
   }
-  get locale() {
-    return this.getP('locale', '');
-  }
-  get grammar() {
-    return this.getP('grammar', '');
-  }
-}
-
+  _createClass(FormMetaData, [{
+    key: "version",
+    get: function get() {
+      return this.getP('version', '');
+    }
+  }, {
+    key: "locale",
+    get: function get() {
+      return this.getP('locale', '');
+    }
+  }, {
+    key: "grammar",
+    get: function get() {
+      return this.getP('grammar', '');
+    }
+  }]);
+  return FormMetaData;
+}(Node);
 /*
  * Copyright 2022 Adobe, Inc.
  *
@@ -5614,36 +6437,38 @@ class FormMetaData extends Node {
 /**
  * Defines a file object which implements the {@link IFileObject | file object interface}
  */
-class FileObject {
-  constructor(init) {
+var FileObject = /*#__PURE__*/function () {
+  function FileObject(init) {
     this.type = 'application/octet-stream';
     this.name = 'unknown';
     this.size = 0;
     Object.assign(this, init);
   }
-  toJSON() {
+  var _proto12 = FileObject.prototype;
+  _proto12.toJSON = function toJSON() {
     return {
       'name': this.name,
       'size': this.size,
       'type': this.type,
       'data': this.data.toString()
     };
-  }
-  equals(obj) {
+  };
+  _proto12.equals = function equals(obj) {
     return this.data === obj.data && this.type === obj.type && this.name === obj.name && this.size === obj.size;
-  }
-}
-const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'.split('');
-const fileSizeRegex = /^(\d*\.?\d+)(\\?(?=[KMGT])([KMGT])(?:i?B)?|B?)$/i;
+  };
+  return FileObject;
+}();
+var chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'.split('');
+var fileSizeRegex = /^(\d*\.?\d+)(\\?(?=[KMGT])([KMGT])(?:i?B)?|B?)$/i;
 /**
  * Utility to generate a random word from seed
  * @param l seed value
  * @returns random word
  */
-const randomWord = l => {
-  const ret = [];
-  for (let i = 0; i <= l; i++) {
-    const randIndex = Math.floor(Math.random() * chars.length);
+var randomWord = function randomWord(l) {
+  var ret = [];
+  for (var i = 0; i <= l; i++) {
+    var randIndex = Math.floor(Math.random() * chars.length);
     ret.push(chars[randIndex]);
   }
   return ret.join('');
@@ -5653,21 +6478,21 @@ const randomWord = l => {
  * @param input form model
  * @returns list of file attachments {@link FileObject} present in the form
  */
-const getAttachments = input => {
-  const items = input.items || [];
-  return items == null ? void 0 : items.reduce((acc, item) => {
-    let ret = null;
+var getAttachments = function getAttachments(input) {
+  var items = input.items || [];
+  return items == null ? void 0 : items.reduce(function (acc, item) {
+    var ret = null;
     if (item.isContainer) {
       ret = getAttachments(item);
     } else {
       if (isFile(item.getState())) {
         ret = {}; // @ts-ignore
-        const name = item.name || '';
-        const dataRef = item.dataRef != null ? item.dataRef : name.length > 0 ? item.name : undefined;
+        var name = item.name || '';
+        var dataRef = item.dataRef != null ? item.dataRef : name.length > 0 ? item.name : undefined;
         //@ts-ignore
         if (item.value instanceof Array) {
           // @ts-ignore
-          ret[item.id] = item.value.map(x => {
+          ret[item.id] = item.value.map(function (x) {
             return _extends({}, x, {
               'dataRef': dataRef
             });
@@ -5688,10 +6513,10 @@ const getAttachments = input => {
  * @param str   file size
  * @returns file size as bytes (in kb) based on IEC specification
  */
-const getFileSizeInBytes = str => {
-  let retVal = 0;
+var getFileSizeInBytes = function getFileSizeInBytes(str) {
+  var retVal = 0;
   if (typeof str === 'string') {
-    const matches = fileSizeRegex.exec(str.trim());
+    var matches = fileSizeRegex.exec(str.trim());
     if (matches != null) {
       retVal = sizeToBytes(parseFloat(matches[1]), (matches[2] || 'kb').toUpperCase());
     }
@@ -5704,15 +6529,15 @@ const getFileSizeInBytes = str => {
  * @param symbol    symbol to use (for example, kb, mb, gb or tb)
  * @returns number as bytes based on the symbol
  */
-const sizeToBytes = (size, symbol) => {
-  const sizes = {
+var sizeToBytes = function sizeToBytes(size, symbol) {
+  var sizes = {
     'KB': 1,
     'MB': 2,
     'GB': 3,
     'TB': 4
   };
   // @ts-ignore
-  const i = Math.pow(1024, sizes[symbol]);
+  var i = Math.pow(1024, sizes[symbol]);
   return Math.round(size * i);
 };
 /**
@@ -5721,39 +6546,61 @@ const sizeToBytes = (size, symbol) => {
  * @constructor
  * @private
  */
-const IdGenerator = function* IdGenerator(initial = 50) {
-  const initialize = function initialize() {
-    const arr = [];
-    for (let i = 0; i < initial; i++) {
-      arr.push(randomWord(10));
-    }
-    return arr;
-  };
-  const passedIds = {};
-  let ids = initialize();
-  do {
-    let x = ids.pop();
-    while (x in passedIds) {
-      if (ids.length === 0) {
-        ids = initialize();
+var IdGenerator = function IdGenerator(initial) {
+  if (initial === void 0) {
+    initial = 50;
+  }
+  return /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var initialize, passedIds, ids, x;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            initialize = function initialize() {
+              var arr = [];
+              for (var i = 0; i < initial; i++) {
+                arr.push(randomWord(10));
+              }
+              return arr;
+            };
+            passedIds = {};
+            ids = initialize();
+          case 3:
+            x = ids.pop();
+            while (x in passedIds) {
+              if (ids.length === 0) {
+                ids = initialize();
+              }
+              x = ids.pop();
+            }
+            passedIds[x] = true;
+            _context.next = 8;
+            return ids.pop();
+          case 8:
+            if (ids.length === 0) {
+              ids = initialize();
+            }
+          case 9:
+            if (ids.length > 0) {
+              _context.next = 3;
+              break;
+            }
+          case 10:
+          case "end":
+            return _context.stop();
+        }
       }
-      x = ids.pop();
-    }
-    passedIds[x] = true;
-    yield ids.pop();
-    if (ids.length === 0) {
-      ids = initialize();
-    }
-  } while (ids.length > 0);
+    }, _callee);
+  })();
 };
 /**
  * Utility to extract {@link FileObject} from string or HTML File data type
  * @param file
  * @returns list of {@link FileObject}
  */
-const extractFileInfo = file => {
+var extractFileInfo = function extractFileInfo(file) {
   if (file !== null) {
-    let retVal = null;
+    var retVal = null;
     if (file instanceof FileObject) {
       retVal = file;
     } else if (typeof File !== 'undefined' && file instanceof File) {
@@ -5766,12 +6613,10 @@ const extractFileInfo = file => {
       };
     } else if (typeof file === 'string' && isDataUrl(file)) {
       // case: data URL
-      const result = dataURItoBlob(file);
+      var result = dataURItoBlob(file);
       if (result !== null) {
-        const {
-          blob,
-          name
-        } = result;
+        var blob = result.blob,
+          name = result.name;
         retVal = {
           name: name,
           type: blob.type,
@@ -5782,7 +6627,7 @@ const extractFileInfo = file => {
     } else {
       var _jFile, _jFile2;
       // case: string as file object
-      let jFile = file;
+      var jFile = file;
       try {
         jFile = JSON.parse(file);
         retVal = jFile;
@@ -5792,20 +6637,20 @@ const extractFileInfo = file => {
       if (typeof ((_jFile = jFile) == null ? void 0 : _jFile.data) === 'string' && isDataUrl((_jFile2 = jFile) == null ? void 0 : _jFile2.data)) {
         var _jFile3;
         // case: data URL
-        const result = dataURItoBlob((_jFile3 = jFile) == null ? void 0 : _jFile3.data);
-        if (result !== null) {
+        var _result = dataURItoBlob((_jFile3 = jFile) == null ? void 0 : _jFile3.data);
+        if (_result !== null) {
           var _jFile4, _jFile5;
-          const blob = result.blob;
+          var _blob = _result.blob;
           retVal = {
             name: (_jFile4 = jFile) == null ? void 0 : _jFile4.name,
             type: (_jFile5 = jFile) == null ? void 0 : _jFile5.type,
-            size: blob.size,
-            data: blob
+            size: _blob.size,
+            data: _blob
           };
         }
       } else if (typeof jFile === 'string') {
         // case: data as external url
-        const fileName = jFile.split('/').pop();
+        var fileName = jFile.split('/').pop();
         retVal = {
           name: fileName,
           type: 'application/octet-stream',
@@ -5836,33 +6681,33 @@ const extractFileInfo = file => {
  * @param dataURI uri to convert to blob
  * @returns `Blob` object for the data URI
  */
-const dataURItoBlob = dataURI => {
-  const regex = /^data:([a-z]+\/[a-z0-9-+.]+)?(?:;name=([^;]+))?(;base64)?,(.+)$/;
-  const groups = regex.exec(dataURI);
+var dataURItoBlob = function dataURItoBlob(dataURI) {
+  var regex = /^data:([a-z]+\/[a-z0-9-+.]+)?(?:;name=([^;]+))?(;base64)?,(.+)$/;
+  var groups = regex.exec(dataURI);
   if (groups !== null) {
-    const type = groups[1] || '';
-    const name = groups[2] || 'unknown';
-    const isBase64 = typeof groups[3] === 'string';
+    var type = groups[1] || '';
+    var name = groups[2] || 'unknown';
+    var isBase64 = typeof groups[3] === 'string';
     if (isBase64) {
-      const binary = atob(groups[4]);
-      const array = [];
-      for (let i = 0; i < binary.length; i++) {
+      var binary = atob(groups[4]);
+      var array = [];
+      for (var i = 0; i < binary.length; i++) {
         array.push(binary.charCodeAt(i));
       }
-      const blob = new window.Blob([new Uint8Array(array)], {
-        type
+      var blob = new window.Blob([new Uint8Array(array)], {
+        type: type
       });
       return {
-        name,
-        blob
+        name: name,
+        blob: blob
       };
     } else {
-      const blob = new window.Blob([groups[4]], {
-        type
+      var _blob2 = new window.Blob([groups[4]], {
+        type: type
       });
       return {
-        name,
-        blob
+        name: name,
+        blob: _blob2
       };
     }
   } else {
@@ -5876,19 +6721,19 @@ const dataURItoBlob = dataURI => {
  */
 // issue with import
 //import {FieldJson, isFileObject} from '../types';
-const dateRegex = /^(\d{4})-(\d{1,2})-(\d{1,2})$/;
-const dataUrlRegex = /^data:([a-z]+\/[a-z0-9-+.]+)?;(?:name=(.*);)?base64,(.*)$/;
-const days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-const daysInMonth = (leapYear, month) => {
+var dateRegex = /^(\d{4})-(\d{1,2})-(\d{1,2})$/;
+var dataUrlRegex = /^data:([a-z]+\/[a-z0-9-+.]+)?;(?:name=(.*);)?base64,(.*)$/;
+var days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+var daysInMonth = function daysInMonth(leapYear, month) {
   if (leapYear && month == 2) {
     return 29;
   }
   return days[month - 1];
 };
-const isLeapYear = year => {
+var isLeapYear = function isLeapYear(year) {
   return year % 400 === 0 || year % 4 === 0 && year % 100 !== 0;
 };
-const isDataUrl = str => {
+var isDataUrl = function isDataUrl(str) {
   return dataUrlRegex.exec(str.trim()) != null;
 };
 /**
@@ -5907,26 +6752,26 @@ const isDataUrl = str => {
  * @param inputVal input value
  * @returns {@link ValidationResult | Validation result}
  */
-const checkNumber = inputVal => {
-  let value = parseFloat(inputVal);
-  const valid = !isNaN(value);
+var checkNumber = function checkNumber(inputVal) {
+  var value = parseFloat(inputVal);
+  var valid = !isNaN(value);
   if (!valid) {
     value = inputVal;
   }
   return {
-    value,
-    valid
+    value: value,
+    valid: valid
   };
 };
-const checkInteger = inputVal => {
-  let value = parseFloat(inputVal);
-  const valid = !isNaN(value) && Math.round(value) === value;
+var checkInteger = function checkInteger(inputVal) {
+  var value = parseFloat(inputVal);
+  var valid = !isNaN(value) && Math.round(value) === value;
   if (!valid) {
     value = inputVal;
   }
   return {
-    value,
-    valid
+    value: value,
+    valid: valid
   };
 };
 /**
@@ -5934,7 +6779,7 @@ const checkInteger = inputVal => {
  * @param inputVal input value
  * @returns wraps the input value into an array
  */
-const toArray = inputVal => {
+var toArray = function toArray(inputVal) {
   if (inputVal != null && !(inputVal instanceof Array)) {
     return [inputVal];
   }
@@ -5956,24 +6801,24 @@ const toArray = inputVal => {
  * @param inputVal input value
  * @returns {@link ValidationResult | Validation result}
  */
-const checkBool = inputVal => {
-  const valid = typeof inputVal === 'boolean' || inputVal === 'true' || inputVal === 'false';
-  const value = typeof inputVal === 'boolean' ? inputVal : valid ? inputVal === 'true' : inputVal;
+var checkBool = function checkBool(inputVal) {
+  var valid = typeof inputVal === 'boolean' || inputVal === 'true' || inputVal === 'false';
+  var value = typeof inputVal === 'boolean' ? inputVal : valid ? inputVal === 'true' : inputVal;
   return {
-    valid,
-    value
+    valid: valid,
+    value: value
   };
 };
 /**
  *
  * @param inputVal
  */
-const checkFile = inputVal => {
-  const value = extractFileInfo(inputVal);
-  const valid = value !== null;
+var checkFile = function checkFile(inputVal) {
+  var value = extractFileInfo(inputVal);
+  var valid = value !== null;
   return {
     value: valid ? value : inputVal,
-    valid
+    valid: valid
   };
 };
 /**
@@ -5981,11 +6826,11 @@ const checkFile = inputVal => {
  * @param mediaType
  * @param accepts
  */
-const matchMediaType = (mediaType, accepts) => {
-  return !mediaType || accepts.some(accept => {
-    const trimmedAccept = accept.trim();
-    const prefixAccept = trimmedAccept.split('/')[0];
-    const suffixAccept = trimmedAccept.split('.')[1];
+var matchMediaType = function matchMediaType(mediaType, accepts) {
+  return !mediaType || accepts.some(function (accept) {
+    var trimmedAccept = accept.trim();
+    var prefixAccept = trimmedAccept.split('/')[0];
+    var suffixAccept = trimmedAccept.split('.')[1];
     return trimmedAccept.includes('*') && mediaType.startsWith(prefixAccept) || trimmedAccept.includes('.') && mediaType.endsWith(suffixAccept) || trimmedAccept === mediaType;
   });
 };
@@ -5996,21 +6841,21 @@ const matchMediaType = (mediaType, accepts) => {
  * @return an array containing two arrays, the first one with all the valid values and the second one with one invalid
  * value (if there is).
  */
-const partitionArray = (inputVal, validatorFn) => {
-  const value = toArray(inputVal);
+var partitionArray = function partitionArray(inputVal, validatorFn) {
+  var value = toArray(inputVal);
   if (value == null) {
     return [[], [value]];
   }
-  return value.reduce((acc, x) => {
+  return value.reduce(function (acc, x) {
     if (acc[1].length == 0) {
-      const r = validatorFn(x);
-      const index = r.valid ? 0 : 1;
+      var r = validatorFn(x);
+      var index = r.valid ? 0 : 1;
       acc[index].push(r.value);
     }
     return acc;
   }, [[], []]);
 };
-const ValidConstraints = {
+var ValidConstraints = {
   date: ['minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum', 'format'],
   string: ['minLength', 'maxLength', 'pattern'],
   number: ['minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum'],
@@ -6020,22 +6865,22 @@ const ValidConstraints = {
 /**
  * Implementation of all constraints defined by `adaptive form specification`
  */
-const Constraints = {
+var Constraints = {
   /**
    * Implementation of type constraint
    * @param constraint    `type` property of the form object
    * @param inputVal      value of the form object
    * @return {@link ValidationResult | validation result}
    */
-  type: (constraint, inputVal) => {
-    let value = inputVal;
+  type: function type(constraint, inputVal) {
+    var value = inputVal;
     if (inputVal == undefined) {
       return {
         valid: true,
         value: inputVal
       };
     }
-    let valid = true,
+    var valid = true,
       res;
     switch (constraint) {
       case 'string':
@@ -6088,8 +6933,8 @@ const Constraints = {
         break;
     }
     return {
-      valid,
-      value
+      valid: valid,
+      value: value
     };
   },
   /**
@@ -6098,24 +6943,28 @@ const Constraints = {
    * @param input         value of the form object
    * @return {@link ValidationResult | validation result}
    */
-  format: (constraint, input) => {
-    let valid = true;
-    const value = input;
+  format: function format(constraint, input) {
+    var valid = true;
+    var value = input;
     if (input === null) {
       return {
-        value,
-        valid
+        value: value,
+        valid: valid
       };
     }
-    let res;
+    var res;
     switch (constraint) {
       case 'date':
         res = dateRegex.exec((input || '').trim());
         if (res != null) {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          const [match, year, month, date] = res;
-          const [nMonth, nDate] = [+month, +date];
-          const leapYear = isLeapYear(+year);
+          var _res = res,
+            year = _res[1],
+            month = _res[2],
+            date = _res[3];
+          var nMonth = +month,
+            nDate = +date;
+          var leapYear = isLeapYear(+year);
           valid = nMonth >= 1 && nMonth <= 12 && nDate >= 1 && nDate <= daysInMonth(leapYear, nMonth);
         } else {
           valid = false;
@@ -6129,8 +6978,8 @@ const Constraints = {
         break;
     }
     return {
-      valid,
-      value
+      valid: valid,
+      value: value
     };
   },
   //todo : add support for date
@@ -6140,10 +6989,10 @@ const Constraints = {
    * @param value         value of the form object
    * @return {@link ValidationResult | validation result}
    */
-  minimum: (constraint, value) => {
+  minimum: function minimum(constraint, value) {
     return {
       valid: value >= constraint,
-      value
+      value: value
     };
   },
   //todo : add support for date
@@ -6153,10 +7002,10 @@ const Constraints = {
    * @param value         value of the form object
    * @return {@link ValidationResult | validation result}
    */
-  maximum: (constraint, value) => {
+  maximum: function maximum(constraint, value) {
     return {
       valid: value <= constraint,
-      value
+      value: value
     };
   },
   /**
@@ -6165,10 +7014,10 @@ const Constraints = {
    * @param value         value of the form object
    * @return {@link ValidationResult | validation result}
    */
-  exclusiveMinimum: (constraint, value) => {
+  exclusiveMinimum: function exclusiveMinimum(constraint, value) {
     return {
       valid: value > constraint,
-      value
+      value: value
     };
   },
   //todo : add support for date
@@ -6178,10 +7027,10 @@ const Constraints = {
    * @param value         value of the form object
    * @return {@link ValidationResult | validation result}
    */
-  exclusiveMaximum: (constraint, value) => {
+  exclusiveMaximum: function exclusiveMaximum(constraint, value) {
     return {
       valid: value < constraint,
-      value
+      value: value
     };
   },
   /**
@@ -6189,10 +7038,10 @@ const Constraints = {
    * @param constraint `minItems` constraint from object
    * @param value value of the form object
    */
-  minItems: (constraint, value) => {
+  minItems: function minItems(constraint, value) {
     return {
       valid: value instanceof Array && value.length >= constraint,
-      value
+      value: value
     };
   },
   /**
@@ -6200,10 +7049,10 @@ const Constraints = {
    * @param constraint `maxItems` constraint from object
    * @param value value of the form object
    */
-  maxItems: (constraint, value) => {
+  maxItems: function maxItems(constraint, value) {
     return {
       valid: value instanceof Array && value.length <= constraint,
-      value
+      value: value
     };
   },
   /**
@@ -6211,10 +7060,10 @@ const Constraints = {
    * @param constraint `uniqueItems` constraint from object
    * @param value value of the form object
    */
-  uniqueItems: (constraint, value) => {
+  uniqueItems: function uniqueItems(constraint, value) {
     return {
       valid: !constraint || value instanceof Array && value.length === new Set(value).size,
-      value
+      value: value
     };
   },
   /**
@@ -6223,9 +7072,9 @@ const Constraints = {
    * @param value         value of the form object
    * @return {@link ValidationResult | validation result}
    */
-  minLength: (constraint, value) => {
+  minLength: function minLength(constraint, value) {
     return _extends({}, Constraints.minimum(constraint, typeof value === 'string' ? value.length : 0), {
-      value
+      value: value
     });
   },
   /**
@@ -6234,9 +7083,9 @@ const Constraints = {
    * @param value         value of the form object
    * @return {@link ValidationResult | validation result}
    */
-  maxLength: (constraint, value) => {
+  maxLength: function maxLength(constraint, value) {
     return _extends({}, Constraints.maximum(constraint, typeof value === 'string' ? value.length : 0), {
-      value
+      value: value
     });
   },
   /**
@@ -6245,8 +7094,8 @@ const Constraints = {
    * @param value         value of the form object
    * @return {@link ValidationResult | validation result}
    */
-  pattern: (constraint, value) => {
-    let regex;
+  pattern: function pattern(constraint, value) {
+    var regex;
     if (typeof constraint === 'string') {
       regex = new RegExp(constraint);
     } else {
@@ -6254,7 +7103,7 @@ const Constraints = {
     }
     return {
       valid: regex.test(value),
-      value
+      value: value
     };
   },
   /**
@@ -6263,11 +7112,11 @@ const Constraints = {
    * @param value         value of the form object
    * @return {@link ValidationResult | validation result}
    */
-  required: (constraint, value) => {
-    const valid = constraint ? value != null && value !== '' : true;
+  required: function required(constraint, value) {
+    var valid = constraint ? value != null && value !== '' : true;
     return {
-      valid,
-      value
+      valid: valid,
+      value: value
     };
   },
   /**
@@ -6276,10 +7125,10 @@ const Constraints = {
    * @param value         value of the form object
    * @return {@link ValidationResult | validation result}
    */
-  enum: (constraint, value) => {
+  "enum": function _enum(constraint, value) {
     return {
       valid: constraint.indexOf(value) > -1,
-      value
+      value: value
     };
   },
   /**
@@ -6287,29 +7136,31 @@ const Constraints = {
    * @param constraint
    * @param value
    */
-  accept: (constraint, value) => {
+  accept: function accept(constraint, value) {
     if (!constraint || constraint.length === 0 || value === null || value === undefined) {
       return {
         valid: true,
-        value
+        value: value
       };
     }
-    const tempValue = value instanceof Array ? value : [value];
-    const invalidFile = tempValue.some(file => !matchMediaType(file.type, constraint));
+    var tempValue = value instanceof Array ? value : [value];
+    var invalidFile = tempValue.some(function (file) {
+      return !matchMediaType(file.type, constraint);
+    });
     return {
       valid: !invalidFile,
-      value
+      value: value
     };
   },
   /**
    * @param constraint
    * @param value
    */
-  maxFileSize: (constraint, value) => {
-    const sizeLimit = typeof constraint === 'string' ? getFileSizeInBytes(constraint) : constraint;
+  maxFileSize: function maxFileSize(constraint, value) {
+    var sizeLimit = typeof constraint === 'string' ? getFileSizeInBytes(constraint) : constraint;
     return {
       valid: !(value instanceof FileObject) || value.size <= sizeLimit,
-      value
+      value: value
     };
   }
 };
@@ -6325,33 +7176,39 @@ var __decorate = function (decorators, target, key, desc) {
   var c = arguments.length,
     r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
     d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+    if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  }
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 /**
  * Defines a form object field which implements {@link FieldModel | field model} interface
  */
-class Field extends Scriptable {
+var Field = /*#__PURE__*/function (_Scriptable2) {
+  _inheritsLoose(Field, _Scriptable2);
   /**
    * @param params
    * @param _options
    * @private
    */
-  constructor(params, _options) {
-    super(params, _options);
-    this._ruleNodeReference = [];
-    this._applyDefaults();
-    this.queueEvent(new Initialize());
-    this.queueEvent(new ExecuteRule());
+  function Field(params, _options) {
+    var _this13;
+    _this13 = _Scriptable2.call(this, params, _options) || this;
+    _this13._ruleNodeReference = [];
+    _this13._applyDefaults();
+    _this13.queueEvent(new Initialize());
+    _this13.queueEvent(new ExecuteRule());
+    return _this13;
   }
   /**
    * @private
    */
-  _initialize() {
-    super._initialize();
+  var _proto13 = Field.prototype;
+  _proto13._initialize = function _initialize() {
+    _Scriptable2.prototype._initialize.call(this);
     this.setupRuleNode();
-  }
-  ruleNodeReference() {
+  };
+  _proto13.ruleNodeReference = function ruleNodeReference() {
     var _this$type;
     if ((_this$type = this.type) != null && _this$type.endsWith('[]')) {
       this._ruleNodeReference = [];
@@ -6359,8 +7216,8 @@ class Field extends Scriptable {
       this._ruleNodeReference = this;
     }
     return this._ruleNodeReference;
-  }
-  _getDefaults() {
+  };
+  _proto13._getDefaults = function _getDefaults() {
     return {
       readOnly: false,
       enabled: true,
@@ -6372,25 +7229,28 @@ class Field extends Scriptable {
    * Returns the fallback type to be used for this field, in case type is not defined. Otherwise returns
    * undefined
    * @protected
-   */
-  _getFallbackType() {
-    const type = this._jsonModel.type;
+   */;
+  _proto13._getFallbackType = function _getFallbackType() {
+    var type = this._jsonModel.type;
     if (typeof type !== 'string') {
-      const _enum = this.enum;
+      var _enum = this["enum"];
       return _enum && _enum.length > 0 ? typeof _enum[0] : 'string';
     }
-  }
-  _applyDefaults() {
-    Object.entries(this._getDefaults()).map(([key, value]) => {
+  };
+  _proto13._applyDefaults = function _applyDefaults() {
+    var _this14 = this;
+    Object.entries(this._getDefaults()).map(function (_ref7) {
+      var key = _ref7[0],
+        value = _ref7[1];
       //@ts-ignore
-      if (this._jsonModel[key] === undefined && value !== undefined) {
+      if (_this14._jsonModel[key] === undefined && value !== undefined) {
         //@ts-ignore
-        this._jsonModel[key] = value;
+        _this14._jsonModel[key] = value;
       }
     });
-    const value = this._jsonModel.value;
+    var value = this._jsonModel.value;
     if (value === undefined) {
-      const typedRes = Constraints.type(this.getInternalType() || 'string', this._jsonModel.default);
+      var typedRes = Constraints.type(this.getInternalType() || 'string', this._jsonModel["default"]);
       this._jsonModel.value = typedRes.value;
     }
     if (this._jsonModel.fieldType === undefined) {
@@ -6408,158 +7268,33 @@ class Field extends Scriptable {
         this._jsonModel.fieldType = defaultFieldTypes(this._jsonModel);
       }
     }
-    if (this._jsonModel.enum === undefined) {
-      const type = this._jsonModel.type;
+    if (this._jsonModel["enum"] === undefined) {
+      var type = this._jsonModel.type;
       if (type === 'boolean') {
-        this._jsonModel.enum = [true, false];
+        this._jsonModel["enum"] = [true, false];
       }
     }
     if (typeof this._jsonModel.step !== 'number' || this._jsonModel.type !== 'number') {
       this._jsonModel.step = undefined;
     }
-  }
-  get editFormat() {
-    return this._jsonModel.editFormat;
-  }
-  get displayFormat() {
-    return this._jsonModel.displayFormat;
-  }
-  get placeholder() {
-    return this._jsonModel.placeholder;
-  }
-  get readOnly() {
-    return this._jsonModel.readOnly;
-  }
-  set readOnly(e) {
-    this._setProperty('readOnly', e);
-  }
-  get language() {
-    //todo: add this in the specification and take it as a property
-    return Intl.DateTimeFormat().resolvedOptions().locale;
-  }
-  get enabled() {
-    return this._jsonModel.enabled;
-  }
-  set enabled(e) {
-    this._setProperty('enabled', e);
-  }
-  get valid() {
-    return this._jsonModel.valid;
-  }
-  get emptyValue() {
-    if (this._jsonModel.emptyValue === 'null') {
-      return null;
-    } else if (this._jsonModel.emptyValue === '' && this.type === 'string') {
-      return '';
-    } else {
-      return undefined;
-    }
-  }
-  get enum() {
-    return this._jsonModel.enum;
-  }
-  set enum(e) {
-    this._setProperty('enum', e);
-  }
-  get enumNames() {
-    return this._jsonModel.enumNames;
-  }
-  set enumNames(e) {
-    this._setProperty('enumNames', e);
-  }
-  get required() {
-    return this._jsonModel.required || false;
-  }
-  set required(r) {
-    this._setProperty('required', r);
-  }
-  get maximum() {
-    return this._jsonModel.maximum;
-  }
-  set maximum(m) {
-    this._setProperty('maximum', m);
-  }
-  get minimum() {
-    return this._jsonModel.minimum;
-  }
-  set minimum(m) {
-    this._setProperty('minimum', m);
-  }
+  };
   /**
    * returns whether the value is empty. Empty value is either a '', undefined or null
    * @private
    */
-  isEmpty() {
+  _proto13.isEmpty = function isEmpty() {
     return this._jsonModel.value === undefined || this._jsonModel.value === null || this._jsonModel.value === '';
-  }
-  get editValue() {
-    const format = this.editFormat;
-    if (this.format == 'date' && this.value != null && this.valid !== false) {
-      return lib.formatDate(new Date(this.value), this.language, format);
-    } else {
-      return this.value;
-    }
-  }
-  get displayValue() {
-    const format = this.displayFormat;
-    if (this.format == 'date' && this.value != null && this.valid !== false) {
-      return lib.formatDate(new Date(this.value), this.language, format);
-    } else {
-      return this.value;
-    }
-  }
-  getDataNodeValue(typedValue) {
+  };
+  _proto13.getDataNodeValue = function getDataNodeValue(typedValue) {
     return this.isEmpty() ? this.emptyValue : typedValue;
-  }
-  get value() {
-    if (this._jsonModel.value === undefined) {
-      return null;
-    } else {
-      return this._jsonModel.value;
-    }
-  }
-  set value(v) {
-    const Constraints = this._getConstraintObject();
-    const typeRes = Constraints.type(this.getInternalType() || 'string', v);
-    const changes = this._setProperty('value', typeRes.value, false);
-    let uniqueRes = {
-      valid: true
-    };
-    if (changes.length > 0) {
-      this._updateRuleNodeReference(typeRes.value);
-      const dataNode = this.getDataNode();
-      if (typeof dataNode !== 'undefined') {
-        dataNode.setValue(this.getDataNodeValue(this._jsonModel.value), this._jsonModel.value, this);
-      }
-      if (this.parent.uniqueItems && this.parent.type === 'array') {
-        // @ts-ignore
-        uniqueRes = Constraints.uniqueItems(this.parent.uniqueItems, this.parent.getDataNode().$value);
-      }
-      let updates;
-      if (typeRes.valid && uniqueRes.valid) {
-        updates = this.evaluateConstraints();
-      } else {
-        const _changes = {
-          'valid': typeRes.valid && uniqueRes.valid,
-          'errorMessage': typeRes.valid && uniqueRes.valid ? '' : this.getErrorMessage('type')
-        };
-        updates = this._applyUpdates(['valid', 'errorMessage'], _changes);
-      }
-      if (updates.valid) {
-        this.triggerValidationEvent(updates);
-      }
-      const changeAction = new Change({
-        changes: changes.concat(Object.values(updates))
-      });
-      this.dispatch(changeAction);
-    }
-  }
-  _updateRuleNodeReference(value) {
+  };
+  _proto13._updateRuleNodeReference = function _updateRuleNodeReference(value) {
+    var _this15 = this;
     var _this$type2;
     if ((_this$type2 = this.type) != null && _this$type2.endsWith('[]')) {
       if (value != null) {
-        value.forEach((val, index) => {
-          this._ruleNodeReference[index] = val;
+        value.forEach(function (val, index) {
+          _this15._ruleNodeReference[index] = val;
         });
         while (value.length !== this._ruleNodeReference.length) {
           this._ruleNodeReference.pop();
@@ -6570,44 +7305,44 @@ class Field extends Scriptable {
         }
       }
     }
-  }
-  getInternalType() {
+  };
+  _proto13.getInternalType = function getInternalType() {
     return this.type;
-  }
-  valueOf() {
+  };
+  _proto13.valueOf = function valueOf() {
     // @ts-ignore
-    const obj = this[target];
-    const actualField = obj === undefined ? this : obj;
+    var obj = this[target];
+    var actualField = obj === undefined ? this : obj;
     actualField.ruleEngine.trackDependency(actualField);
     return actualField._jsonModel.value || null;
-  }
-  toString() {
+  };
+  _proto13.toString = function toString() {
     var _actualField$_jsonMod;
     // @ts-ignore
-    const obj = this[target];
-    const actualField = obj === undefined ? this : obj;
+    var obj = this[target];
+    var actualField = obj === undefined ? this : obj;
     return ((_actualField$_jsonMod = actualField._jsonModel.value) == null ? void 0 : _actualField$_jsonMod.toString()) || '';
   }
   /**
    * Returns the error message for a given constraint
    * @param constraint
-   */
-  getErrorMessage(constraint) {
+   */;
+  _proto13.getErrorMessage = function getErrorMessage(constraint) {
     var _this$_jsonModel$cons;
     return ((_this$_jsonModel$cons = this._jsonModel.constraintMessages) == null ? void 0 : _this$_jsonModel$cons[constraint]) || '';
   }
   /**
    *
    * @private
-   */
-  _getConstraintObject() {
+   */;
+  _proto13._getConstraintObject = function _getConstraintObject() {
     return Constraints;
   }
   /**
    * returns whether the field is array type or not
    * @private
-   */
-  isArrayType() {
+   */;
+  _proto13.isArrayType = function isArrayType() {
     return this.type ? this.type.indexOf('[]') > -1 : false;
   }
   /**
@@ -6615,14 +7350,17 @@ class Field extends Scriptable {
    * @param value
    * @param constraints
    * @private
-   */
-  checkEnum(value, constraints) {
+   */;
+  _proto13.checkEnum = function checkEnum(value, constraints) {
+    var _this16 = this;
     if (this._jsonModel.enforceEnum === true && value != null) {
-      const fn = constraints.enum;
+      var fn = constraints["enum"];
       if (value instanceof Array && this.isArrayType()) {
-        return value.every(x => fn(this.enum || [], x).valid);
+        return value.every(function (x) {
+          return fn(_this16["enum"] || [], x).valid;
+        });
       } else {
-        return fn(this.enum || [], value).valid;
+        return fn(this["enum"] || [], value).valid;
       }
     }
     return true;
@@ -6633,11 +7371,11 @@ class Field extends Scriptable {
    * initialValue + n * step = value
    * @param constraints
    * @private
-   */
-  checkStep() {
-    const value = this._jsonModel.value;
+   */;
+  _proto13.checkStep = function checkStep() {
+    var value = this._jsonModel.value;
     if (typeof this._jsonModel.step === 'number') {
-      const initialValue = this._jsonModel.minimum || this._jsonModel.default || 0;
+      var initialValue = this._jsonModel.minimum || this._jsonModel["default"] || 0;
       return (value - initialValue) % this._jsonModel.step === 0;
     }
     return true;
@@ -6645,8 +7383,8 @@ class Field extends Scriptable {
   /**
    * checks whether the validation expression returns a boolean value or not
    * @private
-   */
-  checkValidationExpression() {
+   */;
+  _proto13.checkValidationExpression = function checkValidationExpression() {
     if (typeof this._jsonModel.validationExpression === 'string') {
       return this.executeExpression(this._jsonModel.validationExpression);
     }
@@ -6655,8 +7393,8 @@ class Field extends Scriptable {
   /**
    * Returns the applicable constraints for a given type
    * @private
-   */
-  getConstraints() {
+   */;
+  _proto13.getConstraints = function getConstraints() {
     switch (this.type) {
       case 'string':
         switch (this.format) {
@@ -6682,36 +7420,36 @@ class Field extends Scriptable {
   }
   /**
    * returns the format constraint
-   */
-  get format() {
-    return this._jsonModel.format || '';
-  }
+   */;
   /**
    * @private
    */
-  evaluateConstraints() {
-    let constraint = 'type';
-    const elem = this._jsonModel;
-    const value = this._jsonModel.value;
-    const Constraints = this._getConstraintObject();
-    const supportedConstraints = this.getConstraints();
-    let valid = true;
+  _proto13.evaluateConstraints = function evaluateConstraints() {
+    var _this17 = this;
+    var constraint = 'type';
+    var elem = this._jsonModel;
+    var value = this._jsonModel.value;
+    var Constraints = this._getConstraintObject();
+    var supportedConstraints = this.getConstraints();
+    var valid = true;
     if (valid) {
       valid = Constraints.required(this.required, value).valid && (this.isArrayType() && this.required ? value.length > 0 : true);
       constraint = 'required';
     }
     if (valid && value != this.emptyValue) {
-      const invalidConstraint = supportedConstraints.find(key => {
+      var invalidConstraint = supportedConstraints.find(function (key) {
         if (key in elem) {
           // @ts-ignore
-          const restriction = elem[key];
+          var restriction = elem[key];
           // @ts-ignore
-          const fn = Constraints[key];
-          if (value instanceof Array && this.isArrayType()) {
+          var fn = Constraints[key];
+          if (value instanceof Array && _this17.isArrayType()) {
             if (ValidConstraints.array.indexOf(key) !== -1) {
               return !fn(restriction, value).valid;
             } else {
-              return value.some(x => !fn(restriction, x).valid);
+              return value.some(function (x) {
+                return !fn(restriction, x).valid;
+              });
             }
           } else if (typeof fn === 'function') {
             return !fn(restriction, value).valid;
@@ -6740,15 +7478,15 @@ class Field extends Scriptable {
     }
     if (!valid) {
       //@ts-ignore
-      this.form.logger.log(`${constraint} constraint evaluation failed ${this[constraint]}. Received ${this._jsonModel.value}`);
+      this.form.logger.log(constraint + " constraint evaluation failed " + this[constraint] + ". Received " + this._jsonModel.value);
     }
-    const changes = {
+    var changes = {
       'valid': valid,
       'errorMessage': valid ? '' : this.getErrorMessage(constraint)
     };
     return this._applyUpdates(['valid', 'errorMessage'], changes);
-  }
-  triggerValidationEvent(changes) {
+  };
+  _proto13.triggerValidationEvent = function triggerValidationEvent(changes) {
     if (changes.valid) {
       if (this.valid) {
         this.dispatch(new Valid());
@@ -6759,9 +7497,9 @@ class Field extends Scriptable {
   }
   /**
    * Validates the current form object
-   */
-  validate() {
-    const changes = this.evaluateConstraints();
+   */;
+  _proto13.validate = function validate() {
+    var changes = this.evaluateConstraints();
     if (changes.valid) {
       this.triggerValidationEvent(changes);
       this.notifyDependents(new Change({
@@ -6769,13 +7507,13 @@ class Field extends Scriptable {
       }));
     }
     return this.valid ? [] : [new ValidationError(this.id, [this._jsonModel.errorMessage])];
-  }
-  importData(contextualDataModel) {
+  };
+  _proto13.importData = function importData(contextualDataModel) {
     this._bindToDataModel(contextualDataModel);
-    const dataNode = this.getDataNode();
+    var dataNode = this.getDataNode();
     // only if the value has changed, queue change event
     if (dataNode !== undefined && dataNode !== NullDataValue && dataNode.$value !== this._jsonModel.value) {
-      const changeAction = propertyChange('value', dataNode.$value, this._jsonModel.value);
+      var changeAction = propertyChange('value', dataNode.$value, this._jsonModel.value);
       this._jsonModel.value = dataNode.$value;
       this.queueEvent(changeAction);
     }
@@ -6783,17 +7521,182 @@ class Field extends Scriptable {
   /**
    * @param name
    * @private
-   */
-  defaultDataModel(name) {
+   */;
+  _proto13.defaultDataModel = function defaultDataModel(name) {
     return new DataValue(name, this.getDataNodeValue(this._jsonModel.value), this.type || 'string');
-  }
-  getState() {
-    return _extends({}, super.getState(), {
+  };
+  _proto13.getState = function getState() {
+    return _extends({}, _Scriptable2.prototype.getState.call(this), {
       editValue: this.editValue,
       displayValue: this.displayValue
     });
-  }
-}
+  };
+  _createClass(Field, [{
+    key: "editFormat",
+    get: function get() {
+      return this._jsonModel.editFormat;
+    }
+  }, {
+    key: "displayFormat",
+    get: function get() {
+      return this._jsonModel.displayFormat;
+    }
+  }, {
+    key: "placeholder",
+    get: function get() {
+      return this._jsonModel.placeholder;
+    }
+  }, {
+    key: "readOnly",
+    get: function get() {
+      return this._jsonModel.readOnly;
+    },
+    set: function set(e) {
+      this._setProperty('readOnly', e);
+    }
+  }, {
+    key: "language",
+    get: function get() {
+      //todo: add this in the specification and take it as a property
+      return Intl.DateTimeFormat().resolvedOptions().locale;
+    }
+  }, {
+    key: "enabled",
+    get: function get() {
+      return this._jsonModel.enabled;
+    },
+    set: function set(e) {
+      this._setProperty('enabled', e);
+    }
+  }, {
+    key: "valid",
+    get: function get() {
+      return this._jsonModel.valid;
+    }
+  }, {
+    key: "emptyValue",
+    get: function get() {
+      if (this._jsonModel.emptyValue === 'null') {
+        return null;
+      } else if (this._jsonModel.emptyValue === '' && this.type === 'string') {
+        return '';
+      } else {
+        return undefined;
+      }
+    }
+  }, {
+    key: "enum",
+    get: function get() {
+      return this._jsonModel["enum"];
+    },
+    set: function set(e) {
+      this._setProperty('enum', e);
+    }
+  }, {
+    key: "enumNames",
+    get: function get() {
+      return this._jsonModel.enumNames;
+    },
+    set: function set(e) {
+      this._setProperty('enumNames', e);
+    }
+  }, {
+    key: "required",
+    get: function get() {
+      return this._jsonModel.required || false;
+    },
+    set: function set(r) {
+      this._setProperty('required', r);
+    }
+  }, {
+    key: "maximum",
+    get: function get() {
+      return this._jsonModel.maximum;
+    },
+    set: function set(m) {
+      this._setProperty('maximum', m);
+    }
+  }, {
+    key: "minimum",
+    get: function get() {
+      return this._jsonModel.minimum;
+    },
+    set: function set(m) {
+      this._setProperty('minimum', m);
+    }
+  }, {
+    key: "editValue",
+    get: function get() {
+      var format = this.editFormat;
+      if (this.format == 'date' && this.value != null && this.valid !== false) {
+        return lib.formatDate(new Date(this.value), this.language, format);
+      } else {
+        return this.value;
+      }
+    }
+  }, {
+    key: "displayValue",
+    get: function get() {
+      var format = this.displayFormat;
+      if (this.format == 'date' && this.value != null && this.valid !== false) {
+        return lib.formatDate(new Date(this.value), this.language, format);
+      } else {
+        return this.value;
+      }
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      if (this._jsonModel.value === undefined) {
+        return null;
+      } else {
+        return this._jsonModel.value;
+      }
+    },
+    set: function set(v) {
+      var Constraints = this._getConstraintObject();
+      var typeRes = Constraints.type(this.getInternalType() || 'string', v);
+      var changes = this._setProperty('value', typeRes.value, false);
+      var uniqueRes = {
+        valid: true
+      };
+      if (changes.length > 0) {
+        this._updateRuleNodeReference(typeRes.value);
+        var dataNode = this.getDataNode();
+        if (typeof dataNode !== 'undefined') {
+          dataNode.setValue(this.getDataNodeValue(this._jsonModel.value), this._jsonModel.value, this);
+        }
+        if (this.parent.uniqueItems && this.parent.type === 'array') {
+          // @ts-ignore
+          uniqueRes = Constraints.uniqueItems(this.parent.uniqueItems, this.parent.getDataNode().$value);
+        }
+        var updates;
+        if (typeRes.valid && uniqueRes.valid) {
+          updates = this.evaluateConstraints();
+        } else {
+          var _changes = {
+            'valid': typeRes.valid && uniqueRes.valid,
+            'errorMessage': typeRes.valid && uniqueRes.valid ? '' : this.getErrorMessage('type')
+          };
+          updates = this._applyUpdates(['valid', 'errorMessage'], _changes);
+        }
+        if (updates.valid) {
+          this.triggerValidationEvent(updates);
+        }
+        var changeAction = new Change({
+          changes: changes.concat(Object.values(updates))
+        });
+        this.dispatch(changeAction);
+      }
+    }
+  }, {
+    key: "format",
+    get: function get() {
+      return this._jsonModel.format || '';
+    }
+  }]);
+  return Field;
+}(Scriptable);
 __decorate([dependencyTracked()], Field.prototype, "readOnly", null);
 __decorate([dependencyTracked()], Field.prototype, "enabled", null);
 __decorate([dependencyTracked()], Field.prototype, "valid", null);
@@ -6802,40 +7705,20 @@ __decorate([dependencyTracked()], Field.prototype, "enumNames", null);
 __decorate([dependencyTracked()], Field.prototype, "required", null);
 __decorate([dependencyTracked()], Field.prototype, "value", null);
 function addNameToDataURL(dataURL, name) {
-  return dataURL.replace(';base64', `;name=${encodeURIComponent(name)};base64`);
+  return dataURL.replace(';base64', ";name=" + encodeURIComponent(name) + ";base64");
 }
 function processFiles(files) {
   return Promise.all([].map.call(files, processFile));
 }
-async function processFile(file) {
-  const {
-    name,
-    size,
-    type
-  } = file;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const fileObj = await new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = event => {
-      resolve(new FileObject({
-        // @ts-ignore
-        data: addNameToDataURL(event.target.result, name),
-        type,
-        name,
-        size
-      }));
-    };
-    reader.readAsDataURL(file.data);
-  });
-  return fileObj;
-}
-/**
- * Implementation of FileUpload runtime model which extends from {@link Field | field}
- */
-class FileUpload extends Field {
+var FileUpload = /*#__PURE__*/function (_Field) {
+  _inheritsLoose(FileUpload, _Field);
+  function FileUpload() {
+    return _Field.apply(this, arguments) || this;
+  }
+  var _proto14 = FileUpload.prototype;
   //private _files: FileObject[];
-  _getDefaults() {
-    return _extends({}, super._getDefaults(), {
+  _proto14._getDefaults = function _getDefaults() {
+    return _extends({}, _Field.prototype._getDefaults.call(this), {
       accept: ['audio/*', 'video/*', 'image/*', 'text/*', 'application/pdf'],
       maxFileSize: '2MB',
       type: 'file'
@@ -6843,85 +7726,81 @@ class FileUpload extends Field {
   }
   /**
    * Returns the max file size in bytes as per IEC specification
-   */
-  get maxFileSize() {
-    return getFileSizeInBytes(this._jsonModel.maxFileSize);
-  }
-  /**
-   * Returns the list of mime types which file attachment can accept
-   */
-  get accept() {
-    return this._jsonModel.accept;
-  }
+   */;
   /**
    * Checks whether there are any updates in the properties
    * @param propNames
    * @param updates
    * @private
    */
-  _applyUpdates(propNames, updates) {
-    return propNames.reduce((acc, propertyName) => {
+  _proto14._applyUpdates = function _applyUpdates(propNames, updates) {
+    var _this18 = this;
+    return propNames.reduce(function (acc, propertyName) {
       //@ts-ignore
-      const prevValue = this._jsonModel[propertyName];
-      const currentValue = updates[propertyName];
+      var prevValue = _this18._jsonModel[propertyName];
+      var currentValue = updates[propertyName];
       if (currentValue !== prevValue) {
         acc[propertyName] = {
-          propertyName,
-          currentValue,
-          prevValue
+          propertyName: propertyName,
+          currentValue: currentValue,
+          prevValue: prevValue
         };
         if (prevValue instanceof FileObject && typeof currentValue === 'object' && propertyName === 'value') {
           // @ts-ignore
-          this._jsonModel[propertyName] = new FileObject(_extends({}, prevValue, {
+          _this18._jsonModel[propertyName] = new FileObject(_extends({}, prevValue, {
             'data': currentValue.data
           }));
         } else {
           // @ts-ignore
-          this._jsonModel[propertyName] = currentValue;
+          _this18._jsonModel[propertyName] = currentValue;
         }
       }
       return acc;
     }, {});
-  }
-  getInternalType() {
+  };
+  _proto14.getInternalType = function getInternalType() {
     var _this$type;
     return (_this$type = this.type) != null && _this$type.endsWith('[]') ? 'file[]' : 'file';
-  }
-  getDataNodeValue(typedValue) {
-    let dataNodeValue = typedValue;
+  };
+  _proto14.getDataNodeValue = function getDataNodeValue(typedValue) {
+    var dataNodeValue = typedValue;
     if (dataNodeValue != null) {
       if (this.type === 'string') {
         var _dataNodeValue$data;
         dataNodeValue = (_dataNodeValue$data = dataNodeValue.data) == null ? void 0 : _dataNodeValue$data.toString();
       } else if (this.type === 'string[]') {
         dataNodeValue = dataNodeValue instanceof Array ? dataNodeValue : [dataNodeValue];
-        dataNodeValue = dataNodeValue.map(_ => {
+        dataNodeValue = dataNodeValue.map(function (_) {
           var _$data;
           return _ == null ? void 0 : (_$data = _.data) == null ? void 0 : _$data.toString();
         });
       }
     }
     return dataNodeValue;
-  }
-  async _serialize() {
-    const val = this._jsonModel.value;
-    if (val === undefined) {
-      return null;
+  };
+  _proto14._serialize = function _serialize() {
+    try {
+      var _this20 = this;
+      var val = _this20._jsonModel.value;
+      if (val === undefined) {
+        return Promise.resolve(null);
+      }
+      // @ts-ignore
+      return Promise.resolve(processFiles(val instanceof Array ? val : [val]));
+    } catch (e) {
+      return Promise.reject(e);
     }
-    // @ts-ignore
-    const filesInfo = await processFiles(val instanceof Array ? val : [val]);
-    return filesInfo;
-  }
-  importData(dataModel) {
+  };
+  _proto14.importData = function importData(dataModel) {
     this._bindToDataModel(dataModel);
-    const dataNode = this.getDataNode();
+    var dataNode = this.getDataNode();
     if (dataNode !== undefined) {
-      const value = dataNode == null ? void 0 : dataNode.$value;
+      var _value2 = dataNode == null ? void 0 : dataNode.$value;
       // only if not undefined, proceed further
-      if (value != null) {
-        const res = Constraints.type(this.getInternalType(), value);
+      if (_value2 != null) {
+        var res = Constraints.type(this.getInternalType(), _value2);
         if (!res.valid) {
-          this.form.logger.error(`unable to bind ${this.name} to data`);
+          this.form.logger.error("unable to bind " + this.name + " to data");
         }
         // is this needed ?
         this.form.getEventQueue().queue(this, propertyChange('value', res.value, this._jsonModel.value));
@@ -6930,79 +7809,105 @@ class FileUpload extends Field {
         this._jsonModel.value = null;
       }
     }
-  }
-}
-
+  };
+  _createClass(FileUpload, [{
+    key: "maxFileSize",
+    get: function get() {
+      return getFileSizeInBytes(this._jsonModel.maxFileSize);
+    }
+    /**
+     * Returns the list of mime types which file attachment can accept
+     */
+  }, {
+    key: "accept",
+    get: function get() {
+      return this._jsonModel.accept;
+    }
+  }]);
+  return FileUpload;
+}(Field);
 /**
  * @param offValue
  * @private
  */
-const requiredConstraint = offValue => (constraint, value) => {
-  const valid = Constraints.required(constraint, value).valid && (!constraint || value != offValue);
-  return {
-    valid,
-    value
+var requiredConstraint = function requiredConstraint(offValue) {
+  return function (constraint, value) {
+    var valid = Constraints.required(constraint, value).valid && (!constraint || value != offValue);
+    return {
+      valid: valid,
+      value: value
+    };
   };
 };
 /**
  * Implementation of check box runtime model which extends from {@link Field | field} model
  */
-class Checkbox extends Field {
-  offValue() {
-    const opts = this.enum;
+var Checkbox = /*#__PURE__*/function (_Field2) {
+  _inheritsLoose(Checkbox, _Field2);
+  function Checkbox() {
+    return _Field2.apply(this, arguments) || this;
+  }
+  var _proto15 = Checkbox.prototype;
+  _proto15.offValue = function offValue() {
+    var opts = this["enum"];
     return opts.length > 1 ? opts[1] : null;
   }
   /**
    * @private
-   */
-  _getConstraintObject() {
-    const baseConstraints = _extends({}, super._getConstraintObject());
+   */;
+  _proto15._getConstraintObject = function _getConstraintObject() {
+    var baseConstraints = _extends({}, _Field2.prototype._getConstraintObject.call(this));
     baseConstraints.required = requiredConstraint(this.offValue());
     return baseConstraints;
-  }
-  _getDefaults() {
-    return _extends({}, super._getDefaults(), {
+  };
+  _proto15._getDefaults = function _getDefaults() {
+    return _extends({}, _Field2.prototype._getDefaults.call(this), {
       enforceEnum: true
     });
   }
   /**
    * Returns the `enum` constraints from the json
-   */
-  get enum() {
-    return this._jsonModel.enum || [];
-  }
-}
-
+   */;
+  _createClass(Checkbox, [{
+    key: "enum",
+    get: function get() {
+      return this._jsonModel["enum"] || [];
+    }
+  }]);
+  return Checkbox;
+}(Field);
 /**
  * Implementation of CheckBoxGroup runtime model which extends from {@link Field | field}
  */
-class CheckboxGroup extends Field {
+var CheckboxGroup = /*#__PURE__*/function (_Field3) {
+  _inheritsLoose(CheckboxGroup, _Field3);
   /**
    * @param params
    * @param _options
    * @private
    */
-  constructor(params, _options) {
-    super(params, _options);
+  function CheckboxGroup(params, _options) {
+    return _Field3.call(this, params, _options) || this;
   }
   /**
    * converts the fallback type, if required, to an array. Since checkbox-group has an array type
    * @protected
    */
-  _getFallbackType() {
-    const fallbackType = super._getFallbackType();
+  var _proto16 = CheckboxGroup.prototype;
+  _proto16._getFallbackType = function _getFallbackType() {
+    var fallbackType = _Field3.prototype._getFallbackType.call(this);
     if (typeof fallbackType === 'string') {
-      return `${fallbackType}[]`;
+      return fallbackType + "[]";
     }
-  }
-  _getDefaults() {
-    return _extends({}, super._getDefaults(), {
+  };
+  _proto16._getDefaults = function _getDefaults() {
+    return _extends({}, _Field3.prototype._getDefaults.call(this), {
       enforceEnum: true,
-      enum: []
+      "enum": []
     });
-  }
-}
-
+  };
+  return CheckboxGroup;
+}(Field);
 /*
  *
  *  * Copyright 2022 Adobe, Inc.
@@ -7012,10 +7917,15 @@ class CheckboxGroup extends Field {
  *  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-class DateField extends Field {
-  _applyDefaults() {
-    super._applyDefaults();
-    const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
+var DateField = /*#__PURE__*/function (_Field4) {
+  _inheritsLoose(DateField, _Field4);
+  function DateField() {
+    return _Field4.apply(this, arguments) || this;
+  }
+  var _proto17 = DateField.prototype;
+  _proto17._applyDefaults = function _applyDefaults() {
+    _Field4.prototype._applyDefaults.call(this);
+    var locale = new Intl.DateTimeFormat().resolvedOptions().locale;
     if (!this._jsonModel.editFormat) {
       this._jsonModel.editFormat = 'short';
     }
@@ -7026,11 +7936,11 @@ class DateField extends Field {
       this._jsonModel.placeholder = lib.getSkeleton(this._jsonModel.editFormat, locale);
     }
     if (!this._jsonModel.description) {
-      this._jsonModel.description = `To enter today's date use ${lib.formatDate(new Date(), locale, this._jsonModel.editFormat)}`;
+      this._jsonModel.description = "To enter today's date use " + lib.formatDate(new Date(), locale, this._jsonModel.editFormat);
     }
-  }
-}
-
+  };
+  return DateField;
+}(Field);
 /*
  * Copyright 2022 Adobe, Inc.
  *
@@ -7044,8 +7954,8 @@ class DateField extends Field {
  * @param options
  * @private
  */
-const createChild = (child, options) => {
-  let retVal;
+var createChild = function createChild(child, options) {
+  var retVal;
   if ('items' in child) {
     retVal = new Fieldset(child, options);
   } else {
@@ -7065,70 +7975,88 @@ const createChild = (child, options) => {
   options.form.fieldAdded(retVal);
   return retVal;
 };
-const defaults = {
+var defaults = {
   visible: true
 };
 /**
  * Defines a field set class which extends from {@link Container | container}
  */
-class Fieldset extends Container {
+var Fieldset = /*#__PURE__*/function (_Container) {
+  _inheritsLoose(Fieldset, _Container);
   /**
    * @param params
    * @param _options
    * @private
    */
-  constructor(params, _options) {
-    super(params, _options);
-    this._applyDefaults();
-    this.queueEvent(new Initialize());
-    this.queueEvent(new ExecuteRule());
+  function Fieldset(params, _options) {
+    var _this21;
+    _this21 = _Container.call(this, params, _options) || this;
+    _this21._applyDefaults();
+    _this21.queueEvent(new Initialize());
+    _this21.queueEvent(new ExecuteRule());
+    return _this21;
   }
-  _applyDefaults() {
-    Object.entries(defaults).map(([key, value]) => {
+  var _proto18 = Fieldset.prototype;
+  _proto18._applyDefaults = function _applyDefaults() {
+    var _this22 = this;
+    Object.entries(defaults).map(function (_ref8) {
+      var key = _ref8[0],
+        value = _ref8[1];
       //@ts-ignore
-      if (this._jsonModel[key] === undefined) {
+      if (_this22._jsonModel[key] === undefined) {
         //@ts-ignore
-        this._jsonModel[key] = value;
+        _this22._jsonModel[key] = value;
       }
     });
     if (this._jsonModel.dataRef && this._jsonModel.type === undefined) {
       this._jsonModel.type = 'object';
     }
-  }
-  get type() {
-    const ret = super.type;
-    if (ret === 'array' || ret === 'object') {
-      return ret;
-    }
-    return undefined;
-  }
+  };
   // @ts-ignore
-  _createChild(child, options) {
-    const {
-      parent = this
-    } = options;
+  _proto18._createChild = function _createChild(child, options) {
+    var _options$parent2 = options.parent,
+      parent = _options$parent2 === void 0 ? this : _options$parent2;
     return createChild(child, {
       form: this.form,
       parent: parent
     });
-  }
-  get items() {
-    return super.items;
-  }
-  get value() {
-    return null;
-  }
-  get fieldType() {
-    return 'panel';
-  }
-  get enabled() {
-    return this._jsonModel.enabled;
-  }
-  set enabled(e) {
-    this._setProperty('enabled', e);
-  }
-}
-const levels = {
+  };
+  _createClass(Fieldset, [{
+    key: "type",
+    get: function get() {
+      var ret = _Container.prototype.type;
+      if (ret === 'array' || ret === 'object') {
+        return ret;
+      }
+      return undefined;
+    }
+  }, {
+    key: "items",
+    get: function get() {
+      return _Container.prototype.items;
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "fieldType",
+    get: function get() {
+      return 'panel';
+    }
+  }, {
+    key: "enabled",
+    get: function get() {
+      return this._jsonModel.enabled;
+    },
+    set: function set(e) {
+      this._setProperty('enabled', e);
+    }
+  }]);
+  return Fieldset;
+}(Container);
+var levels = {
   off: 0,
   debug: 1,
   info: 2,
@@ -7138,29 +8066,33 @@ const levels = {
 /**
  * @private
  */
-class Logger {
-  debug(msg) {
+var Logger = /*#__PURE__*/function () {
+  var _proto19 = Logger.prototype;
+  _proto19.debug = function debug(msg) {
     this.log(msg, 'debug');
-  }
-  info(msg) {
+  };
+  _proto19.info = function info(msg) {
     this.log(msg, 'info');
-  }
-  warn(msg) {
+  };
+  _proto19.warn = function warn(msg) {
     this.log(msg, 'warn');
-  }
-  error(msg) {
+  };
+  _proto19.error = function error(msg) {
     this.log(msg, 'error');
-  }
-  log(msg, level) {
+  };
+  _proto19.log = function log(msg, level) {
     if (this.logLevel !== 0 && this.logLevel <= levels[level]) {
       console[level](msg);
     }
-  }
-  constructor(logLevel = 'off') {
+  };
+  function Logger(logLevel) {
+    if (logLevel === void 0) {
+      logLevel = 'off';
+    }
     this.logLevel = levels[logLevel];
   }
-}
-
+  return Logger;
+}();
 /*
  * Copyright 2022 Adobe, Inc.
  *
@@ -7172,90 +8104,113 @@ class Logger {
  * Implementation of event node
  * @private
  */
-class EventNode {
-  constructor(_node, _event) {
+var EventNode = /*#__PURE__*/function () {
+  function EventNode(_node, _event) {
     this._node = _node;
     this._event = _event;
   }
-  get node() {
-    return this._node;
-  }
-  get event() {
-    return this._event;
-  }
-  isEqual(that) {
+  var _proto20 = EventNode.prototype;
+  _proto20.isEqual = function isEqual(that) {
     return that !== null && that !== undefined && this._node == that._node && this._event.type == that._event.type;
-  }
-  toString() {
+  };
+  _proto20.toString = function toString() {
     return this._node.id + '__' + this.event.type;
-  }
-  valueOf() {
+  };
+  _proto20.valueOf = function valueOf() {
     return this.toString();
-  }
-}
+  };
+  _createClass(EventNode, [{
+    key: "node",
+    get: function get() {
+      return this._node;
+    }
+  }, {
+    key: "event",
+    get: function get() {
+      return this._event;
+    }
+  }]);
+  return EventNode;
+}();
 /**
  * Implementation of event queue. When a user event, like change or click, is captured the expression to be evaluated
  * must be put in an Event Queue and then evaluated.
  * @private
  */
-class EventQueue {
-  constructor(logger = new Logger('off')) {
+var EventQueue = /*#__PURE__*/function () {
+  function EventQueue(logger) {
+    if (logger === void 0) {
+      logger = new Logger('off');
+    }
     this._isProcessing = false;
     this._pendingEvents = [];
     this.logger = logger;
     this._runningEventCount = {};
   }
-  get length() {
-    return this._pendingEvents.length;
-  }
-  get isProcessing() {
-    return this._isProcessing;
-  }
-  isQueued(node, event) {
-    const evntNode = new EventNode(node, event);
-    return this._pendingEvents.find(x => evntNode.isEqual(x)) !== undefined;
-  }
-  queue(node, events, priority = false) {
+  var _proto21 = EventQueue.prototype;
+  _proto21.isQueued = function isQueued(node, event) {
+    var evntNode = new EventNode(node, event);
+    return this._pendingEvents.find(function (x) {
+      return evntNode.isEqual(x);
+    }) !== undefined;
+  };
+  _proto21.queue = function queue(node, events, priority) {
+    var _this23 = this;
+    if (priority === void 0) {
+      priority = false;
+    }
     if (!node || !events) {
       return;
     }
     if (!(events instanceof Array)) {
       events = [events];
     }
-    events.forEach(e => {
-      const evntNode = new EventNode(node, e);
-      const counter = this._runningEventCount[evntNode.valueOf()] || 0;
+    events.forEach(function (e) {
+      var evntNode = new EventNode(node, e);
+      var counter = _this23._runningEventCount[evntNode.valueOf()] || 0;
       if (counter < EventQueue.MAX_EVENT_CYCLE_COUNT) {
-        this.logger.info(`Queued event : ${e.type} node: ${node.id} - ${node.name}`);
+        _this23.logger.info("Queued event : " + e.type + " node: " + node.id + " - " + node.name);
         //console.log(`Event Details ${e.toString()}`)
         if (priority) {
-          const index = this._isProcessing ? 1 : 0;
-          this._pendingEvents.splice(index, 0, evntNode);
+          var index = _this23._isProcessing ? 1 : 0;
+          _this23._pendingEvents.splice(index, 0, evntNode);
         } else {
-          this._pendingEvents.push(evntNode);
+          _this23._pendingEvents.push(evntNode);
         }
-        this._runningEventCount[evntNode.valueOf()] = counter + 1;
+        _this23._runningEventCount[evntNode.valueOf()] = counter + 1;
       } else {
-        this.logger.info(`Skipped queueing event : ${e.type} node: ${node.id} - ${node.name} with count=${counter}`);
+        _this23.logger.info("Skipped queueing event : " + e.type + " node: " + node.id + " - " + node.name + " with count=" + counter);
       }
     });
-  }
-  runPendingQueue() {
+  };
+  _proto21.runPendingQueue = function runPendingQueue() {
     if (this._isProcessing) {
       return;
     }
     this._isProcessing = true;
     while (this._pendingEvents.length > 0) {
-      const e = this._pendingEvents[0];
-      this.logger.info(`Dequeued event : ${e.event.type} node: ${e.node.id} - ${e.node.name}`);
+      var e = this._pendingEvents[0];
+      this.logger.info("Dequeued event : " + e.event.type + " node: " + e.node.id + " - " + e.node.name);
       //console.log(`Event Details ${e.event.toString()}`);
       e.node.executeAction(e.event);
       this._pendingEvents.shift();
     }
     this._runningEventCount = {};
     this._isProcessing = false;
-  }
-}
+  };
+  _createClass(EventQueue, [{
+    key: "length",
+    get: function get() {
+      return this._pendingEvents.length;
+    }
+  }, {
+    key: "isProcessing",
+    get: function get() {
+      return this._isProcessing;
+    }
+  }]);
+  return EventQueue;
+}();
 EventQueue.MAX_EVENT_CYCLE_COUNT = 10;
 
 /*
@@ -7265,11 +8220,17 @@ EventQueue.MAX_EVENT_CYCLE_COUNT = 10;
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ADOBE NOR ITS THIRD PARTY PROVIDERS AND PARTNERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-const request$1 = (url, data = null, options = {}) => {
-  const opts = _extends({}, defaultRequestOptions, options);
+var request$1 = function request$1(url, data, options) {
+  if (data === void 0) {
+    data = null;
+  }
+  if (options === void 0) {
+    options = {};
+  }
+  var opts = _extends({}, defaultRequestOptions, options);
   return fetch(url, _extends({}, opts, {
     body: data
-  })).then(response => {
+  })).then(function (response) {
     var _response$headers$get;
     if (!response.ok) {
       throw new Error(response.statusText);
@@ -7281,11 +8242,11 @@ const request$1 = (url, data = null, options = {}) => {
     }
   });
 };
-const defaultRequestOptions = {
+var defaultRequestOptions = {
   method: 'GET'
 };
-const getCustomEventName = name => {
-  const eName = name;
+var getCustomEventName = function getCustomEventName(name) {
+  var eName = name;
   if (eName.length > 0 && eName.startsWith('custom:')) {
     return eName.substring('custom:'.length);
   }
@@ -7302,56 +8263,69 @@ const getCustomEventName = name => {
  * @param headers                   headers
  * @private
  */
-const request = async (context, uri, httpVerb, payload, success, error, headers) => {
-  const endpoint = uri;
-  const requestOptions = {
-    method: httpVerb
-  };
-  let result;
-  let inputPayload;
+var request = function request(context, uri, httpVerb, payload, success, error, headers) {
   try {
-    if (payload && payload instanceof FileObject && payload.data instanceof File) {
-      // todo: have to implement array type
-      const formData = new FormData();
-      formData.append(payload.name, payload.data);
-      inputPayload = formData;
-    } else if (payload instanceof FormData) {
-      inputPayload = payload;
-    } else if (payload && typeof payload === 'object' && Object.keys(payload).length > 0) {
-      var _requestOptions$heade;
-      const headerNames = Object.keys(headers);
-      if (headerNames.length > 0) {
-        requestOptions.headers = _extends({}, headers, headerNames.indexOf('Content-Type') === -1 ? {
-          'Content-Type': 'application/json'
-        } : {});
-      } else {
-        requestOptions.headers = {
-          'Content-Type': 'application/json'
-        };
+    var _temp3 = function _temp3(_result2) {
+      if (_exit2) return _result2;
+      var eName = getCustomEventName(success);
+      context.form.dispatch(new CustomEvent$1(eName, result, true));
+    };
+    var _exit2;
+    var endpoint = uri;
+    var requestOptions = {
+      method: httpVerb
+    };
+    var result;
+    var inputPayload;
+    var _temp4 = _catch(function () {
+      if (payload && payload instanceof FileObject && payload.data instanceof File) {
+        // todo: have to implement array type
+        var formData = new FormData();
+        formData.append(payload.name, payload.data);
+        inputPayload = formData;
+      } else if (payload instanceof FormData) {
+        inputPayload = payload;
+      } else if (payload && typeof payload === 'object' && Object.keys(payload).length > 0) {
+        var _requestOptions$heade;
+        var headerNames = Object.keys(headers);
+        if (headerNames.length > 0) {
+          requestOptions.headers = _extends({}, headers, headerNames.indexOf('Content-Type') === -1 ? {
+            'Content-Type': 'application/json'
+          } : {});
+        } else {
+          requestOptions.headers = {
+            'Content-Type': 'application/json'
+          };
+        }
+        var contentType = (requestOptions == null ? void 0 : (_requestOptions$heade = requestOptions.headers) == null ? void 0 : _requestOptions$heade['Content-Type']) || 'application/json';
+        if (contentType === 'application/json') {
+          inputPayload = JSON.stringify(payload);
+        } else if (contentType.indexOf('multipart/form-data') > -1) {
+          inputPayload = multipartFormData(payload);
+        } else if (contentType.indexOf('application/x-www-form-urlencoded') > -1) {
+          inputPayload = urlEncoded(payload);
+        }
       }
-      const contentType = (requestOptions == null ? void 0 : (_requestOptions$heade = requestOptions.headers) == null ? void 0 : _requestOptions$heade['Content-Type']) || 'application/json';
-      if (contentType === 'application/json') {
-        inputPayload = JSON.stringify(payload);
-      } else if (contentType.indexOf('multipart/form-data') > -1) {
-        inputPayload = multipartFormData(payload);
-      } else if (contentType.indexOf('application/x-www-form-urlencoded') > -1) {
-        inputPayload = urlEncoded(payload);
-      }
-    }
-    result = await request$1(endpoint, inputPayload, requestOptions);
+      return Promise.resolve(request$1(endpoint, inputPayload, requestOptions)).then(function (_request$) {
+        result = _request$;
+      });
+    }, function () {
+      //todo: define error payload
+      context.form.logger.error('Error invoking a rest API');
+      var _eName = getCustomEventName(error);
+      context.form.dispatch(new CustomEvent$1(_eName, {}, true));
+      _exit2 = 1;
+    });
+    return Promise.resolve(_temp4 && _temp4.then ? _temp4.then(_temp3) : _temp3(_temp4));
   } catch (e) {
-    //todo: define error payload
-    context.form.logger.error('Error invoking a rest API');
-    const _eName = getCustomEventName(error);
-    context.form.dispatch(new CustomEvent$1(_eName, {}, true));
-    return;
+    return Promise.reject(e);
   }
-  const eName = getCustomEventName(success);
-  context.form.dispatch(new CustomEvent$1(eName, result, true));
 };
-const urlEncoded = data => {
-  const formData = new URLSearchParams();
-  Object.entries(data).forEach(([key, value]) => {
+var urlEncoded = function urlEncoded(data) {
+  var formData = new URLSearchParams();
+  Object.entries(data).forEach(function (_ref9) {
+    var key = _ref9[0],
+      value = _ref9[1];
     if (value != null && typeof value === 'object') {
       formData.append(key, jsonString(value));
     } else {
@@ -7367,63 +8341,77 @@ const urlEncoded = data => {
  * @private
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const multipartFormData = (data, attachments) => {
-  const formData = new FormData();
-  Object.entries(data).forEach(([key, value]) => {
+var multipartFormData = function multipartFormData(data, attachments) {
+  var formData = new FormData();
+  Object.entries(data).forEach(function (_ref10) {
+    var key = _ref10[0],
+      value = _ref10[1];
     if (value != null && typeof value === 'object') {
       formData.append(key, jsonString(value));
     } else {
       formData.append(key, value);
     }
   });
-  const addAttachmentToFormData = (objValue, formData) => {
+  var addAttachmentToFormData = function addAttachmentToFormData(objValue, formData) {
     if ((objValue == null ? void 0 : objValue.data) instanceof File) {
-      let attIdentifier = `${objValue == null ? void 0 : objValue.dataRef}/${objValue == null ? void 0 : objValue.name}`;
+      var attIdentifier = (objValue == null ? void 0 : objValue.dataRef) + "/" + (objValue == null ? void 0 : objValue.name);
       if (!attIdentifier.startsWith('/')) {
-        attIdentifier = `/${attIdentifier}`;
+        attIdentifier = "/" + attIdentifier;
       }
       formData.append(attIdentifier, objValue.data);
     }
   };
   if (attachments) {
     // @ts-ignore
-    Object.keys(attachments).reduce((acc, curr) => {
-      const objValue = attachments[curr];
+    Object.keys(attachments).reduce(function (acc, curr) {
+      var objValue = attachments[curr];
       if (objValue && objValue instanceof Array) {
-        return [...acc, ...objValue.map(x => addAttachmentToFormData(x, formData))];
+        return [].concat(acc, objValue.map(function (x) {
+          return addAttachmentToFormData(x, formData);
+        }));
       } else {
-        return [...acc, addAttachmentToFormData(objValue, formData)];
+        return [].concat(acc, [addAttachmentToFormData(objValue, formData)]);
       }
     }, []);
   }
   return formData;
 };
-const submit = async (context, success, error, submitAs = 'multipart/form-data', input_data = null) => {
-  const endpoint = context.form.action;
-  let data = input_data;
-  if (typeof data != 'object' || data == null) {
-    data = context.form.exportData();
+var _submit = function submit(context, success, error, submitAs, input_data) {
+  if (submitAs === void 0) {
+    submitAs = 'multipart/form-data';
   }
-  // todo: have to implement sending of attachments here
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const attachments = getAttachments(context.form);
-  let submitContentType = submitAs;
-  let formData;
-  if (Object.keys(attachments).length > 0 || submitAs === 'multipart/form-data') {
-    formData = multipartFormData({
-      'data': data
-    }, attachments);
-    submitContentType = 'multipart/form-data';
-  } else {
-    formData = {
-      'data': data
-    };
+  if (input_data === void 0) {
+    input_data = null;
   }
-  // submitContentType = submitAs;
-  // note: don't send multipart/form-data let browser decide on the content type
-  await request(context, endpoint, 'POST', formData, success, error, {
-    'Content-Type': submitContentType
-  });
+  try {
+    var endpoint = context.form.action;
+    var data = input_data;
+    if (typeof data != 'object' || data == null) {
+      data = context.form.exportData();
+    }
+    // todo: have to implement sending of attachments here
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    var attachments = getAttachments(context.form);
+    var submitContentType = submitAs;
+    var formData;
+    if (Object.keys(attachments).length > 0 || submitAs === 'multipart/form-data') {
+      formData = multipartFormData({
+        'data': data
+      }, attachments);
+      submitContentType = 'multipart/form-data';
+    } else {
+      formData = {
+        'data': data
+      };
+    }
+    // submitContentType = submitAs;
+    // note: don't send multipart/form-data let browser decide on the content type
+    return Promise.resolve(request(context, endpoint, 'POST', formData, success, error, {
+      'Content-Type': submitContentType
+    })).then(function () {});
+  } catch (e) {
+    return Promise.reject(e);
+  }
 };
 /**
  * Helper function to create an action
@@ -7432,7 +8420,10 @@ const submit = async (context, success, error, submitAs = 'multipart/form-data',
  * @param dispatch      true to trigger the event on all the fields in DFS order starting from the top level form element, false otherwise
  * @private
  */
-const createAction = (name, payload = {}) => {
+var createAction = function createAction(name, payload) {
+  if (payload === void 0) {
+    payload = {};
+  }
   switch (name) {
     case 'change':
       return new Change(payload);
@@ -7452,37 +8443,42 @@ const createAction = (name, payload = {}) => {
  * Implementation of function runtime
  * @private
  */
-class FunctionRuntimeImpl {
-  constructor() {
+var FunctionRuntimeImpl = /*#__PURE__*/function () {
+  function FunctionRuntimeImpl() {
     this.customFunctions = {};
   }
-  registerFunctions(functions) {
-    Object.entries(functions).forEach(([name, funcDef]) => {
-      let finalFunction = funcDef;
+  var _proto22 = FunctionRuntimeImpl.prototype;
+  _proto22.registerFunctions = function registerFunctions(functions) {
+    var _this24 = this;
+    Object.entries(functions).forEach(function (_ref11) {
+      var name = _ref11[0],
+        funcDef = _ref11[1];
+      var finalFunction = funcDef;
       if (typeof funcDef === 'function') {
         finalFunction = {
-          _func: args => {
+          _func: function _func(args) {
             // eslint-disable-next-line @typescript-eslint/ban-types
-            return funcDef(...args);
+            return funcDef.apply(void 0, args);
           },
           _signature: []
         };
       }
       if (!finalFunction.hasOwnProperty('_func')) {
-        console.warn(`Unable to register function with name ${name}.`);
+        console.warn("Unable to register function with name " + name + ".");
         return;
       }
-      this.customFunctions[name] = finalFunction;
+      _this24.customFunctions[name] = finalFunction;
     });
-  }
-  unregisterFunctions(...names) {
-    names.forEach(name => {
-      if (name in this.customFunctions) {
-        delete this.customFunctions[name];
+  };
+  _proto22.unregisterFunctions = function unregisterFunctions() {
+    var _this25 = this;
+    [].slice.call(arguments).forEach(function (name) {
+      if (name in _this25.customFunctions) {
+        delete _this25.customFunctions[name];
       }
     });
-  }
-  getFunctions() {
+  };
+  _proto22.getFunctions = function getFunctions() {
     // todo: remove these once json-formula exposes a way to call them from custom functions
     function isArray(obj) {
       if (obj !== null) {
@@ -7495,7 +8491,9 @@ class FunctionRuntimeImpl {
         return a;
       }
       if (isArray(a)) {
-        return a.map(i => valueOf(i));
+        return a.map(function (i) {
+          return valueOf(i);
+        });
       }
       return a.valueOf();
     }
@@ -7505,11 +8503,11 @@ class FunctionRuntimeImpl {
       }
       return a.toString();
     }
-    const defaultFunctions = {
+    var defaultFunctions = {
       validate: {
-        _func: (args, data, interpreter) => {
-          const element = args[0];
-          let validation;
+        _func: function _func(args, data, interpreter) {
+          var element = args[0];
+          var validation;
           if (typeof element === 'string' || typeof element === 'undefined') {
             validation = interpreter.globals.form.validate();
           } else {
@@ -7523,10 +8521,10 @@ class FunctionRuntimeImpl {
         _signature: []
       },
       setFocus: {
-        _func: (args, data, interpreter) => {
-          const element = args[0];
+        _func: function _func(args, data, interpreter) {
+          var element = args[0];
           try {
-            const field = interpreter.globals.form.getElement(element.$id);
+            var field = interpreter.globals.form.getElement(element.$id);
             interpreter.globals.form.setFocus(field);
           } catch (e) {
             interpreter.globals.form.logger.error('Invalid argument passed in setFocus. An element is expected');
@@ -7535,7 +8533,7 @@ class FunctionRuntimeImpl {
         _signature: []
       },
       getData: {
-        _func: (args, data, interpreter) => {
+        _func: function _func(args, data, interpreter) {
           // deprecated. left for backward compatability.
           interpreter.globals.form.logger.warn('The `getData` function is depricated. Use `exportData` instead.');
           return interpreter.globals.form.exportData();
@@ -7543,14 +8541,14 @@ class FunctionRuntimeImpl {
         _signature: []
       },
       exportData: {
-        _func: (args, data, interpreter) => {
+        _func: function _func(args, data, interpreter) {
           return interpreter.globals.form.exportData();
         },
         _signature: []
       },
       importData: {
-        _func: (args, data, interpreter) => {
-          const inputData = args[0];
+        _func: function _func(args, data, interpreter) {
+          var inputData = args[0];
           if (typeof inputData === 'object' && inputData !== null) {
             interpreter.globals.form.importData(inputData);
           }
@@ -7559,16 +8557,16 @@ class FunctionRuntimeImpl {
         _signature: []
       },
       submitForm: {
-        _func: (args, data, interpreter) => {
+        _func: function _func(args, data, interpreter) {
           // success: string, error: string, submit_as: 'json' | 'multipart' = 'json', data: any = null
-          const success = toString(args[0]);
-          const error = toString(args[1]);
-          const submit_as = args.length > 2 ? toString(args[2]) : 'multipart/form-data';
-          const submit_data = args.length > 3 ? valueOf(args[3]) : null;
+          var success = toString(args[0]);
+          var error = toString(args[1]);
+          var submit_as = args.length > 2 ? toString(args[2]) : 'multipart/form-data';
+          var submit_data = args.length > 3 ? valueOf(args[3]) : null;
           interpreter.globals.form.dispatch(new Submit({
-            success,
-            error,
-            submit_as,
+            success: success,
+            error: error,
+            submit_as: submit_as,
             data: submit_data
           }));
           return {};
@@ -7577,11 +8575,11 @@ class FunctionRuntimeImpl {
       },
       // todo: only supports application/json for now
       request: {
-        _func: (args, data, interpreter) => {
-          const uri = toString(args[0]);
-          const httpVerb = toString(args[1]);
-          const payload = valueOf(args[2]);
-          let success,
+        _func: function _func(args, data, interpreter) {
+          var uri = toString(args[0]);
+          var httpVerb = toString(args[1]);
+          var payload = valueOf(args[2]);
+          var success,
             error,
             headers = {};
           if (typeof args[3] === 'string') {
@@ -7606,17 +8604,17 @@ class FunctionRuntimeImpl {
        * @param payload payload to pass in the event
        */
       dispatchEvent: {
-        _func: (args, data, interpreter) => {
-          const element = args[0];
-          let eventName = valueOf(args[1]);
-          let payload = args.length > 2 ? valueOf(args[2]) : undefined;
-          let dispatch = false;
+        _func: function _func(args, data, interpreter) {
+          var element = args[0];
+          var eventName = valueOf(args[1]);
+          var payload = args.length > 2 ? valueOf(args[2]) : undefined;
+          var dispatch = false;
           if (typeof element === 'string') {
             payload = eventName;
             eventName = element;
             dispatch = true;
           }
-          let event;
+          var event;
           if (eventName.startsWith('custom:')) {
             event = new CustomEvent$1(eventName.substring('custom:'.length), payload, dispatch);
           } else {
@@ -7635,9 +8633,10 @@ class FunctionRuntimeImpl {
       }
     };
     return _extends({}, defaultFunctions, this.customFunctions);
-  }
-}
-const FunctionRuntime = new FunctionRuntimeImpl();
+  };
+  return FunctionRuntimeImpl;
+}();
+var FunctionRuntime = new FunctionRuntimeImpl();
 
 /*
  * Copyright 2022 Adobe, Inc.
@@ -7649,7 +8648,8 @@ const FunctionRuntime = new FunctionRuntimeImpl();
 /**
  * Defines `form model` which implements {@link FormModel | form model}
  */
-class Form extends Container {
+var Form = /*#__PURE__*/function (_Container2) {
+  _inheritsLoose(Form, _Container2);
   /**
    * @private
    */
@@ -7665,50 +8665,49 @@ class Form extends Container {
    * @param logLevel
    * @private
    */
-  constructor(n, _ruleEngine, _eventQueue = new EventQueue(), logLevel = 'off') {
+  function Form(n, _ruleEngine, _eventQueue, logLevel) {
+    var _this26;
+    if (_eventQueue === void 0) {
+      _eventQueue = new EventQueue();
+    }
+    if (logLevel === void 0) {
+      logLevel = 'off';
+    }
     //@ts-ignore
-    super(n, {});
-    this._fields = {};
-    this._invalidFields = [];
-    this.dataRefRegex = /("[^"]+?"|[^.]+?)(?:\.|$)/g;
-    this._ruleEngine = _ruleEngine;
-    this._eventQueue = _eventQueue;
-    this._logger = new Logger(logLevel);
-    this.queueEvent(new Initialize());
-    this.queueEvent(new ExecuteRule());
-    this._ids = IdGenerator();
-    this._bindToDataModel(new DataGroup('$form', {}));
-    this._initialize();
-    this.queueEvent(new FormLoad());
+    _this26 = _Container2.call(this, n, {}) || this;
+    _this26._fields = {};
+    _this26._invalidFields = [];
+    _this26.dataRefRegex = /("[^"]+?"|[^.]+?)(?:\.|$)/g;
+    _this26._ruleEngine = _ruleEngine;
+    _this26._eventQueue = _eventQueue;
+    _this26._logger = new Logger(logLevel);
+    _this26.queueEvent(new Initialize());
+    _this26.queueEvent(new ExecuteRule());
+    _this26._ids = IdGenerator();
+    _this26._bindToDataModel(new DataGroup('$form', {}));
+    _this26._initialize();
+    _this26.queueEvent(new FormLoad());
+    return _this26;
   }
-  get logger() {
-    return this._logger;
-  }
-  get metaData() {
-    const metaData = this._jsonModel.metadata || {};
-    return new FormMetaData(metaData);
-  }
-  get action() {
-    return this._jsonModel.action;
-  }
-  _createChild(child) {
+  var _proto23 = Form.prototype;
+  _proto23._createChild = function _createChild(child) {
     return createChild(child, {
       form: this,
       parent: this
     });
-  }
-  importData(dataModel) {
+  };
+  _proto23.importData = function importData(dataModel) {
     this._bindToDataModel(new DataGroup('$form', dataModel));
     this.syncDataAndFormModel(this.getDataNode());
     this._eventQueue.runPendingQueue();
-  }
-  exportData() {
+  };
+  _proto23.exportData = function exportData() {
     var _this$getDataNode;
     return (_this$getDataNode = this.getDataNode()) == null ? void 0 : _this$getDataNode.$value;
-  }
-  setFocus(field) {
-    const parent = field.parent;
-    const currentField = field;
+  };
+  _proto23.setFocus = function setFocus(field) {
+    var parent = field.parent;
+    var currentField = field;
     while (parent != null && parent.activeChild != currentField) {
       parent.activeChild = currentField;
     }
@@ -7722,37 +8721,28 @@ class Form extends Container {
    * const data = form.getState().data
    * const attachments = form.getState().attachments
    * ```
-   */
-  getState() {
+   */;
+  _proto23.getState = function getState() {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const self = this;
-    const res = super.getState();
+    var self = this;
+    var res = _Container2.prototype.getState.call(this);
     res.id = '$form';
     Object.defineProperty(res, 'data', {
-      get: function () {
+      get: function get() {
         return self.exportData();
       }
     });
     Object.defineProperty(res, 'attachments', {
-      get: function () {
+      get: function get() {
         return getAttachments(self);
       }
     });
     return res;
-  }
-  get type() {
-    return 'object';
-  }
-  isTransparent() {
+  };
+  _proto23.isTransparent = function isTransparent() {
     return false;
-  }
-  get form() {
-    return this;
-  }
-  get ruleEngine() {
-    return this._ruleEngine;
-  }
-  getUniqueId() {
+  };
+  _proto23.getUniqueId = function getUniqueId() {
     if (this._ids == null) {
       return '';
     }
@@ -7761,31 +8751,32 @@ class Form extends Container {
   /**
    * @param field
    * @private
-   */
-  fieldAdded(field) {
+   */;
+  _proto23.fieldAdded = function fieldAdded(field) {
+    var _this27 = this;
     this._fields[field.id] = field;
-    field.subscribe(action => {
-      if (this._invalidFields.indexOf(action.target.id) === -1) {
-        this._invalidFields.push(action.target.id);
+    field.subscribe(function (action) {
+      if (_this27._invalidFields.indexOf(action.target.id) === -1) {
+        _this27._invalidFields.push(action.target.id);
       }
     }, 'invalid');
-    field.subscribe(action => {
-      const index = this._invalidFields.indexOf(action.target.id);
+    field.subscribe(function (action) {
+      var index = _this27._invalidFields.indexOf(action.target.id);
       if (index > -1) {
-        this._invalidFields.splice(index, 1);
+        _this27._invalidFields.splice(index, 1);
       }
     }, 'valid');
-    field.subscribe(action => {
+    field.subscribe(function (action) {
       //@ts-ignore
-      const field = action.target.getState();
+      var field = action.target.getState();
       if (field) {
-        const fieldChangedAction = new FieldChanged(action.payload.changes, field);
-        this.dispatch(fieldChangedAction);
+        var fieldChangedAction = new FieldChanged(action.payload.changes, field);
+        _this27.dispatch(fieldChangedAction);
       }
     });
-  }
-  validate() {
-    const validationErrors = super.validate();
+  };
+  _proto23.validate = function validate() {
+    var validationErrors = _Container2.prototype.validate.call(this);
     // trigger event on form so that user's can customize their application
     this.dispatch(new ValidationComplete(validationErrors));
     return validationErrors;
@@ -7793,72 +8784,114 @@ class Form extends Container {
   /**
    * Checks if the given form is valid or not
    * @returns `true`, if form is valid, `false` otherwise
-   */
-  isValid() {
+   */;
+  _proto23.isValid = function isValid() {
     return this._invalidFields.length === 0;
   }
   /**
    * @param field
    * @private
-   */
-  dispatch(action) {
+   */;
+  _proto23.dispatch = function dispatch(action) {
     if (action.type === 'submit') {
-      super.queueEvent(action);
+      _Container2.prototype.queueEvent.call(this, action);
       this._eventQueue.runPendingQueue();
     } else {
-      super.dispatch(action);
+      _Container2.prototype.dispatch.call(this, action);
     }
   }
   /**
    * @param action
    * @private
-   */
-  executeAction(action) {
+   */;
+  _proto23.executeAction = function executeAction(action) {
     if (action.type !== 'submit' || this._invalidFields.length === 0) {
-      super.executeAction(action);
+      _Container2.prototype.executeAction.call(this, action);
     }
   }
   /**
    * @param action
    * @param context
    * @private
-   */
-  submit(action, context) {
+   */;
+  _proto23.submit = function submit(action, context) {
     // if no errors, only then submit
     if (this.validate().length === 0) {
-      const payload = (action == null ? void 0 : action.payload) || {};
-      submit(context, payload == null ? void 0 : payload.success, payload == null ? void 0 : payload.error, payload == null ? void 0 : payload.submit_as, payload == null ? void 0 : payload.data);
+      var payload = (action == null ? void 0 : action.payload) || {};
+      _submit(context, payload == null ? void 0 : payload.success, payload == null ? void 0 : payload.error, payload == null ? void 0 : payload.submit_as, payload == null ? void 0 : payload.data);
     }
-  }
-  getElement(id) {
+  };
+  _proto23.getElement = function getElement(id) {
     if (id == this.id) {
       return this;
     }
     return this._fields[id];
-  }
-  get qualifiedName() {
-    return '$form';
-  }
+  };
   /**
    * @private
    */
-  getEventQueue() {
+  _proto23.getEventQueue = function getEventQueue() {
     return this._eventQueue;
-  }
-  get name() {
-    return '$form';
-  }
-  get value() {
-    return null;
-  }
-  get id() {
-    return '$form';
-  }
-  get title() {
-    return this._jsonModel.title || '';
-  }
-}
-
+  };
+  _createClass(Form, [{
+    key: "logger",
+    get: function get() {
+      return this._logger;
+    }
+  }, {
+    key: "metaData",
+    get: function get() {
+      var metaData = this._jsonModel.metadata || {};
+      return new FormMetaData(metaData);
+    }
+  }, {
+    key: "action",
+    get: function get() {
+      return this._jsonModel.action;
+    }
+  }, {
+    key: "type",
+    get: function get() {
+      return 'object';
+    }
+  }, {
+    key: "form",
+    get: function get() {
+      return this;
+    }
+  }, {
+    key: "ruleEngine",
+    get: function get() {
+      return this._ruleEngine;
+    }
+  }, {
+    key: "qualifiedName",
+    get: function get() {
+      return '$form';
+    }
+  }, {
+    key: "name",
+    get: function get() {
+      return '$form';
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "id",
+    get: function get() {
+      return '$form';
+    }
+  }, {
+    key: "title",
+    get: function get() {
+      return this._jsonModel.title || '';
+    }
+  }]);
+  return Form;
+}(Container);
 /*
  * Copyright 2022 Adobe, Inc.
  *
@@ -7870,18 +8903,22 @@ class Form extends Container {
  * Implementation of rule engine
  * @private
  */
-class RuleEngine {
-  constructor() {
+var RuleEngine = /*#__PURE__*/function () {
+  function RuleEngine() {
     this._globalNames = ['$form', '$field', '$event'];
   }
-  compileRule(rule) {
-    const customFunctions = FunctionRuntime.getFunctions();
+  var _proto24 = RuleEngine.prototype;
+  _proto24.compileRule = function compileRule(rule) {
+    var customFunctions = FunctionRuntime.getFunctions();
     return new Oe(rule, customFunctions, undefined, this._globalNames);
-  }
-  execute(node, data, globals, useValueOf = false) {
-    const oldContext = this._context;
+  };
+  _proto24.execute = function execute(node, data, globals, useValueOf) {
+    if (useValueOf === void 0) {
+      useValueOf = false;
+    }
+    var oldContext = this._context;
     this._context = globals;
-    let res = undefined;
+    var res = undefined;
     try {
       node.debug = []; // clean previous debug info
       res = node.search(data, globals);
@@ -7889,11 +8926,12 @@ class RuleEngine {
       var _this$_context, _this$_context$form, _this$_context$form$l;
       (_this$_context = this._context) == null ? void 0 : (_this$_context$form = _this$_context.form) == null ? void 0 : (_this$_context$form$l = _this$_context$form.logger) == null ? void 0 : _this$_context$form$l.error(err);
     }
-    for (const debugInfo of node.debug) {
+    for (var _iterator = _createForOfIteratorHelperLoose(node.debug), _step; !(_step = _iterator()).done;) {
+      var debugInfo = _step.value;
       var _this$_context2, _this$_context2$form, _this$_context2$form$;
       (_this$_context2 = this._context) == null ? void 0 : (_this$_context2$form = _this$_context2.form) == null ? void 0 : (_this$_context2$form$ = _this$_context2$form.logger) == null ? void 0 : _this$_context2$form$.debug(debugInfo);
     }
-    let finalRes = res;
+    var finalRes = res;
     if (useValueOf) {
       if (typeof res === 'object' && res !== null) {
         finalRes = Object.getPrototypeOf(res).valueOf.call(res);
@@ -7905,14 +8943,14 @@ class RuleEngine {
   /**
    * Listen to subscriber for
    * @param subscriber
-   */
-  trackDependency(subscriber) {
+   */;
+  _proto24.trackDependency = function trackDependency(subscriber) {
     if (this._context && this._context.field !== undefined && this._context.field !== subscriber) {
       subscriber._addDependent(this._context.field);
     }
-  }
-}
-
+  };
+  return RuleEngine;
+}();
 /**
  * Creates form instance using form model definition as per `adaptive form specification`
  * @param formModel form model definition
@@ -7922,13 +8960,19 @@ class RuleEngine {
  * @param fModel existing form model, this is additional optimization to prevent creation of form instance
  * @returns {@link FormModel | form model}
  */
-const createFormInstance = (formModel, callback, logLevel = 'error', fModel = undefined) => {
+var createFormInstance = function createFormInstance(formModel, callback, logLevel, fModel) {
+  if (logLevel === void 0) {
+    logLevel = 'error';
+  }
+  if (fModel === void 0) {
+    fModel = undefined;
+  }
   try {
-    let f = fModel;
+    var f = fModel;
     if (f == null) {
       f = new Form(_extends({}, formModel), new RuleEngine(), new EventQueue(new Logger(logLevel)), logLevel);
     }
-    const formData = formModel == null ? void 0 : formModel.data;
+    var formData = formModel == null ? void 0 : formModel.data;
     if (formData) {
       f.importData(formData);
     }
@@ -7943,220 +8987,198 @@ const createFormInstance = (formModel, callback, logLevel = 'error', fModel = un
     f.getEventQueue().runPendingQueue();
     return f;
   } catch (e) {
-    console.error(`Unable to create an instance of the Form ${e}`);
+    console.error("Unable to create an instance of the Form " + e);
     throw new Error(e);
   }
 };
 
-class TextArea extends TextInput {
-  getInputHTML() {
-    return `<textarea
-              title="${this.isTooltipVisible() ? this.getTooltipValue() : ''}"
-              aria-label="${this.isLabelVisible() ? this.getLabelValue() : ''}"
-              class="cmp-adaptiveform-textinput__widget"
-              name="${this.getName()}"
-              ${this.getDisabledHTML()}
-              ${this.getReadonlyHTML()}
-              required="${this.isRequired()}"
-              placeholder="${this.getPlaceHolder()}"
-              minlength="${this.getMinLength()}"
-              maxlength="${this.getMaxLength()}"></textarea>`;
+var TextArea = /*#__PURE__*/function (_TextInput) {
+  _inheritsLoose(TextArea, _TextInput);
+  function TextArea() {
+    return _TextInput.apply(this, arguments) || this;
   }
-}
+  var _proto = TextArea.prototype;
+  _proto.getInputHTML = function getInputHTML() {
+    return "<textarea\n              title=\"" + (this.isTooltipVisible() ? this.getTooltipValue() : '') + "\"\n              aria-label=\"" + (this.isLabelVisible() ? this.getLabelValue() : '') + "\"\n              class=\"cmp-adaptiveform-textinput__widget\"\n              name=\"" + this.getName() + "\"\n              " + this.getDisabledHTML() + "\n              " + this.getReadonlyHTML() + "\n              required=\"" + this.isRequired() + "\"\n              placeholder=\"" + this.getPlaceHolder() + "\"\n              minlength=\"" + this.getMinLength() + "\"\n              maxlength=\"" + this.getMaxLength() + "\"></textarea>";
+  };
+  return TextArea;
+}(TextInput);
 
 var _checkIfEqual = /*#__PURE__*/_classPrivateFieldLooseKey("checkIfEqual");
-class DropDown extends FormFieldBase {
-  /**
-   * Each FormField has a data attribute class that is prefixed along with the global namespace to
-   * distinguish between them. If a component wants to put a data-attribute X, the attribute in HTML would be
-   * data-{NS}-{IS}-x=""
-   * @type {string}
-   */
-
-  constructor(params, model) {
-    super(params, model);
-    Object.defineProperty(this, _checkIfEqual, {
+var DropDown = /*#__PURE__*/function (_FormFieldBase) {
+  _inheritsLoose(DropDown, _FormFieldBase);
+  function DropDown(params, model) {
+    var _this;
+    _this = _FormFieldBase.call(this, params, model) || this;
+    Object.defineProperty(_assertThisInitialized(_this), _checkIfEqual, {
       writable: true,
-      value: function (value, optionValue, multiSelect) {
+      value: function value(_value, optionValue, multiSelect) {
         if (multiSelect) {
-          let isPresent = false;
-          value.forEach(saveValue => {
+          var isPresent = false;
+          _value.forEach(function (saveValue) {
             if (String(saveValue) === optionValue)
               // save value can be number and boolean also.
               isPresent = true;
           });
           return isPresent;
         }
-        return String(value) === optionValue;
+        return String(_value) === optionValue;
       }
     });
-    this.qm = this.element.querySelector(DropDown.selectors.qm);
+    _this.qm = _this.element.querySelector(DropDown.selectors.qm);
+    return _this;
   }
-  getWidget() {
+  var _proto = DropDown.prototype;
+  _proto.getWidget = function getWidget() {
     return this.element.querySelector(DropDown.selectors.widget);
-  }
-  getDescription() {
+  };
+  _proto.getDescription = function getDescription() {
     return this.element.querySelector(DropDown.selectors.description);
-  }
-  getLabel() {
+  };
+  _proto.getLabel = function getLabel() {
     return this.element.querySelector(DropDown.selectors.label);
-  }
-  getErrorDiv() {
+  };
+  _proto.getErrorDiv = function getErrorDiv() {
     return this.element.querySelector(DropDown.selectors.errorDiv);
-  }
-  getQuestionMarkDiv() {
+  };
+  _proto.getQuestionMarkDiv = function getQuestionMarkDiv() {
     return this.element.querySelector(DropDown.selectors.qm);
-  }
-  getTooltipDiv() {
+  };
+  _proto.getTooltipDiv = function getTooltipDiv() {
     return this.element.querySelector(DropDown.selectors.tooltipDiv);
-  }
-  _updateValue(value) {
-    let isMultiSelect = this._model.isArrayType();
+  };
+  _proto._updateValue = function _updateValue(value) {
+    var _this2 = this;
+    var isMultiSelect = this._model.isArrayType();
     if (this.widget) {
-      let select = this.widget;
-      [select].forEach(option => {
-        if (_classPrivateFieldLooseBase(this, _checkIfEqual)[_checkIfEqual](value, option.value, isMultiSelect)) {
+      var select = this.widget;
+      [select].forEach(function (option) {
+        if (_classPrivateFieldLooseBase(_this2, _checkIfEqual)[_checkIfEqual](value, option.value, isMultiSelect)) {
           option.setAttribute('selected', 'selected');
         } else {
           option.removeAttribute('selected');
         }
       });
     }
-  }
-  addListener() {
-    var _this$getWidget;
-    (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener('blur', e => {
-      if (this._model.isArrayType()) {
-        let valueArray = [];
-        let select = this.widget;
-        [select].forEach(option => {
+  };
+  _proto.addListener = function addListener() {
+    var _this$getWidget,
+      _this3 = this;
+    (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener('blur', function (e) {
+      if (_this3._model.isArrayType()) {
+        var valueArray = [];
+        var select = _this3.widget;
+        [select].forEach(function (option) {
           if (option.selected) {
             valueArray.push(option.value);
           }
         });
-        this._model.value = valueArray;
+        _this3._model.value = valueArray;
       } else {
-        this._model.value = e.target.value;
+        _this3._model.value = e.target.value;
       }
     });
-  }
-  getbemBlock() {
+  };
+  _proto.getbemBlock = function getbemBlock() {
     return DropDown.bemBlock;
-  }
-  getIS() {
+  };
+  _proto.getIS = function getIS() {
     return DropDown.IS;
-  }
-  getInputHTML() {
-    var _this$getState, _this$getState$enumNa;
-    return `<select class="cmp-adaptiveform-dropdown__widget"
-                    aria-label="${this.isLabelVisible() ? this.getLabelValue() : ''}"
-                    title="${this.isTooltipVisible() ? this.getTooltipValue() : ''}"
-                    name="${this.getName()}"
-                    ${this.getDisabledHTML()}
-                    ${this.getReadonlyHTML()}
-                    ${this.getMultipleHTML()}
-                    required="${this.isRequired()}">
-                ${this.getPlaceHolder() ? `<option  value="" disabled selected>${this.getPlaceHolder()}</option>` : ""}
-                
-                ${(_this$getState = this.getState()) == null ? void 0 : (_this$getState$enumNa = _this$getState.enumNames) == null ? void 0 : _this$getState$enumNa.map((enumDisplayName, index) => {
-      var _this$getState2;
-      return this.getOptionsHTML((_this$getState2 = this.getState()) == null ? void 0 : _this$getState2.enum[index], enumDisplayName, this.getDefault());
-    }).join("")}
-            </select>`;
-  }
-  getOptionsHTML(enumValue, enumDisplayName, defaultVal) {
-    return `
-            <option value="${enumValue}" class="cmp-adaptiveform-dropdown__option"
-                selected="${enumValue == defaultVal ? 'selected' : ''}">${enumDisplayName}</option>
-            `;
-  }
-  getMultipleHTML() {
-    return `${this.getState().isMultiSelect ? 'multiple: multiple' : ''}"`;
-  }
-}
+  };
+  _proto.getInputHTML = function getInputHTML() {
+    var _this$getState,
+      _this$getState$enumNa,
+      _this4 = this;
+    return "<select class=\"cmp-adaptiveform-dropdown__widget\"\n                    aria-label=\"" + (this.isLabelVisible() ? this.getLabelValue() : '') + "\"\n                    title=\"" + (this.isTooltipVisible() ? this.getTooltipValue() : '') + "\"\n                    name=\"" + this.getName() + "\"\n                    " + this.getDisabledHTML() + "\n                    " + this.getReadonlyHTML() + "\n                    " + this.getMultipleHTML() + "\n                    required=\"" + this.isRequired() + "\">\n                " + (this.getPlaceHolder() ? "<option  value=\"\" disabled selected>" + this.getPlaceHolder() + "</option>" : "") + "\n                \n                " + ((_this$getState = this.getState()) == null ? void 0 : (_this$getState$enumNa = _this$getState.enumNames) == null ? void 0 : _this$getState$enumNa.map(function (enumDisplayName, index) {
+      var _this4$getState;
+      return _this4.getOptionsHTML((_this4$getState = _this4.getState()) == null ? void 0 : _this4$getState["enum"][index], enumDisplayName, _this4.getDefault());
+    }).join("")) + "\n            </select>";
+  };
+  _proto.getOptionsHTML = function getOptionsHTML(enumValue, enumDisplayName, defaultVal) {
+    return "\n            <option value=\"" + enumValue + "\" class=\"cmp-adaptiveform-dropdown__option\"\n                selected=\"" + (enumValue == defaultVal ? 'selected' : '') + "\">" + enumDisplayName + "</option>\n            ";
+  };
+  _proto.getMultipleHTML = function getMultipleHTML() {
+    return (this.getState().isMultiSelect ? 'multiple: multiple' : '') + "\"";
+  };
+  return DropDown;
+}(FormFieldBase);
 DropDown.NS = Constants.NS;
 DropDown.IS = "adaptiveFormDropDown";
 DropDown.bemBlock = 'cmp-adaptiveform-dropdown';
 DropDown.selectors = {
   self: "[data-" + DropDown.NS + '-is="' + DropDown.IS + '"]',
-  widget: `.${DropDown.bemBlock}__widget`,
-  options: `.${DropDown.bemBlock}__option`,
-  label: `.${DropDown.bemBlock}__label`,
-  description: `.${DropDown.bemBlock}__longdescription`,
-  qm: `.${DropDown.bemBlock}__questionmark`,
-  errorDiv: `.${DropDown.bemBlock}__errormessage`,
-  tooltipDiv: `.${DropDown.bemBlock}__shortdescription`
+  widget: "." + DropDown.bemBlock + "__widget",
+  options: "." + DropDown.bemBlock + "__option",
+  label: "." + DropDown.bemBlock + "__label",
+  description: "." + DropDown.bemBlock + "__longdescription",
+  qm: "." + DropDown.bemBlock + "__questionmark",
+  errorDiv: "." + DropDown.bemBlock + "__errormessage",
+  tooltipDiv: "." + DropDown.bemBlock + "__shortdescription"
 };
 
-const Actions = {
-  Click,
-  Change,
-  Submit,
-  Blur,
-  AddItem,
-  RemoveItem
+var Actions = {
+  Click: Click,
+  Change: Change,
+  Submit: Submit,
+  Blur: Blur,
+  AddItem: AddItem,
+  RemoveItem: RemoveItem
 };
 
-class Button extends FormFieldBase {
+var Button = /*#__PURE__*/function (_FormFieldBase) {
+  _inheritsLoose(Button, _FormFieldBase);
+  function Button() {
+    return _FormFieldBase.apply(this, arguments) || this;
+  }
+  var _proto = Button.prototype;
   /**
    * Each FormField has a data attribute class that is prefixed along with the global namespace to
    * distinguish between them. If a component wants to put a data-attribute X, the attribute in HTML would be
    * data-{NS}-{IS}-x=""
    * @type {string}
    */
-
-  getQuestionMarkDiv() {
+  _proto.getQuestionMarkDiv = function getQuestionMarkDiv() {
     return null;
-  }
-  getLabel() {
+  };
+  _proto.getLabel = function getLabel() {
     return null;
-  }
-  getWidget() {
+  };
+  _proto.getWidget = function getWidget() {
     return this.element.querySelector(".cmp-button");
   }
   /**
    * Return the description element.
    * @returns {HTMLElement}
-   */
-  getDescription() {
+   */;
+  _proto.getDescription = function getDescription() {
     return null;
-  }
-  getErrorDiv() {
+  };
+  _proto.getErrorDiv = function getErrorDiv() {
     return null;
-  }
-  getTooltipDiv() {
+  };
+  _proto.getTooltipDiv = function getTooltipDiv() {
     return null;
-  }
-  addListener() {
-    var _this$getWidget;
-    (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener("click", () => {
-      this._model.dispatch(new Actions.Click());
+  };
+  _proto.addListener = function addListener() {
+    var _this$getWidget,
+      _this = this;
+    (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener("click", function () {
+      _this._model.dispatch(new Actions.Click());
     });
-  }
-  getbemBlock() {
+  };
+  _proto.getbemBlock = function getbemBlock() {
     return Button.bemBlock;
-  }
-  getIS() {
+  };
+  _proto.getIS = function getIS() {
     return Button.IS;
   }
   // TODO - Icon part of spec?
-  getHTML() {
-    return `<button 
-            type="button"
-            id="${this.getId()}"
-            class="cmp-button"
-            ${this.getDisabledHTML()}
-            ${this.getReadonlyHTML()}
-            title="${this.getTooltipValue}"
-            data-cmp-visible="${this.isVisible()}"
-            data-cmp-enabled="${this.isEnabled()}"
-            data-cmp-is="adaptiveFormButton"
-            aria-label="${this.getLabelValue()}"
-            data-cmp-adaptiveformcontainer-path="${this.getFormContainerPath()}">
-            <span class="cmp-button__text">${this.getLabelValue()}</span>
-        </button>`;
-  }
-}
+  ;
+  _proto.getHTML = function getHTML() {
+    return "<button \n            type=\"button\"\n            id=\"" + this.getId() + "\"\n            class=\"cmp-button\"\n            " + this.getDisabledHTML() + "\n            " + this.getReadonlyHTML() + "\n            title=\"" + this.getTooltipValue + "\"\n            data-cmp-visible=\"" + this.isVisible() + "\"\n            data-cmp-enabled=\"" + this.isEnabled() + "\"\n            data-cmp-is=\"adaptiveFormButton\"\n            aria-label=\"" + this.getLabelValue() + "\"\n            data-cmp-adaptiveformcontainer-path=\"" + this.getFormContainerPath() + "\">\n            <span class=\"cmp-button__text\">" + this.getLabelValue() + "</span>\n        </button>";
+  };
+  return Button;
+}(FormFieldBase);
 Button.NS = Constants.NS;
 Button.IS = "adaptiveFormButton";
 Button.bemBlock = 'cmp-adaptiveform-button';
@@ -8195,12 +9217,12 @@ var _isValueSame = /*#__PURE__*/_classPrivateFieldLooseKey("isValueSame");
  * - Convert's input type number to text to support display/edit format (for example `$` symbol)
  * - One cannot type or paste alphabets in the html input element
  */
-class NumericInputWidget {
+var NumericInputWidget = /*#__PURE__*/function () {
   // passed by reference
 
   //TODO: to support writing in different locales \d should be replaced by [0-9] for different locales
 
-  constructor(_widget2, model) {
+  function NumericInputWidget(_widget2, model) {
     Object.defineProperty(this, _isValueSame, {
       value: _isValueSame2
     });
@@ -8303,9 +9325,9 @@ class NumericInputWidget {
     _classPrivateFieldLooseBase(this, _model)[_model] = model;
     // initialize options for backward compatibility
     _classPrivateFieldLooseBase(this, _options)[_options] = Object.assign({}, _classPrivateFieldLooseBase(this, _defaultOptions)[_defaultOptions], _classPrivateFieldLooseBase(this, _model)[_model]._jsonModel);
-    let matchStr = _classPrivateFieldLooseBase(this, _matchArray)[_matchArray][_classPrivateFieldLooseBase(this, _options)[_options].dataType];
+    var matchStr = _classPrivateFieldLooseBase(this, _matchArray)[_matchArray][_classPrivateFieldLooseBase(this, _options)[_options].dataType];
     if (matchStr) {
-      let ld = _classPrivateFieldLooseBase(this, _options)[_options].leadDigits,
+      var ld = _classPrivateFieldLooseBase(this, _options)[_options].leadDigits,
         fd = _classPrivateFieldLooseBase(this, _options)[_options].fracDigits,
         ldstr = ld && ld !== -1 ? "{0," + ld + "}" : "*",
         fdstr = fd && fd !== -1 ? "{0," + fd + "}" : "*",
@@ -8320,7 +9342,8 @@ class NumericInputWidget {
     _classPrivateFieldLooseBase(this, _widget)[_widget].setAttribute("type", "text");
     _classPrivateFieldLooseBase(this, _attachEventHandlers)[_attachEventHandlers](_widget2);
   }
-  getValue(value) {
+  var _proto = NumericInputWidget.prototype;
+  _proto.getValue = function getValue(value) {
     // we support full width, half width and locale specific numbers
     value = _classPrivateFieldLooseBase(this, _toLatinForm)[_toLatinForm](value);
     if (value.length > 0 && _classPrivateFieldLooseBase(this, _processedValue)[_processedValue] && !value.match(_classPrivateFieldLooseBase(this, _engRegex)[_engRegex])) {
@@ -8332,35 +9355,35 @@ class NumericInputWidget {
     if (value && value.length >= _classPrivateFieldLooseBase(this, _options)[_options].combCells) value = value.slice(0, _classPrivateFieldLooseBase(this, _options)[_options].combCells);
     _classPrivateFieldLooseBase(this, _previousCompositionVal)[_previousCompositionVal] = value;
     return value;
-  }
-  trigger(event, detail) {
+  };
+  _proto.trigger = function trigger(event, detail) {
     if (!_classPrivateFieldLooseBase(this, _widget)[_widget]) {
       return this;
     }
-    const eventName = event.split('.')[0];
-    const isNativeEvent = typeof document.body[`on${eventName}`] !== 'undefined';
+    var eventName = event.split('.')[0];
+    var isNativeEvent = typeof document.body["on" + eventName] !== 'undefined';
     if (isNativeEvent) {
       _classPrivateFieldLooseBase(this, _widget)[_widget].dispatchEvent(new Event(eventName));
       return this;
     }
-    const customEvent = new CustomEvent(eventName, {
+    var customEvent = new CustomEvent(eventName, {
       detail: detail || null
     });
     _classPrivateFieldLooseBase(this, _widget)[_widget].dispatchEvent(customEvent);
     return this;
-  }
-  getHTMLSupportedAttr(domElement, attr) {
+  };
+  _proto.getHTMLSupportedAttr = function getHTMLSupportedAttr(domElement, attr) {
     try {
       return domElement[attr];
     } catch (err) {
       return undefined;
     }
-  }
-  isNonPrintableKey(key) {
+  };
+  _proto.isNonPrintableKey = function isNonPrintableKey(key) {
     return key // In IE, event.key returns words instead of actual characters for some keys.
     && !['MozPrintableKey', 'Divide', 'Multiply', 'Subtract', 'Add', 'Enter', 'Decimal', 'Spacebar', 'Del'].includes(key) && key.length !== 1;
-  }
-  setValue(value) {
+  };
+  _proto.setValue = function setValue(value) {
     // if the value is same, don't do anything
     if (!_classPrivateFieldLooseBase(this, _isValueSame)[_isValueSame]()) {
       if (value && _classPrivateFieldLooseBase(this, _writtenInLocale)[_writtenInLocale]) {
@@ -8369,8 +9392,9 @@ class NumericInputWidget {
         _classPrivateFieldLooseBase(this, _widget)[_widget].value = _classPrivateFieldLooseBase(this, _model)[_model].value;
       }
     }
-  }
-}
+  };
+  return NumericInputWidget;
+}();
 function _toLatinForm2(halfOrFullWidthStr) {
   // refer http://www.fileformat.info/info/unicode/block/halfwidth_and_fullwidth_forms/utf8test.htm
   return halfOrFullWidthStr.replace(/[\uff00-\uffef]/g, function (ch) {
@@ -8378,32 +9402,33 @@ function _toLatinForm2(halfOrFullWidthStr) {
   });
 }
 function _attachEventHandlers2(widget, model) {
-  widget.addEventListener('keydown', e => {
-    _classPrivateFieldLooseBase(this, _handleKeyDown)[_handleKeyDown](e);
+  var _this = this;
+  widget.addEventListener('keydown', function (e) {
+    _classPrivateFieldLooseBase(_this, _handleKeyDown)[_handleKeyDown](e);
   });
-  widget.addEventListener('keypress', e => {
-    _classPrivateFieldLooseBase(this, _handleKeyPress)[_handleKeyPress](e);
+  widget.addEventListener('keypress', function (e) {
+    _classPrivateFieldLooseBase(_this, _handleKeyPress)[_handleKeyPress](e);
   });
-  widget.addEventListener('paste', e => {
-    _classPrivateFieldLooseBase(this, _handlePaste)[_handlePaste](e);
+  widget.addEventListener('paste', function (e) {
+    _classPrivateFieldLooseBase(_this, _handlePaste)[_handlePaste](e);
   });
-  widget.addEventListener('cut', e => {
-    _classPrivateFieldLooseBase(this, _handleCut)[_handleCut](e);
+  widget.addEventListener('cut', function (e) {
+    _classPrivateFieldLooseBase(_this, _handleCut)[_handleCut](e);
   });
-  widget.addEventListener('blur', e => {
-    _classPrivateFieldLooseBase(this, _model)[_model].value = this.getValue(e.target.value);
+  widget.addEventListener('blur', function (e) {
+    _classPrivateFieldLooseBase(_this, _model)[_model].value = _this.getValue(e.target.value);
   });
   // IME specific handling, to handle japanese languages max limit
   _classPrivateFieldLooseBase(this, _attachCompositionEventHandlers)[_attachCompositionEventHandlers](widget);
 }
 function _attachCompositionEventHandlers2(widget) {
-  let hasCompositionJustEnded = false; // Used to swallow keyup event related to compositionend
+  var hasCompositionJustEnded = false; // Used to swallow keyup event related to compositionend
   // IME specific handling, to handle japanese languages max limit
   // since enter can also be invoked during composing, a special handling is done here
-  let that = this,
+  var that = this,
     changeCaratPosition = function changeCaratPosition() {
       // change the carat selection position to further limit input of characters
-      let range = window.getSelection();
+      var range = window.getSelection();
       range.selectAllChildren(widget);
       range.collapseToEnd();
     };
@@ -8438,9 +9463,9 @@ function _attachCompositionEventHandlers2(widget) {
   });
 }
 function _getDigits2() {
-  let zeroCode = _classPrivateFieldLooseBase(this, _options)[_options].zero.charCodeAt(0),
+  var zeroCode = _classPrivateFieldLooseBase(this, _options)[_options].zero.charCodeAt(0),
     digits = "";
-  for (let i = 0; i < 10; i++) {
+  for (var i = 0; i < 10; i++) {
     digits += String.fromCharCode(zeroCode + i);
   }
   return "[" + digits + "]";
@@ -8449,24 +9474,24 @@ function _escape2(str) {
   return str.replace(".", "\\.");
 }
 function _compositionUpdateCallback2(event) {
-  let that = this;
-  let flag = false;
-  let leadDigits = _classPrivateFieldLooseBase(that, _options)[_options].leadDigits;
-  let fracDigits = _classPrivateFieldLooseBase(that, _options)[_options].fracDigits;
+  var that = this;
+  var flag = false;
+  var leadDigits = _classPrivateFieldLooseBase(that, _options)[_options].leadDigits;
+  var fracDigits = _classPrivateFieldLooseBase(that, _options)[_options].fracDigits;
   // we don't check use-case where just fracDigits is set since in case of composition update, the value to update is not known
   if (leadDigits !== -1) {
-    let val = _classPrivateFieldLooseBase(this, _widget)[_widget].value;
+    var val = _classPrivateFieldLooseBase(this, _widget)[_widget].value;
     if (event.type === "compositionupdate" && event.originalEvent.data) {
       val = val + event.originalEvent.data.substr(event.originalEvent.data.length - 1);
     }
     // can't use the existing regex (since current regex checks for english digits), rather doing leadDigit compare
-    let totalLength = leadDigits + (fracDigits !== -1 ? fracDigits + _classPrivateFieldLooseBase(that, _options)[_options].decimal.length : 0);
+    var totalLength = leadDigits + (fracDigits !== -1 ? fracDigits + _classPrivateFieldLooseBase(that, _options)[_options].decimal.length : 0);
     if (val.indexOf(_classPrivateFieldLooseBase(that, _options)[_options].decimal) === -1) {
       totalLength = leadDigits;
     }
-    let latinVal = _classPrivateFieldLooseBase(this, _toLatinForm)[_toLatinForm](val);
+    var latinVal = _classPrivateFieldLooseBase(this, _toLatinForm)[_toLatinForm](val);
     // match both since we support full width, half width and locale specific input
-    let match = latinVal.match(_classPrivateFieldLooseBase(that, _regex)[_regex]) || latinVal.match(_classPrivateFieldLooseBase(this, _engRegex)[_engRegex]);
+    var match = latinVal.match(_classPrivateFieldLooseBase(that, _regex)[_regex]) || latinVal.match(_classPrivateFieldLooseBase(this, _engRegex)[_engRegex]);
     flag = !match;
     if (match === null) {
       // entered invalid character, revert to previous value
@@ -8474,7 +9499,7 @@ function _compositionUpdateCallback2(event) {
       flag = true;
     } else if (flag) {
       // if max reached
-      let newVal = val.substr(0, totalLength);
+      var newVal = val.substr(0, totalLength);
       _classPrivateFieldLooseBase(that, _widget)[_widget].value = newVal;
       _classPrivateFieldLooseBase(that, _previousCompositionVal)[_previousCompositionVal] = newVal;
       flag = true;
@@ -8490,7 +9515,7 @@ function _handleKeyInput2(event, character, code) {
   }
   _classPrivateFieldLooseBase(this, _handleKeyDown)[_handleKeyDown](arguments);
   _classPrivateFieldLooseBase(this, _options)[_options].lengthLimitVisible = true;
-  let val = _classPrivateFieldLooseBase(this, _widget)[_widget].value,
+  var val = _classPrivateFieldLooseBase(this, _widget)[_widget].value,
     // if selectionStart attribute isn't supported then its value will be undefined
     selectionStart = this.getHTMLSupportedAttr(_classPrivateFieldLooseBase(this, _widget)[_widget], "selectionStart") || 0,
     isSelectionAttrSupported = !(selectionStart === undefined || selectionStart === null),
@@ -8510,7 +9535,7 @@ function _handleKeyInput2(event, character, code) {
   }
   current = val.substr(0, selectionStart) + change + val.substr(selectionEnd);
   // done to handle support for both full width, half width or mixed input in number field
-  let latinCurrentValue = _classPrivateFieldLooseBase(this, _toLatinForm)[_toLatinForm](current);
+  var latinCurrentValue = _classPrivateFieldLooseBase(this, _toLatinForm)[_toLatinForm](current);
   if (!(_classPrivateFieldLooseBase(this, _regex)[_regex] == null || latinCurrentValue.match(_classPrivateFieldLooseBase(this, _regex)[_regex]) || latinCurrentValue.match(_classPrivateFieldLooseBase(this, _engRegex)[_engRegex]))) {
     event.preventDefault();
     return false;
@@ -8525,7 +9550,7 @@ function _handleKeyInput2(event, character, code) {
 }
 function _handleKeyDown2(event) {
   if (event) {
-    let code = event.charCode || event.which || event.keyCode || 0;
+    var code = event.charCode || event.which || event.keyCode || 0;
     if (code === 8 || code === 46)
       // backspace and del
       _classPrivateFieldLooseBase(this, _handleKeyInput)[_handleKeyInput](event, "", code);else if (code === 32) {
@@ -8537,13 +9562,13 @@ function _handleKeyDown2(event) {
 }
 function _isValidChar2(character) {
   character = _classPrivateFieldLooseBase(this, _toLatinForm)[_toLatinForm](character);
-  let lastSingleDigitChar = String.fromCharCode(_classPrivateFieldLooseBase(this, _options)[_options].zero.charCodeAt(0) + 9);
+  var lastSingleDigitChar = String.fromCharCode(_classPrivateFieldLooseBase(this, _options)[_options].zero.charCodeAt(0) + 9);
   // we only full width, half width and also locale specific if customer has overlayed the i18n file
   return character >= "0" && character <= "9" || character >= _classPrivateFieldLooseBase(this, _options)[_options].zero && character <= lastSingleDigitChar || character === _classPrivateFieldLooseBase(this, _options)[_options].decimal || character === _classPrivateFieldLooseBase(this, _options)[_options].minus;
 }
 function _handleKeyPress2(event) {
   if (event) {
-    let code = event.charCode || event.which || event.keyCode || 0,
+    var code = event.charCode || event.which || event.keyCode || 0,
       character = String.fromCharCode(code);
     if (this.isNonPrintableKey(event.key)) {
       // mozilla also generates a keypress, along with keydown
@@ -8559,7 +9584,7 @@ function _handleKeyPress2(event) {
 function _handlePaste2(event) {
   if (event) {
     // get the contents
-    let pastedChar = undefined;
+    var pastedChar = undefined;
     if (window.clipboardData && window.clipboardData.getData) {
       // IE
       pastedChar = window.clipboardData.getData('Text');
@@ -8567,7 +9592,7 @@ function _handlePaste2(event) {
       pastedChar = (event.originalEvent || event).clipboardData.getData('text/plain');
     }
     if (pastedChar) {
-      let allPastedCharsValid = pastedChar.split('').every(function (character) {
+      var allPastedCharsValid = pastedChar.split('').every(function (character) {
         return _classPrivateFieldLooseBase(this, _isValidChar)[_isValidChar](character);
       }, this);
       if (allPastedCharsValid) {
@@ -8587,7 +9612,7 @@ function _handleCut2(event) {
   }
 }
 function _convertValueToLocale2(val) {
-  let zeroCode = _classPrivateFieldLooseBase(this, _options)[_options].zero.charCodeAt(0);
+  var zeroCode = _classPrivateFieldLooseBase(this, _options)[_options].zero.charCodeAt(0);
   return val.map(function (c) {
     if (c === ".") {
       return _classPrivateFieldLooseBase(this, _options)[_options].decimal;
@@ -8600,7 +9625,7 @@ function _convertValueToLocale2(val) {
 }
 function _convertValueFromLocale2(val) {
   val = _classPrivateFieldLooseBase(this, _toLatinForm)[_toLatinForm](val);
-  let zeroCode = _classPrivateFieldLooseBase(this, _options)[_options].zero.charCodeAt(0);
+  var zeroCode = _classPrivateFieldLooseBase(this, _options)[_options].zero.charCodeAt(0);
   return val.map(function (c) {
     if (c === _classPrivateFieldLooseBase(this, _options)[_options].decimal) {
       return ".";
@@ -8615,43 +9640,51 @@ function _isValueSame2() {
   return _classPrivateFieldLooseBase(this, _model)[_model].value === null && _classPrivateFieldLooseBase(this, _widget)[_widget].value === "" || _classPrivateFieldLooseBase(this, _model)[_model].value === _classPrivateFieldLooseBase(this, _widget)[_widget].value;
 }
 
-class NumberInput extends FormFieldBase {
-  constructor(...args) {
-    super(...args);
-    this.widgetObject = void 0;
+var NumberInput = /*#__PURE__*/function (_FormFieldBase) {
+  _inheritsLoose(NumberInput, _FormFieldBase);
+  function NumberInput() {
+    var _this;
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+    _this = _FormFieldBase.call.apply(_FormFieldBase, [this].concat(args)) || this;
+    _this.widgetObject = void 0;
+    return _this;
   }
-  getClass() {
+  var _proto = NumberInput.prototype;
+  _proto.getClass = function getClass() {
     return NumberInput.IS;
-  }
-  getWidget() {
+  };
+  _proto.getWidget = function getWidget() {
     return this.element.querySelector(NumberInput.selectors.widget);
-  }
-  getDescription() {
+  };
+  _proto.getDescription = function getDescription() {
     return this.element.querySelector(NumberInput.selectors.description);
-  }
-  getLabel() {
+  };
+  _proto.getLabel = function getLabel() {
     return this.element.querySelector(NumberInput.selectors.label);
-  }
-  getErrorDiv() {
+  };
+  _proto.getErrorDiv = function getErrorDiv() {
     return this.element.querySelector(NumberInput.selectors.errorDiv);
-  }
-  getTooltipDiv() {
+  };
+  _proto.getTooltipDiv = function getTooltipDiv() {
     return this.element.querySelector(NumberInput.selectors.tooltipDiv);
-  }
-  getQuestionMarkDiv() {
+  };
+  _proto.getQuestionMarkDiv = function getQuestionMarkDiv() {
     return this.element.querySelector(NumberInput.selectors.qm);
-  }
-  _updateValue(value) {
+  };
+  _proto._updateValue = function _updateValue(value) {
     if (this.widgetObject == null && (this._model._jsonModel.editFormat || this._model._jsonModel.displayFormat)) {
       this.widgetObject = new NumericInputWidget(this.getWidget(), this._model);
     }
     if (this.widgetObject) {
       this.widgetObject.setValue(value);
     } else {
-      super._updateValue(value);
+      _FormFieldBase.prototype._updateValue.call(this, value);
     }
-  }
-  addListener() {
+  };
+  _proto.addListener = function addListener() {
+    var _this2 = this;
     // only initialize if patterns are set
     if (this._model._jsonModel.editFormat || this._model._jsonModel.displayFormat) {
       if (this.widgetObject == null) {
@@ -8659,75 +9692,68 @@ class NumberInput extends FormFieldBase {
       }
     } else {
       var _this$getWidget;
-      (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener('blur', e => {
-        this._model.value = e.target.value;
+      (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener('blur', function (e) {
+        _this2._model.value = e.target.value;
       });
     }
-  }
-  getbemBlock() {
+  };
+  _proto.getbemBlock = function getbemBlock() {
     return NumberInput.bemBlock;
-  }
-  getIS() {
+  };
+  _proto.getIS = function getIS() {
     return NumberInput.IS;
-  }
-  getInputHTML() {
-    return `<input
-            class="cmp-adaptiveform-numberinput__widget"
-            title="${this.isTooltipVisible() ? this.getTooltipValue() : ''}"
-            aria-label="${this.isLabelVisible() ? this.getLabelValue() : ''}"
-            type="number"
-            name="${this.getName()}"
-            value="${this.getDefault()}"
-            max="${this.getMaximum()}"
-            min="${this.getMinimum()}"
-            ${this.getDisabledHTML()}
-            ${this.getReadonlyHTML()}
-            required="${this.isRequired()}"
-            placeholder="${this.getPlaceHolder()}"/>`;
-  }
-}
+  };
+  _proto.getInputHTML = function getInputHTML() {
+    return "<input\n            class=\"cmp-adaptiveform-numberinput__widget\"\n            title=\"" + (this.isTooltipVisible() ? this.getTooltipValue() : '') + "\"\n            aria-label=\"" + (this.isLabelVisible() ? this.getLabelValue() : '') + "\"\n            type=\"number\"\n            name=\"" + this.getName() + "\"\n            value=\"" + this.getDefault() + "\"\n            max=\"" + this.getMaximum() + "\"\n            min=\"" + this.getMinimum() + "\"\n            " + this.getDisabledHTML() + "\n            " + this.getReadonlyHTML() + "\n            required=\"" + this.isRequired() + "\"\n            placeholder=\"" + this.getPlaceHolder() + "\"/>";
+  };
+  return NumberInput;
+}(FormFieldBase);
 NumberInput.NS = Constants.NS;
 NumberInput.IS = "adaptiveFormNumberInput";
 NumberInput.bemBlock = 'cmp-adaptiveform-numberinput';
 NumberInput.selectors = {
   self: "[data-" + NumberInput.NS + '-is="' + NumberInput.IS + '"]',
-  widget: `.${NumberInput.bemBlock}__widget`,
-  label: `.${NumberInput.bemBlock}__label`,
-  description: `.${NumberInput.bemBlock}__longdescription`,
-  errorDiv: `.${NumberInput.bemBlock}__errormessage`,
-  qm: `.${NumberInput.bemBlock}__questionmark`,
-  tooltipDiv: `.${NumberInput.bemBlock}__shortdescription`
+  widget: "." + NumberInput.bemBlock + "__widget",
+  label: "." + NumberInput.bemBlock + "__label",
+  description: "." + NumberInput.bemBlock + "__longdescription",
+  errorDiv: "." + NumberInput.bemBlock + "__errormessage",
+  qm: "." + NumberInput.bemBlock + "__questionmark",
+  tooltipDiv: "." + NumberInput.bemBlock + "__shortdescription"
 };
 
-class RadioButton extends FormFieldBase {
-  constructor(params, model) {
-    super(params, model);
-    this.qm = this.element.querySelector(RadioButton.selectors.qm);
+var RadioButton = /*#__PURE__*/function (_FormFieldBase) {
+  _inheritsLoose(RadioButton, _FormFieldBase);
+  function RadioButton(params, model) {
+    var _this;
+    _this = _FormFieldBase.call(this, params, model) || this;
+    _this.qm = _this.element.querySelector(RadioButton.selectors.qm);
+    return _this;
   }
-  getWidget() {
+  var _proto = RadioButton.prototype;
+  _proto.getWidget = function getWidget() {
     return this.element.querySelector(RadioButton.selectors.widget);
-  }
-  getWidgets() {
+  };
+  _proto.getWidgets = function getWidgets() {
     return this.element.querySelectorAll(RadioButton.selectors.widget);
-  }
-  getDescription() {
+  };
+  _proto.getDescription = function getDescription() {
     return this.element.querySelector(RadioButton.selectors.description);
-  }
-  getLabel() {
+  };
+  _proto.getLabel = function getLabel() {
     return this.element.querySelector(RadioButton.selectors.label);
-  }
-  getQuestionMarkDiv() {
+  };
+  _proto.getQuestionMarkDiv = function getQuestionMarkDiv() {
     return this.element.querySelector(RadioButton.selectors.qm);
-  }
-  getTooltipDiv() {
+  };
+  _proto.getTooltipDiv = function getTooltipDiv() {
     return this.element.querySelector(RadioButton.selectors.tooltipDiv);
-  }
-  getErrorDiv() {
+  };
+  _proto.getErrorDiv = function getErrorDiv() {
     return this.element.querySelector(RadioButton.selectors.errorDiv);
-  }
-  _updateValue(modelValue) {
+  };
+  _proto._updateValue = function _updateValue(modelValue) {
     if (modelValue != null) {
-      this.getWidgets().forEach(widget => {
+      this.getWidgets().forEach(function (widget) {
         if (widget.value != null && modelValue.toString() == widget.value.toString()) {
           widget.checked = true;
           widget.setAttribute(Constants.HTML_ATTRS.CHECKED, Constants.HTML_ATTRS.CHECKED);
@@ -8739,12 +9765,12 @@ class RadioButton extends FormFieldBase {
         }
       }, this);
     }
-  }
-  _updateEnabled(enabled) {
+  };
+  _proto._updateEnabled = function _updateEnabled(enabled) {
     this.toggle(enabled, Constants.ARIA_DISABLED, true);
     this.element.setAttribute(Constants.DATA_ATTRIBUTE_ENABLED, enabled + "");
-    let widgets = this.getWidgets();
-    widgets == null ? void 0 : widgets.forEach(widget => {
+    var widgets = this.getWidgets();
+    widgets == null ? void 0 : widgets.forEach(function (widget) {
       if (enabled === false) {
         widget.setAttribute(Constants.HTML_ATTRS.DISABLED, true + "");
         widget.setAttribute(Constants.ARIA_DISABLED, true + "");
@@ -8753,105 +9779,89 @@ class RadioButton extends FormFieldBase {
         widget.removeAttribute(Constants.ARIA_DISABLED);
       }
     });
-  }
-  addListener() {
-    this.getWidgets().forEach(widget => {
-      widget.addEventListener('change', e => {
-        this._model.value = e.target.value;
+  };
+  _proto.addListener = function addListener() {
+    var _this2 = this;
+    this.getWidgets().forEach(function (widget) {
+      widget.addEventListener('change', function (e) {
+        _this2._model.value = e.target.value;
       });
     });
-  }
-  getbemBlock() {
+  };
+  _proto.getbemBlock = function getbemBlock() {
     return RadioButton.bemBlock;
-  }
-  getIS() {
+  };
+  _proto.getIS = function getIS() {
     return RadioButton.IS;
-  }
-  getInputHTML() {
-    var _this$getState, _this$getState$enum;
-    return `
-            ${(_this$getState = this.getState()) == null ? void 0 : (_this$getState$enum = _this$getState.enum) == null ? void 0 : _this$getState$enum.map((enumVal, index) => {
-      var _this$getState2;
-      return this.getRadioHTML(this, enumVal, (_this$getState2 = this.getState()) == null ? void 0 : _this$getState2.enumNames[index], index);
-    }).join("")}`;
-  }
-  getRadioHTML(radioButton, enumValue, enumDisplayName, index) {
-    return `<div class="cmp-adaptiveform-radiobutton__option ${radioButton.getLayoutProperties().orientation}">
-                    <label class="cmp-adaptiveform-radiobutton__option__label"
-                            title="${radioButton.getTooltipValue()}"
-                            aria-describedby="_desc"
-                            aria-label="${enumDisplayName}">
-                        <input type="radio"
-                                name="${radioButton.getName()}"
-                                class="cmp-adaptiveform-radiobutton__option__widget"
-                                id="${radioButton.getId()}${'_'}${index}__widget"
-                                value="${enumValue}"
-                                ${this.getDisabledHTML()}
-                                aria-describedby="_desc"
-                                checked="${enumValue == this.getDefault()}"/>
-                        <span>${enumDisplayName}</span>
-                    </label>
-                </div>
-            </div>`;
-  }
-}
+  };
+  _proto.getInputHTML = function getInputHTML() {
+    var _this$getState,
+      _this$getState$enum,
+      _this3 = this;
+    return "\n            " + ((_this$getState = this.getState()) == null ? void 0 : (_this$getState$enum = _this$getState["enum"]) == null ? void 0 : _this$getState$enum.map(function (enumVal, index) {
+      var _this3$getState;
+      return _this3.getRadioHTML(_this3, enumVal, (_this3$getState = _this3.getState()) == null ? void 0 : _this3$getState.enumNames[index], index);
+    }).join(""));
+  };
+  _proto.getRadioHTML = function getRadioHTML(radioButton, enumValue, enumDisplayName, index) {
+    return "<div class=\"cmp-adaptiveform-radiobutton__option " + radioButton.getLayoutProperties().orientation + "\">\n                    <label class=\"cmp-adaptiveform-radiobutton__option__label\"\n                            title=\"" + radioButton.getTooltipValue() + "\"\n                            aria-describedby=\"_desc\"\n                            aria-label=\"" + enumDisplayName + "\">\n                        <input type=\"radio\"\n                                name=\"" + radioButton.getName() + "\"\n                                class=\"cmp-adaptiveform-radiobutton__option__widget\"\n                                id=\"" + radioButton.getId() + '_' + index + "__widget\"\n                                value=\"" + enumValue + "\"\n                                " + this.getDisabledHTML() + "\n                                aria-describedby=\"_desc\"\n                                checked=\"" + (enumValue == this.getDefault()) + "\"/>\n                        <span>" + enumDisplayName + "</span>\n                    </label>\n                </div>\n            </div>";
+  };
+  return RadioButton;
+}(FormFieldBase);
 RadioButton.NS = Constants.NS;
 RadioButton.IS = "adaptiveFormRadioButton";
 RadioButton.bemBlock = 'cmp-adaptiveform-radiobutton';
 RadioButton.selectors = {
   self: "[data-" + RadioButton.NS + '-is="' + RadioButton.IS + '"]',
-  widget: `.${RadioButton.bemBlock}__option__widget`,
-  label: `.${RadioButton.bemBlock}__label`,
-  description: `.${RadioButton.bemBlock}__longdescription`,
-  qm: `.${RadioButton.bemBlock}__questionmark`,
-  errorDiv: `.${RadioButton.bemBlock}__errormessage`,
-  tooltipDiv: `.${RadioButton.bemBlock}__shortdescription`
+  widget: "." + RadioButton.bemBlock + "__option__widget",
+  label: "." + RadioButton.bemBlock + "__label",
+  description: "." + RadioButton.bemBlock + "__longdescription",
+  qm: "." + RadioButton.bemBlock + "__questionmark",
+  errorDiv: "." + RadioButton.bemBlock + "__errormessage",
+  tooltipDiv: "." + RadioButton.bemBlock + "__shortdescription"
 };
 
-class Text extends FormFieldBase {
-  getWidget() {
-    return null;
+var Text = /*#__PURE__*/function (_FormFieldBase) {
+  _inheritsLoose(Text, _FormFieldBase);
+  function Text() {
+    return _FormFieldBase.apply(this, arguments) || this;
   }
-  getDescription() {
+  var _proto = Text.prototype;
+  _proto.getWidget = function getWidget() {
     return null;
-  }
-  getLabel() {
+  };
+  _proto.getDescription = function getDescription() {
     return null;
-  }
-  getErrorDiv() {
+  };
+  _proto.getLabel = function getLabel() {
     return null;
-  }
-  getTooltipDiv() {
+  };
+  _proto.getErrorDiv = function getErrorDiv() {
     return null;
-  }
-  getQuestionMarkDiv() {
+  };
+  _proto.getTooltipDiv = function getTooltipDiv() {
     return null;
-  }
-  getClass() {
+  };
+  _proto.getQuestionMarkDiv = function getQuestionMarkDiv() {
+    return null;
+  };
+  _proto.getClass = function getClass() {
     return Text.IS;
-  }
-  setFocus() {
+  };
+  _proto.setFocus = function setFocus() {
     this.setActive();
-  }
-  getbemBlock() {
+  };
+  _proto.getbemBlock = function getbemBlock() {
     return Text.bemBlock;
-  }
-  getIS() {
+  };
+  _proto.getIS = function getIS() {
     return Text.IS;
-  }
-  getHTML() {
-    return `
-        <div data-cmp-is="${this.getIS()}"
-            id="${this.id}"
-            data-cmp-adaptiveformcontainer-path="${this.getFormContainerPath()}"
-            data-cmp-visible="${this.getDefault()}"
-            class="cmp-adaptiveform-text">
-            <div class="cmp-adaptiveform-text__widget" tabindex="0">
-                ${this.getState().value}
-            </div>
-        </div>`;
-  }
-}
+  };
+  _proto.getHTML = function getHTML() {
+    return "\n        <div data-cmp-is=\"" + this.getIS() + "\"\n            id=\"" + this.id + "\"\n            data-cmp-adaptiveformcontainer-path=\"" + this.getFormContainerPath() + "\"\n            data-cmp-visible=\"" + this.getDefault() + "\"\n            class=\"cmp-adaptiveform-text\">\n            <div class=\"cmp-adaptiveform-text__widget\" tabindex=\"0\">\n                " + this.getState().value + "\n            </div>\n        </div>";
+  };
+  return Text;
+}(FormFieldBase);
 Text.NS = Constants.NS;
 Text.IS = "adaptiveFormText";
 Text.bemBlock = 'cmp-adaptiveform-text';
@@ -8859,138 +9869,125 @@ Text.selectors = {
   self: "[data-" + Text.NS + '-is="' + Text.IS + '"]'
 };
 
-class SliderInput extends FormFieldBase {
-  getWidget() {
+var SliderInput = /*#__PURE__*/function (_FormFieldBase) {
+  _inheritsLoose(SliderInput, _FormFieldBase);
+  function SliderInput() {
+    return _FormFieldBase.apply(this, arguments) || this;
+  }
+  var _proto = SliderInput.prototype;
+  _proto.getWidget = function getWidget() {
     return this.element.querySelector(SliderInput.selectors.widget);
-  }
-  getDescription() {
+  };
+  _proto.getDescription = function getDescription() {
     return this.element.querySelector(SliderInput.selectors.description);
-  }
-  getLabel() {
+  };
+  _proto.getLabel = function getLabel() {
     return this.element.querySelector(SliderInput.selectors.label);
-  }
-  getErrorDiv() {
+  };
+  _proto.getErrorDiv = function getErrorDiv() {
     return this.element.querySelector(SliderInput.selectors.errorDiv);
-  }
-  getTooltipDiv() {
+  };
+  _proto.getTooltipDiv = function getTooltipDiv() {
     return this.element.querySelector(SliderInput.selectors.tooltipDiv);
-  }
-  getQuestionMarkDiv() {
+  };
+  _proto.getQuestionMarkDiv = function getQuestionMarkDiv() {
     return this.element.querySelector(SliderInput.selectors.qm);
-  }
-  addListener() {
-    var _this$getWidget, _this$getWidget2;
-    (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener('blur', e => {
-      this._model.value = e.target.value;
-      this.setInactive();
+  };
+  _proto.addListener = function addListener() {
+    var _this$getWidget,
+      _this = this,
+      _this$getWidget2;
+    (_this$getWidget = this.getWidget()) == null ? void 0 : _this$getWidget.addEventListener('blur', function (e) {
+      _this._model.value = e.target.value;
+      _this.setInactive();
     });
-    (_this$getWidget2 = this.getWidget()) == null ? void 0 : _this$getWidget2.addEventListener('focus', e => {
-      this.setActive();
+    (_this$getWidget2 = this.getWidget()) == null ? void 0 : _this$getWidget2.addEventListener('focus', function (e) {
+      _this.setActive();
     });
-  }
-  getbemBlock() {
+  };
+  _proto.getbemBlock = function getbemBlock() {
     return SliderInput.bemBlock;
-  }
-  getIS() {
+  };
+  _proto.getIS = function getIS() {
     return SliderInput.IS;
-  }
-  getInputHTML() {
-    return `
-            <br>
-            <p class="range-info">${this.getMinimum()}</p>
-            <input
-                class="cmp-adaptiveform-SliderInput__widget"
-                title="${this.isTooltipVisible() ? this.getTooltipValue() : ''}"
-                aria-label="${this.isLabelVisible() ? this.getLabelValue() : ''}"
-                type="range"
-                name="${this.getName()}"
-                value="${this.getDefault()}"
-                step="${this.getState().step}"
-                ${this.getDisabledHTML()}
-                ${this.getReadonlyHTML()}
-                required="${this.isRequired()}"
-                placeholder="${this.getPlaceHolder()}"
-                min="${this.getMinimum()}"
-                max="${this.getMaximum()}"/>
-            
-            <p class="range-info">${this.getMaximum()}</p>
-            `;
-  }
-}
+  };
+  _proto.getInputHTML = function getInputHTML() {
+    return "\n            <br>\n            <p class=\"range-info\">" + this.getMinimum() + "</p>\n            <input\n                class=\"cmp-adaptiveform-SliderInput__widget\"\n                title=\"" + (this.isTooltipVisible() ? this.getTooltipValue() : '') + "\"\n                aria-label=\"" + (this.isLabelVisible() ? this.getLabelValue() : '') + "\"\n                type=\"range\"\n                name=\"" + this.getName() + "\"\n                value=\"" + this.getDefault() + "\"\n                step=\"" + this.getState().step + "\"\n                " + this.getDisabledHTML() + "\n                " + this.getReadonlyHTML() + "\n                required=\"" + this.isRequired() + "\"\n                placeholder=\"" + this.getPlaceHolder() + "\"\n                min=\"" + this.getMinimum() + "\"\n                max=\"" + this.getMaximum() + "\"/>\n            \n            <p class=\"range-info\">" + this.getMaximum() + "</p>\n            ";
+  };
+  return SliderInput;
+}(FormFieldBase);
 SliderInput.NS = Constants.NS;
 SliderInput.IS = "adaptiveFormSliderInput";
 SliderInput.bemBlock = 'cmp-adaptiveform-sliderinput';
 SliderInput.selectors = {
   self: "[data-" + SliderInput.NS + '-is="' + SliderInput.IS + '"]',
-  widget: `.${SliderInput.bemBlock}__widget`,
-  label: `.${SliderInput.bemBlock}__label`,
-  description: `.${SliderInput.bemBlock}__longdescription`,
-  qm: `.${SliderInput.bemBlock}__questionmark`,
-  errorDiv: `.${SliderInput.bemBlock}__errormessage`,
-  tooltipDiv: `.${SliderInput.bemBlock}__shortdescription`
+  widget: "." + SliderInput.bemBlock + "__widget",
+  label: "." + SliderInput.bemBlock + "__label",
+  description: "." + SliderInput.bemBlock + "__longdescription",
+  qm: "." + SliderInput.bemBlock + "__questionmark",
+  errorDiv: "." + SliderInput.bemBlock + "__errormessage",
+  tooltipDiv: "." + SliderInput.bemBlock + "__shortdescription"
 };
 
-class EmailInput extends TextInput {
-  getInputHTML() {
-    return `<input
-              class="cmp-adaptiveform-textinput__widget"
-              title="${this.isTooltipVisible() ? this.getTooltipValue() : ''}"
-              aria-label="${this.isLabelVisible() ? this.getLabelValue() : ''}"
-              type="email"
-              name="${this.getName()}"
-              value="${this.getDefault()}"
-              ${this.getDisabledHTML()}
-              ${this.getReadonlyHTML()}
-              required="${this.isRequired()}"
-              placeholder="${this.getPlaceHolder()}"
-              minlength="${this.getMinLength()}"
-              maxlength="${this.getMaxLength()}"/>`;
+var EmailInput = /*#__PURE__*/function (_TextInput) {
+  _inheritsLoose(EmailInput, _TextInput);
+  function EmailInput() {
+    return _TextInput.apply(this, arguments) || this;
   }
-}
+  var _proto = EmailInput.prototype;
+  _proto.getInputHTML = function getInputHTML() {
+    return "<input\n              class=\"cmp-adaptiveform-textinput__widget\"\n              title=\"" + (this.isTooltipVisible() ? this.getTooltipValue() : '') + "\"\n              aria-label=\"" + (this.isLabelVisible() ? this.getLabelValue() : '') + "\"\n              type=\"email\"\n              name=\"" + this.getName() + "\"\n              value=\"" + this.getDefault() + "\"\n              " + this.getDisabledHTML() + "\n              " + this.getReadonlyHTML() + "\n              required=\"" + this.isRequired() + "\"\n              placeholder=\"" + this.getPlaceHolder() + "\"\n              minlength=\"" + this.getMinLength() + "\"\n              maxlength=\"" + this.getMaxLength() + "\"/>";
+  };
+  return EmailInput;
+}(TextInput);
 
-class CheckBoxGroup extends FormFieldBase {
-  constructor(params, model) {
-    super(params, model);
-    this.widgetLabel = void 0;
-    this.qm = this.element.querySelector(CheckBoxGroup.selectors.qm);
-    this.widgetLabel = this.element.querySelector(CheckBoxGroup.selectors.widgetLabel);
+var CheckBoxGroup = /*#__PURE__*/function (_FormFieldBase) {
+  _inheritsLoose(CheckBoxGroup, _FormFieldBase);
+  function CheckBoxGroup(params, model) {
+    var _this;
+    _this = _FormFieldBase.call(this, params, model) || this;
+    _this.widgetLabel = void 0;
+    _this.qm = _this.element.querySelector(CheckBoxGroup.selectors.qm);
+    _this.widgetLabel = _this.element.querySelector(CheckBoxGroup.selectors.widgetLabel);
+    return _this;
   }
-  getWidget() {
+  var _proto = CheckBoxGroup.prototype;
+  _proto.getWidget = function getWidget() {
     return this.element.querySelector(CheckBoxGroup.selectors.widget);
-  }
-  getWidgets() {
+  };
+  _proto.getWidgets = function getWidgets() {
     return this.element.querySelectorAll(CheckBoxGroup.selectors.widget);
-  }
-  getDescription() {
+  };
+  _proto.getDescription = function getDescription() {
     return this.element.querySelector(CheckBoxGroup.selectors.description);
-  }
-  getLabel() {
+  };
+  _proto.getLabel = function getLabel() {
     return this.element.querySelector(CheckBoxGroup.selectors.label);
-  }
-  getErrorDiv() {
+  };
+  _proto.getErrorDiv = function getErrorDiv() {
     return this.element.querySelector(CheckBoxGroup.selectors.errorDiv);
-  }
-  getQuestionMarkDiv() {
+  };
+  _proto.getQuestionMarkDiv = function getQuestionMarkDiv() {
     return this.element.querySelector(CheckBoxGroup.selectors.qm);
-  }
-  getTooltipDiv() {
+  };
+  _proto.getTooltipDiv = function getTooltipDiv() {
     return this.element.querySelector(CheckBoxGroup.selectors.tooltipDiv);
-  }
-  _updateModelValue() {
-    let value = [];
-    let widgets = this.getWidgets();
-    widgets == null ? void 0 : widgets.forEach(widget => {
+  };
+  _proto._updateModelValue = function _updateModelValue() {
+    var value = [];
+    var widgets = this.getWidgets();
+    widgets == null ? void 0 : widgets.forEach(function (widget) {
       if (widget.checked) {
         value.push(widget.value);
       }
     }, this);
     this._model.value = value;
-  }
-  _updateEnabled(enabled) {
+  };
+  _proto._updateEnabled = function _updateEnabled(enabled) {
     this.toggle(enabled, Constants.ARIA_DISABLED, true);
     this.element.setAttribute(Constants.DATA_ATTRIBUTE_ENABLED, enabled + "");
-    let widgets = this.getWidgets();
-    widgets == null ? void 0 : widgets.forEach(widget => {
+    var widgets = this.getWidgets();
+    widgets == null ? void 0 : widgets.forEach(function (widget) {
       if (enabled === false) {
         widget.setAttribute(Constants.HTML_ATTRS.DISABLED, true + "");
         widget.setAttribute(Constants.ARIA_DISABLED, true + "");
@@ -8999,95 +9996,84 @@ class CheckBoxGroup extends FormFieldBase {
         widget.removeAttribute(Constants.ARIA_DISABLED);
       }
     });
-  }
-  getEnum() {
+  };
+  _proto.getEnum = function getEnum() {
     var _this$getState;
-    return (_this$getState = this.getState()) == null ? void 0 : _this$getState.enum;
-  }
-  getEnumNames() {
+    return (_this$getState = this.getState()) == null ? void 0 : _this$getState["enum"];
+  };
+  _proto.getEnumNames = function getEnumNames() {
     var _this$getState2;
     return (_this$getState2 = this.getState()) == null ? void 0 : _this$getState2.enumNames;
-  }
-  addListener() {
-    let widgets = this.getWidgets();
-    widgets.forEach(widget => {
-      widget.addEventListener('change', e => {
-        this._updateModelValue();
+  };
+  _proto.addListener = function addListener() {
+    var _this2 = this;
+    var widgets = this.getWidgets();
+    widgets.forEach(function (widget) {
+      widget.addEventListener('change', function (e) {
+        _this2._updateModelValue();
       });
     });
-  }
-  getbemBlock() {
+  };
+  _proto.getbemBlock = function getbemBlock() {
     return CheckBoxGroup.bemBlock;
-  }
-  getIS() {
+  };
+  _proto.getIS = function getIS() {
     return CheckBoxGroup.IS;
-  }
-  getInputHTML() {
-    var _this$getEnum;
-    return `
-            <div class="cmp-adaptiveform-checkboxgroup__widget">
-            ${(_this$getEnum = this.getEnum()) == null ? void 0 : _this$getEnum.map((enumVal, index, enums) => {
-      var _this$getEnumNames;
-      return this.getCheckboxHTML(this, enumVal, ((_this$getEnumNames = this.getEnumNames()) == null ? void 0 : _this$getEnumNames[index]) || enumVal, index, enums == null ? void 0 : enums.length);
-    }).join("")}
-            </div>
-            `;
-  }
-  getCheckboxHTML(checkbox, enumValue, enumDisplayName, index, size) {
-    return `<div class="cmp-adaptiveform-checkboxgroup-item ${checkbox.getName()} ${checkbox.getLayoutProperties().orientation} ">
-                <label class="cmp-adaptiveform-checkbox__label" aria-label="${enumDisplayName}"
-                    title="${checkbox.getTooltipValue()}" for="${checkbox.id}${'_'}${index}__widget">
-                    <input class="cmp-adaptiveform-checkbox__widget" type="checkbox" id="${checkbox.id}${'_'}${index}__widget"
-                        aria-describedby="_desc"
-                        name="${size > 1 ? checkbox.getName() : checkbox.getLabelValue()}"
-                        value="${enumValue.toString()}"
-                        checked="${enumValue == checkbox.getDefault()}"
-                        ${this.getDisabledHTML()} />
-                    <span>${this.getEnum().length > 1 ? enumDisplayName : checkbox.getLabelValue()}</span>
-                </label>
-            </div>`;
-  }
-  renderLabel() {
-    return `${this.isLabelVisible() && this.getEnum().length > 1 ? `<label id="${this.getId()}-label" for="${this.getId()}" class="${this.getbemBlock()}__label" >${this.getLabelValue()}</label>` : ""}`;
-  }
-}
+  };
+  _proto.getInputHTML = function getInputHTML() {
+    var _this$getEnum,
+      _this3 = this;
+    return "\n            <div class=\"cmp-adaptiveform-checkboxgroup__widget\">\n            " + ((_this$getEnum = this.getEnum()) == null ? void 0 : _this$getEnum.map(function (enumVal, index, enums) {
+      var _this3$getEnumNames;
+      return _this3.getCheckboxHTML(_this3, enumVal, ((_this3$getEnumNames = _this3.getEnumNames()) == null ? void 0 : _this3$getEnumNames[index]) || enumVal, index, enums == null ? void 0 : enums.length);
+    }).join("")) + "\n            </div>\n            ";
+  };
+  _proto.getCheckboxHTML = function getCheckboxHTML(checkbox, enumValue, enumDisplayName, index, size) {
+    return "<div class=\"cmp-adaptiveform-checkboxgroup-item " + checkbox.getName() + " " + checkbox.getLayoutProperties().orientation + " \">\n                <label class=\"cmp-adaptiveform-checkbox__label\" aria-label=\"" + enumDisplayName + "\"\n                    title=\"" + checkbox.getTooltipValue() + "\" for=\"" + checkbox.id + '_' + index + "__widget\">\n                    <input class=\"cmp-adaptiveform-checkbox__widget\" type=\"checkbox\" id=\"" + checkbox.id + '_' + index + "__widget\"\n                        aria-describedby=\"_desc\"\n                        name=\"" + (size > 1 ? checkbox.getName() : checkbox.getLabelValue()) + "\"\n                        value=\"" + enumValue.toString() + "\"\n                        checked=\"" + (enumValue == checkbox.getDefault()) + "\"\n                        " + this.getDisabledHTML() + " />\n                    <span>" + (this.getEnum().length > 1 ? enumDisplayName : checkbox.getLabelValue()) + "</span>\n                </label>\n            </div>";
+  };
+  _proto.renderLabel = function renderLabel() {
+    return "" + (this.isLabelVisible() && this.getEnum().length > 1 ? "<label id=\"" + this.getId() + "-label\" for=\"" + this.getId() + "\" class=\"" + this.getbemBlock() + "__label\" >" + this.getLabelValue() + "</label>" : "");
+  };
+  return CheckBoxGroup;
+}(FormFieldBase);
 CheckBoxGroup.NS = Constants.NS;
 CheckBoxGroup.IS = "adaptiveFormCheckBoxGroup";
 CheckBoxGroup.bemBlock = 'cmp-adaptiveform-checkboxgroup';
 CheckBoxGroup.checkboxBemBlock = 'cmp-adaptiveform-checkbox';
 CheckBoxGroup.selectors = {
   self: "[data-" + CheckBoxGroup.NS + '-is="' + CheckBoxGroup.IS + '"]',
-  widgets: `.${CheckBoxGroup.bemBlock}__widgets`,
-  widget: `.${CheckBoxGroup.checkboxBemBlock}__widget`,
-  widgetLabel: `.${CheckBoxGroup.checkboxBemBlock}__label`,
-  label: `.${CheckBoxGroup.bemBlock}__label`,
-  description: `.${CheckBoxGroup.bemBlock}__longdescription`,
-  qm: `.${CheckBoxGroup.bemBlock}__questionmark`,
-  errorDiv: `.${CheckBoxGroup.bemBlock}__errormessage`,
-  tooltipDiv: `.${CheckBoxGroup.bemBlock}__shortdescription`
+  widgets: "." + CheckBoxGroup.bemBlock + "__widgets",
+  widget: "." + CheckBoxGroup.checkboxBemBlock + "__widget",
+  widgetLabel: "." + CheckBoxGroup.checkboxBemBlock + "__label",
+  label: "." + CheckBoxGroup.bemBlock + "__label",
+  description: "." + CheckBoxGroup.bemBlock + "__longdescription",
+  qm: "." + CheckBoxGroup.bemBlock + "__questionmark",
+  errorDiv: "." + CheckBoxGroup.bemBlock + "__errormessage",
+  tooltipDiv: "." + CheckBoxGroup.bemBlock + "__shortdescription"
 };
 
-class FormContainer {
-  constructor(_params) {
+var FormContainer = /*#__PURE__*/function () {
+  function FormContainer(_params) {
+    var _this = this;
     this._model = void 0;
     this._path = void 0;
     this._fields = void 0;
     this._deferredParents = void 0;
-    this.renderChildrens = (form, state) => {
+    this.renderChildrens = function (form, state) {
       console.log("Rendering childrens");
-      let items = state == null ? void 0 : state.items;
+      var items = state == null ? void 0 : state.items;
       if (items && items.length > 0) {
-        items.forEach(field => {
-          form.append(this.getRender(field));
+        items.forEach(function (field) {
+          form.append(_this.getRender(field));
         });
       }
     };
-    this.getRender = field => {
-      const fieldWrapper = document.createElement('div');
+    this.getRender = function (field) {
+      var fieldWrapper = document.createElement('div');
       try {
-        let fieldViewModel;
-        let fieldModel = this.getModel(field.id);
-        let params = {
+        var fieldViewModel;
+        var fieldModel = _this.getModel(field.id);
+        var params = {
           element: fieldWrapper,
           id: field.id
         };
@@ -9141,25 +10127,26 @@ class FormContainer {
    * returns the form field view
    * @param fieldId
    */
-  getField(fieldId) {
+  var _proto = FormContainer.prototype;
+  _proto.getField = function getField(fieldId) {
     if (this._fields.hasOwnProperty(fieldId)) {
       return this._fields[fieldId];
     }
     return null;
-  }
-  getModel(id) {
+  };
+  _proto.getModel = function getModel(id) {
     return id ? this._model.getElement(id) : this._model;
-  }
-  addField(fieldView) {
+  };
+  _proto.addField = function addField(fieldView) {
     if (fieldView.getFormContainerPath() === this._path) {
-      let fieldId = fieldView.getId();
+      var fieldId = fieldView.getId();
       this._fields[fieldId] = fieldView;
-      let model = this.getModel(fieldId);
+      var model = this.getModel(fieldId);
       fieldView.setModel(model);
       //todo fix parentId for non form elements, right now parent id might be non form element
-      let parentId = model.parent.id;
+      var parentId = model.parent.id;
       if (parentId != '$form') {
-        let parentView = this._fields[parentId];
+        var parentView = this._fields[parentId];
         //if parent view has been initialized then add parent relationship, otherwise add it to deferred parent-child relationship
         if (parentView) {
           fieldView.setParent(parentView);
@@ -9172,8 +10159,8 @@ class FormContainer {
       }
       // check if field id is in deferred relationship, if it is add parent child relationships
       if (this._deferredParents[fieldId]) {
-        let childList = this._deferredParents[fieldId];
-        for (let index = 0; index < childList.length; index++) {
+        var childList = this._deferredParents[fieldId];
+        for (var index = 0; index < childList.length; index++) {
           childList[index].setParent(fieldView);
         }
         // remove the parent from deferred parents, once child-parent relationship is established
@@ -9181,10 +10168,10 @@ class FormContainer {
       }
       fieldView.subscribe();
     }
-  }
-  setFocus(id) {
+  };
+  _proto.setFocus = function setFocus(id) {
     if (id) {
-      let fieldView = this._fields[id];
+      var fieldView = this._fields[id];
       if (fieldView && fieldView.setFocus) {
         fieldView.setFocus();
       } else {
@@ -9193,24 +10180,25 @@ class FormContainer {
         console.log("View on which focus is to be set, not initialized.");
       }
     }
-  }
-  getPath() {
+  };
+  _proto.getPath = function getPath() {
     return this._path;
-  }
-  render() {
-    const form = document.createElement('form');
+  };
+  _proto.render = function render() {
+    var form = document.createElement('form');
     form.className = "cmp-adaptiveform-container cmp-container";
-    let state = this._model.getState();
+    var state = this._model.getState();
     this.renderChildrens(form, state);
     return form;
-  }
-}
+  };
+  return FormContainer;
+}();
 
-const PANEL_TYPE = "object";
-const PANEL_END = "page-break";
-const RULE_TYPE = "Rules.";
-const EVENTS = "events.";
-const CONSTRAINT_MESSAGE = "constraintMessages.";
+var PANEL_TYPE = "object";
+var PANEL_END = "page-break";
+var RULE_TYPE = "Rules.";
+var EVENTS = "events.";
+var CONSTRAINT_MESSAGE = "constraintMessages.";
 var _handlePanel = /*#__PURE__*/_classPrivateFieldLooseKey("handlePanel");
 var _handleProperty = /*#__PURE__*/_classPrivateFieldLooseKey("handleProperty");
 var _handleCheckbox = /*#__PURE__*/_classPrivateFieldLooseKey("handleCheckbox");
@@ -9222,8 +10210,8 @@ var _isConstraintMsg = /*#__PURE__*/_classPrivateFieldLooseKey("isConstraintMsg"
 var _isPanel = /*#__PURE__*/_classPrivateFieldLooseKey("isPanel");
 var _isEndingPanel = /*#__PURE__*/_classPrivateFieldLooseKey("isEndingPanel");
 var _cleanUpPanel = /*#__PURE__*/_classPrivateFieldLooseKey("cleanUpPanel");
-class ExcelToFormModel {
-  constructor() {
+var ExcelToFormModel = /*#__PURE__*/function () {
+  function ExcelToFormModel() {
     Object.defineProperty(this, _cleanUpPanel, {
       value: _cleanUpPanel2
     });
@@ -9258,74 +10246,92 @@ class ExcelToFormModel {
       value: _handlePanel2
     });
   }
-  async _getForm(formName) {
-    if (!formName) {
-      throw new Error("form name is required");
-    }
-    const resp = await fetch(formName);
-    const json = await resp.json();
-    console.log("Data", json);
-    return json;
-  }
-  async getFormModel(formName) {
-    if (formName) {
-      let formDef = {
-        adaptiveform: "0.10.0",
-        metadata: {
-          grammar: "json-formula-1.0.0",
-          version: "1.0.0"
-        },
-        items: []
-      };
-      let exData = await this._getForm(formName);
-      if (!exData || !exData.data) {
-        throw new Error("Unable to retrieve the form details with excel name " + formName);
+  var _proto = ExcelToFormModel.prototype;
+  _proto._getForm = function _getForm(formName) {
+    try {
+      if (!formName) {
+        throw new Error("form name is required");
       }
-      var stack = [];
-      stack.push(formDef.items);
-      let currentPanel = formDef;
-      exData.data.forEach(item => {
-        if (_classPrivateFieldLooseBase(this, _isPanel)[_isPanel](item)) {
-          item.items = {};
-          let panel = JSON.parse(JSON.stringify(item));
-          _classPrivateFieldLooseBase(this, _handlePanel)[_handlePanel](panel);
-          currentPanel.items.push(panel);
-          stack.push(currentPanel);
-          currentPanel = panel;
-        } else if (_classPrivateFieldLooseBase(this, _isEndingPanel)[_isEndingPanel](item)) {
-          currentPanel = stack.pop();
-          if (!currentPanel) {
-            currentPanel = formDef;
-          }
-        } else {
-          currentPanel.items.push(_classPrivateFieldLooseBase(this, _handleProperty)[_handleProperty](item));
-        }
+      return Promise.resolve(fetch(formName)).then(function (resp) {
+        return Promise.resolve(resp.json());
       });
-      return {
-        formDef: formDef,
-        excelData: exData
-      };
+    } catch (e) {
+      return Promise.reject(e);
     }
-  }
-}
+  };
+  _proto.getFormModel = function getFormModel(formName) {
+    try {
+      var _this2 = this;
+      return Promise.resolve(function () {
+        if (formName) {
+          var formDef = {
+            adaptiveform: "0.10.0",
+            metadata: {
+              grammar: "json-formula-1.0.0",
+              version: "1.0.0"
+            },
+            items: []
+          };
+          console.time("Get Excel JSON");
+          return Promise.resolve(_this2._getForm(formName)).then(function (exData) {
+            console.timeEnd("Get Excel JSON");
+            if (!exData || !exData.data) {
+              throw new Error("Unable to retrieve the form details with excel name " + formName);
+            }
+            var stack = [];
+            stack.push(formDef.items);
+            var currentPanel = formDef;
+            exData.data.forEach(function (item) {
+              if (_classPrivateFieldLooseBase(_this2, _isPanel)[_isPanel](item)) {
+                item.items = {};
+                var panel = JSON.parse(JSON.stringify(item));
+                _classPrivateFieldLooseBase(_this2, _handlePanel)[_handlePanel](panel);
+                currentPanel.items.push(panel);
+                stack.push(currentPanel);
+                currentPanel = panel;
+              } else if (_classPrivateFieldLooseBase(_this2, _isEndingPanel)[_isEndingPanel](item)) {
+                currentPanel = stack.pop();
+                if (!currentPanel) {
+                  currentPanel = formDef;
+                }
+              } else {
+                currentPanel.items.push(_classPrivateFieldLooseBase(_this2, _handleProperty)[_handleProperty](item));
+              }
+            });
+            return {
+              formDef: formDef,
+              excelData: exData
+            };
+          });
+        }
+      }());
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+  return ExcelToFormModel;
+}();
 function _handlePanel2(item) {
   _classPrivateFieldLooseBase(this, _cleanUpPanel)[_cleanUpPanel](item);
   if (_classPrivateFieldLooseBase(this, _isRule)[_isRule](item)) {
-    let rule = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](item, RULE_TYPE);
+    var rule = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](item, RULE_TYPE);
     if (rule && Object.keys(rule).length != 0) {
       item.rules = rule;
     }
   }
   // Handle Events
-  let events = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](item, EVENTS);
+  var events = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](item, EVENTS);
   if (events && Object.keys(events).length != 0) {
     item.events = events;
   }
 }
 function _handleProperty2(item) {
-  let source = Object.fromEntries(Object.entries(item).filter(([_, v]) => v != null && v != ""));
-  let fieldType = ExcelToFormModel.fieldMapping.has(source.Type) ? ExcelToFormModel.fieldMapping.get(source.Type) : source.Type;
-  let field = {
+  var source = Object.fromEntries(Object.entries(item).filter(function (_ref) {
+    var v = _ref[1];
+    return v != null && v != "";
+  }));
+  var fieldType = ExcelToFormModel.fieldMapping.has(source.Type) ? ExcelToFormModel.fieldMapping.get(source.Type) : source.Type;
+  var field = {
     name: source.Field,
     placeholder: source.Placeholder,
     type: "string",
@@ -9342,32 +10348,32 @@ function _handleProperty2(item) {
   _classPrivateFieldLooseBase(this, _setProperty)[_setProperty](source, "MinLength", field, "minLength");
   _classPrivateFieldLooseBase(this, _setProperty)[_setProperty](source, "Step", field, "step");
   if (_classPrivateFieldLooseBase(this, _isRule)[_isRule](source)) {
-    let rule = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](source, RULE_TYPE);
+    var rule = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](source, RULE_TYPE);
     if (rule && Object.keys(rule).length != 0) {
       field.rules = rule;
     }
   }
   if (_classPrivateFieldLooseBase(this, _isConstraintMsg)[_isConstraintMsg](source)) {
-    let constraints = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](source, CONSTRAINT_MESSAGE);
+    var constraints = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](source, CONSTRAINT_MESSAGE);
     if (constraints && Object.keys(constraints).length != 0) {
       field.constraintMessages = constraints;
     }
   }
   // Handle Events
-  let events = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](source, EVENTS);
+  var events = _classPrivateFieldLooseBase(this, _handleHierarchy)[_handleHierarchy](source, EVENTS);
   if (events && Object.keys(events).length != 0) {
     field.events = events;
   }
-  let enumNames = _classPrivateFieldLooseBase(this, _handleMultiValues)[_handleMultiValues](source, "Options");
+  var enumNames = _classPrivateFieldLooseBase(this, _handleMultiValues)[_handleMultiValues](source, "Options");
   if (enumNames) {
-    field.enumNames = field.enum = enumNames;
+    field.enumNames = field["enum"] = enumNames;
   }
   _classPrivateFieldLooseBase(this, _handleCheckbox)[_handleCheckbox](field);
   return field;
 }
 function _handleCheckbox2(field) {
-  if ((field == null ? void 0 : field.fieldType) == "checkbox" && (!field.enum || field.enum.length == 0)) {
-    field.enum = ["on"];
+  if ((field == null ? void 0 : field.fieldType) == "checkbox" && (!field["enum"] || field["enum"].length == 0)) {
+    field["enum"] = ["on"];
   }
 }
 function _setProperty2(source, sourceKey, target, targetKey) {
@@ -9376,17 +10382,19 @@ function _setProperty2(source, sourceKey, target, targetKey) {
   }
 }
 function _handleMultiValues2(item, source) {
-  let values;
+  var values;
   if (item && item[source]) {
-    values = item[source].split(",").map(value => value.trim());
+    values = item[source].split(",").map(function (value) {
+      return value.trim();
+    });
   }
   return values;
 }
 function _handleHierarchy2(item, match) {
-  let constraints = {};
-  Object.keys(item).forEach(key => {
+  var constraints = {};
+  Object.keys(item).forEach(function (key) {
     if (~key.indexOf(match)) {
-      let constraint = key.split(".")[1];
+      var constraint = key.split(".")[1];
       if (item[key]) {
         constraints[constraint] = item[key];
       }
@@ -9417,27 +10425,48 @@ function _cleanUpPanel2(item) {
 }
 ExcelToFormModel.fieldMapping = new Map([["text-input", "text"], ["number-input", "number"], ["date-input", "datetime-local"], ["file-input", "file"], ["drop-down", "select"], ["radio-group", ""], ["checkbox-group", ""], ["plain-text", "plain-text"], ["checkbox", "checkbox"], ["multiline-input", "text-area"], ["panel", "panel"], ["submit", "button"]]);
 
-let createFormContainer = async url => {
-  console.log("Loading & Converting excel form to Crispr Form");
-  const transform = new ExcelToFormModel();
-  const convertedData = await transform.getFormModel(url);
-  console.log(convertedData);
-  console.log("Creating Form Container");
-  let formContainer = new FormContainer({
-    _formJson: convertedData == null ? void 0 : convertedData.formDef
-  });
-  //@ts-ignore
-  window.guideContainer = formContainer;
-  return formContainer.render();
-};
-async function decorate(block) {
-  const form = block.querySelector('a[href$=".json"]');
-  if (form && form != null && form.href) {
-    // Adaptive Form
-    form.replaceWith(await createFormContainer(form.href));
+var decorate = function decorate(block) {
+  try {
+    var form = block == null ? void 0 : block.querySelector('a[href$=".json"]');
+    var _temp = function () {
+      if (form && form != null && form.href) {
+        var _replaceWith2 = form.replaceWith;
+        return Promise.resolve(createFormContainer(form.href)).then(function (_createFormContainer) {
+          _replaceWith2.call(form, _createFormContainer);
+        });
+      }
+    }();
+    return Promise.resolve(_temp && _temp.then ? _temp.then(function () {}) : void 0);
+  } catch (e) {
+    return Promise.reject(e);
   }
-}
+};
+var createFormContainer = function createFormContainer(url) {
+  try {
+    console.log("Loading & Converting excel form to Crispr Form");
+    console.time('Json Transformation (including Get)');
+    var transform = new ExcelToFormModel();
+    return Promise.resolve(transform.getFormModel(url)).then(function (convertedData) {
+      console.timeEnd('Json Transformation (including Get)');
+      console.log(convertedData);
+      console.log("Creating Form Container");
+      console.time('Form Model Instance Creation');
+      var formContainer = new FormContainer({
+        _formJson: convertedData == null ? void 0 : convertedData.formDef
+      });
+      console.timeEnd('Form Model Instance Creation');
+      //@ts-ignore
+      window.guideContainer = formContainer;
+      console.time('Form Rendition');
+      var form = formContainer.render();
+      console.timeEnd('Form Rendition');
+      return form;
+    });
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
 decorate(document.getElementsByClassName("form")[0]);
 
 export { decorate as default };
-//# sourceMappingURL=index.modern.js.map
+//# sourceMappingURL=index.esm.js.map
