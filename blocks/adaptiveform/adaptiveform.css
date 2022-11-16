@@ -3435,10 +3435,10 @@ html,body {
   margin-top: 10px;
   font-size: .875rem
 }
-
+/* LH complaint about Low-contrast text
 .cmp-adaptiveform-checkboxgroup-item {
   color: #888
-}
+}*/
 
 .cmp-adaptiveform-checkboxgroup-item.HORIZONTAL {
   margin-right: 10px
@@ -4100,4 +4100,3 @@ textarea.cmp-adaptiveform-textinput__widget {
 .float-right {
   float: right !important;
 }
-/*# sourceMappingURL=theme.css.map */
