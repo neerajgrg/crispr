@@ -1,2 +1,2 @@
-export{e as default}from"./lite.js";
-//# sourceMappingURL=adaptive-form-block.js.map
+export{d as default}from"./lite.js";
+//# sourceMappingURL=adaptiveform.modern.js.map
