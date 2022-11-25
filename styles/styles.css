@@ -143,12 +143,12 @@ a.button.secondary, button.secondary {
   color: var(--text-color)
 } 
 
-
+/*
 main input {
   font-size: 1.25rem;
   max-width: 50rem;
-  /*width: 100%;
-  display: block;*/
+  width: 100%;
+  display: block;
   margin-bottom: 1rem;
   padding: 0.75rem 0.6rem;    
   border-radius: 0.25rem;
@@ -160,7 +160,7 @@ main input {
 
 main input:hover {
   border: 1px solid var(--text-color);
-}
+} */
 
 main .section {
   padding: 64px 16px;
