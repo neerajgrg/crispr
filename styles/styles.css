@@ -235,3 +235,28 @@ main .section[data-section-status='initialized'] {
 main .section.highlight {
   background-color: var(--highlight-background-color);
 }
+
+
+.vaform  .cmp-adaptiveform-text {
+  font-size: 22px;
+  line-height: 1.5;
+  color: #61126b;
+  font-family: gotham-book,sans-serif!important;
+}
+
+.vaform input {
+  padding: 53px;
+  transition: background .3s cubic-bezier(.25,.8,.5,1);
+  border: 1px solid #ececec!important; 
+}
+
+.vaform label {
+  position: relative;
+  top: 50px;
+  left: 15px;
+  color: rgba(0,0,0,.87);
+}
+
+.vaform input:focus  {
+  color: red;
+}
