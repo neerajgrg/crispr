@@ -237,26 +237,71 @@ main .section.highlight {
 }
 
 
-.vaform  .cmp-adaptiveform-text {
-  font-size: 22px;
-  line-height: 1.5;
-  color: #61126b;
-  font-family: gotham-book,sans-serif!important;
+
+
+
+
+
+/* custom CSS */
+
+.vaform input[type=text-input], .vaform input[type=email] {
+  padding: 5px;
+  outline: none;
+  border: 1px solid #ececec; 
 }
 
-.vaform input {
-  padding: 53px;
-  transition: background .3s cubic-bezier(.25,.8,.5,1);
-  border: 1px solid #ececec!important; 
+.vaform input[type=text-input]:focus , .vaform input[type=email]:focus {
+  outline: none ;
+  border-bottom: 1px solid #61126b !important;
 }
 
-.vaform label {
+
+.cmp-adaptiveform-textinput label {
   position: relative;
   top: 50px;
   left: 15px;
   color: rgba(0,0,0,.87);
+  pointer-events: none;
+  transition: 0.2s ease all;
+  font-weight: 400;
 }
 
-.vaform input:focus  {
-  color: red;
+.cmp-adaptiveform-text-input:focus-within  label {
+  content: 'red';
+  color: #61126b;
+  top: 22px;
+  font-size: small;
+}
+
+.adaptiveform-wrapper {
+ width: 80%;
+}
+
+.cmp-adaptiveform-container {
+  align-items: center;
+  margin: auto;
+}
+
+.cmp-adaptiveform-checkbox-item span {
+  font-size: 16px;
+   color: #222;
+   position:relative;
+   top: -5px;
+   left: 12px;
+   min-height: 8px;
+   font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+.cmp-adaptiveform-checkbox-item input {
+  width: 20px; 
+  height: 20px; 
+}
+
+.cmp-adaptiveform-checkbox-item {
+  align-items: center;
+}
+
+.cmp-adaptiveform-checkbox {
+  margin-left:15px;
+  margin-top:10px
 }
